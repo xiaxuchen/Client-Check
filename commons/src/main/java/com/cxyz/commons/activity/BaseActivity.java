@@ -65,6 +65,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
     protected void afterSetContent() {
     }
 
+
     /***
      * 初始化
      */

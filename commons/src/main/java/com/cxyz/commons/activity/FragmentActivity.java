@@ -3,6 +3,7 @@ package com.cxyz.commons.activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
+import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.fragment.BaseFragment;
 
 /**
@@ -14,7 +15,7 @@ import com.cxyz.commons.fragment.BaseFragment;
  *
  */
 
-public abstract class FragmentActivity extends BaseActivity {
+public abstract class FragmentActivity<p extends IBasePresenter> extends BaseActivity<p> {
 
     /**
      * 获取Fragment在布局文件中的id
