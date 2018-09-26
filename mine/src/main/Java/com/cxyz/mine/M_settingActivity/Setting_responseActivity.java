@@ -7,6 +7,7 @@ import android.widget.EditText;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.commons.widget.TitleView;
 import com.cxyz.mine.R;
 
 /**
@@ -14,6 +15,9 @@ import com.cxyz.mine.R;
  */
 
 public class Setting_responseActivity extends BaseActivity implements View.OnClickListener{
+   private TitleView m_setting_responsetitle;
+    private  EditText m_setting_eduserresponse;
+    private  Button m_setting_submit;
     @Override
     public int getContentViewId() {
         return R.layout.setting_userresponse_layout;
@@ -21,12 +25,10 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void initView() {
-        EditText m_setting_eduserresponse;
-        Button m_setting_submit;
+        m_setting_responsetitle= (TitleView) findViewById(R.id.m_setting_responsetitle);
         m_setting_eduserresponse= (EditText) findViewById(R.id.m_setting_eduserresponse);
         m_setting_submit= (Button) findViewById(R.id.m_setting_submit);
-        m_setting_eduserresponse.setOnClickListener(this);
-        m_setting_submit.setOnClickListener(this);
+        m_setting_responsetitle.setTitle("用户反馈");
 
     }
 
@@ -37,6 +39,29 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void setEvent() {
+        m_setting_eduserresponse.setOnClickListener(this);
+        m_setting_submit.setOnClickListener(this);
+        m_setting_responsetitle.setOnClickListener(new TitleView.OnClickListener() {
+            @Override
+            public void onBackClick() {
+                onBackPressed();
+            }
+
+            @Override
+            public void onEditClick() {
+
+            }
+
+            @Override
+            public void onNameClick() {
+
+            }
+
+            @Override
+            public void onSetClick() {
+
+            }
+        });
 
     }
 

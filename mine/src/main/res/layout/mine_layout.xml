@@ -5,6 +5,7 @@
     android:background="#EAEAEA"
     android:layout_height="match_parent">
     <com.cxyz.commons.widget.TitleView
+        android:id="@+id/m_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
     <ImageView

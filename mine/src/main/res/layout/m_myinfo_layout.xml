@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:weightSum="1">
     <com.cxyz.commons.widget.TitleView
+        android:id="@+id/m_myinfo_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
 

@@ -6,6 +6,7 @@
     android:baselineAligned="false"
     android:orientation="vertical">
     <com.cxyz.commons.widget.TitleView
+        android:id="@+id/m_setting_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
 

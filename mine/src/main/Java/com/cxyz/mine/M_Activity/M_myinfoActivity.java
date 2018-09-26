@@ -11,6 +11,7 @@ import com.cxyz.commons.domain.College;
 import com.cxyz.commons.domain.Grade;
 import com.cxyz.commons.domain.User;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.commons.widget.TitleView;
 import com.cxyz.mine.MinePrimary.IMinePresenter;
 import com.cxyz.mine.MinePrimary.IMineView;
 import com.cxyz.mine.R;
@@ -24,6 +25,7 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
     ImageView m_myinfo_headimg;
     TextView m_myinfo_name,m_myinfo_sex,m_myinfo_schoolcode,m_myinfo_class,
             m_myinfo_college,m_myinfo_edpower,m_myinfo_tel;
+    private  TitleView m_myinfo_title;
     @Override
     public int getContentViewId() {
         return R.layout.m_myinfo_layout;
@@ -40,11 +42,14 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
         m_myinfo_tel= (TextView) findViewById(R.id.m_myinfo_tel);
         m_myinfo_switch= (Switch) findViewById(R.id.m_myinfo_switch);
         m_myinfo_name = (TextView) findViewById(R.id.m_myinfo_name);
+        m_myinfo_title = (TitleView) findViewById(R.id.m_myinfo_title);
+        m_myinfo_title.setTitle("个人信息");
 
     }
 
     @Override
     public void initData() {
+
 
     }
 
@@ -58,10 +63,30 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
         m_myinfo_college.setOnClickListener(this);
         m_myinfo_edpower.setOnClickListener(this);
         m_myinfo_tel.setOnClickListener(this);
+        m_myinfo_title.setOnClickListener(new TitleView.OnClickListener() {
+            @Override
+            public void onBackClick() {
+                onBackPressed();
+            }
+
+            @Override
+            public void onEditClick() {
+
+            }
+
+            @Override
+            public void onNameClick() {
+
+            }
+
+            @Override
+            public void onSetClick() {
+
+            }
+        });
         iPresenter.getInfo();
         iPresenter.getClassname();
         iPresenter.getCollege();
-
 
     }
 
@@ -102,6 +127,7 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
         m_myinfo_sex.setText(info.sex);
         m_myinfo_schoolcode.setText(info._id);
         m_myinfo_edpower.setText(info.power+"");
+        m_myinfo_tel.setText(info.tel);
 
     }
 

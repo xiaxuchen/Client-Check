@@ -17,7 +17,10 @@ import com.cxyz.mine.R;
  */
 
 public class M_appointmentActivity extends BaseActivity implements View.OnClickListener{
-    Spinner m_appointment_spinner;
+    private  Spinner m_appointment_spinner;
+   private  TitleView m_appointment_title;
+    private EditText m_appointment_edapply,m_appointment_edapplytime,m_appointment_edapplyreason;
+    Button m_appointment_submit;
     @Override
     public int getContentViewId() {
         return R.layout.m_appointment_layout;
@@ -25,15 +28,14 @@ public class M_appointmentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void initView() {
-        EditText m_appointment_edapply,m_appointment_edapplytime,m_appointment_edapplyreason;
-        Button m_appointment_submit;
         m_appointment_edapply= (EditText) findViewById(R.id.m_appointment_edapply);
         m_appointment_edapplytime= (EditText) findViewById(R.id.m_appointment_edapplytime);
         m_appointment_edapplyreason= (EditText) findViewById(R.id.m_appointment_edapplyreason);
         m_appointment_submit= (Button) findViewById(R.id.m_appointment_submit);
         m_appointment_spinner= (Spinner) findViewById(R.id.m_appointment_spinner);
+        m_appointment_title= (TitleView) findViewById(R.id.m_appointment_title);
+        m_appointment_title.setTitle("请假预约");
 
-        m_appointment_submit.setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +45,28 @@ public class M_appointmentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void setEvent() {
+        m_appointment_submit.setOnClickListener(this);
+        m_appointment_title.setOnClickListener(new TitleView.OnClickListener() {
+            @Override
+            public void onBackClick() {
+                onBackPressed();
+            }
+
+            @Override
+            public void onEditClick() {
+
+            }
+
+            @Override
+            public void onNameClick() {
+
+            }
+
+            @Override
+            public void onSetClick() {
+
+            }
+        });
 
     }
 

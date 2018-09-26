@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.widget.TitleView;
 import com.cxyz.mine.M_Activity.M_settingActivity;
 import com.cxyz.mine.R;
 import com.cxyz.mine.M_Activity.M_appointmentActivity;
@@ -18,22 +19,22 @@ import com.cxyz.mine.M_Activity.M_myinfoActivity;
  */
 
 public class MineActivity extends BaseActivity implements View.OnClickListener {
+    private TitleView m_title;
+    private  TextView m_myinfo,m_appointment, m_setting;
+    Button exitlogin;
     public int getContentViewId() {
         return R.layout.mine_layout;
     }
 
     @Override
     public void initView() {
-        TextView m_myinfo,m_appointment, m_setting;
-        Button exitlogin;
         m_myinfo= (TextView) findViewById(R.id.m_myinfo);
         m_appointment =(TextView) findViewById(R.id.m_appointment);
         m_setting=(TextView)findViewById(R.id.m_setting);
         exitlogin=(Button)findViewById(R.id.exitlogin);
-        m_myinfo.setOnClickListener(this);
-        m_appointment.setOnClickListener(this);
-        m_setting.setOnClickListener(this);
-        exitlogin.setOnClickListener(this);
+        m_title= (TitleView) findViewById(R.id.m_title);
+        m_title.setTitle("我的");
+
     }
 
     @Override
@@ -43,6 +44,31 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void setEvent() {
+        m_myinfo.setOnClickListener(this);
+        m_appointment.setOnClickListener(this);
+        m_setting.setOnClickListener(this);
+        exitlogin.setOnClickListener(this);
+        m_title.setOnClickListener(new TitleView.OnClickListener() {
+            @Override
+            public void onBackClick() {
+                onBackPressed();
+            }
+
+            @Override
+            public void onEditClick() {
+
+            }
+
+            @Override
+            public void onNameClick() {
+
+            }
+
+            @Override
+            public void onSetClick() {
+
+            }
+        });
 
 
     }

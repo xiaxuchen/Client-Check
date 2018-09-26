@@ -20,7 +20,9 @@ public class IMinePresenter extends IBasePresenter<IBaseModel,IMineView> {
         String sex="男";
         String  schoolcode="17478091";
         int power=1;
+        String tel="12345678910";
         User user= new User();
+        user.tel=tel;
         user.power=power;
         user._id=schoolcode;
         user._name = username;

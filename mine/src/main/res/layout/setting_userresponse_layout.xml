@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
     <com.cxyz.commons.widget.TitleView
+        android:id="@+id/m_setting_responsetitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
     <TextView
@@ -16,14 +17,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/m_setting_tvuserresponse"
         android:layout_weight="0.02" />
+
     <EditText
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="#FFFFFF"
+        android:maxLength="100"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/m_setting_eduserresponse"
         android:layout_weight="0.45" />
+
     <Button
         android:layout_marginTop="20dp"
         android:layout_marginLeft="140dp"

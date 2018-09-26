@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:weightSum="1">
     <com.cxyz.commons.widget.TitleView
+        android:id="@+id/m_appointment_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
 
@@ -23,6 +24,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="#FFFFFF"
+        android:maxLength="10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/m_appointment_edapply"
@@ -41,6 +43,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="#FFFFFF"
+        android:maxLength="30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/m_appointment_edapplytime"
@@ -77,6 +80,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="#FFFFFF"
+        android:maxLength="200"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/m_appointment_edapplyreason"
