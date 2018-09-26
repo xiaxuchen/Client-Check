@@ -10,9 +10,9 @@
         android:theme="@style/AppTheme"
 
         android:name="com.cxyz.commons.application.MyApp">
-        <activity android:name="com.cxyz.check.CheckActivity">
-            <!--原本为listViewActivity-->
-            <!--Theme原本为AppTheme-->
+
+        <activity android:name=".HomeActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

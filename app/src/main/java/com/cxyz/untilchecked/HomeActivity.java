@@ -1,9 +1,9 @@
 package com.cxyz.untilchecked;
 
 
-import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.ToastUtil;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +17,8 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-public class HomeActivity extends BaseActivity {
+
+public class HomeActivity extends BaseActivity<IExamplePresenter> implements IExampleView{
 
     @Override
     public int getContentViewId() {
@@ -31,7 +32,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        iPresenter.login("", "");
     }
 
     @Override
@@ -40,8 +41,8 @@ public class HomeActivity extends BaseActivity {
     }
 
     @Override
-    protected IBasePresenter createIPresenter() {
-        return null;
+    protected IExamplePresenter createIPresenter() {
+        return new IExamplePresenterImpl();
     }
 
     @Override
@@ -53,4 +54,15 @@ public class HomeActivity extends BaseActivity {
     public void hideLoadingView() {
 
     }
+
+    @Override
+    public void showLogin() {
+        ToastUtil.showShort("登录成功");
+    }
+
+    @Override
+    public void showError() {
+        ToastUtil.showShort("登录失败");
+    }
 }
+
