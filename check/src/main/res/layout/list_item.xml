@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+
+
+
+    <ImageView
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/stu_image"
+
+        android:background="@mipmap/ic_launcher"
+
+        android:layout_marginTop="8dp"
+
+        android:layout_marginLeft="8dp"/>
+
+
+
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+
+        android:layout_marginLeft="5dp"
+
+        android:layout_marginTop="10dp">
+
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal"
+
+            android:weightSum="1">
+
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:text="Student_name"
+
+                android:textSize="17sp"
+
+                android:textStyle="bold"
+
+                android:textColor="@color/abc_input_method_navigation_guard"
+
+                android:layout_marginLeft="5dp"
+
+                android:id="@+id/stu_name"/>
+
+        </LinearLayout>
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="Here are Stduent's infomation"
+
+            android:layout_marginTop="5dp"
+
+            android:layout_marginLeft="5dp"
+
+            android:id="@+id/stu_info"
+
+            android:textSize="14sp"/>
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+
+           <!-- <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/check_ture"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="出勤"
+                    />
+
+                <RadioButton
+                    android:id="@+id/check_false"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="缺勤"
+                    android:checked="false"
+                    />
+                    </RadioGroup>
+                    -->
+
+            <!--/////////////////////////////////////////////////////////////////////////////////-->
+
+
+
+                <!--<Button
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="35dp"
+
+                android:text="Order Now"
+
+                android:textSize="10sp"
+
+                android:layout_marginTop="5dp"
+
+                android:layout_marginLeft="5dp"
+
+                android:textColor="@color/abc_primary_text_disable_only_material_dark"
+
+                android:id="@+id/orderNowButton"/>
+
+
+
+            <Button
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="35dp"
+
+                android:layout_marginLeft="10dp"
+
+                android:text="More Details"
+
+                android:textSize="10sp"
+
+                android:layout_marginTop="5dp"
+
+                android:textColor="@color/abc_primary_text_disable_only_material_dark"
+
+                android:id="@+id/decideButton"/>-->
+
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,32 +1,29 @@
-package com.cxyz.untilchecked;
-
+package com.cxyz.check;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
+import com.cxyz.commons.IView.IBaseView;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.ToastUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+/**
+ * Created by 28058 on 2018/9/25.
+ */
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
+public class CheckActivity extends BaseActivity<IBasePresenter> implements IBaseView {
 
-public class HomeActivity extends BaseActivity {
+    IBaseView mView;
+    IBasePresenter mPresenter;
+
 
     @Override
     public int getContentViewId() {
-        return R.layout.activity_home_layout;
+        return R.layout.activity_check_layout;
     }
 
     @Override
     public void initView() {
-
+        ToastUtil.init(getApplicationContext());
+        new IcheckFunctionImple().initGridView(getActivity());
     }
 
     @Override
