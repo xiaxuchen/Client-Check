@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#EAEAEA"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <com.cxyz.commons.widget.TitleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:text="反馈情况"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/m_setting_tvuserresponse"
+        android:layout_weight="0.02" />
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/m_setting_eduserresponse"
+        android:layout_weight="0.45" />
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginRight="140dp"
+        android:layout_marginBottom="40dp"
+        android:text="提交"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/m_setting_submit" />
+
+
+</LinearLayout>

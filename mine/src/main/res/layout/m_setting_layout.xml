@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#EAEAEA"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+    <com.cxyz.commons.widget.TitleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="50dp"
+        android:weightSum="1">
+
+        <TextView
+        android:layout_marginLeft="10dp"
+        android:text="更新推送"
+        android:textSize="25dp"
+        android:textColor="#666666"
+        android:layout_width="199dp"
+        android:layout_height="50dp"
+        android:id="@+id/m_setting_isupdate"
+            android:layout_weight="0.88" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/m_settingswitch" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:text="版本更新"
+        android:textSize="25dp"
+        android:textColor="#666666"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/m_setting_update" />
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:text="用户反馈"
+        android:textSize="25dp"
+        android:textColor="#666666"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/m_setting_response" />
+
+</LinearLayout>
