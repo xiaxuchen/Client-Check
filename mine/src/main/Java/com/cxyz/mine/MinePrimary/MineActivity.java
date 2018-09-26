@@ -12,28 +12,26 @@ import com.cxyz.mine.M_Activity.M_settingActivity;
 import com.cxyz.mine.R;
 import com.cxyz.mine.M_Activity.M_appointmentActivity;
 import com.cxyz.mine.M_Activity.M_myinfoActivity;
-
-
 /**
  * Created by Administrator on 2018/9/25.
  */
 
 public class MineActivity extends BaseActivity implements View.OnClickListener {
-    private TitleView m_title;
-    private  TextView m_myinfo,m_appointment, m_setting;
-    Button exitlogin;
+    private TitleView tvtitle;
+    private  TextView tvmyinfo,tvappointment, tvsetting;
+    private   Button btexitlogin;
     public int getContentViewId() {
-        return R.layout.mine_layout;
+        return R.layout.activity_mine_layout;
     }
 
     @Override
     public void initView() {
-        m_myinfo= (TextView) findViewById(R.id.m_myinfo);
-        m_appointment =(TextView) findViewById(R.id.m_appointment);
-        m_setting=(TextView)findViewById(R.id.m_setting);
-        exitlogin=(Button)findViewById(R.id.exitlogin);
-        m_title= (TitleView) findViewById(R.id.m_title);
-        m_title.setTitle("我的");
+        tvmyinfo= (TextView) findViewById(R.id.tvmyinfo);
+        tvappointment =(TextView) findViewById(R.id.tvappointment);
+        tvsetting=(TextView)findViewById(R.id.tvsetting);
+        btexitlogin=(Button)findViewById(R.id.btexitlogin);
+        tvtitle= (TitleView) findViewById(R.id.tvtitle);
+        tvtitle.setTitle("我的");
 
     }
 
@@ -44,11 +42,11 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void setEvent() {
-        m_myinfo.setOnClickListener(this);
-        m_appointment.setOnClickListener(this);
-        m_setting.setOnClickListener(this);
-        exitlogin.setOnClickListener(this);
-        m_title.setOnClickListener(new TitleView.OnClickListener() {
+        tvmyinfo.setOnClickListener(this);
+        tvappointment.setOnClickListener(this);
+        tvsetting.setOnClickListener(this);
+        btexitlogin.setOnClickListener(this);
+        tvtitle.setOnClickListener(new TitleView.OnClickListener() {
             @Override
             public void onBackClick() {
                 onBackPressed();
@@ -88,18 +86,18 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
 
     }
     //监听事件
-    public void mine_info_myinfo() {
+    public void tvmyinfo() {
         Intent intent=new Intent(getApplicationContext(),M_myinfoActivity.class);
         startActivity(intent);
     }
 
 
-    public void mine_info_appointment() {
+    public void tvappointment() {
         Intent  intent=new Intent(getApplicationContext(),M_appointmentActivity.class);
         startActivity(intent);
     }
 
-    public void mine_info_setting() {
+    public void tvsetting() {
         Intent  intent=new Intent(getApplicationContext(),M_settingActivity.class);
         startActivity(intent);
     }
@@ -110,9 +108,9 @@ public class MineActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
 
         switch (v.getId()){
-            case  R.id.m_myinfo: mine_info_myinfo();break;
-            case R.id.m_appointment:mine_info_appointment();break;
-            case R.id.m_setting:mine_info_setting();break;
+            case  R.id.tvmyinfo: tvmyinfo();break;
+            case R.id.tvappointment:tvappointment();break;
+            case R.id.tvsetting:tvsetting();break;
         }
 
 

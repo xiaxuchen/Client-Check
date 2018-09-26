@@ -5,7 +5,6 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.domain.College;
 import com.cxyz.commons.domain.Grade;
@@ -21,29 +20,29 @@ import com.cxyz.mine.R;
  */
 
 public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements View.OnClickListener,IMineView{
-    private Switch m_myinfo_switch;
-    ImageView m_myinfo_headimg;
-    TextView m_myinfo_name,m_myinfo_sex,m_myinfo_schoolcode,m_myinfo_class,
-            m_myinfo_college,m_myinfo_edpower,m_myinfo_tel;
-    private  TitleView m_myinfo_title;
+    private Switch stmyinfo_switch;
+    private ImageView ivmyinfo_headimg;
+    private TextView tvmyinfo_name,tvmyinfo_sex,tvmyinfo_schoolcode,tvmyinfo_class,
+            tvmyinfo_college,tvmyinfo_edpower,tvmyinfo_tel;
+    private  TitleView tvmyinfo_title;
     @Override
     public int getContentViewId() {
-        return R.layout.m_myinfo_layout;
+        return R.layout.activity_myinfo_layout;
     }
 
     @Override
     public void initView() {
-        m_myinfo_headimg= (ImageView) findViewById(R.id.m_myinfo_headimg);
-        m_myinfo_sex= (TextView) findViewById(R.id.m_myinfo_sex);
-        m_myinfo_schoolcode= (TextView) findViewById(R.id.m_myinfo_schoolcode);
-        m_myinfo_class= (TextView) findViewById(R.id.m_myinfo_class);
-        m_myinfo_college= (TextView) findViewById(R.id.m_myinfo_college);
-        m_myinfo_edpower= (TextView) findViewById(R.id.m_myinfo_edpower);
-        m_myinfo_tel= (TextView) findViewById(R.id.m_myinfo_tel);
-        m_myinfo_switch= (Switch) findViewById(R.id.m_myinfo_switch);
-        m_myinfo_name = (TextView) findViewById(R.id.m_myinfo_name);
-        m_myinfo_title = (TitleView) findViewById(R.id.m_myinfo_title);
-        m_myinfo_title.setTitle("个人信息");
+        ivmyinfo_headimg= (ImageView) findViewById(R.id.ivmyinfo_headimg);
+        tvmyinfo_sex= (TextView) findViewById(R.id.tvmyinfo_sex);
+        tvmyinfo_schoolcode= (TextView) findViewById(R.id.tvmyinfo_schoolcode);
+        tvmyinfo_class= (TextView) findViewById(R.id.tvmyinfo_class);
+        tvmyinfo_college= (TextView) findViewById(R.id.tvmyinfo_college);
+        tvmyinfo_edpower= (TextView) findViewById(R.id.tvmyinfo_edpower);
+        tvmyinfo_tel= (TextView) findViewById(R.id.tvmyinfo_tel);
+        stmyinfo_switch= (Switch) findViewById(R.id.stmyinfo_switch);
+        tvmyinfo_name = (TextView) findViewById(R.id.tvmyinfo_name);
+        tvmyinfo_title = (TitleView) findViewById(R.id.tvmyinfo_title);
+        tvmyinfo_title.setTitle("个人信息");
 
     }
 
@@ -55,15 +54,15 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
 
     @Override
     public void setEvent() {
-        m_myinfo_switch.setOnClickListener(this);
-        m_myinfo_headimg.setOnClickListener(this);
-        m_myinfo_sex.setOnClickListener(this);
-        m_myinfo_schoolcode.setOnClickListener(this);
-        m_myinfo_class.setOnClickListener(this);
-        m_myinfo_college.setOnClickListener(this);
-        m_myinfo_edpower.setOnClickListener(this);
-        m_myinfo_tel.setOnClickListener(this);
-        m_myinfo_title.setOnClickListener(new TitleView.OnClickListener() {
+        stmyinfo_switch.setOnClickListener(this);
+        ivmyinfo_headimg.setOnClickListener(this);
+        tvmyinfo_sex.setOnClickListener(this);
+        tvmyinfo_schoolcode.setOnClickListener(this);
+        tvmyinfo_class.setOnClickListener(this);
+        tvmyinfo_college.setOnClickListener(this);
+        tvmyinfo_edpower.setOnClickListener(this);
+        tvmyinfo_tel.setOnClickListener(this);
+        tvmyinfo_title.setOnClickListener(new TitleView.OnClickListener() {
             @Override
             public void onBackClick() {
                 onBackPressed();
@@ -108,37 +107,45 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
 
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.m_myinfo_switch:m_myinfo_switch();
+            case R.id.stmyinfo_switch:stmyinfo_switch();
         }
 
     }
-    public void m_myinfo_switch(){
+    public void stmyinfo_switch(){
 
-        if (m_myinfo_switch.isChecked()){
+        if (stmyinfo_switch.isChecked()){
+           /* m_myinfo_name.setText("");
+            m_myinfo_sex.setText("");
+            m_myinfo_schoolcode.setText("");
+            m_myinfo_edpower.setText("");
+            m_myinfo_tel.setText("");
+            m_myinfo_class.setText("");
+            m_myinfo_college.setText("");*/
             ToastUtil.showShort("已开启");
         }else {
+
             ToastUtil.showShort("已关闭");
         }
     }
 
     @Override
     public void showMineInfo(User info) {
-        m_myinfo_name.setText(info._name);
-        m_myinfo_sex.setText(info.sex);
-        m_myinfo_schoolcode.setText(info._id);
-        m_myinfo_edpower.setText(info.power+"");
-        m_myinfo_tel.setText(info.tel);
+        tvmyinfo_name.setText(info._name);
+        tvmyinfo_sex.setText(info.sex);
+        tvmyinfo_schoolcode.setText(info._id);
+        tvmyinfo_edpower.setText(info.power+"");
+        tvmyinfo_tel.setText(info.tel);
 
     }
 
     @Override
     public void showMineClass(Grade grade) {
-        m_myinfo_class.setText(grade._name);
+        tvmyinfo_class.setText(grade._name);
     }
 
     @Override
     public void showMineCollege(College college) {
-        m_myinfo_college.setText(college._name);
+        tvmyinfo_college.setText(college._name);
     }
 
 

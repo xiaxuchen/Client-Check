@@ -17,24 +17,26 @@ import com.cxyz.mine.R;
  */
 
 public class M_appointmentActivity extends BaseActivity implements View.OnClickListener{
-    private  Spinner m_appointment_spinner;
-   private  TitleView m_appointment_title;
-    private EditText m_appointment_edapply,m_appointment_edapplytime,m_appointment_edapplyreason;
-    Button m_appointment_submit;
+    private  Spinner spappointment_spinner;
+   private  TitleView tvappointment_title;
+    private EditText edappointment_apply,edappointment_applytime,edappointment_applyreason;
+    Button btappointment_submit;
     @Override
     public int getContentViewId() {
-        return R.layout.m_appointment_layout;
+        return R.layout.activity_appointment_layout;
     }
-
     @Override
     public void initView() {
-        m_appointment_edapply= (EditText) findViewById(R.id.m_appointment_edapply);
-        m_appointment_edapplytime= (EditText) findViewById(R.id.m_appointment_edapplytime);
-        m_appointment_edapplyreason= (EditText) findViewById(R.id.m_appointment_edapplyreason);
-        m_appointment_submit= (Button) findViewById(R.id.m_appointment_submit);
-        m_appointment_spinner= (Spinner) findViewById(R.id.m_appointment_spinner);
-        m_appointment_title= (TitleView) findViewById(R.id.m_appointment_title);
-        m_appointment_title.setTitle("请假预约");
+        edappointment_apply= (EditText) findViewById(R.id.edappointment_apply);
+        edappointment_applytime= (EditText) findViewById(R.id.edappointment_applytime);
+        edappointment_applyreason= (EditText) findViewById(R.id.edappointment_applyreason);
+        btappointment_submit= (Button) findViewById(R.id.btappointment_submit);
+        spappointment_spinner= (Spinner) findViewById(R.id.spappointment_spinner);
+        tvappointment_title= (TitleView) findViewById(R.id.tvappointment_title);
+        edappointment_apply= (EditText) findViewById(R.id.edappointment_apply);
+        edappointment_applytime=(EditText) findViewById(R.id.edappointment_applytime);
+        edappointment_applyreason=(EditText)findViewById(R.id.edappointment_applyreason);
+        tvappointment_title.setTitle("请假预约");
 
     }
 
@@ -45,8 +47,8 @@ public class M_appointmentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void setEvent() {
-        m_appointment_submit.setOnClickListener(this);
-        m_appointment_title.setOnClickListener(new TitleView.OnClickListener() {
+        btappointment_submit.setOnClickListener(this);
+        tvappointment_title.setOnClickListener(new TitleView.OnClickListener() {
             @Override
             public void onBackClick() {
                 onBackPressed();
@@ -67,7 +69,18 @@ public class M_appointmentActivity extends BaseActivity implements View.OnClickL
 
             }
         });
+        spappointment_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] timelength = getResources().getStringArray(R.array.timelength_data);
+                ToastUtil.showShort("你选择了 "+timelength[position]);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -89,20 +102,12 @@ public class M_appointmentActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
 
-            case R.id.m_appointment_submit: m_appointment_submit();break;
+            case R.id.btappointment_submit: btappointment_submit();break;
         }
 
     }
-    public void m_appointment_submit(){
+    public void btappointment_submit(){
         ToastUtil.showShort("已提交");
     }
-   /* public void m_appointment_spinner(){
-        m_appointment_spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String[] languages = getResources().getStringArray(R.array.timelength_data);
-                ToastUtil.showShort(""+languages[position]);
-            }
-        });
- }*/
+
 }

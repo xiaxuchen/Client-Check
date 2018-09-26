@@ -6,7 +6,7 @@
     android:baselineAligned="false"
     android:orientation="vertical">
     <com.cxyz.commons.widget.TitleView
-        android:id="@+id/m_setting_title"
+        android:id="@+id/tvsetting_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
 
@@ -25,13 +25,13 @@
         android:textColor="#666666"
         android:layout_width="199dp"
         android:layout_height="50dp"
-        android:id="@+id/m_setting_isupdate"
+        android:id="@+id/tvsetting_isupdate"
             android:layout_weight="0.88" />
 
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/m_settingswitch" />
+            android:id="@+id/stsettingswitch" />
     </LinearLayout>
 
     <TextView
@@ -41,7 +41,7 @@
         android:textColor="#666666"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/m_setting_update" />
+        android:id="@+id/tvsetting_update" />
 
     <TextView
         android:layout_marginLeft="10dp"
@@ -50,6 +50,6 @@
         android:textColor="#666666"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/m_setting_response" />
+        android:id="@+id/tvsetting_response" />
 
 </LinearLayout>

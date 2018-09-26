@@ -28,18 +28,18 @@ public class M_settingActivity extends BaseActivity implements View.OnClickListe
     private GoogleApiClient client;
     @Override
     public int getContentViewId() {
-        return R.layout.m_setting_layout;
+        return R.layout.activity_setting_layout;
     }
-    private Switch m_settingswitch;
-    private TitleView m_setting_title;
-    private TextView m_setting_update, m_setting_response;
+    private Switch stsettingswitch;
+    private TitleView tvsetting_title;
+    private TextView tvsetting_update, tvsetting_response;
     @Override
     public void initView() {
-        m_setting_update = (TextView) findViewById(R.id.m_setting_update);
-        m_setting_response= (TextView) findViewById(R.id.m_setting_response);
-        m_settingswitch= (Switch) findViewById(R.id.m_settingswitch);
-        m_setting_title= (TitleView) findViewById(R.id.m_setting_title);
-        m_setting_title.setTitle("设置");
+        tvsetting_update = (TextView) findViewById(R.id.tvsetting_update);
+        tvsetting_response= (TextView) findViewById(R.id.tvsetting_response);
+        stsettingswitch= (Switch) findViewById(R.id.stsettingswitch);
+        tvsetting_title= (TitleView) findViewById(R.id.tvsetting_title);
+        tvsetting_title.setTitle("设置");
     }
 
     @Override
@@ -49,10 +49,10 @@ public class M_settingActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void setEvent() {
-        m_setting_update.setOnClickListener(this);
-        m_setting_response.setOnClickListener(this);
-        m_settingswitch.setOnClickListener(this);
-        m_setting_title.setOnClickListener(new TitleView.OnClickListener() {
+        tvsetting_update.setOnClickListener(this);
+        tvsetting_response.setOnClickListener(this);
+        stsettingswitch.setOnClickListener(this);
+        tvsetting_title.setOnClickListener(new TitleView.OnClickListener() {
             @Override
             public void onBackClick() {
                 onBackPressed();
@@ -89,35 +89,28 @@ public class M_settingActivity extends BaseActivity implements View.OnClickListe
     public void hideLoadingView() {
 
     }
-    public  void mine_settingswitch(){
-        if (m_settingswitch.isChecked()){
-            ToastUtil.showShort("已开启");
-        }else {
-            ToastUtil.showShort("已关闭");
-        }
 
 
-    }
-    public void   mine_setting_update(){
+    public void   tvsetting_update(){
         ToastUtil.showLong("已是最新版本");
     }
-    public void mine_setting_response(){
+    public void tvsetting_response(){
         Intent intent=new Intent(getApplicationContext(),Setting_responseActivity.class);
         startActivity(intent);
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.m_setting_update:mine_setting_update();break;
-            case R.id.m_setting_response:mine_setting_response();break;
-            case  R.id.m_settingswitch: mine_settingswitch();break;
+            case R.id.tvsetting_update:tvsetting_update();break;
+            case R.id.tvsetting_response:tvsetting_response();break;
+            case  R.id.stsettingswitch: stsettingswitch();break;
 
         }
 
     }
 
-    private void m_settingswitch() {
-        if (m_settingswitch.isChecked()) {
+    private void stsettingswitch() {
+        if (stsettingswitch.isChecked()) {
         ToastUtil.showShort("已开启");}
         else {
         ToastUtil.showShort("已关闭");

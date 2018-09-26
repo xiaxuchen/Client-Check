@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:weightSum="1">
     <com.cxyz.commons.widget.TitleView
-        android:id="@+id/m_appointment_title"
+        android:id="@+id/tvappointment_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
 
@@ -17,7 +17,7 @@
         android:textSize="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/m_appointment_tvapplyer"
+        android:id="@+id/tvappointment_applyer"
         android:layout_weight="0.02" />
 
     <EditText
@@ -27,7 +27,7 @@
         android:maxLength="10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/m_appointment_edapply"
+        android:id="@+id/edappointment_apply"
         android:layout_weight="0.04" />
     <TextView
         android:layout_marginTop="10dp"
@@ -36,7 +36,7 @@
         android:textSize="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/m_appointment_tvapplytime"
+        android:id="@+id/tvappointment_applytime"
         android:layout_weight="0.02" />
 
     <EditText
@@ -46,7 +46,7 @@
         android:maxLength="30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/m_appointment_edapplytime"
+        android:id="@+id/edappointment_applytime"
         android:layout_weight="0.04" />
 
     <TextView
@@ -56,13 +56,13 @@
         android:textSize="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/m_appointment_tvapplylength"
+        android:id="@+id/tvappointment_applylength"
         android:layout_weight="0.02" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/m_appointment_spinner"
+        android:id="@+id/spappointment_spinner"
         android:layout_weight="0.04"
         android:entries="@array/timelength_data"/>
 
@@ -73,7 +73,7 @@
         android:textSize="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/m_appointment_tvapplyreason"
+        android:id="@+id/tvappointment_applyreason"
         android:layout_weight="0.02" />
 
     <EditText
@@ -81,9 +81,11 @@
         android:layout_marginRight="20dp"
         android:background="#FFFFFF"
         android:maxLength="200"
+        android:gravity="left"
+        android:hint="说说你的情况吧！"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/m_appointment_edapplyreason"
+        android:id="@+id/edappointment_applyreason"
         android:layout_weight="0.73" />
 
     <Button
@@ -95,5 +97,5 @@
         android:background="@drawable/button_shape"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/m_appointment_submit" />
+        android:id="@+id/btappointment_submit" />
 </LinearLayout>

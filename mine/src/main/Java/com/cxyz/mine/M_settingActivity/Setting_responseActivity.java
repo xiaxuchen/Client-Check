@@ -15,20 +15,20 @@ import com.cxyz.mine.R;
  */
 
 public class Setting_responseActivity extends BaseActivity implements View.OnClickListener{
-   private TitleView m_setting_responsetitle;
-    private  EditText m_setting_eduserresponse;
-    private  Button m_setting_submit;
+   private TitleView tvsetting_responsetitle;
+    private  EditText edsetting_eduserresponse;
+    private  Button btsetting_submit;
     @Override
     public int getContentViewId() {
-        return R.layout.setting_userresponse_layout;
+        return R.layout.activity_setting_userresponse_layout;
     }
 
     @Override
     public void initView() {
-        m_setting_responsetitle= (TitleView) findViewById(R.id.m_setting_responsetitle);
-        m_setting_eduserresponse= (EditText) findViewById(R.id.m_setting_eduserresponse);
-        m_setting_submit= (Button) findViewById(R.id.m_setting_submit);
-        m_setting_responsetitle.setTitle("用户反馈");
+        tvsetting_responsetitle= (TitleView) findViewById(R.id.tvsetting_responsetitle);
+        edsetting_eduserresponse= (EditText) findViewById(R.id.edsetting_eduserresponse);
+        btsetting_submit= (Button) findViewById(R.id.btsetting_submit);
+        tvsetting_responsetitle.setTitle("用户反馈");
 
     }
 
@@ -39,9 +39,9 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void setEvent() {
-        m_setting_eduserresponse.setOnClickListener(this);
-        m_setting_submit.setOnClickListener(this);
-        m_setting_responsetitle.setOnClickListener(new TitleView.OnClickListener() {
+        edsetting_eduserresponse.setOnClickListener(this);
+        btsetting_submit.setOnClickListener(this);
+        tvsetting_responsetitle.setOnClickListener(new TitleView.OnClickListener() {
             @Override
             public void onBackClick() {
                 onBackPressed();
@@ -83,15 +83,13 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.m_setting_eduserresponse:m_setting_eduserresponse();break;
-            case R.id.m_setting_submit:m_setting_submit();break;
+            case R.id.btsetting_submit:btsetting_submit();break;
         }
 
     }
 
-    public void m_setting_eduserresponse() {
-    }
-    public void m_setting_submit(){
+
+    public void btsetting_submit(){
         ToastUtil.showShort("已提交");
     }
 }
