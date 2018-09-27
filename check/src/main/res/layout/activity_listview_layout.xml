@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
 
     <ListView
-        android:id="@+id/lv_example"
+        android:id="@+id/check_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content">
+    </ListView>
 </LinearLayout>

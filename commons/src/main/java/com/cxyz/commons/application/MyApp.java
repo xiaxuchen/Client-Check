@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class MyApp extends Application{
 
+
     private HashMap<String,Object> attributes;
 
     @Override
