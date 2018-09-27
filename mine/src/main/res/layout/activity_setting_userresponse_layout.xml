@@ -29,6 +29,13 @@
         android:id="@+id/edsetting_eduserresponse"
         android:layout_weight="0.45" />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/pbsetting_submit"/>
+
     <Button
         android:layout_marginTop="20dp"
         android:layout_marginLeft="140dp"
