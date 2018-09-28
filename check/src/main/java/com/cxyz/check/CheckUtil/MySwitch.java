@@ -1,5 +1,4 @@
-package com.cxyz.check;
-
+package com.cxyz.check.CheckUtil;
 /**
  * Created by 28058 on 2018/9/26.
  */
@@ -10,8 +9,7 @@ public class MySwitch  {
 
     public  static String[] switch_userPower(int userPower){
 
-        //不知道为何传递进来的值会减一
-        switch (userPower+1){
+        switch (userPower){
 
             case 0:
                 setName(new String[]{"开始考勤"})

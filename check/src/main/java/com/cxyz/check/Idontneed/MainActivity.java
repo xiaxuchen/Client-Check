@@ -1,5 +1,6 @@
-package com.cxyz.check;
+package com.cxyz.check.Idontneed;
 
+import com.cxyz.check.R;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 
