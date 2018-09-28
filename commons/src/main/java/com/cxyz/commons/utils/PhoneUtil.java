@@ -10,7 +10,7 @@ import java.io.File;
 
 /**
  * Created by 夏旭晨 on 2018/9/21.
- * 手机组件调用工具类
+ * 手机组件调用工具类，打开相机，打开相册，调用信息发送界面，判断是否连击，获取手机型号信息
  */
 
 public class PhoneUtil {

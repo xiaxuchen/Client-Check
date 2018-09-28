@@ -16,8 +16,8 @@ import java.util.Date;
 
 /**
  * Created by 夏旭晨 on 2018/9/28.
+ * 捕获全局异常
  */
-
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     //文件夹目录

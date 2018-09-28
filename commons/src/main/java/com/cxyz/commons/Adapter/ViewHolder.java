@@ -23,8 +23,9 @@ import com.cxyz.commons.utils.ImageLoaderManager;
 
 /**
  * Created by 夏旭晨 on 2018/9/22.
+ * ViewHolder中定义了一些比较常用的设置View的方法，配合AdapterBase使用
+ * 其中的set方法大多为链式调用
  */
-
 public class ViewHolder {
     private int mPosition;
     private int mLayoutId;
@@ -59,14 +60,17 @@ public class ViewHolder {
         return mPosition;
     }
 
+    /**
+     * @return 获取该vieholder所持有的布局文件
+     */
     public int getLayoutId() {
         return mLayoutId;
     }
 
     /**
-     * 通过viewId获取控件
+     * 通过viewId获取控件（不需要强转）
      *
-     * @param viewId
+     * @param viewId 控件id
      * @return
      */
     @SuppressWarnings("unchecked")
@@ -92,15 +96,19 @@ public class ViewHolder {
      *
      * @param viewId
      * @param text
-     * @return
+     * @return this
      */
     public ViewHolder setText(int viewId, String text) {
         TextView tv = getView(viewId);
         tv.setText(text);
         return this;
     }
-   /**
-     * 项目中用的图片加载框架是fresco
+
+    /**
+     * 为ImageView加载网络图片
+     * @param viewID ImageView的id
+     * @param url 资源路径
+     * @return this
      */
     public ViewHolder setImageUrl(int viewID, String url) {
         ImageView view = getView(viewID);
@@ -115,7 +123,7 @@ public class ViewHolder {
      * @param viewID ImageView的id
      * @param url 资源路径
      * @param resource 资源id
-     * @return
+     * @return this
      */
     public ViewHolder setImageUrl(int viewID, String url, int resource) {
         ImageView view = getView(viewID);
@@ -126,48 +134,98 @@ public class ViewHolder {
         }
         return this;
     }
+
+    /**
+     *  根据资源id为ImageView设置图片
+     * @param viewId 控件id
+     * @param resId 资源id
+     * @return this
+     */
     public ViewHolder setImageResource(int viewId, int resId) {
         ImageView view = getView(viewId);
         view.setImageResource(resId);
         return this;
     }
 
+    /**
+     * 根据传入的bitmap设置ImageView的图片
+     * @param viewId 控件id
+     * @param bitmap 位图
+     * @return this
+     */
     public ViewHolder setImageBitmap(int viewId, Bitmap bitmap) {
         ImageView view = getView(viewId);
         view.setImageBitmap(bitmap);
         return this;
     }
 
+
+    /**
+     * 根据传入的drawable设置ImageView的图片
+     * @param viewId 控件id
+     * @param drawable drawable对象
+     * @return
+     */
     public ViewHolder setImageDrawable(int viewId, Drawable drawable) {
         ImageView view = getView(viewId);
         view.setImageDrawable(drawable);
         return this;
     }
 
+    /**
+     * 根据颜色值设置背景色
+     * @param viewId 控件id
+     * @param color 颜色值
+     * @return this
+     */
     public ViewHolder setBackgroundColor(int viewId, int color) {
         View view = getView(viewId);
         view.setBackgroundColor(color);
         return this;
     }
 
+    /**
+     * 通过颜色资源id设置背景色
+     * @param viewId 控件id
+     * @param backgroundRes 背景色资源
+     * @return this
+     */
     public ViewHolder setBackgroundRes(int viewId, int backgroundRes) {
         View view = getView(viewId);
         view.setBackgroundResource(backgroundRes);
         return this;
     }
 
+    /**
+     * 设置TextView的字体颜色
+     * @param viewId 控件id
+     * @param textColor 文字颜色
+     * @return this
+     */
     public ViewHolder setTextColor(int viewId, int textColor) {
         TextView view = getView(viewId);
         view.setTextColor(textColor);
         return this;
     }
 
+    /**
+     * 设置TextView的字体颜色
+     * @param viewId 控件id
+     * @param textColorRes 颜色资源
+     * @return this
+     */
     public ViewHolder setTextColorRes(int viewId, int textColorRes) {
         TextView view = getView(viewId);
         view.setTextColor(mContext.getResources().getColor(textColorRes));
         return this;
     }
 
+    /**
+     * 设置控件透明度
+     * @param viewId 控件id
+     * @param value 值
+     * @return this
+     */
     public ViewHolder setAlpha(int viewId, float value) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getView(viewId).setAlpha(value);
@@ -181,24 +239,34 @@ public class ViewHolder {
         return this;
     }
 
-    public ViewHolder setVisible(int viewId, boolean visible) {
-        View view = getView(viewId);
-        view.setVisibility(visible ? View.VISIBLE : View.GONE);
+    /**
+     * 设置控件可见性
+     * @param viewId 控件id
+     * @param visible View.VISIBLE/View.INVISIBLE/View.GONE
+     * @return this
+     */
+    public ViewHolder setVisible(int viewId,int visible)
+    {
+        getView(viewId).setVisibility(visible);
         return this;
     }
-
-    public ViewHolder setHolderVisible(int viewId, boolean visible) {
-        View view = getView(viewId);
-        view.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
-        return this;
-    }
-
+    /**
+     * TextView的文本显示链接
+     * @param viewId 控件id
+     * @return this
+     */
     public ViewHolder linkify(int viewId) {
         TextView view = getView(viewId);
         Linkify.addLinks(view, Linkify.ALL);
         return this;
     }
 
+    /**
+     * 设置字体
+     * @param typeface 字体
+     * @param viewIds 控件id
+     * @return this
+     */
     public ViewHolder setTypeface(Typeface typeface, int... viewIds) {
         for (int viewId : viewIds) {
             TextView view = getView(viewId);
@@ -208,12 +276,25 @@ public class ViewHolder {
         return this;
     }
 
+    /**
+     * 设置进度条进度
+     * @param viewId 控件id
+     * @param progress 进度
+     * @return this
+     */
     public ViewHolder setProgress(int viewId, int progress) {
         ProgressBar view = getView(viewId);
         view.setProgress(progress);
         return this;
     }
 
+    /**
+     * 设置进度条进度
+     * @param viewId 控件id
+     * @param progress 进度
+     * @param max 最大进度
+     * @return this
+     */
     public ViewHolder setProgress(int viewId, int progress, int max) {
         ProgressBar view = getView(viewId);
         view.setMax(max);
@@ -221,18 +302,37 @@ public class ViewHolder {
         return this;
     }
 
+    /**
+     * 设置最大进度
+     * @param viewId 控件id
+     * @param max 最大进度
+     * @return this
+     */
     public ViewHolder setMax(int viewId, int max) {
         ProgressBar view = getView(viewId);
         view.setMax(max);
         return this;
     }
 
+    /**
+     * 设置RatingBar的进度
+     * @param viewId 控件id
+     * @param rating 进度
+     * @return this
+     */
     public ViewHolder setRating(int viewId, float rating) {
         RatingBar view = getView(viewId);
         view.setRating(rating);
         return this;
     }
 
+    /**
+     * 设置RatingBar的进度
+     * @param viewId 控件id
+     * @param rating 进度
+     * @param max 最大进度
+     * @return this
+     */
     public ViewHolder setRating(int viewId, float rating, int max) {
         RatingBar view = getView(viewId);
         view.setMax(max);
@@ -240,18 +340,37 @@ public class ViewHolder {
         return this;
     }
 
+    /**
+     * 把对象附加给相应的view
+     * @param viewId 控件id
+     * @param tag 值
+     * @return
+     */
     public ViewHolder setTag(int viewId, Object tag) {
         View view = getView(viewId);
         view.setTag(tag);
         return this;
     }
 
+    /**
+     * 把对象附加给相应的view
+     * @param viewId 控件id
+     * @param key 键
+     * @param tag 值
+     * @return
+     */
     public ViewHolder setTag(int viewId, int key, Object tag) {
         View view = getView(viewId);
         view.setTag(key, tag);
         return this;
     }
 
+    /**
+     * 给可选的控件设置选择状态
+     * @param viewId 控件id
+     * @param checked 是否选中
+     * @return
+     */
     public ViewHolder setChecked(int viewId, boolean checked) {
         Checkable view = (Checkable) getView(viewId);
         view.setChecked(checked);
@@ -259,7 +378,10 @@ public class ViewHolder {
     }
 
     /**
-     * 关于事件的
+     * 设置点击事件
+     * @param viewId 控件id
+     * @param listener 监听
+     * @return this
      */
     public ViewHolder setOnClickListener(int viewId, View.
             OnClickListener listener) {
@@ -268,12 +390,24 @@ public class ViewHolder {
         return this;
     }
 
+    /**
+     * 设置触摸事件
+     * @param viewId 控件id
+     * @param listener 监听
+     * @return this
+     */
     public ViewHolder setOnTouchListener(int viewId, View.OnTouchListener listener) {
         View view = getView(viewId);
         view.setOnTouchListener(listener);
         return this;
     }
 
+    /**
+     * 设置长按事件
+     * @param viewId 控件id
+     * @param listener 监听
+     * @return this
+     */
     public ViewHolder setOnLongClickListener(int viewId, View.OnLongClickListener listener) {
         View view = getView(viewId);
         view.setOnLongClickListener(listener);

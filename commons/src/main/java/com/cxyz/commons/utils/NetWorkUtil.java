@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.provider.Settings;
 
 /**
+ * Created by 夏旭晨 on 2018/9/21.
  * 网络工具类，包含网络的判断、跳转到设置页面 
  */
 public class NetWorkUtil {

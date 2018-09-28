@@ -17,35 +17,43 @@ import com.cxyz.commons.utils.SpUtil;
 *
 *<h1>1.注意事项</h1>
 * <ul>
-* <li>Activity对象必须持有一个IPresenter对象同时实现IView接口(MVP模式)
-* <li>使用的时候若要重写onCreate方法一定要调用super.onCreate(savedInstanceState)，一般不用重写
+* <li>Activity对象必须持有一个IPresenter对象同时实现IView接口(MVP模式)</li>
+* <li>使用的时候若要重写onCreate方法一定要调用super.onCreate(savedInstanceState)，一般不用重写</li>
 * </ul>
 *<h1>2.设置屏幕说明</h1>
 * 如果需要设置有无标题栏、是否全屏、是否使用沉浸式状态栏、是否旋转屏幕，
 * 请重写isShowTitle()、isFullScreen()、isStateBar()、isScreenRotate()方法进行设置
 * <h1>3.方便使用的方法</h1>
-* <li>当跳转到其他activity时需要传递数据时可以使用startActivity(Class<? extends BaseActivity> clz, Bundle bundle)方法
-* <li>当跳转到其他activity时需要传递数据时的同时又需要返回数据时可以使用startActivityForResult(Class<? extends  BaseActivity> cls, Bundle bundle,int requestCode)
-* <li>需要获取当前activity对象时，可以调用getActivity()方法
-* <li>需要获取当前MyApp对象时，可以调用getMyApp()方法
-* <li>需要获取当前SpUtil对象时，可以调用getSpUtil()方法
+* <li>当跳转到其他activity时需要传递数据时可以使用startActivity(Class<? extends BaseActivity> clz, Bundle bundle)方法</li>
+* <li>当跳转到其他activity时需要传递数据时的同时又需要返回数据时可以使用startActivityForResult(Class<? extends  BaseActivity> cls, Bundle bundle,int requestCode)</li>
+* <li>需要获取当前activity对象时，可以调用getActivity()方法</li>
+* <li>需要获取当前MyApp对象时，可以调用getMyApp()方法</li>
+* <li>需要获取当前SpUtil对象时，可以调用getSpUtil()方法</li>
 * </ul>
 *<h1>4.抽象方法</h1>
 * <ul>
-* <li>initData()方法中对数据进行初始化
-* <li>initView()方法中对控件进行初始化
-* <li>setEvent()方法中对事件进行注册
-* <li>通过createIPresenter方法创建IPresenter
-* <li>getContentViewId()设置布局的id
+* <li>initData()方法中对数据进行初始化</li>
+* <li>initView()方法中对控件进行初始化</li>
+* <li>setEvent()方法中对事件进行注册</li>
+* <li>通过createIPresenter方法创建IPresenter</li>
+* <li>getContentViewId()设置布局的id</li>
 * </ul>
 * <h1>Created by 夏旭晨 on 2018/9/19.</h1>
 * */
 public abstract class BaseActivity<p extends IBasePresenter> extends Activity implements IBaseView {
 
+    /**
+     * Activity持有的IPresenter引用，通过重写createIPresenter()方法获取实例
+     */
     protected p iPresenter;
 
     private ScreenManager screenManager;
 
+    /**
+     * 进行Activity的初始化，如果createIPresenter()方法返回了一个IPresenter对象，
+     * 则会自动注册到Activity的生命周期，并且将IView依附到IPresenter
+     * @param savedInstanceState 临时存储数据的bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onCreate");
@@ -90,19 +98,28 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
     }
 
     /*
-    * 设置布局
+    * 通过重写此方法设置布局文件
     * */
     public abstract int getContentViewId();
 
+    /**
+     * 在此方法中进行一些初始化view的操作
+     */
     public abstract void initView();
 
+    /**
+     * 在此方法中进行一些初始化数据的操作
+     */
     public abstract void initData();
 
+    /**
+     * 在此方法中设置事件
+     */
     public abstract  void setEvent();
 
     /***
      * 获取所在activity
-     * @return
+     * @return this
      */
     protected Activity getActivity()
     {
@@ -111,7 +128,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
     /**
      * 获取SpUtil对象
-     * @return
+     * @return spUtil对象
      */
     protected SpUtil getSpUtil()
     {
@@ -120,7 +137,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
     /**
      * 获取MyApp对象
-     * @return
+     * @return MyApp对象
      */
     protected MyApp getMyApp()
     {
@@ -129,7 +146,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
     /**
      * 是否设置标题栏
-     *默认不显示，重写该方法来选择是否显示
+     * 默认不显示，重写该方法来选择是否显示
      * @return
      */
     protected boolean isShowTitle() {
@@ -138,7 +155,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
 
     /**
-     * 设置是否显示状态栏
+     * 设置是否全屏
      * 默认不全屏，重写该方法来选择是否显示
      */
     protected boolean isFullScreen() {
@@ -147,7 +164,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
     /**
      * 设置是否竖屏
-     * 默认旋屏，重写该方法来选择
+     * 默认竖屏屏，重写该方法来选择
      */
     protected boolean isScreenRotate()
     {
@@ -169,9 +186,9 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
     /**
      * [含有Bundle通过Class打开界面]
      *
-     * @param cls
-     * @param bundle
-     * @param requestCode
+     * @param cls 所跳转的activity的class
+     * @param bundle 需要传递的数据
+     * @param requestCode 请求码
      */
     public void startActivityForResult(Class<? extends  BaseActivity> cls, Bundle bundle,int requestCode)
     {
@@ -185,8 +202,8 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
     /**
      * [携带数据的页面跳转]
      *
-     * @param clz
-     * @param bundle
+     * @param clz 所跳转的activity的class
+     * @param bundle 需要传递的数据
      */
     public void startActivity(Class<? extends BaseActivity> clz, Bundle bundle)
     {
@@ -205,6 +222,11 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     protected abstract  p createIPresenter();
 
+    /**
+     * 生命周期方法，在其中回调了IPresenter中相应的方法
+     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
+     * 本来写在activity的生命周期方法中的代码可以写到IPresenter中
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -212,7 +234,11 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
             iPresenter.onStart();
         LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onStart");
     }
-
+    /**
+     * 生命周期方法，在其中回调了IPresenter中相应的方法
+     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
+     * 本来写在activity的生命周期方法中的代码可以写到IPresenter中
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -220,7 +246,11 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
             iPresenter.onStop();
         LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onStop");
     }
-
+    /**
+     * 生命周期方法，在其中回调了IPresenter中相应的方法
+     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
+     * 本来写在activity的生命周期方法中的代码可以写到IPresenter中
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -228,7 +258,11 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
             iPresenter.onResume();
         LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onResume");
     }
-
+    /**
+     * 生命周期方法，在其中回调了IPresenter中相应的方法
+     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
+     * 本来写在activity的生命周期方法中的代码可以写到IPresenter中
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -236,7 +270,11 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
             iPresenter.onPause();
         LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onPasue");
     }
-
+    /**
+     * 生命周期方法，在其中回调了IPresenter中相应的方法
+     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
+     * 本来写在activity的生命周期方法中的代码可以写到IPresenter中
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -250,7 +288,8 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
     }
 
     /**
-     * 当由其他activity打开时进行一个处理
+     * 当由其他组件跳转并需要根据intent带来的数据显示view时调用
+     * @param intent 跳转时所用的
      */
     protected void handleIntent(Intent intent)
     {

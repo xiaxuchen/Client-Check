@@ -107,7 +107,7 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
 
     /**
      * 设置编辑位置的文字
-     * @param txt
+     * @param txt 文字
      */
     public void setEdit(String txt)
     {
@@ -115,6 +115,10 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
         edit.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * 设置控件右边的文字
+     * @param txt
+     */
     public void setSet(String txt)
     {
         set.setText(txt);
@@ -152,8 +156,8 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
 
 
     /**
-     * 设置监听
-     * @param listener
+     * 设置监听,建议使用OnClickListenerWrapper，只需重写需要的方法，而不是所有
+     * @param listener TitleView.OnClickListener
      */
     public void setOnClickListener(OnClickListener listener)
     {
@@ -179,6 +183,9 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
 
     }
 
+    /**
+     * TitleView点击事件的接口
+     */
     public interface OnClickListener{
         void onBackClick();
         void onEditClick();
@@ -187,7 +194,7 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
     }
 
     /**
-     * TitleView的空实现类
+     * TitleView的OnClickListener包装类
      */
     public static class OnClickListenerWrapper implements OnClickListener
     {
