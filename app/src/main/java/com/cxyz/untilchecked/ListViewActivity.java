@@ -7,6 +7,7 @@ import com.cxyz.commons.Adapter.AdapterBase;
 import com.cxyz.commons.Adapter.ViewHolder;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.widget.TitleView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,16 +20,19 @@ import java.util.Map;
 
 public class ListViewActivity extends BaseActivity {
     private ListView lv_example;
+
+    private TitleView title;
     //listview需要的数据
     private ArrayList<Map<String,Object>> data;
     @Override
     public int getContentViewId() {
-        return R.layout.activity_listview_layout;
+        return R.layout.activity_list_layout;
     }
 
     @Override
     public void initView() {
-        lv_example = (ListView) findViewById(R.id.);
+        lv_example = (ListView) findViewById(R.id.lv_show);
+        title = (TitleView) findViewById(R.id.title);
         lv_example.setAdapter(new MyAdapter(getActivity(),data,R.layout.item_lv_example_layout));
     }
 

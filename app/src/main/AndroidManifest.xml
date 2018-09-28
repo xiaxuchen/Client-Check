@@ -19,10 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.cxyz.untilchecked.com.cxyz.check.IcheckFunctionImple">
-        </activity>
-        <activity android:name="com.cxyz.untilchecked.com.cxyz.check.myListView">
-        </activity>
     </application>
 
 </manifest>
