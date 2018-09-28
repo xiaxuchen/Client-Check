@@ -1,10 +1,10 @@
-package ferture_z.com.z.dataUtil;
+package com.cxyz.homepage.dataUtil;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ferture_z.doMain.Clazz;
+import com.cxyz.homepage.doMain.Clazz;
 
 /**
  * Created by 鱼塘主 on 2018/9/25.

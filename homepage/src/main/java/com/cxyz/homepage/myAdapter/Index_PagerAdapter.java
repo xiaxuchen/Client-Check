@@ -1,4 +1,4 @@
-package ferture_z.myAdapter;
+package com.cxyz.homepage.myAdapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -10,9 +10,9 @@ import com.cxyz.homepage.R;
 
 import java.util.List;
 
-import ferture_z.com.z.dataUtil.DataUtil;
-import ferture_z.com.z.dataUtil.GetRintId;
-import ferture_z.doMain.Clazz;
+import com.cxyz.homepage.dataUtil.DataUtil;
+import com.cxyz.homepage.dataUtil.GetRintId;
+import com.cxyz.homepage.doMain.Clazz;
 
 /**
  * Created by 鱼塘主 on 2018/9/25.

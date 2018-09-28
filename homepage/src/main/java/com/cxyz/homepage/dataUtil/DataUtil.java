@@ -1,4 +1,4 @@
-package ferture_z.com.z.dataUtil;
+package com.cxyz.homepage.dataUtil;
 
 import android.os.Handler;
 import android.os.Message;

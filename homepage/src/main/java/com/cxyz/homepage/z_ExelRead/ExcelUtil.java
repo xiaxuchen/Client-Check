@@ -1,10 +1,10 @@
-package com.cxyz.commons.utils.z_ExelRead;
+package com.cxyz.homepage.z_ExelRead;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.cxyz.commons.domain.feature_z_domain.Clazz;
+import com.cxyz.homepage.feature_z_domain.Clazz;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class ExcelUtil{
 
     /**
      *
-     * @param context
+     * @param context 上下文
      * @param src excel的路径
      * @return simpleExcelUtil  单例模式
      */
@@ -53,7 +53,7 @@ public class ExcelUtil{
 
     /**
      * 读取Excel表的方法
-     * @param context
+     * @param context 上下文
      * @return hashMap<Srting<Week>,List<Clazz>></>
      */
         public HashMap<String,List<Clazz>> readExcelToDB(Context context) {

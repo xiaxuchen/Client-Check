@@ -1,4 +1,4 @@
-package ferture_z.myView;
+package com.cxyz.homepage.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

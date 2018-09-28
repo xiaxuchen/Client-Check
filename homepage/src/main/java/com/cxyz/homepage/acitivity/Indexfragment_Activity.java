@@ -1,11 +1,11 @@
-package ferture_z.acitivity;
+package com.cxyz.homepage.acitivity;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.FragmentActivity;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.homepage.R;
 
-import ferture_z.fragments.Index_fragment;
+import com.cxyz.homepage.fragments.Index_fragment;
 
 
 /**

@@ -1,4 +1,4 @@
-package ferture_z.fragments;
+package com.cxyz.homepage.fragments;
 
 import android.app.AlertDialog;
 import android.graphics.Color;
@@ -23,10 +23,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ferture_z.doMain.Clazz;
-import ferture_z.doMain.Stu;
-import ferture_z.myAdapter.Index_PagerAdapter;
-import ferture_z.myView.myTableTextView;
+import com.cxyz.homepage.doMain.Clazz;
+import com.cxyz.homepage.doMain.Stu;
+import com.cxyz.homepage.myAdapter.Index_PagerAdapter;
+import com.cxyz.homepage.view.myTableTextView;
 
 /**
  * Created by 鱼塘主 on 2018/9/25.
