@@ -1,5 +1,6 @@
 package com.cxyz.mine.MineView.mineactivity;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -10,13 +11,14 @@ import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
+import com.cxyz.mine.MinePresenter.presenter.IAppointmenPresenter;
 import com.cxyz.mine.R;
 
 /**
  * Created by Administrator on 2018/9/25.
  */
 
-public class M_appointmentActivity extends BaseActivity implements View.OnClickListener{
+public class AppointmentActivity extends BaseActivity<IAppointmenPresenter> implements View.OnClickListener{
     private  Spinner spappointment_spinner;
    private  TitleView tvappointment_title;
     private EditText edappointment_apply,edappointment_applytime,edappointment_applyreason;
@@ -37,9 +39,7 @@ public class M_appointmentActivity extends BaseActivity implements View.OnClickL
         edappointment_applytime=(EditText) findViewById(R.id.edappointment_applytime);
         edappointment_applyreason=(EditText)findViewById(R.id.edappointment_applyreason);
         tvappointment_title.setTitle("请假预约");
-
     }
-
     @Override
     public void initData() {
 
@@ -47,6 +47,7 @@ public class M_appointmentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void setEvent() {
+         spappointment_spinner();
         btappointment_submit.setOnClickListener(this);
         tvappointment_title.setOnClickListener(new TitleView.OnClickListener() {
             @Override
@@ -69,23 +70,12 @@ public class M_appointmentActivity extends BaseActivity implements View.OnClickL
 
             }
         });
-        spappointment_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String[] timelength = getResources().getStringArray(R.array.timelength_data);
-                ToastUtil.showShort("你选择了 "+timelength[position]);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     @Override
-    protected IBasePresenter createIPresenter() {
-        return null;
+    protected IAppointmenPresenter createIPresenter() {
+        return new  IAppointmenPresenter();
     }
 
     @Override
@@ -101,10 +91,23 @@ public class M_appointmentActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-
             case R.id.btappointment_submit: btappointment_submit();break;
         }
 
+    }
+    public  void spappointment_spinner(){
+        spappointment_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] timelength = getResources().getStringArray(R.array.timelength_data);
+                ToastUtil.showShort("你选择了 "+timelength[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
     public void btappointment_submit(){
         ToastUtil.showShort("已提交");

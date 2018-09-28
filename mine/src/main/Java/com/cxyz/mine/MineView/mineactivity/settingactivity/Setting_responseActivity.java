@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.mine.MinePresenter.presenter.IMinePresenter;
 import com.cxyz.mine.R;
@@ -16,7 +17,6 @@ import com.cxyz.mine.R;
  */
 
 public class Setting_responseActivity extends BaseActivity implements View.OnClickListener{
-    private IMinePresenter iMinePresenter;
    private TitleView tvsetting_responsetitle;
     private  EditText edsetting_eduserresponse;
     private  Button btsetting_submit;
@@ -28,7 +28,6 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void initView() {
-        iMinePresenter=new IMinePresenter();
         pbsetting_submit= (ProgressBar) findViewById(R.id.pbsetting_submit);
         tvsetting_responsetitle= (TitleView) findViewById(R.id.tvsetting_responsetitle);
         edsetting_eduserresponse= (EditText) findViewById(R.id.edsetting_eduserresponse);
@@ -79,7 +78,6 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
     public void showLoadingView() {
 
     }
-
     @Override
     public void hideLoadingView() {
 
@@ -88,8 +86,10 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btsetting_submit:iMinePresenter.btsetting_submit();break;
+            case R.id.btsetting_submit:btsetting_submit();break;
         }
 
     }
-}
+    public void btsetting_submit(){
+        ToastUtil.showShort("已提交");
+}}

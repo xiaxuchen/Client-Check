@@ -1,6 +1,7 @@
 package com.cxyz.mine.MineView.mineactivity;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ import com.cxyz.mine.R;
  * Created by Administrator on 2018/9/25.
  */
 
-public class M_myinfoActivity extends BaseActivity<IMyinfoPresenter> implements View.OnClickListener,IMyinfoView{
+public class MyinfoActivity extends BaseActivity<IMyinfoPresenter> implements View.OnClickListener,IMyinfoView{
     private Switch stmyinfo_switch;
     private ImageView ivmyinfo_headimg;
     private TextView tvmyinfo_name,tvmyinfo_sex,tvmyinfo_schoolcode,tvmyinfo_class,
@@ -107,20 +108,11 @@ public class M_myinfoActivity extends BaseActivity<IMyinfoPresenter> implements 
 
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.stmyinfo_switch:stmyinfo_switch();
+            case R.id.stmyinfo_switch:hideinfo(stmyinfo_switch);
         }
 
     }
-    public void stmyinfo_switch(){
 
-        if (stmyinfo_switch.isChecked()){
-
-            ToastUtil.showShort("已开启");
-        }else {
-
-            ToastUtil.showShort("已关闭");
-        }
-    }
 
     @Override
     public void showMyInfo(User info) {
@@ -142,5 +134,16 @@ public class M_myinfoActivity extends BaseActivity<IMyinfoPresenter> implements 
         tvmyinfo_college.setText(college._name);
     }
 
+
+
+    public void hideinfo(Switch s) {
+        if(s.isChecked()){
+            ToastUtil.showShort("已开启");
+        }
+        else {
+            ToastUtil.showShort("已关闭");
+        }
+
+    }
 
 }

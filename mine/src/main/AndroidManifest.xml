@@ -15,9 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MineView.mineactivity.M_myinfoActivity"></activity>
-        <activity android:name=".MineView.mineactivity.M_appointmentActivity"></activity>
-        <activity android:name=".MineView.mineactivity.M_settingActivity"></activity>
+        <activity android:name=".MineView.mineactivity.MyinfoActivity"></activity>
+        <activity android:name=".MineView.mineactivity.AppointmentActivity"></activity>
+        <activity android:name=".MineView.mineactivity.SettingActivity"></activity>
         <activity android:name=".MineView.mineactivity.settingactivity.Setting_responseActivity"></activity>
     </application>
 
