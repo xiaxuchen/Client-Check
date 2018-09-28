@@ -20,9 +20,9 @@ import okhttp3.Request;
  * 基于OkHttp的异步网络加载框架
  * <h1>使用</h1>
  * <ul>
- *     <li>1.创建CommonOkHttpClient对象client<br/>
- *     <li>2.根据情况选择client的相应情求方法，post、get、getFile<br/>
- *     <li>3.传入url，params和DisposeDataHandler，详细请看RequestParams和DisPoseDataHandler<br/>
+ *     <li>1.创建CommonOkHttpClient对象client<br></br>
+ *     <li>2.根据情况选择client的相应情求方法，post、get、getFile<br></br>
+ *     <li>3.传入url，params和DisposeDataHandler，详细请看RequestParams和DisPoseDataHandler<br></br>
  *     <li>4.如果没有参数params可以指定为null
  * </ul>
  */
@@ -52,6 +52,13 @@ public class CommonOkHttpClient {
         client = builder.build();
     }
 
+    /**
+     * get方式请求网络
+     * @param url 请求的地址
+     * @param params 请求参数
+     * @param handler 请求信息的封装类，详细请看DisposeDataHandler
+     * @return
+     */
     public static Call get(String url, RequestParams params, DisposeDataHandler handler) {
         Request request = CommonRequest.createGetRequest(url, params);
         Call call = client.newCall(request);
@@ -59,6 +66,13 @@ public class CommonOkHttpClient {
         return call;
     }
 
+    /**
+     * post方式请求网络
+     * @param url 请求的地址
+     * @param params 请求参数
+     * @param handler 请求信息的封装类，详细请看DisposeDataHandler
+     * @return
+     */
     public static Call post(String url, RequestParams params, DisposeDataHandler handler) {
         Request request = CommonRequest.createPostRequest(url, params);
         Call call = client.newCall(request);
@@ -66,6 +80,13 @@ public class CommonOkHttpClient {
         return call;
     }
 
+    /**
+     * 下载文件
+     * @param url 请求的地址
+     * @param params 请求参数
+     * @param handler 请求信息的封装类，详细请看DisposeDataHandler
+     * @return
+     */
     public static Call getFile(String url, RequestParams params, DisposeDataHandler handler) {
         Request request = CommonRequest.createGetRequest(url, params);
         Call call = client.newCall(request);

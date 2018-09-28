@@ -20,6 +20,7 @@ public class MyApp extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        //Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance().init(this));
         attributes = new HashMap<>();
         //初始化ToastUtils
         ToastUtil.init(getApplicationContext());

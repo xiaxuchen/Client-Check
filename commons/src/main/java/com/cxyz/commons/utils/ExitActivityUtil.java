@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 /**
  * Created by 夏旭晨 on 2018/9/21.
+ * 双击退出应用时，可以将exit方法在Activity的onKeyDown方法中调用
  */
 
 public class ExitActivityUtil {
