@@ -1,4 +1,4 @@
-package com.cxyz.homepage.fragments;
+package com.cxyz.homepage.fragment;
 
 import android.app.AlertDialog;
 import android.graphics.Color;
@@ -17,16 +17,15 @@ import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.ColorsUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.domain.Clazz;
+import com.cxyz.homepage.domain.Stu;
+import com.cxyz.homepage.myAdapter.Index_PagerAdapter;
+import com.cxyz.homepage.view.myTableTextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.cxyz.homepage.doMain.Clazz;
-import com.cxyz.homepage.doMain.Stu;
-import com.cxyz.homepage.myAdapter.Index_PagerAdapter;
-import com.cxyz.homepage.view.myTableTextView;
 
 /**
  * Created by 鱼塘主 on 2018/9/25.

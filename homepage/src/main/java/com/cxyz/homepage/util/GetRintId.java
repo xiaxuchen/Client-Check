@@ -1,4 +1,4 @@
-package com.cxyz.homepage.dataUtil;
+package com.cxyz.homepage.util;
 
 import android.content.Context;
 import android.util.Log;

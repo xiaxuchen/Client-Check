@@ -7,12 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.domain.Clazz;
+import com.cxyz.homepage.util.DataUtil;
+import com.cxyz.homepage.util.GetRintId;
 
 import java.util.List;
-
-import com.cxyz.homepage.dataUtil.DataUtil;
-import com.cxyz.homepage.dataUtil.GetRintId;
-import com.cxyz.homepage.doMain.Clazz;
 
 /**
  * Created by 鱼塘主 on 2018/9/25.

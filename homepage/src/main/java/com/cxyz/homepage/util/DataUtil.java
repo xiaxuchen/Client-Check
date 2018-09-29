@@ -1,4 +1,4 @@
-package com.cxyz.homepage.dataUtil;
+package com.cxyz.homepage.util;
 
 import android.os.Handler;
 import android.os.Message;

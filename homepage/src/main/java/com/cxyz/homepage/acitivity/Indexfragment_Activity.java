@@ -5,7 +5,7 @@ import com.cxyz.commons.activity.FragmentActivity;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.homepage.R;
 
-import com.cxyz.homepage.fragments.Index_fragment;
+import com.cxyz.homepage.fragment.Index_fragment;
 
 
 /**

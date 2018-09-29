@@ -1,10 +1,10 @@
-package com.cxyz.homepage.dataUtil;
+package com.cxyz.homepage.util;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cxyz.homepage.doMain.Clazz;
+import com.cxyz.homepage.domain.Clazz;
 
 /**
  * Created by 鱼塘主 on 2018/9/25.
