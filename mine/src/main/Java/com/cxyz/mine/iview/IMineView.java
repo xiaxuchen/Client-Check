@@ -1,4 +1,4 @@
-package com.cxyz.mine.MinePresenter.ipresenter;
+package com.cxyz.mine.iview;
 
 import com.cxyz.commons.IView.IBaseView;
 

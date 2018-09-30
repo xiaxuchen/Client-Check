@@ -1,4 +1,4 @@
-package com.cxyz.mine.MineView;
+package com.cxyz.mine.activity;
 
 import android.content.Intent;
 import android.view.View;
@@ -9,10 +9,7 @@ import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.widget.TitleView;
-import com.cxyz.mine.MinePresenter.presenter.IMinePresenter;
-import com.cxyz.mine.MineView.mineactivity.AppointmentActivity;
-import com.cxyz.mine.MineView.mineactivity.MyinfoActivity;
-import com.cxyz.mine.MineView.mineactivity.SettingActivity;
+import com.cxyz.mine.ipresenter.presenter.IMinePresenter;
 import com.cxyz.mine.R;
 
 /**
@@ -34,9 +31,6 @@ public class MineActivity extends BaseActivity<IBasePresenter> implements View.O
         tvappointment = (TextView) findViewById(R.id.tvappointment);
         tvsetting = (TextView) findViewById(R.id.tvsetting);
         btexitlogin = (Button) findViewById(R.id.btexitlogin);
-        tvtitle = (TitleView) findViewById(R.id.tvtitle);
-        tvtitle.setTitle("我的");
-
     }
 
     @Override
@@ -50,27 +44,6 @@ public class MineActivity extends BaseActivity<IBasePresenter> implements View.O
         tvappointment.setOnClickListener(this);
         tvsetting.setOnClickListener(this);
         btexitlogin.setOnClickListener(this);
-        tvtitle.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
 
 
     }

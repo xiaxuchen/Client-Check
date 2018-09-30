@@ -26,7 +26,7 @@
         android:gravity="left"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edsetting_eduserresponse"
+        android:id="@+id/etsetting_eduserresponse"
         android:layout_weight="0.45" />
 
     <ProgressBar

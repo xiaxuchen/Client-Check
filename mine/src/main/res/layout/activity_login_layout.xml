@@ -17,7 +17,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="74dp"
         android:weightSum="1">
 
         <TextView
@@ -36,12 +36,13 @@
             android:layout_marginRight="30dp"
             android:background="#FFFFFF"
             android:maxLength="20"
-            android:id="@+id/edlogin_username" />
+            android:id="@+id/etlogin_username"
+            android:layout_weight="2.62" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="123dp"
         android:weightSum="1">
 
         <TextView
@@ -59,10 +60,12 @@
             android:layout_height="39dp"
             android:inputType="textPassword"
             android:maxLength="20"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="#FFFFFF"
-            android:id="@+id/edlogin_password" />
+            android:id="@+id/etlogin_password"
+            android:layout_weight="0.08" />
     </LinearLayout>
 
     <LinearLayout
@@ -82,22 +85,5 @@
             android:layout_height="wrap_content"
             android:id="@+id/btlogin" />
 
-        <TextView
-            android:text="跳过登入"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvskiplogin"
-            android:layout_weight="0.15" />
-
-        <TextView
-            android:text="忘记密码"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvforgetpsw"
-            android:layout_weight="0.15" />
     </LinearLayout>
 </LinearLayout>

@@ -1,7 +1,4 @@
-package com.cxyz.mine.MinePresenter.ipresenter;
-
-import android.widget.Button;
-import android.widget.Switch;
+package com.cxyz.mine.iview;
 
 import com.cxyz.commons.IView.IBaseView;
 import com.cxyz.commons.domain.College;

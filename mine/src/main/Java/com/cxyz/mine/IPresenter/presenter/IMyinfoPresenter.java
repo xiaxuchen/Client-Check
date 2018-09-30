@@ -1,25 +1,28 @@
-package com.cxyz.mine.MinePresenter.presenter;
+package com.cxyz.mine.ipresenter.presenter;
 
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.domain.College;
 import com.cxyz.commons.domain.Grade;
 import com.cxyz.commons.domain.User;
-import com.cxyz.mine.MinePresenter.ipresenter.IMyinfoView;
+import com.cxyz.mine.iview.IMyinfoView;
 
 /**
  * Created by Administrator on 2018/9/27.
  */
 
-public class IMyinfoPresenter extends IBasePresenter<IBaseModel,IMyinfoView>{
+public   class IMyinfoPresenter extends IBasePresenter<IBaseModel,IMyinfoView>{
     @Override
     public IBaseModel createModel() {
         return null;
     }
+ /*   public abstract void getInfo();
+    public  abstract void getClassname();
+    public  abstract  void getCollege();*/
     //获取数据
     //从User获取姓名，性别，学号，电话，等级权限
     public void getInfo() {
-        String username ="张国荣";
+        String username ="周某人";
         String sex="男";
         String  schoolcode="17478091";
         int power=1;
@@ -46,6 +49,4 @@ public class IMyinfoPresenter extends IBasePresenter<IBaseModel,IMyinfoView>{
         college._name=collegename;
         mIView.showMyCollege(college);
     }
-
-
 }

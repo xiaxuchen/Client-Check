@@ -1,4 +1,4 @@
-package com.cxyz.mine.M_Activity;
+package com.cxyz.mine.activity;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -11,19 +11,25 @@ import com.cxyz.commons.domain.Grade;
 import com.cxyz.commons.domain.User;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
-import com.cxyz.mine.MinePrimary.IMinePresenter;
-import com.cxyz.mine.MinePrimary.IMineView;
+import com.cxyz.mine.ipresenter.IPresenterImpl.IMyinfoPresenterlmpl;
+import com.cxyz.mine.ipresenter.presenter.IMyinfoPresenter;
+import com.cxyz.mine.iview.IMyinfoView;
 import com.cxyz.mine.R;
 
 /**
  * Created by Administrator on 2018/9/25.
  */
 
-public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements View.OnClickListener,IMineView{
+public class MyinfoActivity extends BaseActivity<IMyinfoPresenter> implements View.OnClickListener,IMyinfoView{
     private Switch stmyinfo_switch;
     private ImageView ivmyinfo_headimg;
-    private TextView tvmyinfo_name,tvmyinfo_sex,tvmyinfo_schoolcode,tvmyinfo_class,
-            tvmyinfo_college,tvmyinfo_edpower,tvmyinfo_tel;
+    private TextView tvmyinfo_name;
+    private  TextView tvmyinfo_sex;
+    private  TextView tvmyinfo_schoolcode;
+    private TextView tvmyinfo_class;
+     private TextView  tvmyinfo_college;
+    private TextView tvmyinfo_edpower;
+    private TextView tvmyinfo_tel;
     private  TitleView tvmyinfo_title;
     @Override
     public int getContentViewId() {
@@ -43,7 +49,6 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
         tvmyinfo_name = (TextView) findViewById(R.id.tvmyinfo_name);
         tvmyinfo_title = (TitleView) findViewById(R.id.tvmyinfo_title);
         tvmyinfo_title.setTitle("个人信息");
-
     }
 
     @Override
@@ -83,16 +88,16 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
 
             }
         });
-        iPresenter.getInfo();
+       iPresenter.getInfo();
         iPresenter.getClassname();
         iPresenter.getCollege();
-
     }
 
     @Override
-    protected IMinePresenter createIPresenter() {
-        return new IMinePresenter();
+    protected IMyinfoPresenter createIPresenter() {
+        return new IMyinfoPresenter();
     }
+
 
     @Override
     public void showLoadingView() {
@@ -107,29 +112,14 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
 
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.stmyinfo_switch:stmyinfo_switch();
+            case R.id.stmyinfo_switch:hideinfo(stmyinfo_switch);
         }
 
     }
-    public void stmyinfo_switch(){
 
-        if (stmyinfo_switch.isChecked()){
-           /* m_myinfo_name.setText("");
-            m_myinfo_sex.setText("");
-            m_myinfo_schoolcode.setText("");
-            m_myinfo_edpower.setText("");
-            m_myinfo_tel.setText("");
-            m_myinfo_class.setText("");
-            m_myinfo_college.setText("");*/
-            ToastUtil.showShort("已开启");
-        }else {
-
-            ToastUtil.showShort("已关闭");
-        }
-    }
 
     @Override
-    public void showMineInfo(User info) {
+    public void showMyInfo(User info) {
         tvmyinfo_name.setText(info._name);
         tvmyinfo_sex.setText(info.sex);
         tvmyinfo_schoolcode.setText(info._id);
@@ -139,14 +129,25 @@ public class M_myinfoActivity extends BaseActivity<IMinePresenter> implements Vi
     }
 
     @Override
-    public void showMineClass(Grade grade) {
+    public void showMyClass(Grade grade) {
         tvmyinfo_class.setText(grade._name);
     }
 
     @Override
-    public void showMineCollege(College college) {
+    public void showMyCollege(College college) {
         tvmyinfo_college.setText(college._name);
     }
 
+
+
+    public void hideinfo(Switch s) {
+        if(s.isChecked()){
+            ToastUtil.showShort("已开启");
+        }
+        else {
+            ToastUtil.showShort("已关闭");
+        }
+
+    }
 
 }

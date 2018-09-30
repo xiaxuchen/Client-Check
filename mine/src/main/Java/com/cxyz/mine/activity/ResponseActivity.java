@@ -1,4 +1,4 @@
-package com.cxyz.mine.MineView.mineactivity.settingactivity;
+package com.cxyz.mine.activity;
 
 import android.view.View;
 import android.widget.Button;
@@ -9,18 +9,19 @@ import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
-import com.cxyz.mine.MinePresenter.presenter.IMinePresenter;
 import com.cxyz.mine.R;
+import com.cxyz.mine.ipresenter.presenter.IResponsePresenter;
 
 /**
  * Created by Administrator on 2018/9/25.
  */
 
-public class Setting_responseActivity extends BaseActivity implements View.OnClickListener{
-   private TitleView tvsetting_responsetitle;
-    private  EditText edsetting_eduserresponse;
-    private  Button btsetting_submit;
+public class ResponseActivity extends BaseActivity<IResponsePresenter> implements View.OnClickListener {
+    private TitleView tvsetting_responsetitle;
+    private EditText etsetting_eduserresponse;
+    private Button btsetting_submit;
     private ProgressBar pbsetting_submit;
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_setting_userresponse_layout;
@@ -28,10 +29,10 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void initView() {
-        pbsetting_submit= (ProgressBar) findViewById(R.id.pbsetting_submit);
-        tvsetting_responsetitle= (TitleView) findViewById(R.id.tvsetting_responsetitle);
-        edsetting_eduserresponse= (EditText) findViewById(R.id.edsetting_eduserresponse);
-        btsetting_submit= (Button) findViewById(R.id.btsetting_submit);
+        pbsetting_submit = (ProgressBar) findViewById(R.id.pbsetting_submit);
+        tvsetting_responsetitle = (TitleView) findViewById(R.id.tvsetting_responsetitle);
+        etsetting_eduserresponse = (EditText) findViewById(R.id.etsetting_eduserresponse);
+        btsetting_submit = (Button) findViewById(R.id.btsetting_submit);
         tvsetting_responsetitle.setTitle("用户反馈");
 
     }
@@ -43,7 +44,7 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void setEvent() {
-        edsetting_eduserresponse.setOnClickListener(this);
+        etsetting_eduserresponse.setOnClickListener(this);
         btsetting_submit.setOnClickListener(this);
         tvsetting_responsetitle.setOnClickListener(new TitleView.OnClickListener() {
             @Override
@@ -70,14 +71,15 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
     }
 
     @Override
-    protected IBasePresenter createIPresenter() {
-        return null;
+    protected IResponsePresenter createIPresenter() {
+        return new IResponsePresenter();
     }
 
     @Override
     public void showLoadingView() {
 
     }
+
     @Override
     public void hideLoadingView() {
 
@@ -85,11 +87,12 @@ public class Setting_responseActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btsetting_submit:btsetting_submit();break;
+        switch (v.getId()) {
+            case R.id.btsetting_submit:
+                iPresenter.btsetting_submit(etsetting_eduserresponse, pbsetting_submit);
+                break;
         }
 
     }
-    public void btsetting_submit(){
-        ToastUtil.showShort("已提交");
-}}
+}
+

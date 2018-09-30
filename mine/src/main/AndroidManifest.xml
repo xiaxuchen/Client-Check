@@ -8,17 +8,17 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name=".MineView.MineActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MineView.mineactivity.MyinfoActivity"></activity>
-        <activity android:name=".MineView.mineactivity.AppointmentActivity"></activity>
-        <activity android:name=".MineView.mineactivity.SettingActivity"></activity>
-        <activity android:name=".MineView.mineactivity.settingactivity.Setting_responseActivity"></activity>
+        <activity android:name=".activity.MineActivity"></activity>
+        <activity android:name=".activity.MyinfoActivity"></activity>
+        <activity android:name=".activity.AppointmentActivity"></activity>
+        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.ResponseActivity"></activity>
     </application>
 
 </manifest>

@@ -1,8 +1,8 @@
-package com.cxyz.mine.MinePresenter.presenter;
+package com.cxyz.mine.ipresenter.presenter;
 
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.IPresenter.IBasePresenter;
-import com.cxyz.mine.MinePresenter.ipresenter.IMineView;
+import com.cxyz.mine.iview.IMineView;
 
 /**
  * Created by Administrator on 2018/9/25.
