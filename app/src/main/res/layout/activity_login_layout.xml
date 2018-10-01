@@ -5,12 +5,18 @@
     android:background="#EAEAEA"
     android:layout_height="match_parent">
 
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <ImageView
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_gravity="center"
         android:layout_width="136dp"
         android:layout_height="125dp"
+        android:src="@mipmap/common_pxxy"
         />
 
     <LinearLayout
@@ -70,6 +76,31 @@
         android:layout_height="match_parent"
         android:weightSum="1">
 
+        <RadioGroup
+            android:id="@+id/rg_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            >
+            <RadioButton
+                android:id="@+id/rb_stu"
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="学生"
+                android:checked="true"
+                />
+
+            <RadioButton
+                android:id="@+id/rb_tea"
+                android:layout_marginLeft="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="老师"/>
+        </RadioGroup>
+
         <Button
             android:layout_marginTop="30dp"
             android:layout_marginLeft="120dp"
@@ -78,7 +109,8 @@
             android:textColor="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_login" />
+            android:id="@+id/btn_login"
+            android:background="@drawable/button_shape"/>
 
         <TextView
             android:text="忘记密码"

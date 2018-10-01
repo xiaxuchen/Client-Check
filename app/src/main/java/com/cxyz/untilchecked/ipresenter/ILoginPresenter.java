@@ -10,10 +10,10 @@ import com.cxyz.untilchecked.iview.ILoginView;
 
 public abstract class ILoginPresenter extends IBasePresenter<ILoginModel,ILoginView> {
     /**
-     *
-     * @param id
-     * @param pwd
-     * @param type
+     * 登录
+     * @param id 用户id
+     * @param pwd 密码
+     * @param type 用户类型
      */
     public abstract void login(String id,String pwd,int type);
 

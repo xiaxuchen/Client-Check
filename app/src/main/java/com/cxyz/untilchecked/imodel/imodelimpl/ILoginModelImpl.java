@@ -40,12 +40,17 @@ public class ILoginModelImpl implements ILoginModel{
             public void onSuccess(Object responseObj) {
                 try {
                     if(listener!=null)
-                        listener.getInfo(new JSONObject((String)responseObj));
-                }catch (Exception e){}
+                        listener.getInfoSuccess(new JSONObject((String)responseObj));
+                }catch (Exception e){
+                    if(listener!=null)
+                        listener.getInfoFail("JSON转化错误");
+                }
             }
 
             @Override
             public void onFailure(Object error) {
+                if(listener!=null)
+                    listener.getInfoFail(error);
             }
         }));
     }
