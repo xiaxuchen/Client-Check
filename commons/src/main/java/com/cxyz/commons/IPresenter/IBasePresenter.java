@@ -17,7 +17,7 @@ public abstract class IBasePresenter<M extends IBaseModel, V extends IBaseView> 
      * 依附相应的IView
      * @param v
      */
-    public void attachV(V v) {
+    public void attachV(V v){
         this.mIView = v;
         if (mIModle == null) {
             mIModle = createModel();

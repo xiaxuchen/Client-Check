@@ -2,6 +2,7 @@ package com.cxyz.commons.application;
 
 import android.app.Application;
 
+import com.cxyz.commons.domain.User;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.commons.utils.ToastUtil;
 
@@ -14,6 +15,7 @@ import java.util.Map;
 
 public class MyApp extends Application{
 
+    public static User user;
 
     private HashMap<String,Object> attributes;
 
