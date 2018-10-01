@@ -44,8 +44,6 @@ public class MineActivity extends BaseActivity<IBasePresenter> implements View.O
         tvappointment.setOnClickListener(this);
         tvsetting.setOnClickListener(this);
         btexitlogin.setOnClickListener(this);
-
-
     }
 
     @Override
