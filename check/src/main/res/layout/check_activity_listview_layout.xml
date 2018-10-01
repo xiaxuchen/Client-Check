@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.cxyz.untilchecked.HomeActivity">
-    <com.cxyz.commons.widget.TitleView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
-
+    tools:context="com.cxyz.check.activity.ListViewAcitivity">
+    <!--<com.cxyz.commons.widget.TitleView-->
+        <!--android:id="@+id/title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>-->
     <ListView
-        android:id="@+id/check_list"
+        android:id="@+id/listview_check"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     </ListView>
 </LinearLayout>

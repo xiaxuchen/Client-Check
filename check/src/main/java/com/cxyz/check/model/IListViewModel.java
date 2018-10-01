@@ -1,34 +1,23 @@
-package com.cxyz.check.CheckModel;
+package com.cxyz.check.model;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.media.Image;
-import android.widget.Adapter;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
-import com.cxyz.check.CheckUtil.MySwitch;
-import com.cxyz.check.CheckUtil.stuInfo_Check;
-import com.cxyz.check.R;
+import com.cxyz.check.checkTools.StuInfo_Check;
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.domain.User;
-import com.cxyz.commons.utils.ToastUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 28058 on 2018/9/26.
  */
 
-public class ICheckModel extends IBaseModel {
+public class IListViewModel implements IBaseModel {
 
-    private int image[];
-    private int user_power;
-    private String []function_name;
     private List<String>stu_name;
     private List<String>stu_id;
     private List<Image>stu_image;
@@ -46,32 +35,6 @@ public class ICheckModel extends IBaseModel {
 
     public void setmListView(ListView mListView) {
         this.mListView = mListView;
-    }
-
-    public String []getFunction_name() {
-        return function_name;
-    }
-
-    public void setFunction_name(String []function_name) {
-        this.function_name = function_name;
-    }
-
-    public int getUser_power() {
-        //做点假数据
-        user_power=1;
-        return user_power;
-    }
-
-    public void setUser_power(int user_power) {
-        this.user_power = user_power;
-    }
-
-    public int[] getImage() {
-        return image;
-    }
-
-    public void setImage(int[] image) {
-        this.image = image;
     }
 
     public List<String> getStu_name() {
@@ -98,46 +61,7 @@ public class ICheckModel extends IBaseModel {
         this.stu_image = stu_image;
     }
 
-    public Adapter inieGridData(final Activity activity){
-
-        //这里进行初始化GridView的Data(九宫格需要向适配器内添加数组,根据数组展示功能)
-        ToastUtil.init(activity.getApplicationContext());
-        //这里需要我做设置，根据权限的不同区判断给予什么功能，故这里需要判断和List来存放数据
-        setFunction_name(MySwitch.switch_userPower(getUser_power()));
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        final List<Integer> iconList=new ArrayList<>();
-        for(int i=1;i<=getFunction_name().length;i++){
-            //根据用户得到的功能名获取功能图片
-            //这样添加功能图片是不灵活的，应该改变为根据获取的功能名获取相对应的图片，后期需要利用键值对来获取
-            iconList.add(R.mipmap.ic_launcher);
-        }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //获取存放图片id的int数组
-        int[] icon = new int[iconList.size()];
-        for(int i = 0;i<iconList.size();i++){
-            icon[i] = iconList.get(i);
-        }
-        //清空iconList内部的数据
-        iconList.clear();
-        datalist = new ArrayList<Map<String, Object>>();
-        for (int i = 0; i <icon.length; i++) {
-            Map<String, Object> map=new HashMap<String, Object>();
-            map.put("img", icon[i]);
-            map.put("text",function_name[i]);
-            datalist.add(map);
-        }
-        //实例化一下GridView
-        mygv=(GridView) activity.findViewById(R.id.check_gv);
-        String[] from={"img","text"};
-        int[] to={R.id.image_gv,R.id.text_gv};
-
-        return new SimpleAdapter(activity,datalist,R.layout.item,from,to);
-
-    }
-
-    public stuInfo_Check getListViewInfo(User user){
+    public StuInfo_Check getListViewInfo(User user){
         //在这里获取会显示在ListView的信息
         //根据登陆用户的权限显示他应该获取的班级成员信息
         //①如果本地存储了班级成员信息,就先从本地读取
@@ -156,7 +80,7 @@ public class ICheckModel extends IBaseModel {
             stu_id.add("小机器人没有id");
         };
 
-        return new stuInfo_Check(stu_name,stu_id);
+        return new StuInfo_Check(stu_name,stu_id);
     }
 
 }

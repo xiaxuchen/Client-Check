@@ -1,87 +1,36 @@
-package com.cxyz.check.CheckModel;
+package com.cxyz.check.model;
 
-import android.app.AlertDialog;
-import android.media.Image;
-import android.widget.GridView;
-import android.widget.ListView;
-
-import com.cxyz.check.CheckUtil.stuInfo_Check;
+import com.cxyz.check.checkTools.StuInfo_Check;
 import com.cxyz.commons.IModel.IBaseModel;
+import com.cxyz.commons.domain.Student;
 import com.cxyz.commons.domain.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by 28058 on 2018/9/26.
  */
+//Model负责获取（本机没有）数据
+public interface ICheckModel extends IBaseModel {
 
-public class IListViewModel extends IBaseModel {
+    /**
+     *从服务器获取学生数据
+     * @return
+     */
+    public List<Student> getStus();
 
-    private List<String>stu_name;
-    private List<String>stu_id;
-    private List<Image>stu_image;
-
-
-    List datalist;
-    GridView mygv;
-    AlertDialog alert;
-    AlertDialog.Builder builder;
-    ListView mListView;
-
-    public ListView getmListView() {
-        return mListView;
-    }
-
-    public void setmListView(ListView mListView) {
-        this.mListView = mListView;
-    }
-
-    public List<String> getStu_name() {
-        return stu_name;
-    }
-
-    public void setStu_name(List<String> stu_name) {
-        this.stu_name = stu_name;
-    }
-
-    public List<String> getStu_id() {
-        return stu_id;
-    }
-
-    public void setStu_id(List<String> stu_id) {
-        this.stu_id = stu_id;
-    }
-
-    public List<Image> getStu_image() {
-        return stu_image;
-    }
-
-    public void setStu_image(List<Image> stu_image) {
-        this.stu_image = stu_image;
-    }
-
-    public stuInfo_Check getListViewInfo(User user){
-        //在这里获取会显示在ListView的信息
-        //根据登陆用户的权限显示他应该获取的班级成员信息
-        //①如果本地存储了班级成员信息,就先从本地读取
-
-        /*
-        * 这里需要写一个从本地获取数据的方法
-        * */
+    /*
+    从本地获取学生数据
+    * */
+    public StuInfo_Check getListViewInfo();
 
 
-        //先做一点假数据(获取学生名字)
-        stu_name=new ArrayList<String>();
-        stu_id=new ArrayList<String>();
-//        stu_image=new ArrayList<Image>();
-        for(int i=0;i<10;i++){
-            stu_name.add("安卓小机器人");
-            stu_id.add("小机器人没有id");
-        };
+    public User getUser();
 
-        return new stuInfo_Check(stu_name,stu_id);
-    }
+    public ArrayList<HashMap<String, Object>> getListViewInfo(StuInfo_Check StuInfo_Check);
+
 
 }
 

@@ -1,4 +1,4 @@
-package com.cxyz.check.CheckView;
+package com.cxyz.check.view;
 
 import android.app.Activity;
 import android.widget.Adapter;

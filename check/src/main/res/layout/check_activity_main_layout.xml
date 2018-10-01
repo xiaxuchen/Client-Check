@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity" >
+    tools:context="com.cxyz.check.activity.CheckActivity">
 
     <GridView
-        android:id="@+id/check_gv"
+        android:id="@+id/gv_check"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
@@ -19,7 +19,7 @@
     <RadioGroup
         android:background="@color/ripple_material_light"
         android:layout_alignParentBottom="true"
-        android:id="@+id/myRadioGroup"
+        android:id="@+id/rdgroup_check"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -27,7 +27,7 @@
 
         <RadioButton
             android:drawableTop="@mipmap/ic_launcher"
-            android:id="@+id/radio_tableclass"
+            android:id="@+id/rdclass_check"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,7 +37,7 @@
 
         <RadioButton
             android:drawableTop="@mipmap/ic_launcher"
-            android:id="@+id/radiomainpage"
+            android:id="@+id/rdmain_check"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,7 +47,7 @@
 
         <RadioButton
             android:drawableTop="@mipmap/ic_launcher"
-            android:id="@+id/radio_mine"
+            android:id="@+id/rdmine_check"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

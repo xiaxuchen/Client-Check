@@ -1,27 +1,18 @@
-package com.cxyz.check.CheckView;
+package com.cxyz.check.view;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
-import com.cxyz.commons.IModel.IBaseModel;
-import com.cxyz.commons.IPresenter.IBasePresenter;
+import com.cxyz.check.checkTools.StuInfo_Check;
 import com.cxyz.commons.IView.IBaseView;
-
-import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.commons.domain.Student;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 28058 on 2018/9/26.
@@ -29,9 +20,18 @@ import java.util.Map;
 
 public interface ICheckView extends IBaseView
 {
-    public void initGridView(Adapter adapter,GridView mGridView);
+    public void showResultDialog();
 
-    public void initActivity(Activity activity);
+    public void showCommitView();
+
+    public void showStus(List<Student> stus);
+
+    public void showGridView();
+
+    public  AdapterView.OnItemClickListener getGridViewListener();
+
+    public void showListView();
+
 }
 
 

@@ -1,4 +1,4 @@
-package com.cxyz.check.CheckUtil;
+package com.cxyz.check.checkTools;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.cxyz.check.CheckView.Iitem_ListView;
+import com.cxyz.check.view.ListView_item;
 import com.cxyz.check.R;
 
 import java.util.ArrayList;
@@ -46,20 +46,21 @@ import java.util.HashMap;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        Iitem_ListView item = null;
+        ListView_item item = null;
         if (convertView == null) {
-            item = new Iitem_ListView();
+            item = new ListView_item();
             // 获取组件布局
-            convertView = layoutInflater.inflate(R.layout.list_item, null);
+            convertView = layoutInflater.inflate(R.layout.check_activity_listview_item, null);
             item.stu_name = (TextView) convertView.findViewById(R.id.stu_name);
             item.stu_info = (TextView) convertView.findViewById(R.id.stu_info);
+            item.stu_check=(TextView) convertView.findViewById(R.id.stu_check);
+
 
             // 这里要注意，是使用的tag来存储数据的。
             convertView.setTag(item);
         } else {
-            item = (Iitem_ListView) convertView.getTag();
+            item = (ListView_item) convertView.getTag();
         }
-
 			 /*获取map中对应的数据的数据,然后显示在ListView中*/
         item.stu_name.setText((String) list.get(position).get("stu_name"));
         item.stu_info.setText((String) list.get(position).get("stu_info"));
