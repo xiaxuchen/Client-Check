@@ -2,8 +2,8 @@ package com.cxyz.untilchecked.ipresenter.ipresenterimpl;
 
 import com.cxyz.commons.domain.Student;
 import com.cxyz.commons.domain.User;
+import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.JsonUtil;
-import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.untilchecked.imodel.ILoginModel;
 import com.cxyz.untilchecked.imodel.imodelimpl.ILoginModelImpl;
 import com.cxyz.untilchecked.ipresenter.ILoginPresenter;
@@ -52,7 +52,11 @@ public class ILoginPresenterImpl extends ILoginPresenter{
 
             @Override
             public void getInfoFail(Object error) {
-                LogUtil.i(error.toString());
+                if(error instanceof OKHttpException)
+                    mIView.loginFail(((OKHttpException)error).getMessage());
+                else{
+                    mIView.loginFail(error.toString());
+                }
                 mIView.hideLoadingView();
             }
 

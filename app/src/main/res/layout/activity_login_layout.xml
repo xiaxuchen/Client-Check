@@ -26,7 +26,7 @@
         android:weightSum="1">
 
         <TextView
-            android:text="账号"
+            android:text="@string/app_account"
             android:layout_width="match_parent"
             android:textSize="18dp"
             android:layout_marginLeft="30dp"
@@ -39,7 +39,7 @@
             android:layout_height="39dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="#FFFFFF"
+            android:background="@color/app_white"
             android:maxLength="20"
             android:id="@+id/et_id" />
     </LinearLayout>
@@ -50,7 +50,7 @@
         android:weightSum="1">
 
         <TextView
-            android:text="密码"
+            android:text="@string/app_pwd"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:textSize="18dp"
@@ -66,7 +66,7 @@
             android:maxLength="20"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="#FFFFFF"
+            android:background="@color/app_white"
             android:id="@+id/et_pwd" />
     </LinearLayout>
 
@@ -88,7 +88,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="学生"
+                android:text="@string/app_stu"
                 android:checked="true"
                 />
 
@@ -98,22 +98,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="老师"/>
+                android:text="@string/app_tea"/>
         </RadioGroup>
 
         <Button
             android:layout_marginTop="30dp"
             android:layout_marginLeft="120dp"
             android:layout_marginRight="120dp"
-            android:text="登录"
-            android:textColor="#FFFFFF"
+            android:text="@string/app_login"
+            android:textColor="@color/app_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_login"
             android:background="@drawable/button_shape"/>
 
         <TextView
-            android:text="忘记密码"
+            android:text="@string/app_forget_pwd"
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"

@@ -74,6 +74,7 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
     @Override
     public void showLoadingView() {
         dialog = new ProgressDialog(getActivity());
+        dialog.setIcon(R.mipmap.common_logo2);
         dialog.setTitle("正在登录...");
         dialog.setCancelable(false);
         dialog.show();

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.cxyz.untilchecked.activity.HomeActivity">
+
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:background="#f9ffff"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></FrameLayout>
+
+        <RadioGroup
+            android:background="@color/app_white"
+            android:paddingTop="5dp"
+            android:paddingBottom="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" >
+                <RadioButton
+                    android:id="@+id/rb_check"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:button="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@mipmap/app_check_off"
+                    android:text="考勤"
+                    android:textSize="14sp"
+                    android:textColor="#bfbfbf"
+                    android:gravity="center"
+                    android:drawablePadding="4dp"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/rb_home"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:button="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@mipmap/app_home"
+                    android:gravity="center"
+                    android:textSize="0sp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/rb_mine"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:button="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@mipmap/app_mine_off"
+                    android:text="我的"
+                    android:textSize="14sp"
+                    android:textColor="#bfbfbf"
+                    android:gravity="center"
+                    android:drawablePadding="4dp"
+                    />
+
+            </RelativeLayout>
+
+        </RadioGroup>
+
+</LinearLayout>

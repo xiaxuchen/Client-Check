@@ -1,6 +1,8 @@
 package com.cxyz.untilchecked.imodel.imodelimpl;
 
-import com.cxyz.commons.constant.NetWorkConstant;
+import android.accounts.NetworkErrorException;
+
+import com.cxyz.untilchecked.constant.NetWorkConstant;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
@@ -27,32 +29,37 @@ public class ILoginModelImpl implements ILoginModel{
      */
     public void getLoginInfo(String id, String pwd, int type, final getLoginInfoListener listener)
     {
-        CommonOkHttpClient client = new CommonOkHttpClient();
         Map<String,String> map = new HashMap<>();
         map.put("method","login");
         map.put("id",id);
         map.put("pwd",pwd);
         map.put("type",String.valueOf(type));
         RequestParams params = new RequestParams(map);
-        client.get(NetWorkConstant.LOGIN_URL,params,new DisposeDataHandler(new DisposeDataListener() {
+        try {
+            CommonOkHttpClient.post(NetWorkConstant.LOGIN_URL,params,new DisposeDataHandler(new DisposeDataListener() {
 
-            @Override
-            public void onSuccess(Object responseObj) {
-                try {
-                    if(listener!=null)
-                        listener.getInfoSuccess(new JSONObject((String)responseObj));
-                }catch (Exception e){
-                    if(listener!=null)
-                        listener.getInfoFail("JSON转化错误");
+                @Override
+                public void onSuccess(Object responseObj) {
+                    try {
+                        if(listener!=null)
+                            listener.getInfoSuccess(new JSONObject((String)responseObj));
+                    }catch (Exception e){
+                        if(listener!=null)
+                            listener.getInfoFail("JSON转化错误");
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Object error) {
-                if(listener!=null)
-                    listener.getInfoFail(error);
-            }
-        }));
+                @Override
+                public void onFailure(Object error) {
+                    if(listener!=null)
+                        listener.getInfoFail(error);
+                }
+            }));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            if(listener!=null)
+                listener.getInfoFail("网络状态异常");
+        }
     }
 
 }

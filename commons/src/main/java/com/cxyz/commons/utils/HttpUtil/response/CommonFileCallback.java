@@ -51,7 +51,7 @@ public class CommonFileCallback implements Callback {
         mDeliveryHandler.post(new Runnable() {
             @Override
             public void run() {
-                mListener.onFailure(new OKHttpException("连接失败"));
+                mListener.onFailure(new OKHttpException("服务器无响应"));
             }
         });
     }
