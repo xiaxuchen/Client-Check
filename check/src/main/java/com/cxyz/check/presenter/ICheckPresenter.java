@@ -16,7 +16,6 @@ import java.util.List;
 
 public abstract class ICheckPresenter extends IBasePresenter<ICheckModel,ICheckView> {
 
-    StuInfo_Check StuInfo_Check;
     public ICheckModel mModel;
     IBaseView mView;
 
@@ -27,7 +26,5 @@ public abstract class ICheckPresenter extends IBasePresenter<ICheckModel,ICheckV
     public abstract void getStusToShow();
 
     public abstract List getGridViewInfo();
-
-    public abstract ArrayList<HashMap<String,Object>> getstuInfo_check(StuInfo_Check StuInfo_Check);
 
 }

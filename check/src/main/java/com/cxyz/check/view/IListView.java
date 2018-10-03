@@ -10,11 +10,9 @@ import com.cxyz.commons.IView.IBaseView;
  * Created by 28058 on 2018/9/26.
  */
 
-public interface Interface_IListViewView extends IBaseView
+public interface IListView extends IBaseView
 {
-    public void initGridView(Adapter adapter, GridView mGridView);
 
-    public void initActivity(Activity activity);
 }
 
 

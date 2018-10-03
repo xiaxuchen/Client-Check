@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.cxyz.check.view.ListView_item;
+import com.cxyz.check.activity.ListView_item;
 import com.cxyz.check.R;
 
 import java.util.ArrayList;
@@ -64,6 +64,7 @@ import java.util.HashMap;
 			 /*获取map中对应的数据的数据,然后显示在ListView中*/
         item.stu_name.setText((String) list.get(position).get("stu_name"));
         item.stu_info.setText((String) list.get(position).get("stu_info"));
+        item.stu_check.setText((String) list.get(position).get("stu_check"));
 
         return convertView;
     }

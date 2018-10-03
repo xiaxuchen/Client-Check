@@ -27,17 +27,14 @@ import java.util.Map;
 
 public class ICheckPresenterImpl extends ICheckPresenter {
 
-    @Override
     public ICheckModel createModel() {
         return new ICheckModelImpl();
     }
 
-    @Override
     public void getStusToShow() {
 
     }
 
-    @Override
     //getGridView功能是返回将会在显示在GridView内的功能名字，返回List，里面包含了功能名和功能图片
     public List getGridViewInfo() {
         //在这里根据返回的用户权限为用户配置相应的功能
@@ -63,17 +60,4 @@ public class ICheckPresenterImpl extends ICheckPresenter {
         return datalist;
     }
 
-    @Override
-    public ArrayList<HashMap<String,Object>> getstuInfo_check(StuInfo_Check StuInfo_Check){
-        ArrayList<HashMap<String, Object>> arrayList = new ArrayList<HashMap<String, Object>>();
-        //根据需求添加一些数据,
-        HashMap<String, Object> tempHashMap = new HashMap<String, Object>();
-        // 相同的样式布局,可以设置显示不同的文字。
-
-        for (int i = 0; i < StuInfo_Check.stu_name.size(); i++) {
-            tempHashMap.put("stu_name", StuInfo_Check.stu_name.get(i));
-            tempHashMap.put("stu_info", StuInfo_Check.stu_info.get(i));
-            arrayList.add(tempHashMap); 	        }
-        return arrayList;
-    }
 }

@@ -56,31 +56,4 @@ public class ICheckModelImpl implements ICheckModel {
         return arrayList;
     }
 
-    @Override
-    public StuInfo_Check getListViewInfo(){
-        //在这里获取会显示在ListView的信息
-        //根据登陆用户的权限显示他应该获取的班级成员信息
-        //①如果本地存储了班级成员信息,就先从本地读取*/
-        /*
-        * 这里需要写一个从本地获取数据的方法
-        * */
-    //先做一点假数据(获取学生名字)
-        List stu_name;
-        List stu_id;
-        List stu_check;
-        stu_name=new ArrayList<String>();
-        stu_id=new ArrayList<String>();
-        stu_check=new ArrayList<String>();
-//        stu_image=new ArrayList<Image>();
-        for(int i=0;i<10;i++){
-            stu_name.add("安卓小机器人");
-            stu_id.add("小机器人没有id");
-            stu_check.add("小机器人每天都出勤了");
-        };
-
-        return new StuInfo_Check(stu_name,stu_id,stu_check);
-    }
-
-
-
 }

@@ -24,13 +24,8 @@ public interface ICheckModel extends IBaseModel {
     /*
     从本地获取学生数据
     * */
-    public StuInfo_Check getListViewInfo();
-
 
     public User getUser();
-
-    public ArrayList<HashMap<String, Object>> getListViewInfo(StuInfo_Check StuInfo_Check);
-
 
 }
 

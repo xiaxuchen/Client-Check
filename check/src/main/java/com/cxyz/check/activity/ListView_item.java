@@ -1,4 +1,4 @@
-package com.cxyz.check.view;
+package com.cxyz.check.activity;
 
 import android.widget.TextView;
 
