@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAEAEA"
+    android:orientation="vertical"
+    android:weightSum="1">
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tvappointment_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:text="申请人"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvappointment_applyer"
+        android:layout_weight="0.02" />
+
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#FFFFFF"
+        android:maxLength="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etappointment_apply"
+        android:layout_weight="0.04" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:text="申请日期"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvappointment_applytime"
+        android:layout_weight="0.02" />
+
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#FFFFFF"
+        android:maxLength="30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etappointment_applytime"
+        android:layout_weight="0.04" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:text="申请时长"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvappointment_applylength"
+        android:layout_weight="0.02" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spappointment_spinner"
+        android:layout_weight="0.04"
+        android:entries="@array/timelength_data"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:text="申请原因"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvappointment_applyreason"
+        android:layout_weight="0.02" />
+
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#FFFFFF"
+        android:maxLength="200"
+        android:gravity="left"
+        android:hint="说说你的情况吧！"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etappointment_applyreason"
+        android:layout_weight="0.73" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:visibility="gone"
+        android:id="@+id/pbappointment_progressBar" />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginRight="140dp"
+        android:text="提交"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btappointment_submit" />
+</LinearLayout>
