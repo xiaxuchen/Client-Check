@@ -19,11 +19,13 @@ import java.util.Map;
  */
 
 public class ListViewActivity extends BaseActivity {
+
     private ListView lv_example;
 
     private TitleView title;
     //listview需要的数据
     private ArrayList<Map<String,Object>> data;
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_list_layout;

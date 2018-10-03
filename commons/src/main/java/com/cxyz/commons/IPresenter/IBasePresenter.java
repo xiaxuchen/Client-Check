@@ -32,7 +32,6 @@ public abstract class IBasePresenter<M extends IBaseModel, V extends IBaseView> 
      */
     public abstract M createModel();
 
-
     /**
      * 生命周期方法,在Activity中重写getIBasePresenter将会在activity中相应的进行注册
      */

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.ColorsUtil;
@@ -38,13 +37,13 @@ public class Index_fragment extends BaseFragment {
 
     //搞课表
     private ViewPager kebiao;
-    private TextView time_show_data,time_show_week,clazz_1_name,clazz_1_teacher,clazz_1_room;
+   // private TextView time_show_data,time_show_week,clazz_1_name,clazz_1_teacher,clazz_1_room;
     private List<Clazz> list = new ArrayList();
 
     //搞工具
     private GridView gv_tool;
     private int[] function_img_R = new int[]{R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo};
-    private String [] function={"记事本","记事本","记事本","记事本",   "记事本","记事本","记事本","记事本"};
+    private String [] function={"记事本","记事本","记事本","记事本","记事本","记事本","记事本","记事本"};
     private List<Map<String,Object>> datalist;
     private SimpleAdapter adapter;
 
@@ -88,11 +87,7 @@ public class Index_fragment extends BaseFragment {
         kebiao.setOffscreenPageLimit(5);//设置viewpager预加载页面数
         //将数据搞到pageradapter中
         kebiao.setAdapter(new Index_PagerAdapter(this.getActivity(),list));
-        //pagerView的刷新方法
-//        private void refresh() {
-//            mDataList.set(0, "更新数据源测试");
-//            mPagerAdapter.notifyDataSetChanged();
-//        }
+
         /**
          *搞工具表GridView
          */

@@ -71,7 +71,7 @@ public class ViewHolder {
      * 通过viewId获取控件（不需要强转）
      *
      * @param viewId 控件id
-     * @return
+     * @return  控件view的实例
      */
     @SuppressWarnings("unchecked")
     public <T extends View> T getView(int viewId) {
@@ -173,6 +173,7 @@ public class ViewHolder {
     }
 
     /**
+     * 设置控件的颜色
      * 根据颜色值设置背景色
      * @param viewId 控件id
      * @param color 颜色值

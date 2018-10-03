@@ -5,7 +5,7 @@ import android.util.Log;
 
 /**
  * Created by &#x9c7c;&#x5858;&#x4e3b; on 2018/9/25.
- * @param
+ * @param :根据R的类型和字段名返回R的int值
  *
  */
 

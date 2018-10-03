@@ -2,6 +2,7 @@ package com.cxyz.homepage.domain;
 
 /**
  * Created by 鱼塘主 on 2018/9/25.
+ * 存放学生信息的实体类
  */
 
 public class Stu {

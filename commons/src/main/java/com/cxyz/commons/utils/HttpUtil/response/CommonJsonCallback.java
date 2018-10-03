@@ -17,6 +17,7 @@ import okhttp3.Response;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
+ *
  */
 
 public class CommonJsonCallback implements Callback {
@@ -25,6 +26,10 @@ public class CommonJsonCallback implements Callback {
     private Class<?> clazz;
     private Handler handler;
 
+    /**
+     *
+     * @param disposeDataHandler
+     */
     public CommonJsonCallback(DisposeDataHandler disposeDataHandler){
         listener = disposeDataHandler.listener;
         clazz = disposeDataHandler.clazz;

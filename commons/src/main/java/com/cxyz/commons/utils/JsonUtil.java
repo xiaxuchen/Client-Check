@@ -24,7 +24,7 @@ public class JsonUtil {
     /**
      * 将一个对象转换成一个Json字符串
      * @param t
-     * @return
+     * @return json字符串
      */
     public static <T> String objectToJson(T t){
         if (t instanceof String) {

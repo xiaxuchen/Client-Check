@@ -3,24 +3,16 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FF1493"
+    android:layout_margin="5dp"
+    android:background="#FFF0F5"
     android:weightSum="1">
-    <TextView
-        android:id="@+id/item_tv_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:padding="5dp"
-        android:gravity="center"
-        android:background="#DC143C"
-        android:text="缺勤"
-        android:textSize="24dp"
-        android:textColor="#ffffff" />
+
     <LinearLayout
         android:background="#fff"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="288dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -52,6 +44,7 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <TextView
                 android:id="@+id/item_tv_checkperson"
                 android:layout_width="match_parent"
@@ -68,6 +61,7 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <TextView
                 android:id="@+id/item_tv_checktime"
                 android:layout_width="match_parent"
@@ -76,4 +70,16 @@
                 android:text="2018-09-02-09:25:23"/>
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:gravity="center"
+        android:background="#DC143C"
+        android:text="缺勤"
+        android:textSize="24dp"
+        android:textColor="#ffffff" />
 </LinearLayout>

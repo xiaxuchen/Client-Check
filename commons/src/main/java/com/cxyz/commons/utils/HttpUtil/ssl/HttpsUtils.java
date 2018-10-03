@@ -25,6 +25,13 @@ import javax.net.ssl.X509TrustManager;
 
 public class HttpsUtils
 {
+    /**
+     *
+     * @param certificates
+     * @param bksFile
+     * @param password
+     * @return
+     */
     public static SSLSocketFactory getSslSocketFactory(InputStream[] certificates, InputStream bksFile, String password)
     {
         try

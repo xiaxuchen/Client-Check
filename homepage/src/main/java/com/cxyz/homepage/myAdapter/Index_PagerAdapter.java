@@ -94,14 +94,25 @@ public class Index_PagerAdapter extends PagerAdapter {
             //显示课程状态check(status in(下节课,上课中,上完了))
 
 
+
+            //判断是否是节假日
+            /**
+             *
+             */
+            //显示课程状态: status :休假中
+
         }
         container.addView(view);
         return view;
     }
-
+//    //pagerView的刷新方法
+//        private void refresh() {
+//           // mDataList.set(0, "更新数据源测试");
+//            this.notifyDataSetChanged();
+//        }
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
+
     }
 
     @Override

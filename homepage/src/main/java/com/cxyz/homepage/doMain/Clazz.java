@@ -2,6 +2,7 @@ package com.cxyz.homepage.domain;
 
 /**
  * Created by 鱼塘主 on 2018/9/25.
+ * 存放首页显示的课程信息类
  */
 
 public class Clazz {

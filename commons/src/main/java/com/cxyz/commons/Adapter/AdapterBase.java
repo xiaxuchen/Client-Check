@@ -15,13 +15,21 @@ import java.util.List;
  * listView适配器的基类，泛型T为传递给Adapter的数据类型
  */
 public abstract class AdapterBase<T> extends BaseAdapter {
-    protected List<T> mList = new LinkedList<T>();
-    protected Context mContext;
-    protected int mItemLayoutId;
+    protected List<T> mList = new LinkedList<T>(); //数据吧
+    protected Context mContext; //上下文
+    protected int mItemLayoutId; //item布局id
 
+    //无参的构造方法
     public AdapterBase() {
+
     }
 
+    /**
+     *  带三个参数的构造方法初始化对象
+     * @param mContext
+     * @param list
+     * @param mItemLayoutId
+     */
     public AdapterBase(Context mContext, List<T> list, int mItemLayoutId) {
         initAdp(mContext, list, mItemLayoutId);
     }
@@ -39,14 +47,14 @@ public abstract class AdapterBase<T> extends BaseAdapter {
 
     /**
      * 获取所有数据
-     * @return 数据
+     * @return <list></>数据
      */
     public List<T> getList() {
         return mList;
     }
 
     /**
-     * 添加Item
+     * 动态添加Item
      * @param item
      */
     public void appendItem(T item) {
@@ -55,7 +63,7 @@ public abstract class AdapterBase<T> extends BaseAdapter {
         }
         mList.add(item);
         afterAddLists(mList);
-        notifyDataSetChanged();
+        notifyDataSetChanged();//刷新的方法
     }
 
     /**
@@ -73,6 +81,7 @@ public abstract class AdapterBase<T> extends BaseAdapter {
 
     /**
      * 添加item到存放数据的list中
+     * 会刷新的
      * @param list
      */
     public void appendToList(List<T> list) {
@@ -86,6 +95,7 @@ public abstract class AdapterBase<T> extends BaseAdapter {
 
     /**
      * 添加item到存放数据的list中，且放在第一个
+     * 也会刷新的
      * @param list
      */
     public void appendToTopList(List<T> list) {
@@ -99,7 +109,6 @@ public abstract class AdapterBase<T> extends BaseAdapter {
 
     /**
      * 删除指定数据
-     *
      * @param t
      */
     public void deleteItem(T t) {
@@ -126,11 +135,20 @@ public abstract class AdapterBase<T> extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    /**
+     *
+     * @return 数据的长度
+     */
     @Override
     public int getCount() {
         return mList.size();
     }
 
+    /**
+     *
+     * @param position
+     * @return 返回该位置的数据对象
+     */
     @Override
     public T getItem(int position) {
         if (position > mList.size() - 1) {
@@ -144,6 +162,13 @@ public abstract class AdapterBase<T> extends BaseAdapter {
         return position;
     }
 
+    /**
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder = getViewHolder(position, convertView, parent);
@@ -151,10 +176,21 @@ public abstract class AdapterBase<T> extends BaseAdapter {
         return viewHolder.getConvertView();
     }
 
+    /**
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     private ViewHolder getViewHolder(int position, View convertView, ViewGroup parent) {
         return ViewHolder.get(mContext, convertView, parent, mItemLayoutId, position);
     }
 
+    /**
+     * @param holder
+     * @param item
+     */
     public abstract void convertView(ViewHolder holder, T item);
 
     /**
