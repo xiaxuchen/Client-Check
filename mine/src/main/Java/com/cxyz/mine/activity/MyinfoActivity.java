@@ -11,8 +11,7 @@ import com.cxyz.commons.domain.Grade;
 import com.cxyz.commons.domain.User;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
-import com.cxyz.mine.ipresenter.IPresenterImpl.IMyinfoPresenterlmpl;
-import com.cxyz.mine.ipresenter.presenter.IMyinfoPresenter;
+import com.cxyz.mine.IPresenter.presenter.IMyinfoPresenter;
 import com.cxyz.mine.iview.IMyinfoView;
 import com.cxyz.mine.R;
 
@@ -67,28 +66,13 @@ public class MyinfoActivity extends BaseActivity<IMyinfoPresenter> implements Vi
         tvmyinfo_college.setOnClickListener(this);
         tvmyinfo_edpower.setOnClickListener(this);
         tvmyinfo_tel.setOnClickListener(this);
-        tvmyinfo_title.setOnClickListener(new TitleView.OnClickListener() {
+        tvmyinfo_title.setOnClickListener(new TitleView.OnClickListenerWrapper() {
             @Override
             public void onBackClick() {
                 onBackPressed();
             }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
         });
-       iPresenter.getInfo();
+        iPresenter.getInfo();
         iPresenter.getClassname();
         iPresenter.getCollege();
     }
@@ -111,31 +95,29 @@ public class MyinfoActivity extends BaseActivity<IMyinfoPresenter> implements Vi
 
 
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.stmyinfo_switch:hideinfo(stmyinfo_switch);
-        }
-
+        if(v.getId() == R.id.stmyinfo_switch)
+            hideinfo(stmyinfo_switch);
     }
 
 
     @Override
     public void showMyInfo(User info) {
-        tvmyinfo_name.setText(info._name);
+       /* tvmyinfo_name.setText(info._name);
         tvmyinfo_sex.setText(info.sex);
         tvmyinfo_schoolcode.setText(info._id);
         tvmyinfo_edpower.setText(info.power+"");
-        tvmyinfo_tel.setText(info.tel);
+        tvmyinfo_tel.setText(info.tel);*/
 
     }
 
     @Override
     public void showMyClass(Grade grade) {
-        tvmyinfo_class.setText(grade._name);
+        //tvmyinfo_class.setText(grade._name);
     }
 
     @Override
     public void showMyCollege(College college) {
-        tvmyinfo_college.setText(college._name);
+        //tvmyinfo_college.setText(college._name);
     }
 
 

@@ -1,12 +1,10 @@
-package com.cxyz.mine.ipresenter.presenter;
+package com.cxyz.mine.IPresenter.presenter;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.IPresenter.IBasePresenter;

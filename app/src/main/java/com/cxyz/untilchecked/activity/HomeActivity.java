@@ -1,5 +1,6 @@
 package com.cxyz.untilchecked.activity;
 
+import android.app.FragmentTransaction;
 import android.view.View;
 import android.widget.RadioButton;
 
@@ -7,6 +8,7 @@ import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.FragmentActivity;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.widget.TitleView;
+import com.cxyz.mine.fragment.MineFragment;
 import com.cxyz.untilchecked.R;
 
 public class HomeActivity extends FragmentActivity implements View.OnClickListener{
@@ -18,6 +20,10 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     private RadioButton rb_home;
 
     private RadioButton rb_mine;
+
+    private MineFragment mineFragment = MineFragment.newInstance();
+
+    private BaseFragment currentFragment = mineFragment;
 
 
     @Override
@@ -72,6 +78,29 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
+    /**
+     * 选择要显示的fragment
+     * @param targetFragment
+     */
+    public void switchFragment(BaseFragment targetFragment)
+    {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (!targetFragment.isAdded()) {
+            //第一次使用switchFragment()时currentFragment为null，所以要判断一下
+            if (currentFragment != null) {
+                transaction.hide(currentFragment);
+            }
+            transaction.add(R.id.fl_content, targetFragment,
+                    targetFragment.getClass().getSimpleName()).show(targetFragment);
+        } else {
+            transaction
+                    .hide(currentFragment)
+                    .show(targetFragment);
+        }
+        currentFragment = targetFragment;
+        transaction.commit();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId())
@@ -88,6 +117,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                         getDrawable(R.mipmap.app_mine_on),null,null);
                 rb_check.setCompoundDrawablesWithIntrinsicBounds(null,getResources().
                         getDrawable(R.mipmap.app_check_off),null,null);
+                switchFragment(mineFragment);
                 break;
             }
             case R.id.rb_check:{

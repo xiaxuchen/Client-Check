@@ -1,7 +1,5 @@
 package com.cxyz.mine.activity;
 
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,7 +10,7 @@ import android.widget.Spinner;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
-import com.cxyz.mine.ipresenter.presenter.IAppointmenPresenter;
+import com.cxyz.mine.IPresenter.presenter.IAppointmenPresenter;
 import com.cxyz.mine.R;
 
 import java.util.ArrayList;
@@ -104,12 +102,13 @@ public class AppointmentActivity extends BaseActivity<IAppointmenPresenter> impl
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btappointment_submit:pbappointment_progressBar.setVisibility(View.VISIBLE);
-                iPresenter.btappointment_submit(editTexts,pbappointment_progressBar);break;
-        }
-
+            if(v.getId() == R.id.btappointment_submit)
+            {
+                pbappointment_progressBar.setVisibility(View.VISIBLE);
+                iPresenter.btappointment_submit(editTexts, pbappointment_progressBar);
+            }
     }
+
     public  void spappointment_spinner(){
         spappointment_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -124,6 +123,7 @@ public class AppointmentActivity extends BaseActivity<IAppointmenPresenter> impl
             }
         });
     }
+
     public void btappointment_submit(){
         ToastUtil.showShort("已提交");
     }

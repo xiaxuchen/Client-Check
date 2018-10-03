@@ -1,15 +1,72 @@
 package com.cxyz.commons.domain;
 
-import java.util.Date;
+
+import com.cxyz.commons.Date;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
  */
+public class TaskCompletion{
+	/**
+	 * 正常考勤
+	 */
+	public static final int NORMAL = 0;
+	/**
+	 * 特殊情况
+	 */
+	public static final int OTHER = -1;
+    private Integer _id;
+    private TaskInfo taskInfo;
+    private Date date;
+    private Integer state;
+    private Date updatetime;
+    
+    public TaskCompletion(){}
+    
+    public TaskCompletion(int id){
+    	set_id(id);
+    }
+    
+    public Integer get_id() {
+		return _id;
+	}
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
+	public TaskInfo getTaskInfo() {
+		return taskInfo;
+	}
+	public void setTaskInfo(TaskInfo taskInfo) {
+		this.taskInfo = taskInfo;
+	}
+	public Integer getState() {
+		return state;
+	}
+	public void setState(Integer state) {
+		this.state = state;
+	}
 
-public class TaskCompletion {
-    public int _id;
-    public TaskInfo taskInfo;
-    public Date _date;
-    public int state;
-    public Date update_time;
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Date getUpdatetime() {
+		return updatetime;
+	}
+
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
+	}
+
+	@Override
+	public String toString() {
+		return "TaskCompletion [_id=" + _id + ", taskInfo=" + taskInfo
+				+ ", date=" + date + ", state=" + state + ", updatetime="
+				+ updatetime + "]";
+	}
+	
 }

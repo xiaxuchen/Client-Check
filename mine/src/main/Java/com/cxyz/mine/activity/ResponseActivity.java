@@ -5,12 +5,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
-import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
+import com.cxyz.mine.IPresenter.presenter.IResponsePresenter;
 import com.cxyz.mine.R;
-import com.cxyz.mine.ipresenter.presenter.IResponsePresenter;
 
 /**
  * Created by Administrator on 2018/9/25.
@@ -87,11 +85,8 @@ public class ResponseActivity extends BaseActivity<IResponsePresenter> implement
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btsetting_submit:
-                iPresenter.btsetting_submit(etsetting_eduserresponse, pbsetting_submit);
-                break;
-        }
+        if(v.getId() == R.id.btsetting_submit)
+            iPresenter.btsetting_submit(etsetting_eduserresponse, pbsetting_submit);
 
     }
 }

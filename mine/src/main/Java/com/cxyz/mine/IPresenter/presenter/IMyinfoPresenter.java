@@ -1,4 +1,4 @@
-package com.cxyz.mine.ipresenter.presenter;
+package com.cxyz.mine.IPresenter.presenter;
 
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.IPresenter.IBasePresenter;
@@ -28,25 +28,25 @@ public   class IMyinfoPresenter extends IBasePresenter<IBaseModel,IMyinfoView>{
         int power=1;
         String tel="12345678910";
         User user= new User();
-        user.tel=tel;
+     /*   user.tel=tel;
         user.power=power;
         user._id=schoolcode;
         user._name = username;
-        user.sex=sex;
+        user.sex=sex;*/
         mIView.showMyInfo(user);
     }
     //从Grade获取班级
     public  void getClassname(){
         String classname="1702软件工程";
         Grade grade=new Grade();
-        grade._name=classname;
+       // grade._name=classname;*/
         mIView.showMyClass(grade);
     }
     //从College获取学院名字
     public void getCollege(){
         String collegename="信息与计算机工程学院";
         College college=new College();
-        college._name=collegename;
+       // college._name=collegename;
         mIView.showMyCollege(college);
     }
 }

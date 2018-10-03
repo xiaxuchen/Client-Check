@@ -1,4 +1,4 @@
-package com.cxyz.mine.ipresenter.presenter;
+package com.cxyz.mine.IPresenter.presenter;
 
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.IPresenter.IBasePresenter;

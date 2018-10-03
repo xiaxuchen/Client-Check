@@ -1,4 +1,4 @@
-package com.cxyz.mine.ipresenter.presenter;
+package com.cxyz.mine.IPresenter.presenter;
 
 import android.os.Handler;
 import android.os.Looper;

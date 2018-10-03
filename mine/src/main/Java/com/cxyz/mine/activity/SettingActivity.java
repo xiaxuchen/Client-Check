@@ -95,14 +95,16 @@ public class SettingActivity extends BaseActivity <IBasePresenter>implements Vie
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.tvsetting_update:tvsetting_update();break;
-            case R.id.tvsetting_response:tvsetting_response();break;
-            case  R.id.stsettingswitch: stsettingswitch(stsettingswitch);break;
+        int viewId = v.getId();
+        if(viewId == R.id.tvsetting_update)
+            tvsetting_update();
+        else if(viewId == R.id.tvsetting_response)
+            tvsetting_response();
+        else if(viewId == R.id.stsettingswitch)
+            stsettingswitch(stsettingswitch);
 
         }
 
-    }
     //用户反馈activity跳转
     public void tvsetting_response(){
         Intent intent=new Intent(getApplicationContext(),ResponseActivity.class);
