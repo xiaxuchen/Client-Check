@@ -1,7 +1,11 @@
 package com.cxyz.commons.domain;
 
 
+
 import com.cxyz.commons.Date;
+import com.cxyz.commons.DateTime;
+
+import java.util.Arrays;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
@@ -12,11 +16,32 @@ public class TaskInfo {
 	private String _name;
     private User sponser = new User();
     private Student checker = new Student();
-    private Date start;
-    private Date len;
+    private DateTime start;
+    private DateTime len;
+    private Date end;
     private ClassRoom classRoom = new ClassRoom();
     private Integer type;
     private Grade grade = new Grade();
+    /*
+     * 所有的考勤日期
+     */
+    private Date[] dates;
+    public Date getEnd() {
+		return end;
+	}
+
+	public void setEnd(Date end) {
+		this.end = end;
+	}
+
+	public Date[] getDates() {
+		return dates;
+	}
+
+	public void setDates(Date[] dates) {
+		this.dates = dates;
+	}
+
     
     public TaskInfo(){}
     
@@ -72,19 +97,20 @@ public class TaskInfo {
 		this.grade = grade;
 	}
 
-	public Date getStart() {
+
+	public DateTime getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(DateTime start) {
 		this.start = start;
 	}
 
-	public Date getLen() {
+	public DateTime getLen() {
 		return len;
 	}
 
-	public void setLen(Date len) {
+	public void setLen(DateTime len) {
 		this.len = len;
 	}
 
@@ -92,8 +118,9 @@ public class TaskInfo {
 	public String toString() {
 		return "TaskInfo [_id=" + _id + ", _name=" + _name + ", sponser="
 				+ sponser + ", checker=" + checker + ", start=" + start
-				+ ", len=" + len + ", classRoom=" + classRoom + ", type="
-				+ type + ", grade=" + grade + "]";
+				+ ", len=" + len + ", end=" + end + ", classRoom=" + classRoom
+				+ ", type=" + type + ", grade=" + grade + ", dates="
+				+ Arrays.toString(dates) + "]";
 	}
 
 

@@ -1,9 +1,10 @@
 package com.cxyz.commons.domain;
 
 /**
+ * 考勤记录信息<br/>
+ * 
  * Created by 夏旭晨 on 2018/9/23.
  */
-
 public class CheckRecord {
 	/**
 	 * 请假
@@ -26,11 +27,25 @@ public class CheckRecord {
 	 * 撤销
 	 */
 	public static final int CANCLE = -5;
-	
+	/**
+	 * 考勤记录的id
+	 */
     private int _id;
+    /**
+     * 所属学生
+     */
     private Student student;
+    /**
+     * 考勤结果
+     */
     private int result;
+    /**
+     * 完成情况，一般只需要装填id
+     */
     private TaskCompletion taskCompletion;
+    /**
+     * 考勤描述信息
+     */
     private String des;
 	public int get_id() {
 		return _id;

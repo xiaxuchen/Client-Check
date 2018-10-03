@@ -1,7 +1,7 @@
 package com.cxyz.commons.domain;
 
-
 import com.cxyz.commons.Date;
+import com.cxyz.commons.DateTime;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
@@ -19,7 +19,7 @@ public class TaskCompletion{
     private TaskInfo taskInfo;
     private Date date;
     private Integer state;
-    private Date updatetime;
+    private DateTime updatetime;
     
     public TaskCompletion(){}
     
@@ -54,11 +54,12 @@ public class TaskCompletion{
 		this.date = date;
 	}
 
-	public Date getUpdatetime() {
+
+	public DateTime getUpdatetime() {
 		return updatetime;
 	}
 
-	public void setUpdatetime(Date updatetime) {
+	public void setUpdatetime(DateTime updatetime) {
 		this.updatetime = updatetime;
 	}
 
@@ -68,5 +69,6 @@ public class TaskCompletion{
 				+ ", date=" + date + ", state=" + state + ", updatetime="
 				+ updatetime + "]";
 	}
+
 	
 }
