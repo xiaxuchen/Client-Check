@@ -1,14 +1,10 @@
 package com.cxyz.commons.utils.HttpUtil;
 
-import android.accounts.NetworkErrorException;
-import android.content.Context;
-
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.request.CommonRequest;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 import com.cxyz.commons.utils.HttpUtil.response.CommonFileCallback;
 import com.cxyz.commons.utils.HttpUtil.response.CommonJsonCallback;
-import com.cxyz.commons.utils.NetWorkUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,17 +20,15 @@ import okhttp3.Request;
  * 基于OkHttp的异步网络加载框架
  * <h1>使用</h1>
  * <ul>
- *     <li>1.根据情况选择client的相应情求方法，post、get、getFile<br></br>
- *     <li>2.传入url，params和DisposeDataHandler，详细请看RequestParams和DisPoseDataHandler<br></br>
- *     <li>3.如果没有参数params可以指定为null
+ *     <li>1.创建CommonOkHttpClient对象client<br></br>
+ *     <li>2.根据情况选择client的相应情求方法，post、get、getFile<br></br>
+ *     <li>3.传入url，params和DisposeDataHandler，详细请看RequestParams和DisPoseDataHandler<br></br>
+ *     <li>4.如果没有参数params可以指定为null
  * </ul>
  */
 public class CommonOkHttpClient {
     private static final int TIME_OUT = 10;
     private static OkHttpClient client;
-    private static Context context;
-
-    private CommonOkHttpClient(){}
 
     static {
         //创建okhttpclient的构建者
@@ -59,24 +53,13 @@ public class CommonOkHttpClient {
     }
 
     /**
-     * 判断网络状态需要context，所以在application中就必须先进行初始化
-     * @param c
-     */
-    public static void init(Context c)
-    {
-        context = c;
-    }
-
-    /**
      * get方式请求网络
      * @param url 请求的地址
      * @param params 请求参数
      * @param handler 请求信息的封装类，详细请看DisposeDataHandler
      * @return
      */
-    public static Call get(String url, RequestParams params, DisposeDataHandler handler) throws NetworkErrorException {
-        if(!NetWorkUtil.isNetWorkEnable(context))
-            throw new NetworkErrorException();
+    public static Call get(String url, RequestParams params, DisposeDataHandler handler) {
         Request request = CommonRequest.createGetRequest(url, params);
         Call call = client.newCall(request);
         call.enqueue(new CommonJsonCallback(handler));
@@ -90,9 +73,7 @@ public class CommonOkHttpClient {
      * @param handler 请求信息的封装类，详细请看DisposeDataHandler
      * @return
      */
-    public static Call post(String url, RequestParams params, DisposeDataHandler handler) throws NetworkErrorException {
-        if(!NetWorkUtil.isNetWorkEnable(context))
-            throw new NetworkErrorException();
+    public static Call post(String url, RequestParams params, DisposeDataHandler handler) {
         Request request = CommonRequest.createPostRequest(url, params);
         Call call = client.newCall(request);
         call.enqueue(new CommonJsonCallback(handler));
@@ -106,9 +87,7 @@ public class CommonOkHttpClient {
      * @param handler 请求信息的封装类，详细请看DisposeDataHandler
      * @return
      */
-    public static Call getFile(String url, RequestParams params, DisposeDataHandler handler) throws NetworkErrorException {
-        if(!NetWorkUtil.isNetWorkEnable(context))
-            throw new NetworkErrorException();
+    public static Call getFile(String url, RequestParams params, DisposeDataHandler handler) {
         Request request = CommonRequest.createGetRequest(url, params);
         Call call = client.newCall(request);
         call.enqueue(new CommonFileCallback(handler));

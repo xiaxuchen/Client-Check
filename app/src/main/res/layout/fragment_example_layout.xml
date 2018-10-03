@@ -5,8 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cxyz.untilchecked.HomeActivity">
-    <com.cxyz.commons.widget.TitleView
-        android:id="@+id/title"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hello"/>
+
+
+    <Button
+        android:id="@+id/btn_go"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+        android:layout_height="wrap_content"
+        android:text="跳转到下个Fragment"/>
 </RelativeLayout>

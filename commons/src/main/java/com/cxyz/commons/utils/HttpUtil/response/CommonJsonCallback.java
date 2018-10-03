@@ -41,7 +41,7 @@ public class CommonJsonCallback implements Callback {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                listener.onFailure(new OKHttpException("服务器无响应"));
+                listener.onFailure(new OKHttpException(""));
             }
         });
     }
