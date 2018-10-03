@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#EAEAEA"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/pxxy"
+        android:layout_width="118dp"
+        android:layout_height="94dp"
+        android:id="@+id/ivinfo_headimg"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#CCCCCC"
+        android:layout_marginBottom="3dp"/>
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:text="个人信息"
+        android:textSize="25dp"
+        android:textColor="#666666"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tvmyinfo" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#CCCCCC"
+        android:layout_marginBottom="3dp"/>
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:text="请假预约"
+        android:textSize="25dp"
+        android:textColor="#666666"
+        android:layout_width="match_parent"
+        android:id="@+id/tvappointment"
+        android:layout_height="50dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#CCCCCC"
+        android:layout_marginBottom="3dp"/>
+
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:text="设置"
+        android:textSize="25dp"
+        android:textColor="#666666"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tvsetting" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#CCCCCC"
+        android:layout_marginBottom="3dp"/>
+
+
+    <Button
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginRight="120dp"
+        android:text="退出登入"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btexitlogin" />
+
+</LinearLayout>

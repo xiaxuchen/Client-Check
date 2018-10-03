@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#EAEAEA"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tvmyinfo_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+
+    <ImageView
+        android:src="@drawable/pxxy"
+        android:layout_width="109dp"
+        android:layout_height="76dp"
+        android:id="@+id/ivmyinfo_headimg"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0.18" />
+
+    <LinearLayout
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFF"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <TextView
+            android:text="姓名："
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_tname"
+            android:layout_marginLeft="3dp"/>
+
+        <TextView
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_name"
+            android:layout_weight="1.31" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:text="性别："
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_width="68dp"
+            android:layout_marginLeft="3dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_tsex" />
+
+        <TextView
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_sex"
+            android:layout_weight="1.31" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:text="学号："
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_marginLeft="3dp"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_tshoolcode" />
+
+        <TextView
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_schoolcode"
+            android:layout_weight="1.31" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:text="班级："
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_marginLeft="3dp"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_tclass" />
+
+        <TextView
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_class"
+            android:layout_weight="1.31" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:text="院校："
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_marginLeft="3dp"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_tcollege" />
+
+        <TextView
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_college"
+            android:layout_weight="1.31" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:text="级别："
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_marginLeft="3dp"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_power" />
+
+        <TextView
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_edpower"
+            android:layout_weight="1.31" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <TextView
+            android:text="手机："
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_marginLeft="3dp"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_ttel" />
+
+        <TextView
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_tel"
+            android:layout_weight="1.31" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        >
+
+        <TextView
+            android:text="隐藏资料"
+            android:singleLine="true"
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:layout_marginLeft="3dp"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:id="@+id/tvmyinfo_thide"
+            />
+
+        <Switch
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/stmyinfo_switch"
+            android:layout_weight="1"
+            android:gravity="end"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
