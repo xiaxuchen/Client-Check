@@ -1,5 +1,6 @@
 package com.cxyz.homepage.ipresenter;
 
+import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.imodel.MassageList_Model;
 import com.cxyz.homepage.imodel.MassageList_ModelImpl;
 
@@ -19,12 +20,15 @@ public class MassageList_PresenterImpl extends MassageList_Presenter{
             public void getInfoSuccess(JSONObject info) {
                 if (info==null){
                     return;
+                }else{
+                    //JsonUtil.getJsonObjectValue(info,"",)
+                   // JsonUtil
                 }
             }
 
             @Override
             public void getInfFail(Object error) {
-
+                ToastUtil.showShort("请求失败");
             }
         });
 

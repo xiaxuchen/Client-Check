@@ -64,7 +64,7 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
     private void initView()
     {
         setOrientation(LinearLayout.VERTICAL);
-        View.inflate(getContext(), R.layout.view_title_layout, this);
+        View.inflate(getContext(), R.layout.views_title_layout, this);
         back = (TextView) findViewById(R.id.title_back);
         edit = (TextView) findViewById(R.id.title_edit);
         set = (TextView) findViewById(R.id.title_set);

@@ -178,7 +178,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     protected boolean isStateBar()
     {
-        return false;
+        return true;
     }
 
 
