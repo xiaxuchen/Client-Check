@@ -9,19 +9,20 @@ import java.util.Arrays;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
+ * 考勤任务基本信息
  */
 
 public class TaskInfo {
-    private String _id;
-	private String _name;
-    private User sponser = new User();
-    private Student checker = new Student();
-    private DateTime start;
-    private DateTime len;
-    private Date end;
-    private ClassRoom classRoom = new ClassRoom();
-    private Integer type;
-    private Grade grade = new Grade();
+    private String _id;//考勤任务编号
+	private String _name;//考勤任务名称
+    private User sponser = new User();//考勤任务发起人
+    private User checker = new User();//考勤任务考勤人
+    private DateTime start;//考勤开始时间
+    private DateTime len;//考勤时限
+    private Date end;//最后一次的考勤日期(预留)
+    private ClassRoom classRoom = new ClassRoom();//考勤所在地
+    private Integer type;//考勤任务类型，临时任务或者课程
+    private Grade grade = new Grade();//考勤班级
     /*
      * 所有的考勤日期
      */
@@ -68,10 +69,10 @@ public class TaskInfo {
 	public void setSponser(User sponser) {
 		this.sponser = sponser;
 	}
-	public Student getChecker() {
+	public User getChecker() {
 		return checker;
 	}
-	public void setChecker(Student checker) {
+	public void setChecker(User checker) {
 		this.checker = checker;
 	}
 	public ClassRoom getClassRoom() {

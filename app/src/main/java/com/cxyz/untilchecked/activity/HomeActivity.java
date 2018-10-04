@@ -2,7 +2,9 @@ package com.cxyz.untilchecked.activity;
 
 import android.app.FragmentTransaction;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.FragmentActivity;
@@ -15,11 +17,19 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     private TitleView tv_title;
 
-    private RadioButton rb_check;
+    private ImageView iv_check;
 
-    private RadioButton rb_home;
+    private ImageView iv_home;
 
-    private RadioButton rb_mine;
+    private ImageView iv_mine;
+
+    private TextView tv_check;
+
+    private TextView tv_mine;
+
+    private LinearLayout ll_check;
+
+    private LinearLayout ll_mine;
 
     private MineFragment mineFragment = MineFragment.newInstance();
 
@@ -43,10 +53,14 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void initView() {
+        iv_check = (ImageView) findViewById(R.id.iv_check);
+        iv_home = (ImageView) findViewById(R.id.iv_home);
+        iv_mine = (ImageView) findViewById(R.id.iv_mine);
+        tv_check = (TextView) findViewById(R.id.tv_check);
+        tv_mine = (TextView) findViewById(R.id.tv_mine);
         tv_title = (TitleView) findViewById(R.id.tv_title);
-        rb_check = (RadioButton) findViewById(R.id.rb_check);
-        rb_home = (RadioButton) findViewById(R.id.rb_home);
-        rb_mine = (RadioButton) findViewById(R.id.rb_mine);
+        ll_check = (LinearLayout) findViewById(R.id.ll_check);
+        ll_mine = (LinearLayout) findViewById(R.id.ll_mine);
         tv_title.setTitle("主页");
         tv_title.setBack(0,"");
     }
@@ -58,9 +72,9 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void setEvent() {
-        rb_mine.setOnClickListener(this);
-        rb_check.setOnClickListener(this);
-        rb_home.setOnClickListener(this);
+        ll_check.setOnClickListener(this);
+        ll_mine.setOnClickListener(this);
+        iv_home.setOnClickListener(this);
     }
 
     @Override
@@ -105,26 +119,26 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.rb_home:{
-                rb_mine.setCompoundDrawablesWithIntrinsicBounds(null,getResources().
-                        getDrawable(R.mipmap.app_mine_off),null,null);
-                rb_check.setCompoundDrawablesWithIntrinsicBounds(null,getResources().
-                        getDrawable(R.mipmap.app_check_off),null,null);
+            case R.id.ll_check:{
+                iv_check.setImageResource(R.mipmap.app_check_on);
+                iv_mine.setImageResource(R.mipmap.app_mine_off);
+                tv_check.setTextColor(getResources().getColor(R.color.app_on));
+                tv_mine.setTextColor(getResources().getColor(R.color.app_off));
                 break;
             }
-            case R.id.rb_mine:{
-                rb_mine.setCompoundDrawablesWithIntrinsicBounds(null,getResources().
-                        getDrawable(R.mipmap.app_mine_on),null,null);
-                rb_check.setCompoundDrawablesWithIntrinsicBounds(null,getResources().
-                        getDrawable(R.mipmap.app_check_off),null,null);
+            case R.id.ll_mine:{
+                iv_check.setImageResource(R.mipmap.app_check_off);
+                iv_mine.setImageResource(R.mipmap.app_mine_on);
+                tv_mine.setTextColor(getResources().getColor(R.color.app_on));
+                tv_check.setTextColor(getResources().getColor(R.color.app_off));
                 switchFragment(mineFragment);
                 break;
             }
-            case R.id.rb_check:{
-                rb_mine.setCompoundDrawablesWithIntrinsicBounds(null,getResources().
-                        getDrawable(R.mipmap.app_mine_off),null,null);
-                rb_check.setCompoundDrawablesWithIntrinsicBounds(null,getResources().
-                        getDrawable(R.mipmap.app_check_on),null,null);
+            case R.id.iv_home:{
+                iv_check.setImageResource(R.mipmap.app_check_off);
+                iv_mine.setImageResource(R.mipmap.app_mine_off);
+                tv_mine.setTextColor(getResources().getColor(R.color.app_off));
+                tv_check.setTextColor(getResources().getColor(R.color.app_off));
                 break;
             }
         }

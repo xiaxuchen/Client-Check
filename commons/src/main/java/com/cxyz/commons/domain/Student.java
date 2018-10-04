@@ -6,9 +6,12 @@ package com.cxyz.commons.domain;
  */
 
 public class Student extends User{
-	private Grade grade;
+
+	//更多信息在User中
+
+	private Grade grade;//所属班级
 	
-	private String college_name;
+	private String college_name;//学院名称
 	
 	public Student(){}
 	

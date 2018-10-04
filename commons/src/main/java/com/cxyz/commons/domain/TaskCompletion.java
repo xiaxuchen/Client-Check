@@ -5,6 +5,7 @@ import com.cxyz.commons.DateTime;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
+ * 一个考勤完成情况就是一次考勤
  */
 public class TaskCompletion{
 	/**
@@ -15,11 +16,11 @@ public class TaskCompletion{
 	 * 特殊情况
 	 */
 	public static final int OTHER = -1;
-    private Integer _id;
-    private TaskInfo taskInfo;
-    private Date date;
-    private Integer state;
-    private DateTime updatetime;
+    private Integer _id;//考勤完成情况id
+    private TaskInfo taskInfo;//所属任务id
+    private Date date;//考勤日期
+    private Integer state;//完成情况
+    private DateTime updatetime;//更新时间
     
     public TaskCompletion(){}
     

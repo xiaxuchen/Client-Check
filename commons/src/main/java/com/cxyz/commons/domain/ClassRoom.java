@@ -5,10 +5,10 @@ package com.cxyz.commons.domain;
  */
 
 public class ClassRoom {
-    private Integer _id;
-    private String _name;
-    private College college;
-    private Integer state;
+    private Integer _id;//教室编号
+    private String _name;//教室名称
+    private College college;//所属学院
+    private Integer state;//是否空闲状态(预留字段)
     
     public ClassRoom(){}
     

@@ -6,10 +6,10 @@ package com.cxyz.commons.domain;
 
 public class College {
 	
-	private Integer _id;
-    private String _name;
-    private School school;
-    private Teacher manager;
+	private Integer _id;//学院编号
+    private String _name;//学院名称
+    private School school;//所属学校
+    private Teacher manager;//系部管理员
     
     public College(){}
     

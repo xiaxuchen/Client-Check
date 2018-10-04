@@ -9,12 +9,12 @@ public class User {
 	public static final int TEACHER = 1;
 	public static final int ERROR = 3;
 	
-	private String _id;
-    private String _name;
-    private String sex;
-    private String pwd;
-    private String tel;
-    private String photo;
+	private String _id;//编号
+    private String _name;//姓名
+    private String sex;//性别
+    private String pwd;//密码
+    private String tel;//电话号码
+    private String photo;//照片的url
     
     /**
      * power属性用来区分权限

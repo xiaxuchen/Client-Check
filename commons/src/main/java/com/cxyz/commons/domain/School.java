@@ -2,13 +2,14 @@ package com.cxyz.commons.domain;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
+ * 学校实体
  */
 
 public class School {
 	
-	private String _name;
-    private Teacher manager;
-    private Integer _id;
+	private String _name;//学校姓名
+    private Teacher manager;//校部管理员
+    private Integer _id;//学校编号
     
     public School(){}
     

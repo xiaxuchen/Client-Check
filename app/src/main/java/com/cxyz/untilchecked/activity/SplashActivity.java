@@ -75,7 +75,7 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     @Override
     public void showUpdateView(String version, String des,final String url) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setIcon(R.mipmap.common_logo1);
+        builder.setIcon(R.mipmap.common_logo);
         builder.setTitle("发现新版本"+version);
         builder.setMessage(des+"是否更新？");
         builder.setPositiveButton("更新", new DialogInterface.OnClickListener() {

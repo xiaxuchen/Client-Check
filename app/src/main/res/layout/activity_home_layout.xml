@@ -14,80 +14,88 @@
 
     <FrameLayout
         android:id="@+id/fl_content"
-        android:background="#f9ffff"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></FrameLayout>
 
-        <RadioGroup
-            android:background="@color/app_white"
-            android:paddingTop="5dp"
-            android:paddingBottom="2dp"
+        <LinearLayout
+            android:paddingTop="8dp"
+            android:background="@color/common_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            >
             <RelativeLayout
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" >
-                <RadioButton
-                    android:id="@+id/rb_check"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:button="@null"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/app_check_off"
-                    android:text="考勤"
-                    android:textSize="14sp"
-                    android:textColor="#bfbfbf"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/ll_check"
                     android:gravity="center"
-                    android:drawablePadding="4dp"
-                    />
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/app_check_off"/>
+                    <TextView
+                        android:textColor="@color/app_off"
+                        android:id="@+id/tv_check"
+                        android:layout_marginTop="3dp"
+                        android:layout_below="@id/iv_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_check"/>
+                </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" >
-
-                <RadioButton
-                    android:id="@+id/rb_home"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:button="@null"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <ImageView
+                    android:layout_marginBottom="6dp"
+                    android:id="@+id/iv_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/app_home"
-                    android:gravity="center"
-                    android:textSize="0sp"
-                    />
+                    android:src="@mipmap/app_home"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" >
+                android:layout_height="match_parent"
+                android:gravity="center">
 
-                <RadioButton
-                    android:id="@+id/rb_mine"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:button="@null"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/app_mine_off"
-                    android:text="我的"
-                    android:textSize="14sp"
-                    android:textColor="#bfbfbf"
+                <LinearLayout
+                    android:id="@+id/ll_mine"
                     android:gravity="center"
-                    android:drawablePadding="4dp"
-                    />
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_mine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/app_mine_off"/>
+                    <TextView
+                        android:textColor="@color/app_off"
+                        android:id="@+id/tv_mine"
+                        android:layout_marginTop="3dp"
+                        android:layout_below="@id/iv_mine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_mine"/>
+                </LinearLayout>
 
             </RelativeLayout>
 
-        </RadioGroup>
+        </LinearLayout>
 
 </LinearLayout>
