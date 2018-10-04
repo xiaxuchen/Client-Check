@@ -1,5 +1,8 @@
 package com.cxyz.commons.application;
 
+import com.cxyz.commons.domain.Grade;
+import com.cxyz.commons.domain.Student;
+import com.cxyz.commons.domain.User;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.commons.utils.ToastUtil;
@@ -16,6 +19,25 @@ public class MyApp extends BaseApplication{
 
     private HashMap<String,Object> attributes;
 
+    private static User user;
+
+    /**
+     *
+     * 获取当前用户信息
+     * @return
+     */
+    public static User getUser() {
+        return MyApp.user;
+    }
+
+    /**
+     * 登录成功后设置当前用户信息
+     * @param user
+     */
+    public static void setUser(User user) {
+        MyApp.user = user;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,6 +49,15 @@ public class MyApp extends BaseApplication{
         SpUtil.init(getApplicationContext());
         //初始化CommonOkHttp
         CommonOkHttpClient.init(getApplicationContext());
+        Student stu = new Student("17478093");
+        stu.setGrade(new Grade(1));
+        stu.setCollege_name("信计学院");
+        stu.set_name("夏旭晨");
+        stu.setPower(5);
+        stu.setPwd("12345678");
+        stu.setSex("男");
+        stu.setTel("17779911413");
+        setUser(stu);
     }
 
     /***

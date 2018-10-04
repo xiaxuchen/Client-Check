@@ -1,20 +1,10 @@
 package com.cxyz.check.model.imodelimpl;
 
-import android.app.AlertDialog;
-import android.media.Image;
-import android.widget.GridView;
-import android.widget.ListView;
-
-import com.cxyz.check.checkTools.StuInfo_Check;
-import com.cxyz.check.model.ICheckModel;
-import com.cxyz.commons.application.MyApp;
 import com.cxyz.commons.domain.Student;
 import com.cxyz.commons.domain.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 28058 on 2018/9/29.
@@ -36,11 +26,11 @@ public class ICheckModelImpl implements ICheckModel {
         //返回一个假数据
 
         User user=new User();
-        user.power=5;
+        user.setPower(5);
         return user;
     }
 
-    public ArrayList<HashMap<String, Object>> getListViewInfo(StuInfo_Check StuInfo_Check) {
+    /*public ArrayList<HashMap<String, Object>> getListViewInfo(StuInfo_Check StuInfo_Check) {
         //做点假数据
         ArrayList<HashMap<String, Object>> arrayList = new ArrayList<HashMap<String, Object>>();
         //根据需求添加一些数据,
@@ -54,6 +44,6 @@ public class ICheckModelImpl implements ICheckModel {
             arrayList.add(tempHashMap);
         }
         return arrayList;
-    }
+    }*/
 
 }
