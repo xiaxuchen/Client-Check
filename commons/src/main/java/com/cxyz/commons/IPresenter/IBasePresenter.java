@@ -17,7 +17,7 @@ public abstract class IBasePresenter<M extends IBaseModel, V extends IBaseView> 
      * 依附相应的IView
      * @param v
      */
-    public void attachV(V v) {
+    public void attachV(V v){
         this.mIView = v;
         if (mIModle == null) {
             mIModle = createModel();
@@ -36,41 +36,26 @@ public abstract class IBasePresenter<M extends IBaseModel, V extends IBaseView> 
     /**
      * 生命周期方法,在Activity中重写getIBasePresenter将会在activity中相应的进行注册
      */
-
-    public void onStart() {
-    }
-
-    ;
+    public void onStart() {}
 
     /**
      * 生命周期方法,在Activity中重写getIBasePresenter将会在activity中相应的进行注册
      */
-    public void onPause() {
-    }
-
-    ;
+    public void onPause() {}
 
     /**
      * 生命周期方法,在Activity中重写getIBasePresenter将会在activity中相应的进行注册
      */
-    public void onStop() {
-    }
-
-    ;
+    public void onStop() {}
 
     /**
      * 生命周期方法,在Activity中重写getIBasePresenter将会在activity中相应的进行注册
      */
-    public void onResume() {
-    }
-
-    ;
+    public void onResume() {}
 
     /**
      * 生命周期方法,在Activity中重写getIBasePresenter将会在activity中相应的进行注册
      */
-    public void onDestory() {
-    }
+    public void onDestory() {}
 
-    ;
 }

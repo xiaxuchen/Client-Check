@@ -1,7 +1,6 @@
 package com.cxyz.commons.application;
 
-import android.app.Application;
-
+import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.commons.utils.ToastUtil;
 
@@ -12,7 +11,7 @@ import java.util.Map;
  * Created by 夏旭晨 on 2018/9/20.
  */
 
-public class MyApp extends Application{
+public class MyApp extends BaseApplication{
 
 
     private HashMap<String,Object> attributes;
@@ -20,11 +19,14 @@ public class MyApp extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        //Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance().init(this));
         attributes = new HashMap<>();
         //初始化ToastUtils
         ToastUtil.init(getApplicationContext());
         //初始化SpUtils
         SpUtil.init(getApplicationContext());
+        //初始化CommonOkHttp
+        CommonOkHttpClient.init(getApplicationContext());
     }
 
     /***

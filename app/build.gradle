@@ -21,12 +21,15 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    if(!isDebug.toBoolean())
-    {
+    if (!isDebug.toBoolean()) {
         compile project(':check')
         compile project(':homepage')
         compile project(':mine')
-    }else
+    } else
         compile project(':commons')
 
+    compile 'com.android.support:appcompat-v7:21.0.3'
 }
+
+
+
