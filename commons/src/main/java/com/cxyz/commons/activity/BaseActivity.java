@@ -302,4 +302,13 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
     };
 
+    /**
+     * 直接通过class文件跳转
+     * @param clazz
+     */
+    public void startActivity(Class clazz)
+    {
+        startActivity(clazz,null);
+    }
+
 }

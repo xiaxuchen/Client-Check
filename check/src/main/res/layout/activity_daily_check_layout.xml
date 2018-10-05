@@ -12,17 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <AutoCompleteTextView
-        android:id="@+id/act_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ListView
-        android:id="@+id/lv_stus"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+        <ListView
+            android:id="@+id/lv_stus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
 
+        <ProgressBar
+            android:id="@+id/pb_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

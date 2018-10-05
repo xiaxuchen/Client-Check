@@ -3,7 +3,7 @@ package com.cxyz.check.ipresenter.ipresenterimpl;
 import com.cxyz.check.R;
 import com.cxyz.check.constant.IDs;
 import com.cxyz.check.ipresenter.ICheckPresenter;
-import com.cxyz.check.model.imodelimpl.ICheckModelImpl;
+import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.application.MyApp;
 
 import java.util.ArrayList;
@@ -35,8 +35,8 @@ public class ICheckPresenterImpl extends ICheckPresenter {
      */
     private long ids[] = new long[]{IDs.DAILYID, IDs.SHORTTIMEID,2,3,4,5,6,7,8};
 
-    public ICheckModel createModel() {
-        return new ICheckModelImpl();
+    public IBaseModel createModel() {
+        return null;
     }
 
     public void getStusToShow() {

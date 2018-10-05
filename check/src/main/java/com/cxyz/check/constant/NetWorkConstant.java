@@ -6,7 +6,10 @@ package com.cxyz.check.constant;
 
 public class NetWorkConstant {
 
-    public static final String ROOT_URL = "http://dvumx7.natappfree.cc/Service_Check";
+    public static final String ROOT_URL = "http://3yryuy.natappfree.cc/Service_Check";
 
-
+    //获取班级学生的url
+    public static final String GET_STUS = ROOT_URL+"/servlet/UserServlet";
+    //提交的url
+    public static  final String COMMIT_URL = ROOT_URL+"/servlet/CheckServlet";
 }

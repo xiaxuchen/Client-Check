@@ -6,6 +6,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.cxyz.check.R;
+import com.cxyz.check.activity.DailyCheckActivity;
 import com.cxyz.check.adapter.FunctionAdapter;
 import com.cxyz.check.constant.IDs;
 import com.cxyz.check.ipresenter.ICheckPresenter;
@@ -68,7 +69,7 @@ public class CheckFragment extends BaseFragment<ICheckPresenter> implements IBas
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(id == IDs.DAILYID)
         {
-
+            getHoldingActivity().startActivity(DailyCheckActivity.class);
         }else if(id == IDs.SHORTTIMEID)
         {
 

@@ -1,6 +1,8 @@
 package com.cxyz.commons.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用于装载考勤信息的bean<br/>
@@ -45,7 +47,20 @@ public class Check {
 	public void setState(OtherState state) {
 		this.state = state;
 	}
-	
+
+	public static Check getCheck(Map<String,CheckRecord> mcr,TaskCompletion completion)
+	{
+		Check c = new Check();
+		c.setCompletion(completion);
+		List<CheckRecord> crs = new ArrayList<>();
+		for(CheckRecord cr:mcr.values())
+		{
+			crs.add(cr);
+		}
+		c.setRecords(crs);
+		return c;
+	}
+
 	@Override
 	public String toString() {
 		return "Check [completion=" + completion + ", record=" + records

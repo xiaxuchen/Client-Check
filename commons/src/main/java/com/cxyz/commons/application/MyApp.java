@@ -50,7 +50,7 @@ public class MyApp extends BaseApplication{
         //初始化CommonOkHttp
         CommonOkHttpClient.init(getApplicationContext());
         Student stu = new Student("17478093");
-        stu.setGrade(new Grade(1));
+        stu.setGrade(new Grade(122));
         stu.setCollege_name("信计学院");
         stu.set_name("夏旭晨");
         stu.setPower(5);
