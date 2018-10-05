@@ -11,11 +11,13 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.ColorsUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.acitivity.Massage_Activity;
 import com.cxyz.homepage.domain.Clazz;
 import com.cxyz.homepage.domain.Stu;
 import com.cxyz.homepage.myAdapter.Index_PagerAdapter;
@@ -51,6 +53,9 @@ public class Index_fragment extends BaseFragment {
     private LinearLayout tableLinerLayout,tLinearLayout;
     private String[] table_title={"学号","姓名","本学期缺勤情况:","工号","本学期班级缺勤人数"};
     private String[] table_text={user.getId(),user.getName(),user.getGg()};
+
+    //搞考勤情况
+    private TextView kaoqinqingkuang;
 
     //搞申述按钮
     private Button btn_allege;
@@ -134,6 +139,22 @@ public class Index_fragment extends BaseFragment {
             }
             tableLinerLayout.addView(tLinearLayout);
         }
+        /**
+         * 考勤情况入口
+         */
+        kaoqinqingkuang = findViewById(R.id.station);
+        kaoqinqingkuang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //带着user对象跳到massage_activiy
+                getHoldingActivity().startActivity(Massage_Activity.class,null);
+            }
+        });
+
+
+
+
+
         /**
          * 申述按钮
          */
