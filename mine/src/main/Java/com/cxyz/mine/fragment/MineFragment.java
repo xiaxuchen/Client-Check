@@ -29,7 +29,7 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_mine_layout;
+        return R.layout.fragment_mine_layout;
     }
 
     @Override
@@ -105,5 +105,7 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
             tvappointment();
         else if(viewId == R.id.tvsetting)
             tvsetting();
+        else if(viewId == R.id.btexitlogin)
+            System.exit(0);
     }
 }

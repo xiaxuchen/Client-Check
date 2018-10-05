@@ -8,12 +8,15 @@ import android.widget.TextView;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.domain.College;
 import com.cxyz.commons.domain.Grade;
+import com.cxyz.commons.domain.Student;
+import com.cxyz.commons.domain.Teacher;
 import com.cxyz.commons.domain.User;
+import com.cxyz.commons.manager.UserManager;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.mine.IPresenter.presenter.IMyinfoPresenter;
-import com.cxyz.mine.iview.IMyinfoView;
 import com.cxyz.mine.R;
+import com.cxyz.mine.iview.IMyinfoView;
 
 /**
  * Created by Administrator on 2018/9/25.
@@ -48,11 +51,29 @@ public class MyinfoActivity extends BaseActivity<IMyinfoPresenter> implements Vi
         tvmyinfo_name = (TextView) findViewById(R.id.tvmyinfo_name);
         tvmyinfo_title = (TitleView) findViewById(R.id.tvmyinfo_title);
         tvmyinfo_title.setTitle("个人信息");
+
+        //设置信息
+        User u = UserManager.getInstance().getUser();
+        tvmyinfo_name.setText(u.get_name());
+        tvmyinfo_edpower.setText(u.getPower()+"");
+        tvmyinfo_sex.setText(u.getSex());
+        tvmyinfo_tel.setText(u.getTel()==null?"":u.getTel());
+        if(u.getType() == User.STUDNET)
+        {
+            Student stu = (Student)u;
+            tvmyinfo_college.setText(stu.getCollege_name()==null?"暂无":stu.getCollege_name());
+            tvmyinfo_class.setText(stu.getGrade().get_name());
+        }else
+        {
+            Teacher tea = (Teacher)u;
+            tvmyinfo_college.setText(tea.getCollege().get_name());
+        }
+        tvmyinfo_schoolcode.setText("萍乡学院(暂时填充)");
+
     }
 
     @Override
     public void initData() {
-
 
     }
 
