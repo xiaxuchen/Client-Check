@@ -5,6 +5,13 @@ package com.cxyz.commons.domain;
  */
 
 public class Grade {
+<<<<<<< HEAD
+    public int _id;
+    public String _name;
+    public College college;
+    public Teacher headTeacher;
+    public ClassRoom classRoom;
+=======
 	private Integer _id;//班级编号
 	private String _name;//班级名称
 	private College college;//所属学院
@@ -52,4 +59,5 @@ public class Grade {
 				+ ", headTeacher=" + headTeacher + ", classRoom=" + classRoom
 				+ ", _id=" + _id + "]";
 	}
+>>>>>>> 65f779f9dc574c11711dafe67911761f9fe2410c
 }

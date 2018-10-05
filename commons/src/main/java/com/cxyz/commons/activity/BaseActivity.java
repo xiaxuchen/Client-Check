@@ -65,13 +65,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         initData();
         initView();
         setEvent();
-        afterInit();
     }
-
-    /**
-     * 在setEvent之后调用
-     */
-    protected  void afterInit(){};
 
     /**
      * 在setContentView方法后紧接着调用

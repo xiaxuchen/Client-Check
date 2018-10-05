@@ -5,6 +5,10 @@ package com.cxyz.commons.domain;
  * 学生实体
  */
 
+<<<<<<< HEAD
+public class Student extends User {
+    public Grade grade;
+=======
 public class Student extends User{
 
 	//更多信息在User中
@@ -42,4 +46,5 @@ public class Student extends User{
 		this.college_name = college_name;
 	}
 
+>>>>>>> 65f779f9dc574c11711dafe67911761f9fe2410c
 }

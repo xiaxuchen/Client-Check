@@ -1,10 +1,26 @@
 package com.cxyz.commons.domain;
 
+import java.util.Date;
+
 /**
  * Created by 夏旭晨 on 2018/9/23.
  */
 
 public class User {
+<<<<<<< HEAD
+    public String _id;
+    public String _name;
+    public String sex;
+    public String pwd;
+    public Date birthday;
+    public String email;
+    public String tel;
+    public String info;
+    public String head_img;
+    public String photo;
+    public int power;
+    public int type;
+=======
 	public static final int STUDNET = 0;
 	public static final int TEACHER = 1;
 	public static final int ERROR = 3;
@@ -92,6 +108,5 @@ public class User {
 	}
     
 	
+>>>>>>> 65f779f9dc574c11711dafe67911761f9fe2410c
 }
-
-

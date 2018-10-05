@@ -6,6 +6,11 @@ package com.cxyz.commons.domain;
  */
 
 public class School {
+<<<<<<< HEAD
+    public int _id;
+    public String _name;
+    public Teacher manager;
+=======
 	
 	private String _name;//学校姓名
     private Teacher manager;//校部管理员
@@ -40,4 +45,5 @@ public class School {
 				+ _id + "]";
 	}
 	
+>>>>>>> 65f779f9dc574c11711dafe67911761f9fe2410c
 }

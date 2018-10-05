@@ -6,6 +6,9 @@ package com.cxyz.commons.domain;
  */
 
 public class Teacher extends User{
+<<<<<<< HEAD
+    public College college;
+=======
 
 	//更多信息看User
 	
@@ -36,4 +39,5 @@ public class Teacher extends User{
 
 	
     
+>>>>>>> 65f779f9dc574c11711dafe67911761f9fe2410c
 }

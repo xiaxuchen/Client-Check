@@ -5,6 +5,12 @@ package com.cxyz.commons.domain;
  */
 
 public class ClassRoom {
+<<<<<<< HEAD
+    public int _id;
+    public String _name;
+    public College college;
+    public int state;
+=======
     private Integer _id;//教室编号
     private String _name;//教室名称
     private College college;//所属学院
@@ -49,4 +55,5 @@ public class ClassRoom {
 				+ college + ", state=" + state + "]";
 	}
     
+>>>>>>> 65f779f9dc574c11711dafe67911761f9fe2410c
 }

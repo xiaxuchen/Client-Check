@@ -1,4 +1,4 @@
-if (isDebug.toBoolean())
+if(isDebug.toBoolean())
     apply plugin: 'com.android.application'
 else
     apply plugin: 'com.android.library'
@@ -18,9 +18,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main {
-            if (isDebug.toBoolean())
+    sourceSets{
+        main{
+            if(isDebug.toBoolean())
                 manifest.srcFile 'src/main/AndroidManifest.xml'
         }
     }
@@ -29,6 +29,4 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':commons')
-    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
-    compile 'com.android.support:appcompat-v7:21.0.3'
 }

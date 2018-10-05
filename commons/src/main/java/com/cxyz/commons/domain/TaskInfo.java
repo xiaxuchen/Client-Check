@@ -1,11 +1,6 @@
 package com.cxyz.commons.domain;
 
-
-
-import com.cxyz.commons.Date;
-import com.cxyz.commons.DateTime;
-
-import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
@@ -13,6 +8,16 @@ import java.util.Arrays;
  */
 
 public class TaskInfo {
+<<<<<<< HEAD
+    public int _id;
+    public String _name;
+    public User sponser;
+    public Student checker;
+    public Date startTime;
+    public Date time_len;
+    public ClassRoom classRoom;
+    public String describe;
+=======
     private String _id;//考勤任务编号
 	private String _name;//考勤任务名称
     private User sponser = new User();//考勤任务发起人
@@ -126,4 +131,5 @@ public class TaskInfo {
 
 
 	
+>>>>>>> 65f779f9dc574c11711dafe67911761f9fe2410c
 }

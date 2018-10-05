@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/img_tool_0"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/logo"/>
+    <TextView
+        android:id="@+id/tv_tool_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="记事"
+        android:textColor="#4682B4"/>
+</LinearLayout>

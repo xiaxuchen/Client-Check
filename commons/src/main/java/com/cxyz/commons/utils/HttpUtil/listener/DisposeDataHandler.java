@@ -4,6 +4,7 @@ package com.cxyz.commons.utils.HttpUtil.listener;
  * Created by 夏旭晨 on 2018/9/23.
  * 封装回调及数据处理的参数
  */
+
 public class DisposeDataHandler {
     public DisposeDataListener listener = null;
     public Class<?> clazz = null;
@@ -21,7 +22,7 @@ public class DisposeDataHandler {
     /**
      * 在返回对象的时候使用此构造方法
      * @param listener 回调
-     * @param clazz 实体对象的Class
+     * @param clazz 对应的实体对象的Class
      */
     public DisposeDataHandler(DisposeDataListener listener,Class<?> clazz){
         this.listener = listener;

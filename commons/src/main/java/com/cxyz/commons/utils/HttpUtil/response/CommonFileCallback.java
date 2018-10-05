@@ -19,6 +19,7 @@ import okhttp3.Response;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
+ *
  */
 
 public class CommonFileCallback implements Callback {
@@ -51,7 +52,7 @@ public class CommonFileCallback implements Callback {
         mDeliveryHandler.post(new Runnable() {
             @Override
             public void run() {
-                mListener.onFailure(new OKHttpException("服务器无响应"));
+                mListener.onFailure(new OKHttpException("连接失败"));
             }
         });
     }

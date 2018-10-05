@@ -1,10 +1,10 @@
 package com.cxyz.commons.domain;
 
 /**
- * 考勤记录信息<br/>
- * 
  * Created by 夏旭晨 on 2018/9/23.
  */
+<<<<<<< HEAD
+=======
 public class CheckRecord {
 	/**
 	 * 请假
@@ -84,5 +84,11 @@ public class CheckRecord {
 	}
 	
 	
+>>>>>>> feature-c
 
+public class CheckRecord {
+    public int _id;
+    public Student student;
+    public int result;
+    public TaskCompletion taskCompletion;
 }

@@ -5,6 +5,12 @@ package com.cxyz.commons.domain;
  */
 
 public class College {
+<<<<<<< HEAD
+    public int _id;
+    public String _name;
+    public School school;
+    public Teacher manager;
+=======
 	
 	private Integer _id;//学院编号
     private String _name;//学院名称
@@ -46,4 +52,5 @@ public class College {
 		return "College [_id=" + _id + ", _name=" + _name + ", school="
 				+ school + ", manager=" + manager + "]";
 	}
+>>>>>>> 65f779f9dc574c11711dafe67911761f9fe2410c
 }

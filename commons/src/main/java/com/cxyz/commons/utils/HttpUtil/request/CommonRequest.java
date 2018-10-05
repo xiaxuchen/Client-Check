@@ -12,6 +12,8 @@ import okhttp3.RequestBody;
 /**
  * Created by 夏旭晨 on 2018/9/23.
  * 用来封装请求
+ * 负责创建各种类型的请求对象,包括get,post,文件上传类型,
+ * 文件下载类型
  */
 
 public class CommonRequest {
@@ -33,7 +35,6 @@ public class CommonRequest {
         return new Request.Builder().get().url(urlBuilder.substring(0,urlBuilder.length()-1).toString()).build();
     }
     /**
-     *
      * @param url
      * @param params
      * @return 返回一个创建好的发送POST请求的Request对象

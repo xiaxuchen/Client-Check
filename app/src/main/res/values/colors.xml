@@ -3,7 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+<<<<<<< HEAD
+=======
     <color name="app_white">#FFFFFF</color>
     <color name="app_on">#1AFA29</color>
     <color name="app_off">#bfbfbf</color>
+>>>>>>> 65f779f9dc574c11711dafe67911761f9fe2410c
 </resources>

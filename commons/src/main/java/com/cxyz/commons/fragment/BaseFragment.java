@@ -9,10 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cxyz.commons.IPresenter.IBasePresenter;
-import com.cxyz.commons.IView.IBaseView;
 import com.cxyz.commons.activity.FragmentActivity;
-import com.cxyz.commons.utils.LogUtil;
 
 /**
  * Created by 夏旭晨 on 2018/9/21.
@@ -31,7 +28,7 @@ import com.cxyz.commons.utils.LogUtil;
  * }<br></br>
  *注：其中FIRST_FRAGMENT是你自定义的标记，BaseFragment搭配FragmentActivity使用
  */
-public abstract class BaseFragment<p extends IBasePresenter> extends Fragment implements IBaseView{
+public abstract class BaseFragment extends Fragment {
 
     /**
      * 持有的所在Activity的引用
@@ -42,11 +39,6 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      * Fragment的布局转换的view
      */
     protected View mRootView;
-
-    /**
-     * 持有的IPresenter的引用
-     */
-    protected p iPresenter;
 
     /**
      * 是否对用户可见
@@ -64,14 +56,6 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     protected FragmentActivity getHoldingActivity() {
         return mActivity;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        iPresenter = createIPresenter();
-        super.onCreate(savedInstanceState);
-        if(iPresenter!=null)
-            iPresenter.attachV(this);
     }
 
     @Override
@@ -129,20 +113,9 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
     protected abstract void initView(View view, Bundle savedInstanceState);
 
     /**
-     * 获取IPresenter
-     * @return
-     */
-    protected abstract p createIPresenter();
-
-    /**
      * 设置监听事件
      */
     protected abstract void setListener();
-
-    /**
-     * 在初始化之后调用
-     */
-    protected void afterInit(){}
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -181,69 +154,4 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
         }
         return (T) mRootView.findViewById(id);
     }
-
-    /**
-     * 生命周期方法，在其中回调了IPresenter中相应的方法
-     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
-     * 本来写在fragment的生命周期方法中的代码可以写到IPresenter中
-     */
-    @Override
-    public void onStart() {
-        super.onStart();
-        if(iPresenter!=null)
-            iPresenter.onStart();
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onStart");
-    }
-    /**
-     * 生命周期方法，在其中回调了IPresenter中相应的方法
-     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
-     * 本来写在fragment的生命周期方法中的代码可以写到IPresenter中
-     */
-    @Override
-    public void onStop() {
-        super.onStop();
-        if(iPresenter!=null)
-            iPresenter.onStop();
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onStop");
-    }
-    /**
-     * 生命周期方法，在其中回调了IPresenter中相应的方法
-     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
-     * 本来写在fragment的生命周期方法中的代码可以写到IPresenter中
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(iPresenter!=null)
-            iPresenter.onResume();
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onResume");
-    }
-    /**
-     * 生命周期方法，在其中回调了IPresenter中相应的方法
-     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
-     * 本来写在fragment的生命周期方法中的代码可以写到IPresenter中
-     */
-    @Override
-    public void onPause() {
-        super.onPause();
-        if(iPresenter!=null)
-            iPresenter.onPause();
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onPasue");
-    }
-    /**
-     * 生命周期方法，在其中回调了IPresenter中相应的方法
-     * 在其中还打印了当前生命周期的日志，日志内容为类名+方法名+生命周期
-     * 本来写在fragment的生命周期方法中的代码可以写到IPresenter中
-     */
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(iPresenter!=null)
-        {
-            iPresenter.onDestory();
-            iPresenter.detachV();
-        }
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onDestory");
-    }
-
 }

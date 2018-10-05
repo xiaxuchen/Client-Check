@@ -49,18 +49,10 @@ public abstract class FragmentActivity<p extends IBasePresenter> extends BaseAct
      */
     public void addFragment(BaseFragment fragment) {
         if (fragment != null) {
+
             getFragmentManager()
                     .beginTransaction()
                     .replace(getFragmentContentId(), fragment, fragment.getClass().getSimpleName())
-                    .addToBackStack(fragment.getClass().getSimpleName()).commitAllowingStateLoss();
-        }
-    }
-
-    public void addFragment(BaseFragment fragment,String tag) {
-        if (fragment != null) {
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(getFragmentContentId(), fragment,tag)
                     .addToBackStack(fragment.getClass().getSimpleName()).commitAllowingStateLoss();
         }
     }
