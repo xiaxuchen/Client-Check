@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.cxyz.check.fragment.CheckFragment;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.FragmentActivity;
 import com.cxyz.commons.fragment.BaseFragment;
@@ -32,6 +33,8 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     private LinearLayout ll_mine;
 
     private MineFragment mineFragment = MineFragment.newInstance();
+
+    private CheckFragment checkFragment = CheckFragment.newInstance();
 
     private BaseFragment currentFragment = mineFragment;
 
@@ -124,6 +127,8 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 iv_mine.setImageResource(R.mipmap.app_mine_off);
                 tv_check.setTextColor(getResources().getColor(R.color.app_on));
                 tv_mine.setTextColor(getResources().getColor(R.color.app_off));
+                switchFragment(checkFragment);
+                tv_title.setTitle("考勤");
                 break;
             }
             case R.id.ll_mine:{
@@ -132,6 +137,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 tv_mine.setTextColor(getResources().getColor(R.color.app_on));
                 tv_check.setTextColor(getResources().getColor(R.color.app_off));
                 switchFragment(mineFragment);
+                tv_title.setTitle("我的");
                 break;
             }
             case R.id.iv_home:{
@@ -139,6 +145,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 iv_mine.setImageResource(R.mipmap.app_mine_off);
                 tv_mine.setTextColor(getResources().getColor(R.color.app_off));
                 tv_check.setTextColor(getResources().getColor(R.color.app_off));
+                tv_title.setTitle("主页");
                 break;
             }
         }

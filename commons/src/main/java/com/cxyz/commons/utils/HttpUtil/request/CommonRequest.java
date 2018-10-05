@@ -42,15 +42,15 @@ public class CommonRequest {
     public static Request createPostRequest(String url,RequestParams params)
     {
         FormBody body = null;
+        FormBody.Builder builder = new FormBody.Builder();
         if(params != null)
         {
-            FormBody.Builder builder = new FormBody.Builder();
             for(Map.Entry<String,String> entry:params.urlParams.entrySet())
             {
                 builder.add(entry.getKey(),entry.getValue());
             }
-            body = builder.build();
         }
+        body = builder.build();
         return new Request.Builder().post(body).url(url).build();
     }
 

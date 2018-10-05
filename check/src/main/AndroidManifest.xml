@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cxyz.check">
 
+<<<<<<< HEAD
     <application
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
@@ -18,4 +19,11 @@
         <activity android:name="com.cxyz.check.activity.ListViewAcitivity">
         </activity>
     </application>
+=======
+    <application android:theme="@style/AppTheme">
+        <activity android:name=".activity.ListViewAcitivity" />
+        <activity android:name=".activity.DailyCheckActivity"></activity>
+    </application>
+
+>>>>>>> feature-c
 </manifest>
