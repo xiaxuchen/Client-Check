@@ -13,6 +13,7 @@ import com.cxyz.homepage.ipresenter.MassageList_PresenterImpl;
 
 public class Massage_Activity extends BaseActivity<MassageList_Presenter> {
     private ListView lv_massage;
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_massage;
