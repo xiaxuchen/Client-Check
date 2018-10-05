@@ -1,7 +1,9 @@
 package com.cxyz.untilchecked.ipresenter.ipresenterimpl;
 
 import com.cxyz.commons.domain.Student;
+import com.cxyz.commons.domain.Teacher;
 import com.cxyz.commons.domain.User;
+import com.cxyz.commons.manager.UserManager;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.JsonUtil;
 import com.cxyz.untilchecked.imodel.ILoginModel;
@@ -43,6 +45,12 @@ public class ILoginPresenterImpl extends ILoginPresenter{
                     {
                         Student stu = JsonUtil.jsonToObject(info.toString(), Student.class);
                         mIView.loginSuccess();
+                        UserManager.getInstance().setUser(stu);
+                    }else if(info.getInt("type") == User.TEACHER)
+                    {
+                        Teacher tea = JsonUtil.jsonToObject(info.toString(),Teacher.class);
+                        mIView.loginSuccess();
+                        UserManager.getInstance().setUser(tea);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -78,8 +86,8 @@ public class ILoginPresenterImpl extends ILoginPresenter{
             return "账号长度应为8位！";
         if(pwd.isEmpty())
             return "密码不能为空！";
-        if(id.length()<8)
-            return "密码不能少于8位！";
+        if(id.length()<6)
+            return "密码不能少于6位！";
         return null;
     }
 

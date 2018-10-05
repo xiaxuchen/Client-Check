@@ -6,7 +6,7 @@ package com.cxyz.untilchecked.constant;
 
 public class NetWorkConstant {
 
-    public static final String ROOT_URL = "http://dvumx7.natappfree.cc/Service_Check";
+    public static final String ROOT_URL = "http://6ikbhw.natappfree.cc/Service_Check";
 
     public static final String LOGIN_URL = ROOT_URL+"/servlet/UserServlet";
 

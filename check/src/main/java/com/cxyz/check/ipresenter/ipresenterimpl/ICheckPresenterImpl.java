@@ -4,7 +4,7 @@ import com.cxyz.check.R;
 import com.cxyz.check.constant.IDs;
 import com.cxyz.check.ipresenter.ICheckPresenter;
 import com.cxyz.commons.IModel.IBaseModel;
-import com.cxyz.commons.application.MyApp;
+import com.cxyz.commons.manager.UserManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +61,7 @@ public class ICheckPresenterImpl extends ICheckPresenter {
 
     private int[] getIndex()
     {
-        switch (MyApp.getUser().getPower())
+        switch (UserManager.getInstance().getUser().getPower())
         {
             case 0:
             {

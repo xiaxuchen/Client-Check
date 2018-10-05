@@ -2,11 +2,12 @@ package com.cxyz.untilchecked.imodel.imodelimpl;
 
 import android.accounts.NetworkErrorException;
 
-import com.cxyz.untilchecked.constant.NetWorkConstant;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
+import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.untilchecked.constant.NetWorkConstant;
 import com.cxyz.untilchecked.imodel.ILoginModel;
 
 import org.json.JSONObject;
@@ -35,6 +36,7 @@ public class ILoginModelImpl implements ILoginModel{
         map.put("pwd",pwd);
         map.put("type",String.valueOf(type));
         RequestParams params = new RequestParams(map);
+        LogUtil.e(NetWorkConstant.LOGIN_URL);
         try {
             CommonOkHttpClient.post(NetWorkConstant.LOGIN_URL,params,new DisposeDataHandler(new DisposeDataListener() {
 

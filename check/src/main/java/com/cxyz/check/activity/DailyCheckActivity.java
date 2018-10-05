@@ -15,10 +15,10 @@ import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.ipresenter.ipresenterimpl.IDailyPresenterImpl;
 import com.cxyz.check.view.IDailyView;
 import com.cxyz.commons.activity.BaseActivity;
-import com.cxyz.commons.application.MyApp;
 import com.cxyz.commons.domain.CheckRecord;
 import com.cxyz.commons.domain.Student;
 import com.cxyz.commons.domain.TaskCompletion;
+import com.cxyz.commons.manager.UserManager;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
 
@@ -70,6 +70,15 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void setEvent() {
+        tv_title.setOnClickListener(new TitleView.OnClickListenerWrapper()
+        {
+            @Override
+            public void onBackClick() {
+                super.onBackClick();
+                onBackPressed();
+            }
+        });
+
         lv_stus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -85,6 +94,11 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         });
     }
 
+    /**
+     * 显示选择状态的对话框
+     * @param position
+     * @param view
+     */
     private void showStateDialog(final int position,final View view)
     {
         final String[] items = new String[]{"迟到","请假","已到达","缺勤","早退"};
@@ -146,7 +160,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     protected void afterInit() {
         super.afterInit();
-        iPresenter.getStusToShow(((Student)MyApp.getUser()).getGrade().get_id());
+        iPresenter.getStusToShow(((Student) UserManager.getInstance().getUser()).getGrade().get_id());
     }
 
     @Override

@@ -90,6 +90,7 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
     @Override
     public void loginSuccess() {
         ToastUtil.showShort("登录成功");
+        startActivity(HomeActivity.class);
     }
 
     @Override
