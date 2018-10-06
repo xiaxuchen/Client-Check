@@ -41,7 +41,6 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     private BaseFragment currentFragment = index_fragment;
 
-
     @Override
     public int getFragmentContentId() {
         return R.id.fl_content;
@@ -60,6 +59,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void initView() {
+
         iv_check = (ImageView) findViewById(R.id.iv_check);
         iv_home = (ImageView) findViewById(R.id.iv_home);
         iv_mine = (ImageView) findViewById(R.id.iv_mine);

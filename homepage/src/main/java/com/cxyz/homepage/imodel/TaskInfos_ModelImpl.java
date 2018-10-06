@@ -1,6 +1,6 @@
 package com.cxyz.homepage.imodel;
 
-import com.cxyz.commons.domain.RecordDetail;
+import com.cxyz.commons.domain.TaskInfo;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
@@ -14,32 +14,28 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by 鱼塘主 on 2018/10/3.
+ * Created by 鱼塘主 on 2018/10/6.
  */
 
-public class MassageList_ModelImpl implements MassageList_Model {
-    /**
-     * 获取该学生的个人的一个又一个的考勤情况
-     * @return
-     */
+public class TaskInfos_ModelImpl implements TaskInfos_Model{
     @Override
-    public void getMassageInfo(String id,String url,final getMassageInfoListener listener) {
+    public void getTaskInfo(String id, String url, final getTaskInfoListener listener) {
         Map<String,String> map = new HashMap<>();
-        map.put("method","getRecordDetails");
+        map.put("method","");
         map.put("id",id);
         RequestParams params = new RequestParams(map);
-        LogUtil.e(NetWorkHomeUrl.RDS_URL);
+        LogUtil.e(NetWorkHomeUrl.TASK_URL);
         try {
-            CommonOkHttpClient.post(NetWorkHomeUrl.RDS_URL,params,new DisposeDataHandler(new DisposeDataListener() {
+            CommonOkHttpClient.post(NetWorkHomeUrl.TASK_URL,params,new DisposeDataHandler(new DisposeDataListener() {
                 @Override
                 public void onSuccess(Object responseObj) {
-                    List<RecordDetail> recordDetails = JsonUtil.jsonToListObject(responseObj.toString(), RecordDetail.class);
-                    listener.getInfoSuccess(recordDetails);
+                    List<TaskInfo> taskInfoList = JsonUtil.jsonToListObject(responseObj.toString(),TaskInfo.class);
+                    listener.getInfoSuccess(taskInfoList);
                 }
                 @Override
                 public void onFailure(Object error) {
                     if (listener!=null){
-                        listener.getInfFail("请求是煞笔煞笔煞笔煞笔");
+                        listener.getInfFail("请求shibei");
                     }
                 }
             }));
@@ -49,9 +45,5 @@ public class MassageList_ModelImpl implements MassageList_Model {
                 listener.getInfFail("你的网有问题!!!");
             }
         }
-
-
     }
-
-
 }

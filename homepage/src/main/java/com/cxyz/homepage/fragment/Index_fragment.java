@@ -13,14 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.cxyz.commons.IPresenter.IBasePresenter;
+import com.cxyz.commons.domain.TaskInfo;
+import com.cxyz.commons.domain.User;
 import com.cxyz.commons.fragment.BaseFragment;
+import com.cxyz.commons.manager.UserManager;
 import com.cxyz.commons.utils.ColorsUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.acitivity.Massage_Activity;
-import com.cxyz.homepage.doMain.Clazz;
-import com.cxyz.homepage.doMain.Stu;
+import com.cxyz.homepage.ipresenter.TakInfo_PresenterImpl;
+import com.cxyz.homepage.ipresenter.TaskInfo_Presenter;
+import com.cxyz.homepage.iview.TaskInfosPagerView;
 import com.cxyz.homepage.myAdapter.Index_PagerAdapter;
 import com.cxyz.homepage.view.myTableTextView;
 
@@ -29,19 +32,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Created by 鱼塘主 on 2018/9/25.
  */
 
-public class Index_fragment extends BaseFragment {
+public class Index_fragment extends BaseFragment<TaskInfo_Presenter> implements TaskInfosPagerView{
 
     //虚拟(假)信息
-    Stu user = new Stu("17478090","张大壮","123456","男","854703427@qq.com","#","17软工2班","颜丽","100");
+    User user = UserManager.getInstance().getUser();
 
     //搞课表
     private ViewPager kebiao;
    // private TextView time_show_data,time_show_week,clazz_1_name,clazz_1_teacher,clazz_1_room;
-    private List<Clazz> list = new ArrayList<>();
+    private List<TaskInfo> list = new ArrayList<>();
 
     //搞工具
     private GridView gv_tool;
@@ -53,7 +57,7 @@ public class Index_fragment extends BaseFragment {
     //搞个人信息
     private LinearLayout tableLinerLayout,tLinearLayout;
     private String[] table_title={"学号","姓名","本学期缺勤情况:","工号","本学期班级缺勤人数"};
-    private String[] table_text={user.getId(),user.getName(),user.getGg()};
+    private String[] table_text={UserManager.getInstance().getUser().get_id(),user.get_name(),"100"};
 
     //搞考勤情况
     private TextView kaoqinqingkuang;
@@ -78,21 +82,21 @@ public class Index_fragment extends BaseFragment {
          */
 
         kebiao = (ViewPager) findViewById(R.id.vp_kebiao);
-        Clazz[] c = new Clazz[4];
-        c[0] = new Clazz("离散数学","朱哲","3316","1","2");
-        c[1] = new Clazz("没有","没有","没有","3","4");
-        c[2] = new Clazz("马克思主义基本原理","陈尧嘉","2608","5","6");
-        c[3] = new Clazz("马克思主义基本原理","陈尧嘉","2608","7","7");
-
-        for (int j = 0;j < 4 ; j++){
-            list.add(c[j]);
-        }
+//        Clazz[] c = new Clazz[4];
+//        c[0] = new Clazz("离散数学","朱哲","3316","1","2");
+//        c[1] = new Clazz("没有","没有","没有","3","4");
+//        c[2] = new Clazz("马克思主义基本原理","陈尧嘉","2608","5","6");
+//        c[3] = new Clazz("马克思主义基本原理","陈尧嘉","2608","7","7");
+//
+//        for (int j = 0;j < 4 ; j++){
+//            list.add(c[j]);
+//        }
 
 
         kebiao.setPageMargin(10);  //设置viewpager页面之间的间隔
         kebiao.setOffscreenPageLimit(5);//设置viewpager预加载页面数
         //将数据搞到pageradapter中
-        kebiao.setAdapter(new Index_PagerAdapter(getHoldingActivity(),list));
+
 
         /**
          *搞工具表GridView
@@ -151,11 +155,6 @@ public class Index_fragment extends BaseFragment {
                 getHoldingActivity().startActivity(Massage_Activity.class,null);
             }
         });
-
-
-
-
-
         /**
          * 申述按钮
          */
@@ -167,40 +166,28 @@ public class Index_fragment extends BaseFragment {
                 ToastUtil.showShort("..还没得上线(`@`)...");
             }
         });
-
-        /**
-         *
-         */
-
-
     }
-
-
+    @Override
+    public void setTaskInfosData(List<TaskInfo> taskInfosData) {
+        list = taskInfosData;
+        kebiao.setAdapter(new Index_PagerAdapter(getHoldingActivity(),list));
+    }
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-
-
-
     }
-
     @Override
-    protected IBasePresenter createIPresenter() {
-        return null;
+    protected TaskInfo_Presenter createIPresenter() {
+        return new TakInfo_PresenterImpl();
     }
-
     @Override
     protected void setListener() {
-
     }
-
-
     @Override
     public void showLoadingView() {
-
     }
-
     @Override
     public void hideLoadingView() {
-
     }
+
+
 }

@@ -1,9 +1,9 @@
 package com.cxyz.homepage.iview;
 
 import com.cxyz.commons.IView.IBaseView;
+import com.cxyz.commons.domain.RecordDetail;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,6 +11,6 @@ import java.util.List;
  */
 
 public interface MassageListView extends IBaseView{
-     void setListItem(List<HashMap<String,String>> listItem);//将从服务器上得到的数据载入listview中
+     void setListItem(List<RecordDetail> listItem);//将从服务器上得到的数据载入listview中
      void refreshData(ArrayList inListDataBean);//下拉刷新
 }

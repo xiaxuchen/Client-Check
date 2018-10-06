@@ -1,4 +1,4 @@
-package com.cxyz.homepage.doMain;
+package com.cxyz.homepage.domain;
 
 /**
  * Created by 鱼塘主 on 2018/9/25.

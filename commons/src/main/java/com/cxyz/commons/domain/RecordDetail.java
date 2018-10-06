@@ -18,6 +18,9 @@ public class RecordDetail {
 	private DateTime checkTime;
 	//课程名
 	private String _name;
+	/**
+	 *
+	 */
 	//考勤结果
 	private int result;
 	//情况描述

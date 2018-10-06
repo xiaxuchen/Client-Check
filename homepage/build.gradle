@@ -30,4 +30,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':commons')
     compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.hynnet:jxl:2.6.12.1'//exel开源库
 }

@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cxyz.commons.domain.TaskInfo;
 import com.cxyz.homepage.R;
-import com.cxyz.homepage.doMain.Clazz;
 import com.cxyz.homepage.util.DataUtil;
 import com.cxyz.homepage.util.GetRintId;
 
@@ -18,11 +18,11 @@ import java.util.List;
  */
 
 public class Index_PagerAdapter extends PagerAdapter {
-
+//TaskInfo
     private Context mContext;
-    private List<Clazz> mData;  //存入当天课程对象
-    private Clazz clazz;
-    public Index_PagerAdapter(Context mContext, List<Clazz> mData){
+    private List<TaskInfo> mData;  //存入当天课程对象
+    private TaskInfo clazz;
+    public Index_PagerAdapter(Context mContext, List<TaskInfo> mData){
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -53,30 +53,36 @@ public class Index_PagerAdapter extends PagerAdapter {
             TextView time_show_data = (TextView) view.findViewById(R.id.data_show);
             TextView time_show_week = (TextView) view.findViewById(R.id.week_show);
 
-
             new DataUtil(time_show_data,time_show_week).start();//更新时间日期
 
         }else{
 
             int count = position-1;
-            Clazz clazz = mData.get(count);
+            TaskInfo clazz = mData.get(count);
             //获取布局文件
             String lyout_r = "pager_kebiao_"+count;
             int layout_mr = GetRintId.getFieldValue("layout",lyout_r,mContext);
             view = View.inflate(mContext,layout_mr,null);
 
+            //显示任务开始时间
+            String tv_r_time = "clazz_"+count+"_time";
+            int tv_time_r = GetRintId.getFieldValue("id",tv_r_time,mContext);
+            TextView this_clazz_time = (TextView) view.findViewById(tv_time_r);
+            this_clazz_time.setText(clazz.getStart().toString());
+
+
             //显示课程名
             String tv_r_name = "clazz_"+count+"_name";
             int tv_name_r = GetRintId.getFieldValue("id",tv_r_name,mContext);
             TextView this_clazz_name = (TextView) view.findViewById(tv_name_r);
-            this_clazz_name.setText(clazz.getName());
+            this_clazz_name.setText(clazz.get_name());
 
 
             //显示代课老师
             String tv_r_teacher = "clazz_"+count+"_teacher";
             int tv_teacher_r = GetRintId.getFieldValue("id",tv_r_teacher,mContext);
             TextView this_clazz_teacher = (TextView) view.findViewById(tv_teacher_r);
-            this_clazz_teacher.setText(clazz.getTeacher());
+            this_clazz_teacher.setText(clazz.getSponser().get_name());
 
 
 
@@ -84,7 +90,7 @@ public class Index_PagerAdapter extends PagerAdapter {
             String tv_r_room = "clazz_"+count+"_room";
             int tv_room_r = GetRintId.getFieldValue("id",tv_r_room,mContext);
             TextView this_clazz_room = (TextView) view.findViewById(tv_room_r);
-            this_clazz_room.setText(clazz.getRoom());
+            this_clazz_room.setText(clazz.getClassRoom().get_name());
 
             //判断是否到了上给该科的周数  ps:优先级别 : 二
             /**

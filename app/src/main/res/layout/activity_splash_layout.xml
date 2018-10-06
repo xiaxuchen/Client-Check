@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/app_splash"
-    tools:context="com.cxyz.main.activity.SplashActivity">
+    tools:context="com.cxyz.untilchecked.activity.SplashActivity">
 
     <ProgressBar
         android:id="@+id/pb_pro"

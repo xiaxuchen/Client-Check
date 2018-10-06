@@ -14,6 +14,7 @@ import java.util.List;
 import jxl.Sheet;
 import jxl.Workbook;
 
+
 /**
  * Created by 鱼塘主 on 2018/9/27.
  * 使用jxl需要在Android工程中导入jxl.jar包，jxl可以完成Excel的基本读写操作，其支持与不支持的情况如下：<br/>
@@ -63,6 +64,7 @@ public class ExcelUtil{
             Log.e("readExcelToDB", noConfig + "-----config---------");
             if (noConfig) {//如果没有保存过而且数据库Clazz_info表的内容为空
                 try {
+
                     // 我们把excel放在Assset目录下，通过Workbook.getWorkbook(inputStream);获取到整个excel。
                     InputStream inputStream = context.getAssets().open(src);
                     Workbook workbook = Workbook.getWorkbook(inputStream);// 获取第一张excel数据表。
