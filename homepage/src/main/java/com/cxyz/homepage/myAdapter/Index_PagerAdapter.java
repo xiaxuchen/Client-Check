@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cxyz.homepage.R;
-import com.cxyz.homepage.domain.Clazz;
+import com.cxyz.homepage.doMain.Clazz;
 import com.cxyz.homepage.util.DataUtil;
 import com.cxyz.homepage.util.GetRintId;
 

@@ -17,6 +17,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -24,6 +25,7 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <TextView
                 android:id="@+id/item_tv_clazzname"
                 android:gravity="center"

@@ -11,6 +11,7 @@ import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.FragmentActivity;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.widget.TitleView;
+import com.cxyz.homepage.fragment.Index_fragment;
 import com.cxyz.mine.fragment.MineFragment;
 import com.cxyz.untilchecked.R;
 
@@ -36,7 +37,9 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     private CheckFragment checkFragment = CheckFragment.newInstance();
 
-    private BaseFragment currentFragment = mineFragment;
+    private Index_fragment index_fragment = Index_fragment.newInstance();
+
+    private BaseFragment currentFragment = index_fragment;
 
 
     @Override
@@ -46,6 +49,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     protected BaseFragment getFirstFragment() {
+        switchFragment(index_fragment);
         return null;
     }
 
@@ -145,6 +149,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
                 iv_mine.setImageResource(R.mipmap.app_mine_off);
                 tv_mine.setTextColor(getResources().getColor(R.color.app_off));
                 tv_check.setTextColor(getResources().getColor(R.color.app_off));
+                switchFragment(index_fragment);
                 tv_title.setTitle("主页");
                 break;
             }

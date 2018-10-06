@@ -13,13 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.ColorsUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.acitivity.Massage_Activity;
-import com.cxyz.homepage.domain.Clazz;
-import com.cxyz.homepage.domain.Stu;
+import com.cxyz.homepage.doMain.Clazz;
+import com.cxyz.homepage.doMain.Stu;
 import com.cxyz.homepage.myAdapter.Index_PagerAdapter;
 import com.cxyz.homepage.view.myTableTextView;
 
@@ -40,7 +41,7 @@ public class Index_fragment extends BaseFragment {
     //搞课表
     private ViewPager kebiao;
    // private TextView time_show_data,time_show_week,clazz_1_name,clazz_1_teacher,clazz_1_room;
-    private List<Clazz> list = new ArrayList();
+    private List<Clazz> list = new ArrayList<>();
 
     //搞工具
     private GridView gv_tool;
@@ -91,15 +92,15 @@ public class Index_fragment extends BaseFragment {
         kebiao.setPageMargin(10);  //设置viewpager页面之间的间隔
         kebiao.setOffscreenPageLimit(5);//设置viewpager预加载页面数
         //将数据搞到pageradapter中
-        kebiao.setAdapter(new Index_PagerAdapter(this.getActivity(),list));
+        kebiao.setAdapter(new Index_PagerAdapter(getHoldingActivity(),list));
 
         /**
          *搞工具表GridView
          */
         gv_tool = (GridView) findViewById(R.id.tools_grid);
-        datalist = new ArrayList<Map<String, Object>>();
+        datalist = new ArrayList<>();
         for (int i = 0; i <function_img_R.length; i++) {
-            Map<String, Object> map=new HashMap<String, Object>();
+            Map<String, Object> map=new HashMap<>();
             map.put("img", function_img_R[i]);
             map.put("text",function[i]);
             datalist.add(map);
@@ -142,7 +143,7 @@ public class Index_fragment extends BaseFragment {
         /**
          * 考勤情况入口
          */
-        kaoqinqingkuang = findViewById(R.id.station);
+        kaoqinqingkuang = (TextView) findViewById(R.id.station);
         kaoqinqingkuang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,6 +175,7 @@ public class Index_fragment extends BaseFragment {
 
     }
 
+
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
 
@@ -182,9 +184,23 @@ public class Index_fragment extends BaseFragment {
     }
 
     @Override
+    protected IBasePresenter createIPresenter() {
+        return null;
+    }
+
+    @Override
     protected void setListener() {
 
     }
 
 
+    @Override
+    public void showLoadingView() {
+
+    }
+
+    @Override
+    public void hideLoadingView() {
+
+    }
 }
