@@ -29,4 +29,5 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':commons')
+    compile 'com.android.support:support-v4:24.2.1'
 }
