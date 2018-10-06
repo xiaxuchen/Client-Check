@@ -9,5 +9,5 @@ import com.cxyz.homepage.iview.TaskInfosPagerView;
  */
 
 public abstract class TaskInfo_Presenter extends IBasePresenter<TaskInfos_Model,TaskInfosPagerView>{
-    public abstract void getTaskInfoData(String User_id);
+    public abstract void getTaskInfoData(String grede_id);
 }

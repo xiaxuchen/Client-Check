@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface TaskInfos_Model extends IBaseModel{
-    public void getTaskInfo(String id, String url, final TaskInfos_Model.getTaskInfoListener listener);
+    public void getTaskInfo(String grede_id, String url, final TaskInfos_Model.getTaskInfoListener listener);
     public interface getTaskInfoListener{
         public void getInfoSuccess(List<TaskInfo> info);
         public void getInfFail(Object error);

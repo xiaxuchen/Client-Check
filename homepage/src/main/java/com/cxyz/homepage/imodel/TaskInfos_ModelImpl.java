@@ -19,17 +19,21 @@ import java.util.Map;
 
 public class TaskInfos_ModelImpl implements TaskInfos_Model{
     @Override
-    public void getTaskInfo(String id, String url, final getTaskInfoListener listener) {
+    public void getTaskInfo(String grede_id, String url, final getTaskInfoListener listener) {
         Map<String,String> map = new HashMap<>();
-        map.put("method","");
-        map.put("id",id);
+        map.put("method","getTaskInfos");
+        map.put("grade",grede_id);
         RequestParams params = new RequestParams(map);
-        LogUtil.e(NetWorkHomeUrl.TASK_URL);
+        LogUtil.e("goudongxi"+NetWorkHomeUrl.TASK_URL);
         try {
             CommonOkHttpClient.post(NetWorkHomeUrl.TASK_URL,params,new DisposeDataHandler(new DisposeDataListener() {
                 @Override
                 public void onSuccess(Object responseObj) {
+
+                    LogUtil.e(responseObj.toString());//测试
+
                     List<TaskInfo> taskInfoList = JsonUtil.jsonToListObject(responseObj.toString(),TaskInfo.class);
+                    LogUtil.e("xiachedan"+taskInfoList.toString());
                     listener.getInfoSuccess(taskInfoList);
                 }
                 @Override

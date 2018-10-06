@@ -15,9 +15,9 @@ import java.util.List;
 public class TakInfo_PresenterImpl extends TaskInfo_Presenter{
 
     @Override
-    public void getTaskInfoData(String User_id) {
+    public void getTaskInfoData(String grede_id) {
         mIView.showLoadingView();
-        mIModle.getTaskInfo(User_id, NetWorkHomeUrl.TASK_URL, new TaskInfos_Model.getTaskInfoListener() {
+        mIModle.getTaskInfo(grede_id, NetWorkHomeUrl.TASK_URL, new TaskInfos_Model.getTaskInfoListener() {
             @Override
             public void getInfoSuccess(List<TaskInfo> info) {
                 if (info==null){
@@ -27,7 +27,6 @@ public class TakInfo_PresenterImpl extends TaskInfo_Presenter{
                 }
 
             }
-
             @Override
             public void getInfFail(Object error) {
                 ToastUtil.showShort("TaskInfos请求失败");

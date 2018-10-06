@@ -5,6 +5,7 @@ import android.widget.ListView;
 
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.domain.RecordDetail;
+import com.cxyz.commons.manager.UserManager;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.ipresenter.MassageList_Presenter;
 import com.cxyz.homepage.ipresenter.MassageList_PresenterImpl;
@@ -37,7 +38,7 @@ public class Massage_Activity extends BaseActivity<MassageList_Presenter> implem
     @Override
     public void initData() {
         //UserManager.getInstance().getUser().get_id()
-        iPresenter.getMassageData(17478093+"");
+        iPresenter.getMassageData(UserManager.getInstance().getUser().get_id());
     }
 
     @Override

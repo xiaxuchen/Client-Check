@@ -68,7 +68,7 @@ public class Index_PagerAdapter extends PagerAdapter {
             String tv_r_time = "clazz_"+count+"_time";
             int tv_time_r = GetRintId.getFieldValue("id",tv_r_time,mContext);
             TextView this_clazz_time = (TextView) view.findViewById(tv_time_r);
-            this_clazz_time.setText(clazz.getStart().toString());
+            this_clazz_time.setText(clazz.getStart()+"");
 
 
             //显示课程名

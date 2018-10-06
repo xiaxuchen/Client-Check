@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.cxyz.commons.domain.Student;
 import com.cxyz.commons.domain.TaskInfo;
+import com.cxyz.commons.domain.Teacher;
 import com.cxyz.commons.domain.User;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.manager.UserManager;
@@ -45,7 +47,7 @@ public class Index_fragment extends BaseFragment<TaskInfo_Presenter> implements 
     //搞课表
     private ViewPager kebiao;
    // private TextView time_show_data,time_show_week,clazz_1_name,clazz_1_teacher,clazz_1_room;
-    private List<TaskInfo> list = new ArrayList<>();
+    //private List<TaskInfo> list = new ArrayList<>();
 
     //搞工具
     private GridView gv_tool;
@@ -77,22 +79,15 @@ public class Index_fragment extends BaseFragment<TaskInfo_Presenter> implements 
 
     @Override
     protected void initData(Bundle bundle) {
+        User user = UserManager.getInstance().getUser();
+       switch (user.getType()){
+           case User.STUDNET:user = (Student)user;iPresenter.getTaskInfoData(((Student) user).getGrade().get_id()+"");break;
+           case User.TEACHER:user= (Teacher)user;break;
+       }
         /**
          * 搞课表viewpager(分班级课表,开始周数,从周一至周五录,例:周一:以节数(共7节课)为基准,课程名(object),代课老师(object),上课教室(int),taskinfo)
          */
-
         kebiao = (ViewPager) findViewById(R.id.vp_kebiao);
-//        Clazz[] c = new Clazz[4];
-//        c[0] = new Clazz("离散数学","朱哲","3316","1","2");
-//        c[1] = new Clazz("没有","没有","没有","3","4");
-//        c[2] = new Clazz("马克思主义基本原理","陈尧嘉","2608","5","6");
-//        c[3] = new Clazz("马克思主义基本原理","陈尧嘉","2608","7","7");
-//
-//        for (int j = 0;j < 4 ; j++){
-//            list.add(c[j]);
-//        }
-
-
         kebiao.setPageMargin(10);  //设置viewpager页面之间的间隔
         kebiao.setOffscreenPageLimit(5);//设置viewpager预加载页面数
         //将数据搞到pageradapter中
@@ -167,11 +162,7 @@ public class Index_fragment extends BaseFragment<TaskInfo_Presenter> implements 
             }
         });
     }
-    @Override
-    public void setTaskInfosData(List<TaskInfo> taskInfosData) {
-        list = taskInfosData;
-        kebiao.setAdapter(new Index_PagerAdapter(getHoldingActivity(),list));
-    }
+
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
     }
@@ -188,6 +179,9 @@ public class Index_fragment extends BaseFragment<TaskInfo_Presenter> implements 
     @Override
     public void hideLoadingView() {
     }
-
+    @Override
+    public void setTaskInfosData(List<TaskInfo> taskInfosData) {
+        kebiao.setAdapter(new Index_PagerAdapter(getHoldingActivity(),taskInfosData));
+    }
 
 }
