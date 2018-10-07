@@ -5,7 +5,7 @@ import android.content.Context;
 import com.cxyz.check.R;
 import com.cxyz.commons.Adapter.AdapterBase;
 import com.cxyz.commons.Adapter.ViewHolder;
-import com.cxyz.commons.domain.Student;
+import com.cxyz.logiccommons.domain.Student;
 
 import java.util.List;
 

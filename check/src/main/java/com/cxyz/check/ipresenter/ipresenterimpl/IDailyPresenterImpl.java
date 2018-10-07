@@ -3,11 +3,11 @@ package com.cxyz.check.ipresenter.ipresenterimpl;
 import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.model.IDailyModel;
 import com.cxyz.check.model.imodelimpl.IDailyModelImpl;
-import com.cxyz.commons.domain.Check;
-import com.cxyz.commons.domain.CheckRecord;
-import com.cxyz.commons.domain.Student;
-import com.cxyz.commons.domain.TaskCompletion;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
+import com.cxyz.logiccommons.domain.Check;
+import com.cxyz.logiccommons.domain.CheckRecord;
+import com.cxyz.logiccommons.domain.Student;
+import com.cxyz.logiccommons.domain.TaskCompletion;
 
 import java.util.List;
 import java.util.Map;

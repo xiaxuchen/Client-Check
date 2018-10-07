@@ -13,12 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.cxyz.commons.domain.Student;
-import com.cxyz.commons.domain.TaskInfo;
-import com.cxyz.commons.domain.Teacher;
-import com.cxyz.commons.domain.User;
 import com.cxyz.commons.fragment.BaseFragment;
-import com.cxyz.commons.manager.UserManager;
 import com.cxyz.commons.utils.ColorsUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
@@ -28,6 +23,11 @@ import com.cxyz.homepage.ipresenter.TaskInfo_Presenter;
 import com.cxyz.homepage.iview.TaskInfosPagerView;
 import com.cxyz.homepage.myAdapter.Index_PagerAdapter;
 import com.cxyz.homepage.view.myTableTextView;
+import com.cxyz.logiccommons.domain.Student;
+import com.cxyz.logiccommons.domain.TaskInfo;
+import com.cxyz.logiccommons.domain.Teacher;
+import com.cxyz.logiccommons.domain.User;
+import com.cxyz.logiccommons.manager.UserManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;

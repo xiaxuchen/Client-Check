@@ -4,7 +4,7 @@ import com.cxyz.check.R;
 import com.cxyz.check.constant.IDs;
 import com.cxyz.check.ipresenter.ICheckPresenter;
 import com.cxyz.commons.IModel.IBaseModel;
-import com.cxyz.commons.manager.UserManager;
+import com.cxyz.logiccommons.manager.UserManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;

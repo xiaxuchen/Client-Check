@@ -2,9 +2,9 @@ package com.cxyz.mine.IPresenter.presenter;
 
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.IPresenter.IBasePresenter;
-import com.cxyz.commons.domain.College;
-import com.cxyz.commons.domain.Grade;
-import com.cxyz.commons.domain.User;
+import com.cxyz.logiccommons.domain.College;
+import com.cxyz.logiccommons.domain.Grade;
+import com.cxyz.logiccommons.domain.User;
 import com.cxyz.mine.iview.IMyinfoView;
 
 /**

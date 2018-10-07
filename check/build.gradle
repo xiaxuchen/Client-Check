@@ -23,6 +23,8 @@ android {
     sourceSets {
         main {
             if (isDebug.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
         }
@@ -32,6 +34,5 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':commons')
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile project(':logiccommons')
 }

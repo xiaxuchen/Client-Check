@@ -1,7 +1,7 @@
 package com.cxyz.homepage.iview;
 
 import com.cxyz.commons.IView.IBaseView;
-import com.cxyz.commons.domain.TaskInfo;
+import com.cxyz.logiccommons.domain.TaskInfo;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.cxyz.homepage.imodel;
 
-import com.cxyz.commons.domain.TaskInfo;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
@@ -8,6 +7,7 @@ import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 import com.cxyz.commons.utils.JsonUtil;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.homepage.constant.NetWorkHomeUrl;
+import com.cxyz.logiccommons.domain.TaskInfo;
 
 import java.util.HashMap;
 import java.util.List;

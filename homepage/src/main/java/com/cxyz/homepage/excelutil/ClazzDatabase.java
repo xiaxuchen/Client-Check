@@ -51,7 +51,7 @@ public class ClazzDatabase   {
      * @param clazz_table  HashMap<String,List<Clazz>>课表
      * @param context 上下文的对象
      */
-    public  void saveClazzInfo(HashMap<String,List<Clazz>> clazz_table,Context context){
+    public  void saveClazzInfo(HashMap<String,List<Clazz>> clazz_table, Context context){
         clazzSQLOpenHelper =  ClazzSQLOpenHelper.getInstance(context);
         cSqliteDatabase = clazzSQLOpenHelper.getWritableDatabase();
         ContentValues values = new ContentValues();

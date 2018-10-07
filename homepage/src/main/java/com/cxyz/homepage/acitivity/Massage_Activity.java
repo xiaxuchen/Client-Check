@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.widget.ListView;
 
 import com.cxyz.commons.activity.BaseActivity;
-import com.cxyz.commons.domain.RecordDetail;
-import com.cxyz.commons.manager.UserManager;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.ipresenter.MassageList_Presenter;
 import com.cxyz.homepage.ipresenter.MassageList_PresenterImpl;
 import com.cxyz.homepage.iview.MassageListView;
 import com.cxyz.homepage.myAdapter.Massage_SmpleAdapter;
+import com.cxyz.logiccommons.domain.RecordDetail;
+import com.cxyz.logiccommons.manager.UserManager;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,6 @@
     package="com.cxyz.check">
 
     <application android:theme="@style/AppTheme">
-        <activity android:name=".activity.ListViewAcitivity" />
         <activity android:name=".activity.DailyCheckActivity"></activity>
     </application>
 

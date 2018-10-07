@@ -1,7 +1,7 @@
 package com.cxyz.homepage.imodel;
 
 import com.cxyz.commons.IModel.IBaseModel;
-import com.cxyz.commons.domain.TaskInfo;
+import com.cxyz.logiccommons.domain.TaskInfo;
 
 import java.util.List;
 

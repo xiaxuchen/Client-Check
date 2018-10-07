@@ -4,14 +4,14 @@ import android.accounts.NetworkErrorException;
 
 import com.cxyz.check.constant.NetWorkConstant;
 import com.cxyz.check.model.IDailyModel;
-import com.cxyz.commons.domain.Check;
-import com.cxyz.commons.domain.Student;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 import com.cxyz.commons.utils.JsonUtil;
+import com.cxyz.logiccommons.domain.Check;
+import com.cxyz.logiccommons.domain.Student;
 
 import java.util.HashMap;
 import java.util.List;

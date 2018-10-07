@@ -1,7 +1,7 @@
 package com.cxyz.homepage.imodel;
 
 import com.cxyz.commons.IModel.IBaseModel;
-import com.cxyz.commons.domain.RecordDetail;
+import com.cxyz.logiccommons.domain.RecordDetail;
 
 import java.util.List;
 

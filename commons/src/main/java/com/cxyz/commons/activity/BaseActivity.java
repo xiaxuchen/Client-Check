@@ -7,7 +7,7 @@ import android.view.Window;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.IView.IBaseView;
-import com.cxyz.commons.application.MyApp;
+import com.cxyz.commons.application.BaseApplication;
 import com.cxyz.commons.manager.ActivityStackManager;
 import com.cxyz.commons.manager.ScreenManager;
 import com.cxyz.commons.utils.LogUtil;
@@ -145,9 +145,9 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      * 获取MyApp对象
      * @return MyApp对象
      */
-    protected MyApp getMyApp()
+    protected BaseApplication getMyApp()
     {
-        return (MyApp)getApplication();
+        return (BaseApplication)getApplication();
     }
 
     /**

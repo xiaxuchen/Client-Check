@@ -1,10 +1,10 @@
 package com.cxyz.homepage.ipresenter;
 
-import com.cxyz.commons.domain.RecordDetail;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.constant.NetWorkHomeUrl;
 import com.cxyz.homepage.imodel.MassageList_Model;
 import com.cxyz.homepage.imodel.MassageList_ModelImpl;
+import com.cxyz.logiccommons.domain.RecordDetail;
 
 import java.util.List;
 

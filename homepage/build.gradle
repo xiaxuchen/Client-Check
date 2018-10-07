@@ -18,17 +18,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets{
-        main{
-            if(isDebug.toBoolean())
+    sourceSets {
+        main {
+            if (isDebug.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
         }
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':commons')
-    compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.hynnet:jxl:2.6.12.1'//exel开源库
+    compile project(':logiccommons')
 }

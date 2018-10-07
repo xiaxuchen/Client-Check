@@ -1,7 +1,7 @@
 package com.cxyz.homepage.iview;
 
 import com.cxyz.commons.IView.IBaseView;
-import com.cxyz.commons.domain.RecordDetail;
+import com.cxyz.logiccommons.domain.RecordDetail;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -25,11 +25,8 @@ dependencies {
         compile project(':check')
         compile project(':homepage')
         compile project(':mine')
+        compile project(':main')
     } else
-        compile project(':commons')
-
-    compile 'com.android.support:appcompat-v7:21.0.3'
+        compile project(':logiccommons')
 }
-
-
 

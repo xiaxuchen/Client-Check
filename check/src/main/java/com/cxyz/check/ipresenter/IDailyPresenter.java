@@ -3,8 +3,8 @@ package com.cxyz.check.ipresenter;
 import com.cxyz.check.model.IDailyModel;
 import com.cxyz.check.view.IDailyView;
 import com.cxyz.commons.IPresenter.IBasePresenter;
-import com.cxyz.commons.domain.CheckRecord;
-import com.cxyz.commons.domain.TaskCompletion;
+import com.cxyz.logiccommons.domain.CheckRecord;
+import com.cxyz.logiccommons.domain.TaskCompletion;
 
 import java.util.Map;
 
@@ -22,5 +22,5 @@ public abstract class IDailyPresenter extends IBasePresenter<IDailyModel,IDailyV
     /**
      * 提交考勤情况
      */
-    public abstract void commit(Map<String,CheckRecord> crs,TaskCompletion completion);
+    public abstract void commit(Map<String,CheckRecord> crs, TaskCompletion completion);
 }

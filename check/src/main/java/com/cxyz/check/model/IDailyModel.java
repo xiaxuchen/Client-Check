@@ -1,8 +1,8 @@
 package com.cxyz.check.model;
 
 import com.cxyz.commons.IModel.IBaseModel;
-import com.cxyz.commons.domain.Check;
-import com.cxyz.commons.domain.Student;
+import com.cxyz.logiccommons.domain.Check;
+import com.cxyz.logiccommons.domain.Student;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public interface IDailyModel extends IBaseModel{
      */
     public void getStus(int grade,GetStusListener listener);
 
-    public void commit(Check check,CommitListener listener);
+    public void commit(Check check, CommitListener listener);
 
     interface GetStusListener{
         /**

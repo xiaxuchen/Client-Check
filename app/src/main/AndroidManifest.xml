@@ -1,28 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cxyz.untilchecked">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.cxyz.untilchecked">
 
     <application
-        android:name="com.cxyz.commons.application.MyApp"
+        android:name="com.cxyz.logiccommons.application.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/common_logo"
-        android:label="@string/common_app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.cxyz.untilchecked.activity.HomeActivity">
-        </activity>
-        <activity android:name="com.cxyz.untilchecked.activity.SplashActivity">
+        android:label="@string/common_app_name">
+        <activity android:name="com.cxyz.mains.activity.HomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
-        </activity>
-        <activity android:name="com.cxyz.untilchecked.activity.LoginActivity">
         </activity>
     </application>
 

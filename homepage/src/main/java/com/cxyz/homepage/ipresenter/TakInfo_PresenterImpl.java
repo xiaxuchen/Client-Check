@@ -1,10 +1,10 @@
 package com.cxyz.homepage.ipresenter;
 
-import com.cxyz.commons.domain.TaskInfo;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.constant.NetWorkHomeUrl;
 import com.cxyz.homepage.imodel.TaskInfos_Model;
 import com.cxyz.homepage.imodel.TaskInfos_ModelImpl;
+import com.cxyz.logiccommons.domain.TaskInfo;
 
 import java.util.List;
 

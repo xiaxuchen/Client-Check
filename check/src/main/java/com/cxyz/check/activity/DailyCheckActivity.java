@@ -15,12 +15,12 @@ import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.ipresenter.ipresenterimpl.IDailyPresenterImpl;
 import com.cxyz.check.view.IDailyView;
 import com.cxyz.commons.activity.BaseActivity;
-import com.cxyz.commons.domain.CheckRecord;
-import com.cxyz.commons.domain.Student;
-import com.cxyz.commons.domain.TaskCompletion;
-import com.cxyz.commons.manager.UserManager;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
+import com.cxyz.logiccommons.domain.CheckRecord;
+import com.cxyz.logiccommons.domain.Student;
+import com.cxyz.logiccommons.domain.TaskCompletion;
+import com.cxyz.logiccommons.manager.UserManager;
 
 import java.util.HashMap;
 import java.util.List;

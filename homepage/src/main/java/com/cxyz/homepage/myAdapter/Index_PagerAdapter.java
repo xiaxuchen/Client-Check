@@ -6,10 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cxyz.commons.domain.TaskInfo;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.util.DataUtil;
-import com.cxyz.homepage.util.GetRintId;
+import com.cxyz.logiccommons.domain.TaskInfo;
 
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class Index_PagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view;
+        View view = null;
         TextView clazz_name;
 
         if(position==0){
@@ -58,8 +57,17 @@ public class Index_PagerAdapter extends PagerAdapter {
         }else{
 
             int count = position-1;
-            TaskInfo clazz = mData.get(count);
-            //获取布局文件
+            TaskInfo ti = mData.get(count);
+            view = View.inflate(mContext,R.layout.page_lesson_layout,null);
+            TextView tv_lesson_name = (TextView) view.findViewById(R.id.tv_lesson_name);
+            TextView tv_lesson_date = (TextView) view.findViewById(R.id.tv_lesson_date);
+            TextView tv_tea_name = (TextView) view.findViewById(R.id.tv_tea_name);
+            TextView tv_lesson_room = (TextView) view.findViewById(R.id.tv_lesson_room);
+
+            tv_lesson_name.setText(ti.get_name());
+            tv_lesson_room.setText(ti.getClassRoom().get_id()+"");
+
+            /*//获取布局文件
             String lyout_r = "pager_kebiao_"+count;
             int layout_mr = GetRintId.getFieldValue("layout",lyout_r,mContext);
             view = View.inflate(mContext,layout_mr,null);
@@ -91,6 +99,8 @@ public class Index_PagerAdapter extends PagerAdapter {
             int tv_room_r = GetRintId.getFieldValue("id",tv_r_room,mContext);
             TextView this_clazz_room = (TextView) view.findViewById(tv_room_r);
             this_clazz_room.setText(clazz.getClassRoom().get_name());
+
+            */
 
             //判断是否到了上给该科的周数  ps:优先级别 : 二
             /**

@@ -20,15 +20,17 @@ android {
     }
     sourceSets {
         main {
-            if (isDebug.toBoolean())
+            if (isDebug.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
         }
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':commons')
     compile 'com.google.android.gms:play-services-appindexing:9.8.0'
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile project(':logiccommons')
 }

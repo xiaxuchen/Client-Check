@@ -4,10 +4,10 @@ import android.content.Context;
 
 import com.cxyz.commons.Adapter.AdapterBase;
 import com.cxyz.commons.Adapter.ViewHolder;
-import com.cxyz.commons.domain.CheckRecord;
-import com.cxyz.commons.domain.RecordDetail;
 import com.cxyz.commons.utils.ColorsUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.logiccommons.domain.CheckRecord;
+import com.cxyz.logiccommons.domain.RecordDetail;
 
 import java.util.List;
 

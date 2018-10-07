@@ -1,7 +1,7 @@
 package com.cxyz.check.view;
 
 import com.cxyz.commons.IView.IBaseView;
-import com.cxyz.commons.domain.Student;
+import com.cxyz.logiccommons.domain.Student;
 
 import java.util.List;
 
