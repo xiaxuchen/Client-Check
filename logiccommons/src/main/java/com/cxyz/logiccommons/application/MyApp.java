@@ -1,6 +1,8 @@
 package com.cxyz.logiccommons.application;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.application.BaseApplication;
+import com.cxyz.commons.utils.CrashHandler;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.commons.utils.ToastUtil;
@@ -20,15 +22,63 @@ public class MyApp extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        //Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance().init(this));
         attributes = new HashMap<>();
+        initToast();
+        initSpUtil();
+        initCommonOkHttpClient();
+        initARouter(true);
+    }
+
+    /**
+     * 初始化ToastUtil
+     */
+    private void initToast()
+    {
         //初始化ToastUtils
         ToastUtil.init(getApplicationContext());
+    }
+
+    /**
+     * 初始化SpUtil
+     */
+    private void initSpUtil()
+    {
         //初始化SpUtils
         SpUtil.init(getApplicationContext());
+    }
+
+    /**
+     * 初始化全局异常
+     */
+    private void initCrach()
+    {
+        Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance().init(this));
+    }
+
+
+    /**
+     * 初始化okhttp
+     */
+    private void initCommonOkHttpClient()
+    {
         //初始化CommonOkHttp
         CommonOkHttpClient.init(getApplicationContext());
     }
+
+    /**
+     * 初始化ARouter
+     * @param isDebug 是否显示错误
+     */
+    private void initARouter(boolean isDebug)
+    {
+        if(isDebug)
+        {
+            ARouter.openDebug();
+            ARouter.openLog();
+        }
+        ARouter.init(this);
+    }
+
 
     /***
      * 添加或者覆盖一个key所对应的全局map中的值

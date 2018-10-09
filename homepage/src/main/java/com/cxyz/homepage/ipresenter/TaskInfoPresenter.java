@@ -8,6 +8,6 @@ import com.cxyz.homepage.iview.TaskInfosPagerView;
  * Created by 鱼塘主 on 2018/10/6.
  */
 
-public abstract class TaskInfo_Presenter extends IBasePresenter<TaskInfos_Model,TaskInfosPagerView>{
+public abstract class TaskInfoPresenter extends IBasePresenter<TaskInfos_Model,TaskInfosPagerView>{
     public abstract void getTaskInfoData(String grede_id);
 }

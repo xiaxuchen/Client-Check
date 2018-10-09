@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.mine.IPresenter.presenter.IMinePresenter;
@@ -17,7 +18,7 @@ import com.cxyz.mine.activity.SettingActivity;
 /**
  * Created by Administrator on 2018/9/25.
  */
-
+@Route(path = "/mine/MineFragment")
 public class MineFragment extends BaseFragment<IMinePresenter> implements View.OnClickListener {
     private TextView tvmyinfo, tvappointment, tvsetting;
     private Button btexitlogin;

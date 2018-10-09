@@ -12,7 +12,7 @@ import java.util.List;
  * Created by 鱼塘主 on 2018/10/6.
  */
 
-public class TakInfo_PresenterImpl extends TaskInfo_Presenter{
+public class TakInfoPresenterImpl extends TaskInfoPresenter {
 
     @Override
     public void getTaskInfoData(String grede_id) {

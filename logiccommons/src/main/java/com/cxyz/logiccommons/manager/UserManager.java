@@ -1,6 +1,8 @@
 package com.cxyz.logiccommons.manager;
 
 
+import com.cxyz.logiccommons.domain.Grade;
+import com.cxyz.logiccommons.domain.Student;
 import com.cxyz.logiccommons.domain.User;
 
 /**
@@ -24,6 +26,14 @@ public class UserManager {
     {
         if(userManager == null)
             userManager = new UserManager();
+        Student u = new Student();
+        u.setPwd("123456");
+        u.set_name("夏旭晨");
+        u.set_id("17478093");
+        u.setPower(5);
+        u.setCollege_name("信计");
+        u.setGrade(new Grade(122));
+        userManager.setUser(u);
         return userManager;
     }
 

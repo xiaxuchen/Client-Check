@@ -29,4 +29,7 @@ ext{
     targetSdkVersion = 21
     versionCode = 1
     versionName = "1.0"
+    //router
+    routerVersion = "1.4.0"
+    annotationProcessor = "1.2.1"
 }

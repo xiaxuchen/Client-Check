@@ -13,13 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.ColorsUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.acitivity.Massage_Activity;
-import com.cxyz.homepage.ipresenter.TakInfo_PresenterImpl;
-import com.cxyz.homepage.ipresenter.TaskInfo_Presenter;
+import com.cxyz.homepage.ipresenter.TakInfoPresenterImpl;
+import com.cxyz.homepage.ipresenter.TaskInfoPresenter;
 import com.cxyz.homepage.iview.TaskInfosPagerView;
 import com.cxyz.homepage.myAdapter.Index_PagerAdapter;
 import com.cxyz.homepage.view.myTableTextView;
@@ -38,8 +39,8 @@ import java.util.Map;
 /**
  * Created by 鱼塘主 on 2018/9/25.
  */
-
-public class Index_fragment extends BaseFragment<TaskInfo_Presenter> implements TaskInfosPagerView{
+@Route(path="/homepage/HomeFragment")
+public class HomeFragment extends BaseFragment<TaskInfoPresenter> implements TaskInfosPagerView{
 
     //虚拟(假)信息
     User user = UserManager.getInstance().getUser();
@@ -72,8 +73,8 @@ public class Index_fragment extends BaseFragment<TaskInfo_Presenter> implements 
         return R.layout.fragment_index;
     }
 
-    public static Index_fragment newInstance() {
-        Index_fragment fragment = new Index_fragment();
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
         return fragment;
     }
 
@@ -167,8 +168,8 @@ public class Index_fragment extends BaseFragment<TaskInfo_Presenter> implements 
     protected void initView(View view, Bundle savedInstanceState) {
     }
     @Override
-    protected TaskInfo_Presenter createIPresenter() {
-        return new TakInfo_PresenterImpl();
+    protected TaskInfoPresenter createIPresenter() {
+        return new TakInfoPresenterImpl();
     }
     @Override
     protected void setListener() {
@@ -179,6 +180,7 @@ public class Index_fragment extends BaseFragment<TaskInfo_Presenter> implements 
     @Override
     public void hideLoadingView() {
     }
+
     @Override
     public void setTaskInfosData(List<TaskInfo> taskInfosData) {
         kebiao.setAdapter(new Index_PagerAdapter(getHoldingActivity(),taskInfosData));

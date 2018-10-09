@@ -22,5 +22,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.3.0' //okttp依赖
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.hynnet:jxl:2.6.12.1'//exel开源库
+    compile "com.alibaba:arouter-api:$rootProject.ext.routerVersion"//router
     testCompile 'junit:junit:4.12'
 }

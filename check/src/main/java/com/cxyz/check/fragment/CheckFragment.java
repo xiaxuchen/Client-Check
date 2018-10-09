@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.check.R;
 import com.cxyz.check.activity.DailyCheckActivity;
 import com.cxyz.check.adapter.FunctionAdapter;
@@ -17,7 +18,7 @@ import com.cxyz.commons.fragment.BaseFragment;
 /**
  * Created by 夏旭晨 on 2018/10/4.
  */
-
+@Route(path = "/check/CheckFragment")
 public class CheckFragment extends BaseFragment<ICheckPresenter> implements IBaseView,AdapterView.OnItemClickListener{
 
     private GridView gv_function;
