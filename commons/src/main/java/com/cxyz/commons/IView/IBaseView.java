@@ -5,6 +5,13 @@ package com.cxyz.commons.IView;
  */
 
 public interface IBaseView {
+    /**
+     * 显示加载的视图
+     */
     public void showLoadingView();
+
+    /**
+     * 隐藏加载的视图
+     */
     public void hideLoadingView();
 }

@@ -1,8 +1,6 @@
 package com.cxyz.commons.widget;
 
-/**
- * Created by 夏旭晨 on 2018/9/24.
- */
+
 
 import android.content.Context;
 import android.graphics.Color;
@@ -15,6 +13,25 @@ import android.widget.TextView;
 import com.cxyz.commons.R;
 
 
+/**
+ *
+ *
+ * <h1>关于TitleView
+ * <ul>
+ *     <li>
+ *         在布局文件中的使用(与普通view一样，不过需要带包名)：<br/>
+ *         &lt;com.cxyz.commons.widget.TitleView<br/>
+ *           android:id="@+id/title"<br/>
+ *          android:layout_width="match_parent"<br/>
+ *          android:layout_height="wrap_content"/&gt;<br/>
+ *      <li>设置显示:<br/>
+ *          setTitle、setIcon、setEdit、setSet，详细请看方法注释
+ *      <li>设置监听
+ *          setOnClickListener(TitleView.OnClickListener);
+ *          可以使用OnClickListenerWrapper类，其是OnClickListener的包装类，<br/>
+ *          只需重写需要的方法而不是全部方法，减少代码冗余,详细时间请看注释
+ * </ul>
+ */
 public class TitleView extends LinearLayout implements View.OnClickListener {
 
     private TextView edit,set,name,back;
@@ -47,7 +64,7 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
     private void initView()
     {
         setOrientation(LinearLayout.VERTICAL);
-        View.inflate(getContext(), R.layout.view_title_layout, this);
+        View.inflate(getContext(), R.layout.views_title_layout, this);
         back = (TextView) findViewById(R.id.title_back);
         edit = (TextView) findViewById(R.id.title_edit);
         set = (TextView) findViewById(R.id.title_set);
@@ -90,7 +107,7 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
 
     /**
      * 设置编辑位置的文字
-     * @param txt
+     * @param txt 文字
      */
     public void setEdit(String txt)
     {
@@ -98,6 +115,10 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
         edit.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * 设置控件右边的文字
+     * @param txt
+     */
     public void setSet(String txt)
     {
         set.setText(txt);
@@ -135,8 +156,8 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
 
 
     /**
-     * 设置监听
-     * @param listener
+     * 设置监听,建议使用OnClickListenerWrapper，只需重写需要的方法，而不是所有
+     * @param listener TitleView.OnClickListener
      */
     public void setOnClickListener(OnClickListener listener)
     {
@@ -162,11 +183,41 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
 
     }
 
+    /**
+     * TitleView点击事件的接口
+     */
     public interface OnClickListener{
         void onBackClick();
         void onEditClick();
         void onNameClick();
         void onSetClick();
+    }
+
+    /**
+     * TitleView的OnClickListener包装类
+     */
+    public static class OnClickListenerWrapper implements OnClickListener
+    {
+
+        @Override
+        public void onBackClick() {
+
+        }
+
+        @Override
+        public void onEditClick() {
+
+        }
+
+        @Override
+        public void onNameClick() {
+
+        }
+
+        @Override
+        public void onSetClick() {
+
+        }
     }
 }
 
