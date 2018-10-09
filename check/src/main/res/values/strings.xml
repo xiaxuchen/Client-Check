@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Check</string>
+    <string name="table_class">课表</string>
+    <string name="main_page">首页</string>
+    <string name="mine">我的</string>
 </resources>

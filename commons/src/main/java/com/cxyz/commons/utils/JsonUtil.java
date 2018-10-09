@@ -3,11 +3,15 @@ package com.cxyz.commons.utils;
 import android.content.ContentValues;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -180,5 +184,33 @@ public class JsonUtil {
         }
 
         return contentValues;
+    }
+
+    /**
+     * 把json对象转化为对应的List对象，类型用泛型t指定
+     * @param json json字符串
+     * @param <T> 返回的List的泛型
+     * @return
+     */
+    public static <T> List<T> jsonToListObject(String json,Class<T> clazz)
+    {
+        Gson gson = new Gson();
+        JsonArray jsonArray = null;
+        JsonParser parser = new JsonParser();
+        JsonElement el = parser.parse(json);
+        if(!el.isJsonArray())
+            return null;
+        else
+            jsonArray = el.getAsJsonArray();
+        //遍历JsonArray对象
+        Iterator it = jsonArray.iterator();
+        List<T> lt = new ArrayList<>();
+        while(it.hasNext()){
+            JsonElement e = (JsonElement)it.next();
+            //JsonElement转换为JavaBean对象
+            Object o = gson.fromJson(e, clazz);
+            lt.add((T)o);
+        }
+        return lt;
     }
 }

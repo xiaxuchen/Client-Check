@@ -8,22 +8,24 @@ import android.net.NetworkInfo;
 import android.provider.Settings;
 
 /**
+ * Created by 夏旭晨 on 2018/9/21.
  * 网络工具类，包含网络的判断、跳转到设置页面 
  */
 public class NetWorkUtil {
 
     /**
-     * 判断当前是否有网络连接 
+     * 判断当前是否有网络连接，需要ACCESS_NETWORK_STATE权限
      * @param context
-     * @return  有网络返回true；无网络返回false 
+     * @return  有网络返回true；无网络返回false
      */
     @SuppressWarnings("null")
     public static boolean isNetWorkEnable(Context context){
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
-        if (networkInfo != null || networkInfo.isConnected()) {
-            if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                return true;
+        if (networkInfo != null) {
+            if(networkInfo.isConnected())
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
             }
         }
         return false;

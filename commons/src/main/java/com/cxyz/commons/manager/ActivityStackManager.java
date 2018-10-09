@@ -6,8 +6,8 @@ import java.util.Stack;
 
 /**
  * Created by 夏旭晨 on 2018/9/22.
+ * Activity栈管理类
  */
-
 public class ActivityStackManager {
     private static Stack<Activity> activityStack;
     private static ActivityStackManager instance;
