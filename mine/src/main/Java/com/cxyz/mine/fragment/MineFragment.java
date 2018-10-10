@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.mine.IPresenter.presenter.IMinePresenter;
@@ -107,6 +108,9 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
         else if(viewId == R.id.tvsetting)
             tvsetting();
         else if(viewId == R.id.btexitlogin)
-            System.exit(0);
+        {
+            ARouter.getInstance().build("/main/LoginActivity").navigation();
+            getHoldingActivity().finish();
+        }
     }
 }
