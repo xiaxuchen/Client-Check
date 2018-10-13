@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Mine</string>
+    <string name="update_download_failed">fail</string>
+    <string name="update_download_start">start</string>
+    <string name="update_download_progressing">progress</string>
+    <string name="update_download_finish">finish</string>
 </resources>
