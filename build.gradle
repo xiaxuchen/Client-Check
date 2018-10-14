@@ -3,6 +3,10 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.1'
@@ -14,6 +18,10 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
         jcenter()
     }
 }
@@ -23,10 +31,10 @@ task clean(type: Delete) {
 }
 
 ext{
-    compileSdkVersion = 21
-    buildToolsVersion = "21.0.1"
+    compileSdkVersion = 26
+    buildToolsVersion = "26.0.1"
     minSdkVersion = 14
-    targetSdkVersion = 21
+    targetSdkVersion = 26
     versionCode = 1
     versionName = "1.0"
     //router

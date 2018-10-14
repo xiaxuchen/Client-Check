@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.mains.R;
@@ -18,6 +19,7 @@ import com.cxyz.mains.iview.ILoginView;
  * Created by 夏旭晨 on 2018/9/30.
  */
 
+@Route(path = "/main/LoginActivity")
 public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILoginView{
 
     private EditText et_id;
