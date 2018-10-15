@@ -38,7 +38,7 @@ public class MyCheckActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mycheck_activity);
+        setContentView(R.layout.activity_mycheck);
         iv_absent=findViewById(R.id.iv_absent);
         el_checksituation = (ExpandableListView) findViewById(R.id.el_checksituation);
         qmuiProgressBar = findViewById(R.id.qmuiProgressBar);

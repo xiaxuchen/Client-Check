@@ -1,6 +1,7 @@
 package com.cxyz.mains.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +45,6 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
         btn_login = (Button) findViewById(R.id.btn_login);
         rg_type = (RadioGroup) findViewById(R.id.rg_type);
         tv_title = (TitleView) findViewById(R.id.tv_title);
-
         tv_title.setTitle("登录");
         tv_title.setBack(0,"");
     }
@@ -64,6 +64,13 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
                  */
                 iPresenter.login(et_id.getText().toString(),et_pwd.getText().toString(),rg_type
                         .getCheckedRadioButtonId()==R.id.rb_stu?0:1);
+            }
+        });
+        tv_forgetpwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),FogetpwdActivity.class);
+                startActivity(intent);
             }
         });
     }

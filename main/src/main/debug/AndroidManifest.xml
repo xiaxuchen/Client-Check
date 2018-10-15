@@ -9,7 +9,7 @@
         android:name="com.cxyz.logiccommons.application.MyApp"
         android:allowBackup="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/QMUI.Compat.NoActionBar" >
         <activity
             android:name="com.cxyz.mains.activity.HomeActivity">
         </activity>
@@ -22,6 +22,14 @@
         </activity>
         <activity android:name="com.cxyz.mains.activity.LoginActivity">
         </activity>
+        <activity android:name=".activity.FogetpwdActivity"></activity>
+        <activity android:name=".activity.RestPwdActivity"></activity>
+        <activity android:name=".activity.Myinfo"></activity>
+        <activity android:name=".activity.Apponitment"></activity>
+        <activity android:name=".activity.UserResponse"></activity>
+        <activity android:name=".activity.ExpandFunction"></activity>
+        <activity android:name=".activity.MoreSetting"></activity>
+
     </application>
 
 </manifest>

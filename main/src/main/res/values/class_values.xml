@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="infoandcom">
+        <item>1701软件技术</item>
+        <item>1702软件技术</item>
+        <item>1701软件工程</item>
+        <item>1702软件工程</item>
+        <item>1701数字媒体</item>
+        <item>1702数字媒体</item>
+    </string-array>
+</resources>

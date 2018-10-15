@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+   <com.cxyz.commons.widget.TitleView
+       android:id="@+id/tv_myinfo_title"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:background="#0ca2ff"
+        android:orientation="vertical">
+
+        <com.cxyz.mains.activity.CircleImage
+            android:id="@+id/iv_circleview"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/pxxy" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp">
+
+            <TextView
+
+                android:layout_width="95dp"
+                android:layout_height="49dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="姓名"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:paddingTop="13dp"
+                android:text="张三"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp">
+
+            <TextView
+
+                android:layout_width="95dp"
+                android:layout_height="49dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="性别"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:paddingTop="13dp"
+                android:text="男"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp">
+
+            <TextView
+
+                android:layout_width="95dp"
+                android:layout_height="49dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="学号"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:paddingTop="13dp"
+                android:text="17478000"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp">
+
+            <TextView
+
+                android:layout_width="95dp"
+                android:layout_height="49dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="班级"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:paddingTop="13dp"
+                android:text="1702软件工程"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp">
+
+            <TextView
+
+                android:layout_width="95dp"
+                android:layout_height="49dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="院校"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:paddingTop="13dp"
+                android:text="信息与计算机工程学院"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="95dp"
+                android:layout_height="49dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="手机"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:paddingTop="13dp"
+                android:text="12345678910"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+    </LinearLayout>
+</LinearLayout>

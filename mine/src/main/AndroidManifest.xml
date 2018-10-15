@@ -10,6 +10,8 @@
         <activity android:name=".activity.AppointmentActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.ResponseActivity" />
+
+
     </application>
 
 </manifest>

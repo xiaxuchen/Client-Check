@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
    android:orientation="vertical"
 
-    tools:context="com.example.administrator.checkui.MainActivity">
+    >
 
 
     <LinearLayout

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="college">
+        <item>信计学院</item>
+        <item>商学院</item>
+        <item>工管学院</item>
+        <item>学前学院</item>
+        <item>初教学院</item>
+        <item>机电学院</item>
+        <item>政法学院</item>
+    </string-array>
+</resources>
