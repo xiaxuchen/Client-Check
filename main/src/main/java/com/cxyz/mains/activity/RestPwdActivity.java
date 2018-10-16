@@ -59,7 +59,7 @@ public class RestPwdActivity extends BaseActivity {
                 et_resetpwd_password.setText("");
                 et_resetpwd_confirmpwd.setText("");
                 ToastUtil.showShort("已完成");
-                Intent intent=new Intent(getApplicationContext(),Myinfo.class);
+                Intent intent=new Intent(getApplicationContext(),MyinfoActivity.class);
                 startActivity(intent);
             }
         });

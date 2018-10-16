@@ -48,9 +48,7 @@ public class FogetpwdActivity extends BaseActivity {
      bt_forgetpwd_next.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-    /*   Intent intent=new Intent(getApplicationContext(),RestPwdActivity.class);
-       startActivity(intent);*/
-       Intent intent=new Intent(getApplicationContext(),MoreSetting.class);
+       Intent intent=new Intent(getApplicationContext(),PieChartActivity.class);
        startActivity(intent);
       }
      });

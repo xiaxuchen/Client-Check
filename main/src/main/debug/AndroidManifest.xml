@@ -24,11 +24,12 @@
         </activity>
         <activity android:name=".activity.FogetpwdActivity"></activity>
         <activity android:name=".activity.RestPwdActivity"></activity>
-        <activity android:name=".activity.Myinfo"></activity>
+        <activity android:name=".activity.MyinfoActivity"></activity>
         <activity android:name=".activity.Apponitment"></activity>
         <activity android:name=".activity.UserResponse"></activity>
         <activity android:name=".activity.ExpandFunction"></activity>
         <activity android:name=".activity.MoreSetting"></activity>
+        <activity android:name=".activity.PieChartActivity"></activity>
 
     </application>
 

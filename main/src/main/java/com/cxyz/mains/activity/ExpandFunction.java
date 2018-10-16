@@ -42,35 +42,35 @@ public class ExpandFunction extends BaseActivity {
         bitmap1= BitmapFactory.decodeResource(getResources(),R.mipmap.newspaper);
         iv_expandfun_shcoolnews =findViewById(R.id.iv_expandfun_shcoolnews);
         iv_expandfun_shcoolnews.setBitmap(bitmap1);
-        iv_expandfun_shcoolnews.setColor(Color.WHITE);
-        iv_expandfun_shcoolnews.setOuterRingAlpha(50);
+        initImage(iv_expandfun_shcoolnews);
         bitmap2= BitmapFactory.decodeResource(getResources(),R.mipmap.notice);
         iv_expandfun_notice =findViewById(R.id.iv_expandfun_notice);
         iv_expandfun_notice.setBitmap(bitmap2);
-        iv_expandfun_notice.setColor(Color.WHITE);
-        iv_expandfun_notice.setOuterRingAlpha(50);
+        initImage(iv_expandfun_notice);
         bitmap3= BitmapFactory.decodeResource(getResources(),R.mipmap.classsight);
         iv_expandfun_classsight =findViewById(R.id.iv_expandfun_classsight);
         iv_expandfun_classsight.setBitmap(bitmap3);
-        iv_expandfun_classsight.setColor(Color.WHITE);
-        iv_expandfun_classsight.setOuterRingAlpha(50);
+        initImage(iv_expandfun_classsight);
         bitmap4= BitmapFactory.decodeResource(getResources(),R.mipmap.member);
         iv_expandfun_member =findViewById(R.id.iv_expandfun_member);
         iv_expandfun_member.setBitmap(bitmap4);
-        iv_expandfun_member.setColor(Color.WHITE);
-        iv_expandfun_member.setOuterRingAlpha(50);
+        initImage(iv_expandfun_member);
         bitmap5= BitmapFactory.decodeResource(getResources(),R.mipmap.communication);
         iv_expandfun_communication =findViewById(R.id.iv_expandfun_communication);
         iv_expandfun_communication.setBitmap(bitmap5);
-        iv_expandfun_communication.setColor(Color.WHITE);
-        iv_expandfun_communication.setOuterRingAlpha(50);
+        initImage(iv_expandfun_communication);
         bitmap6= BitmapFactory.decodeResource(getResources(),R.mipmap.classlist);
         iv_expandfun_classlist =findViewById(R.id.iv_expandfun_classlist);
         iv_expandfun_classlist.setBitmap(bitmap6);
-        iv_expandfun_classlist.setColor(Color.WHITE);
-        iv_expandfun_classlist.setOuterRingAlpha(50);
+        initImage(iv_expandfun_classlist);
         tv_expand_title=findViewById(R.id.tv_expand_title);
         tv_expand_title.setTitle("更多功能");
+    }
+
+    private void initImage(CircleImage c)
+    {
+        c.setColor(Color.WHITE);
+        c.setOuterRingAlpha(50);
     }
 
     @Override

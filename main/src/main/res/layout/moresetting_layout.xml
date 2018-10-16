@@ -31,15 +31,8 @@
                 android:textSize="15sp"
                 android:text="更新推送" />
 
-           <!-- <Switch
-                android:id="@+id/sw_moresetting_udpate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/switch_plan_notice_selector"
-                android:thumb="@null"
-                android:track="@null" />-->
             <Switch
+                android:id="@+id/sw_moresetting_udpate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/MySwitch"/>

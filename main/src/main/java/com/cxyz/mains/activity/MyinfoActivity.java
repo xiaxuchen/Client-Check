@@ -13,7 +13,7 @@ import com.cxyz.mains.R;
  * Created by Administrator on 2018/10/14.
  */
 
-public class Myinfo extends BaseActivity {
+public class MyinfoActivity extends BaseActivity {
     private TitleView tv_myinfo_title;
     private  CircleImage iv_circleview;
     private Bitmap bitmap;
