@@ -35,7 +35,7 @@ public class MyinfoActivity extends BaseActivity<IMyinfoPresenter> implements Vi
     private  TitleView tvmyinfo_title;
     @Override
     public int getContentViewId() {
-        return R.layout.activity_myinfo_layout;
+        return R.layout.activity_login_layout;
     }
 
     @Override
