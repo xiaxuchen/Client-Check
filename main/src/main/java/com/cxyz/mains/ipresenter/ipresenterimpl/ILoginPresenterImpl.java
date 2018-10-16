@@ -2,6 +2,7 @@ package com.cxyz.mains.ipresenter.ipresenterimpl;
 
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.JsonUtil;
+import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.logiccommons.domain.Student;
 import com.cxyz.logiccommons.domain.Teacher;
 import com.cxyz.logiccommons.domain.User;
@@ -20,7 +21,7 @@ import org.json.JSONObject;
 public class ILoginPresenterImpl extends ILoginPresenter{
 
     @Override
-    public void login(String id, String pwd,int type) {
+    public void login(final String id, final String pwd, final int type) {
         String msg = this.checkout(id,pwd);
         //判断数据是否合法
         if(msg != null)
@@ -36,21 +37,36 @@ public class ILoginPresenterImpl extends ILoginPresenter{
             public void getInfoSuccess(JSONObject info) {
                 //获取数据后进行判断
                 if(info == null)
+                {
+                    mIView.loginFail("服务器异常");
                     return;
+                }
                 try {
                     if(info.getInt("type") == User.ERROR)
                     {
+                        //显示登录失败
                         mIView.loginFail(info.getString("msg"));
-                    }else if(info.getInt("type") == User.STUDNET)
+                        return;
+                    }else
                     {
-                        Student stu = JsonUtil.jsonToObject(info.toString(), Student.class);
+                        User user = null;
+                        if(info.getInt("type") == User.STUDNET)
+                        {
+                            user = JsonUtil.jsonToObject(info.toString(), Student.class);
+                        }else if(info.getInt("type") == User.TEACHER)
+                        {
+                            user = JsonUtil.jsonToObject(info.toString(),Teacher.class);
+                        }
+
+                        //把用户数据保存到UserManager
+                        UserManager.getInstance().setUser(user);
+
+                        //把用户的用户名和密码保存到sp中
+                        SpUtil.getInstance().putString("username",id)
+                                .putInt("type",type);
+                        SpUtil.getInstance().putString("pwd",pwd);
+                        //显示登录成功
                         mIView.loginSuccess();
-                        UserManager.getInstance().setUser(stu);
-                    }else if(info.getInt("type") == User.TEACHER)
-                    {
-                        Teacher tea = JsonUtil.jsonToObject(info.toString(),Teacher.class);
-                        mIView.loginSuccess();
-                        UserManager.getInstance().setUser(tea);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
