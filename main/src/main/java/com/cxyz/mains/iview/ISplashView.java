@@ -29,5 +29,18 @@ public interface ISplashView extends IBaseView {
      */
     public void installApp(File app);
 
-    public void finishSplash();
+    /**
+     * 退出闪屏页面
+     */
+    public void exitSplash();
+
+    /**
+     * 显示自动登录成功
+     */
+    public void autoLoginSuccess();
+
+    /**
+     * 显示自动登录失败
+     */
+    public void autoLoginFail(String info);
 }

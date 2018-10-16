@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.ToastUtil;
-import com.cxyz.commons.widget.TitleView;
 import com.cxyz.mains.R;
 import com.cxyz.mains.ipresenter.ILoginPresenter;
 import com.cxyz.mains.ipresenter.ipresenterimpl.ILoginPresenterImpl;
@@ -30,7 +29,6 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
     private Button btn_login;
     private RadioGroup rg_type;
     private ProgressDialog dialog;
-    private TitleView tv_title;
 
     @Override
     public int getContentViewId() {
@@ -39,14 +37,13 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
 
     @Override
     public void initView() {
-        et_id = (EditText) findViewById(R.id.et_id);
-        et_pwd = (EditText) findViewById(R.id.et_pwd);
+        et_id = (EditText) findViewById(R.id.et_username);
+        et_pwd = (EditText) findViewById(R.id.et_password);
         tv_forgetpwd = (TextView) findViewById(R.id.tv_forgetpwd);
-        btn_login = (Button) findViewById(R.id.btn_login);
-        rg_type = (RadioGroup) findViewById(R.id.rg_type);
-        tv_title = (TitleView) findViewById(R.id.tv_title);
-        tv_title.setTitle("登录");
-        tv_title.setBack(0,"");
+        btn_login = (Button) findViewById(R.id.bt_login);
+        rg_type = (RadioGroup) findViewById(R.id.rg_teacherstudent);
+
+        et_id.setText(getSpUtil().getString("username",""));
     }
 
     @Override
@@ -63,7 +60,7 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
                  * 从输入框和单选框中获取数据后登录
                  */
                 iPresenter.login(et_id.getText().toString(),et_pwd.getText().toString(),rg_type
-                        .getCheckedRadioButtonId()==R.id.rb_stu?0:1);
+                        .getCheckedRadioButtonId()==R.id.rb_student?0:1);
             }
         });
         tv_forgetpwd.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +97,7 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
     public void loginSuccess() {
         ToastUtil.showShort("登录成功");
         startActivity(HomeActivity.class);
+        this.finish();
     }
 
     @Override

@@ -6,9 +6,9 @@ package com.cxyz.mains.constant;
 
 public class NetWorkConstant {
 
-    public static final String ROOT_URL = "http://qnvkxs.natappfree.cc/Service_Check";
+    public static final String ROOT_URL = "http://119.29.101.171:8080/Service_Check/servlet";
 
-    public static final String LOGIN_URL = ROOT_URL+"/servlet/UserServlet";
+    public static final String LOGIN_URL = ROOT_URL+"/UserServlet";
 
     public static final String UPDATE_URL = ROOT_URL+"/json/update.json";
 
