@@ -37,7 +37,6 @@ android {
 }
 
 dependencies {
-    compile 'com.github.codbking:PickTime:v1.0.1'
     compile 'com.github.lecho:hellocharts-android:v1.5.8'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"
