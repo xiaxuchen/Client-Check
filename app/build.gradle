@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     if (!isDebug.toBoolean()) {
         compile project(':check')

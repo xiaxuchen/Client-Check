@@ -1,12 +1,9 @@
 package com.cxyz.mine.activity;
-
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Switch;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.TextView;
 
 import com.cxyz.commons.activity.BaseActivity;
-import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.logiccommons.domain.College;
 import com.cxyz.logiccommons.domain.Grade;
@@ -18,57 +15,57 @@ import com.cxyz.mine.IPresenter.presenter.IMyinfoPresenter;
 import com.cxyz.mine.R;
 import com.cxyz.mine.iview.IMyinfoView;
 
+
 /**
- * Created by Administrator on 2018/9/25.
+ * Created by Administrator on 2018/10/14.
  */
 
-public class MyinfoActivity extends BaseActivity<IMyinfoPresenter> implements View.OnClickListener,IMyinfoView{
-    private Switch stmyinfo_switch;
-    private ImageView ivmyinfo_headimg;
-    private TextView tvmyinfo_name;
-    private  TextView tvmyinfo_sex;
-    private  TextView tvmyinfo_schoolcode;
-    private TextView tvmyinfo_class;
-     private TextView  tvmyinfo_college;
-    private TextView tvmyinfo_edpower;
-    private TextView tvmyinfo_tel;
-    private  TitleView tvmyinfo_title;
+public class MyinfoActivity extends BaseActivity <IMyinfoPresenter>implements IMyinfoView {
+    private TextView tv_myinfo_username;
+    private  TextView tv_myinfo_usersex;
+    private  TextView tv_myinfo_usercode;
+    private TextView tv_myinfo_userclass;
+    private TextView  tv_myinfo_usercollege;
+    private TextView tv_myinfo_usertel;
+    private TitleView tv_myinfo_title;
+    private CircleImage iv_myinfo_circleview;
+    private Bitmap bitmap;
     @Override
     public int getContentViewId() {
-        return R.layout.activity_login_layout;
+        return R.layout.activity_myinfo_layout;
     }
 
     @Override
     public void initView() {
-        ivmyinfo_headimg= (ImageView) findViewById(R.id.ivmyinfo_headimg);
-        tvmyinfo_sex= (TextView) findViewById(R.id.tvmyinfo_sex);
-        tvmyinfo_schoolcode= (TextView) findViewById(R.id.tvmyinfo_schoolcode);
-        tvmyinfo_class= (TextView) findViewById(R.id.tvmyinfo_class);
-        tvmyinfo_college= (TextView) findViewById(R.id.tvmyinfo_college);
-        tvmyinfo_edpower= (TextView) findViewById(R.id.tvmyinfo_edpower);
-        tvmyinfo_tel= (TextView) findViewById(R.id.tvmyinfo_tel);
-        stmyinfo_switch= (Switch) findViewById(R.id.stmyinfo_switch);
-        tvmyinfo_name = (TextView) findViewById(R.id.tvmyinfo_name);
-        tvmyinfo_title = (TitleView) findViewById(R.id.tvmyinfo_title);
-        tvmyinfo_title.setTitle("个人信息");
-
+        tv_myinfo_usercode=findViewById(R.id.tv_myinfo_usercode);
+        tv_myinfo_usersex=findViewById(R.id.tv_myinfo_usersex);
+        tv_myinfo_username=findViewById(R.id.tv_myinfo_username);
+        tv_myinfo_userclass=findViewById(R.id.tv_myinfo_userclass);
+        tv_myinfo_usercollege=findViewById(R.id.tv_myinfo_usercollege);
+        tv_myinfo_usertel=findViewById(R.id.tv_myinfo_usertel);
+        tv_myinfo_title=findViewById(R.id.tv_myinfo_title);
+        iv_myinfo_circleview=findViewById(R.id.iv_myinfo_circleview);
+        tv_myinfo_title.setTitle("个人信息");
+        bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.beauty);
+        iv_myinfo_circleview.setBitmap(bitmap);
+        iv_myinfo_circleview.setmOuterRing(20);
+        iv_myinfo_circleview.setOuterRingAlpha(0);
         //设置信息
         User u = UserManager.getInstance().getUser();
-        tvmyinfo_name.setText(u.get_name());
-        tvmyinfo_edpower.setText(u.getPower()+"");
-        tvmyinfo_sex.setText(u.getSex());
-        tvmyinfo_tel.setText(u.getTel()==null?"":u.getTel());
+        tv_myinfo_username.setText(u.get_name());
+        tv_myinfo_usersex.setText(u.getSex());
+        tv_myinfo_usertel.setText(u.getTel()==null?"":u.getTel());
         if(u.getType() == User.STUDNET)
         {
             Student stu = (Student)u;
-            tvmyinfo_college.setText(stu.getCollege_name()==null?"暂无":stu.getCollege_name());
-            tvmyinfo_class.setText(stu.getGrade().get_name());
+            tv_myinfo_usercollege.setText(stu.getCollege_name()==null?"暂无":stu.getCollege_name());
+            tv_myinfo_userclass.setText(stu.getGrade().get_name());
         }else
         {
             Teacher tea = (Teacher)u;
-            tvmyinfo_college.setText(tea.getCollege().get_name());
+            tv_myinfo_usercollege.setText(tea.getCollege().get_name());
         }
-        tvmyinfo_schoolcode.setText("萍乡学院(暂时填充)");
+        tv_myinfo_usercode.setText("萍乡学院(暂时填充)");
 
     }
 
@@ -76,21 +73,37 @@ public class MyinfoActivity extends BaseActivity<IMyinfoPresenter> implements Vi
     public void initData() {
 
     }
+    @Override
+    public void showLoadingView() {
+
+    }
+
+    @Override
+    public void hideLoadingView() {
+
+    }
 
     @Override
     public void setEvent() {
-        stmyinfo_switch.setOnClickListener(this);
-        ivmyinfo_headimg.setOnClickListener(this);
-        tvmyinfo_sex.setOnClickListener(this);
-        tvmyinfo_schoolcode.setOnClickListener(this);
-        tvmyinfo_class.setOnClickListener(this);
-        tvmyinfo_college.setOnClickListener(this);
-        tvmyinfo_edpower.setOnClickListener(this);
-        tvmyinfo_tel.setOnClickListener(this);
-        tvmyinfo_title.setOnClickListener(new TitleView.OnClickListenerWrapper() {
+        tv_myinfo_title.setOnClickListener(new TitleView.OnClickListener() {
             @Override
             public void onBackClick() {
                 onBackPressed();
+            }
+
+            @Override
+            public void onEditClick() {
+
+            }
+
+            @Override
+            public void onNameClick() {
+
+            }
+
+            @Override
+            public void onSetClick() {
+
             }
         });
         iPresenter.getInfo();
@@ -105,52 +118,17 @@ public class MyinfoActivity extends BaseActivity<IMyinfoPresenter> implements Vi
 
 
     @Override
-    public void showLoadingView() {
-
-    }
-
-    @Override
-    public void hideLoadingView() {
-
-    }
-
-
-    public void onClick(View v) {
-        if(v.getId() == R.id.stmyinfo_switch)
-            hideinfo(stmyinfo_switch);
-    }
-
-
-    @Override
     public void showMyInfo(User info) {
-       /* tvmyinfo_name.setText(info._name);
-        tvmyinfo_sex.setText(info.sex);
-        tvmyinfo_schoolcode.setText(info._id);
-        tvmyinfo_edpower.setText(info.power+"");
-        tvmyinfo_tel.setText(info.tel);*/
 
     }
 
     @Override
     public void showMyClass(Grade grade) {
-        //tvmyinfo_class.setText(grade._name);
+
     }
 
     @Override
     public void showMyCollege(College college) {
-        //tvmyinfo_college.setText(college._name);
-    }
-
-
-
-    public void hideinfo(Switch s) {
-        if(s.isChecked()){
-            ToastUtil.showShort("已开启");
-        }
-        else {
-            ToastUtil.showShort("已关闭");
-        }
 
     }
-
 }

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_forgetpwd_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+
+    <TextView
+        android:id="@+id/tvtv_forgetpwd_info"
+        android:layout_width="311dp"
+        android:layout_height="52dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="请输入已绑定的手机号码，获取验证码后可以重置密码"
+        android:fontFamily="sans-serif-thin"
+        android:textStyle="normal"
+        android:textColor="@color/material_grey_600"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="310dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/linerlayout_shapecolor"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_forgetpwd_tel"
+            android:layout_width="66dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="手机号"
+            android:textSize="15sp"
+            android:textColor="@color/material_grey_600" />
+
+        <EditText
+            android:id="@+id/et_forgetpwd_tel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/MyEditText"
+            android:textSize="15sp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="310dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/linerlayout_shapecolor"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_forgetpwd_testcode"
+            android:layout_width="66dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:shadowColor="@color/material_grey_600"
+            android:text="验证码"
+            android:textSize="15sp"
+            android:textColor="@color/material_grey_600" />
+
+        <EditText
+            android:id="@+id/et__forgetpwd_testcode"
+            android:layout_width="135dp"
+            android:layout_height="match_parent"
+            android:theme="@style/MyEditText"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="获取验证码"
+            android:textColor="@color/material_grey_600"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_forgetpwd_next"
+        android:layout_width="131dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/main_shape"
+        android:text="下一步"
+        android:textColor="@color/common_white" />
+
+
+</LinearLayout>

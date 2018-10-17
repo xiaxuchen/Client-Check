@@ -11,4 +11,30 @@
     <string name="app_forget_pwd">忘记密码</string>
     <string name="app_stu">学生</string>
     <string name="app_tea">老师</string>
+    <string-array name="appointtime">
+        <item>一节课</item>
+        <item>两节课</item>
+        <item>半天</item>
+        <item>一天</item>
+        <item>三天</item>
+        <item>一星期</item>
+        <item>休学</item>
+    </string-array>
+    <string-array name="college">
+        <item>信计学院</item>
+        <item>商学院</item>
+        <item>学前学院</item>
+        <item>初教学院</item>
+        <item>机电学院</item>
+        <item>工管学院</item>
+        <item>体育学院</item>
+    </string-array>
+    <string-array name="classname">
+        <item>1701软件工程</item>
+        <item>1702软件工程</item>
+        <item>1701软件技术</item>
+        <item>1702软件技术</item>
+        <item>1701数字媒体</item>
+        <item>1702数字媒体</item>
+    </string-array>
 </resources>
