@@ -31,7 +31,7 @@ public class oldAppointmentActivity extends BaseActivity<IAppointmenPresenter> i
     public   List<EditText> editTexts;
     @Override
     public int getContentViewId() {
-        return R.layout.activity_appointment_layout;
+        return R.layout.oldactivity_appointment_layout;
     }
     @Override
     public void initView() {

@@ -35,7 +35,7 @@ public class oldMyinfoActivity extends BaseActivity<IMyinfoPresenter> implements
     private  TitleView tvmyinfo_title;
     @Override
     public int getContentViewId() {
-        return R.layout.activity_myinfo_layout;
+        return R.layout.oldactivity_myinfo_layout;
     }
 
     @Override
@@ -123,11 +123,6 @@ public class oldMyinfoActivity extends BaseActivity<IMyinfoPresenter> implements
 
     @Override
     public void showMyInfo(User info) {
-       /* tvmyinfo_name.setText(info._name);
-        tvmyinfo_sex.setText(info.sex);
-        tvmyinfo_schoolcode.setText(info._id);
-        tvmyinfo_edpower.setText(info.power+"");
-        tvmyinfo_tel.setText(info.tel);*/
 
     }
 
