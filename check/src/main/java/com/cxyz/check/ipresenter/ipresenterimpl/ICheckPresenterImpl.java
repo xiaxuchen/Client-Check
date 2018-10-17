@@ -20,7 +20,7 @@ public class ICheckPresenterImpl extends ICheckPresenter {
     /**
      * 模块对应的图片
      */
-    private int[] imgs = new int[]{R.mipmap.ic_launcher,R.mipmap.ic_launcher,
+    private int[] imgs = new int[]{R.mipmap.dailychecks,R.mipmap.tempchecks,
             R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,
             R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher};
 
