@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Administrator on 2018/9/25.
  */
 
-public class AppointmentActivity extends BaseActivity<IAppointmenPresenter> implements View.OnClickListener{
+public class oldAppointmentActivity extends BaseActivity<IAppointmenPresenter> implements View.OnClickListener{
     private  Spinner spappointment_spinner;
     private  TitleView tvappointment_title;
     private EditText etappointment_apply;

@@ -1,5 +1,7 @@
 <resources>
 
+    <style name="AppTheme" parent="QMUI"/>
+
     <style name="MyEditText" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/material_grey_50</item>
         <item name="colorControlActivated">@color/material_grey_300</item>

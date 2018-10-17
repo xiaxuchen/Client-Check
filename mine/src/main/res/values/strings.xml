@@ -11,4 +11,11 @@
     <string name="app_forget_pwd">忘记密码</string>
     <string name="app_stu">学生</string>
     <string name="app_tea">老师</string>
+    <string-array name="appointtime">
+        <item>一节课</item>
+        <item>两节课</item>
+        <item>半天</item>
+        <item>一天</item>
+        <item>三天</item>
+    </string-array>
 </resources>

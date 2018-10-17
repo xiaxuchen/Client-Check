@@ -1,85 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="#EAEAEA"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageView
-        android:src="@drawable/pxxy"
-        android:layout_width="118dp"
-        android:layout_height="94dp"
-        android:id="@+id/ivinfo_headimg"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"/>
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#CCCCCC"
-        android:layout_marginBottom="3dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:text="个人信息"
-        android:textSize="25dp"
-        android:textColor="#666666"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/tvmyinfo" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#CCCCCC"
-        android:layout_marginBottom="3dp"/>
-
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:text="请假预约"
-        android:textSize="25dp"
-        android:textColor="#666666"
-        android:layout_width="match_parent"
-        android:id="@+id/tvappointment"
-        android:layout_height="50dp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#CCCCCC"
-        android:layout_marginBottom="3dp"/>
-
-
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:text="设置"
-        android:textSize="25dp"
-        android:textColor="#666666"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/tvsetting" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#CCCCCC"
-        android:layout_marginBottom="3dp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <Button
-            android:layout_centerInParent="true"
-            android:text="退出登入"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_shape"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btexitlogin" />
-
-
-    </RelativeLayout>
-
+        <TextView
+            android:id="@+id/tv_mine_myinfo"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="我的信息" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_appointment"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="请假预约" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_alterpwd"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="修改密码" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_update"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="版本更新" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_useradvice"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="用户反馈" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_setting"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="更多设置" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+    </LinearLayout>
 
 </LinearLayout>
