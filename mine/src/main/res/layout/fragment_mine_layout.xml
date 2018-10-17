@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_mine_myinfo"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="我的信息" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_appointment"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="请假预约" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_alterpwd"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="修改密码" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_update"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="版本更新" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_useradvice"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="用户反馈" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+        <TextView
+            android:id="@+id/tv_mine_setting"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="更多设置" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey_300"></View>
+    </LinearLayout>
+
+</LinearLayout>

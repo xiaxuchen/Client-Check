@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/tv_lesson_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="安卓"
+        />
+
+    <TextView
+        android:id="@+id/tv_tea_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="刘老师"
+        />
+
+    <TextView
+        android:id="@+id/tv_lesson_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9:40-11:40"
+        />
+
+    <TextView
+        android:id="@+id/tv_lesson_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1-8周"
+        />
+
+    <TextView
+        android:id="@+id/tv_lesson_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3301"/>
+
+</LinearLayout>

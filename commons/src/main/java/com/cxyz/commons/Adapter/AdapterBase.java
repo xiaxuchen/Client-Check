@@ -12,8 +12,8 @@ import java.util.List;
 
 /**
  * Created by 夏旭晨 on 2018/9/22.
+ * listView适配器的基类，泛型T为传递给Adapter的数据类型
  */
-
 public abstract class AdapterBase<T> extends BaseAdapter {
     protected List<T> mList = new LinkedList<T>();
     protected Context mContext;
@@ -26,6 +26,7 @@ public abstract class AdapterBase<T> extends BaseAdapter {
         initAdp(mContext, list, mItemLayoutId);
     }
 
+
     private void initAdp(Context mContext, List<T> list, int mItemLayoutId) {
         if (list == null) {
             return;
@@ -36,6 +37,10 @@ public abstract class AdapterBase<T> extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    /**
+     * 获取所有数据
+     * @return 数据
+     */
     public List<T> getList() {
         return mList;
     }
@@ -93,7 +98,7 @@ public abstract class AdapterBase<T> extends BaseAdapter {
     }
 
     /**
-     * 删除指定对象
+     * 删除指定数据
      *
      * @param t
      */

@@ -20,13 +20,14 @@ android {
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    if(!isDebug.toBoolean())
-    {
+    if (!isDebug.toBoolean()) {
         compile project(':check')
         compile project(':homepage')
         compile project(':mine')
-    }else
-        compile project(':commons')
-
+        compile project(':main')
+    } else
+        compile project(':logiccommons')
 }
+
