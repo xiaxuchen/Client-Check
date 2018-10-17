@@ -14,7 +14,7 @@ import com.cxyz.mine.R;
  * Created by Administrator on 2018/9/25.
  */
 
-public class SettingActivity extends BaseActivity <IBasePresenter>implements View.OnClickListener {
+public class oldSettingActivity extends BaseActivity <IBasePresenter>implements View.OnClickListener {
     @Override
     public int getContentViewId() {
         return R.layout.activity_setting_layout;

@@ -6,10 +6,19 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".activity.MyinfoActivity" />
-        <activity android:name=".activity.AppointmentActivity" />
-        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.oldMyinfoActivity" />
+        <activity android:name=".activity.oldAppointmentActivity" />
+        <activity android:name=".activity.oldSettingActivity" />
         <activity android:name=".activity.ResponseActivity" />
+        <activity android:name=".activity.MyinfoActivity"></activity>
+        <activity android:name=".activity.ExpandFunctionActivity"></activity>
+        <activity android:name=".activity.MoreSettingActivity"></activity>
+        <activity android:name=".activity.PieChartActivity"></activity>
+        <activity android:name=".activity.UserResponse"></activity>
+        <activity android:name=".activity.ApponitmentActivity"></activity>
+        <activity android:name=".activity.ForgetpwdActivity"></activity>
+        <activity android:name=".activity.RestPwdActivity"></activity>
+
     </application>
 
 </manifest>

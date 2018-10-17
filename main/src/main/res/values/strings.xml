@@ -8,7 +8,7 @@
     <string name="app_login">登录</string>
     <string name="app_account">账号</string>
     <string name="app_pwd">密码</string>
-    <string name="app_forget_pwd">忘记密码</string>
+    <string name="app_forget_pwd">忘记密码?</string>
     <string name="app_stu">学生</string>
     <string name="app_tea">老师</string>
 </resources>

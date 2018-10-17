@@ -2,12 +2,11 @@ package com.cxyz.mains.imodel.imodelimpl;
 
 import android.accounts.NetworkErrorException;
 
-import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
-import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.mains.constant.NetWorkConstant;
+import com.cxyz.mains.constant.RequestCenter;
 import com.cxyz.mains.imodel.ILoginModel;
 
 import org.json.JSONObject;
@@ -38,7 +37,7 @@ public class ILoginModelImpl implements ILoginModel{
         RequestParams params = new RequestParams(map);
         LogUtil.e(NetWorkConstant.LOGIN_URL);
         try {
-            CommonOkHttpClient.post(NetWorkConstant.LOGIN_URL,params,new DisposeDataHandler(new DisposeDataListener() {
+            RequestCenter.login(params,new DisposeDataListener() {
 
                 @Override
                 public void onSuccess(Object responseObj) {
@@ -56,7 +55,7 @@ public class ILoginModelImpl implements ILoginModel{
                     if(listener!=null)
                         listener.getInfoFail(error);
                 }
-            }));
+            });
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             if(listener!=null)

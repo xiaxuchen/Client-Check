@@ -3,28 +3,31 @@ package com.cxyz.mine.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.fragment.BaseFragment;
+import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.mine.IPresenter.presenter.IMinePresenter;
 import com.cxyz.mine.R;
-import com.cxyz.mine.activity.AppointmentActivity;
+import com.cxyz.mine.activity.ApponitmentActivity;
+import com.cxyz.mine.activity.ForgetpwdActivity;
+import com.cxyz.mine.activity.MoreSettingActivity;
 import com.cxyz.mine.activity.MyinfoActivity;
-import com.cxyz.mine.activity.SettingActivity;
+import com.cxyz.mine.activity.UserResponse;
 
 /**
  * Created by Administrator on 2018/9/25.
  */
 @Route(path = "/mine/MineFragment")
 public class MineFragment extends BaseFragment<IMinePresenter> implements View.OnClickListener {
-    private TextView tvmyinfo, tvappointment, tvsetting;
-    private Button btexitlogin;
-
-
+    private TextView tv_mine_myinfo;
+    private TextView tv_mine_update;
+    private TextView tv_mine_useradvice;
+    private TextView tv_mine_setting;
+    private TextView tv_mine_appointment;
+    private  TextView   tv_mine_alterpwd;
     public static MineFragment newInstance() {
         return new MineFragment();
     }
@@ -41,10 +44,12 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        tvmyinfo = findViewById(R.id.tvmyinfo);
-        tvappointment = findViewById(R.id.tvappointment);
-        tvsetting = findViewById(R.id.tvsetting);
-        btexitlogin = findViewById(R.id.btexitlogin);
+        tv_mine_myinfo = findViewById(R.id.tv_mine_myinfo);
+        tv_mine_appointment = findViewById(R.id.tv_mine_appointment);
+        tv_mine_update = findViewById(R.id.tv_mine_update);
+        tv_mine_useradvice = findViewById(R.id.tv_mine_useradvice);
+        tv_mine_setting = findViewById(R.id.tv_mine_setting);
+        tv_mine_alterpwd = findViewById(R.id.tv_mine_alterpwd);
     }
 
     @Override
@@ -59,10 +64,12 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
 
     @Override
     protected void setListener() {
-        tvmyinfo.setOnClickListener(this);
-        tvappointment.setOnClickListener(this);
-        tvsetting.setOnClickListener(this);
-        btexitlogin.setOnClickListener(this);
+        tv_mine_myinfo.setOnClickListener(this);
+        tv_mine_appointment.setOnClickListener(this);
+        tv_mine_update.setOnClickListener(this);
+        tv_mine_useradvice.setOnClickListener(this);
+        tv_mine_setting.setOnClickListener(this);
+        tv_mine_alterpwd.setOnClickListener(this);
     }
 
     @Override
@@ -75,25 +82,35 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
 
     }
 
+
     //监听事件
 
     //界面跳转
     //从我的界面跳转到设置界面
-    public void tvsetting() {
-        Intent intent = new Intent(getActivity().getApplicationContext(), SettingActivity.class);
-
+    public void tv_mine_setting() {
+        Intent intent = new Intent(getActivity().getApplicationContext(), MoreSettingActivity.class);
         startActivity(intent);
     }
 
     //从我的界面跳转到预约请假界面
-    public void tvappointment() {
-        Intent intent = new Intent(getActivity().getApplicationContext(), AppointmentActivity.class);
+    public void tv_mine_appointment() {
+        Intent intent = new Intent(getActivity().getApplicationContext(), ApponitmentActivity.class);
         startActivity(intent);
     }
 
     //从我的界面跳转到个人信息界面
-    public void tvmyinfo() {
+    public void tv_mine_myinfo() {
         Intent intent = new Intent(getActivity().getApplicationContext(), MyinfoActivity.class);
+        startActivity(intent);
+    }
+    //从我的界面跳转到修改密码界面
+    public void tv_mine_alterpwd() {
+        Intent intent = new Intent(getActivity().getApplicationContext(), ForgetpwdActivity.class);
+        startActivity(intent);
+    }
+    //从我的界面跳转到用户反馈界面
+    public void tv_mine_useradvice() {
+        Intent intent = new Intent(getActivity().getApplicationContext(), UserResponse.class);
         startActivity(intent);
     }
 
@@ -101,16 +118,17 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
-        if(viewId == R.id.tvmyinfo)
-            tvmyinfo();
-        else if(viewId == R.id.tvappointment)
-            tvappointment();
-        else if(viewId == R.id.tvsetting)
-            tvsetting();
-        else if(viewId == R.id.btexitlogin)
-        {
-            ARouter.getInstance().build("/main/LoginActivity").navigation();
-            getHoldingActivity().finish();
-        }
+        if(viewId == R.id.tv_mine_myinfo)
+            tv_mine_myinfo();
+        else if(viewId == R.id.tv_mine_appointment)
+            tv_mine_appointment();
+        else if(viewId == R.id.tv_mine_setting)
+            tv_mine_setting();
+        else if(viewId == R.id.tv_mine_alterpwd)
+            tv_mine_alterpwd();
+        else if(viewId == R.id.tv_mine_useradvice)
+            tv_mine_useradvice();
+        else if(viewId == R.id.tv_mine_update)
+            ToastUtil.showShort("已是最新版本");
     }
 }
