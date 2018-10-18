@@ -18,8 +18,9 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="49dp"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center"
             android:src="@drawable/datatime" />
 
         <TextView
@@ -45,8 +46,9 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="49dp"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center"
             android:src="@drawable/datatime" />
 
         <TextView
