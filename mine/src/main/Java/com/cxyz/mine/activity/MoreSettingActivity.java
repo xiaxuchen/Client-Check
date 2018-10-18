@@ -13,6 +13,7 @@ import com.cxyz.mine.R;
  */
 
 public class MoreSettingActivity extends BaseActivity {
+    private  TextView tv_moresetting_exitlogin;
     private TextView tv_moresetting_expand;
     private TitleView tv_moresetting_title;
     @Override
@@ -32,6 +33,7 @@ public class MoreSettingActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        tv_moresetting_exitlogin=findViewById(R.id.tv_moresetting_exitlogin);
         tv_moresetting_expand=findViewById(R.id.tv_moresetting_expand);
         tv_moresetting_title=findViewById(R.id.tv_moresetting_title);
         tv_moresetting_title.setTitle("更多设置");
@@ -49,6 +51,14 @@ public class MoreSettingActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(),ExpandFunctionActivity.class);
                 startActivity(intent);
+            }
+        });
+        tv_moresetting_exitlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),check.class);
+                startActivity(intent);
+
             }
         });
         tv_moresetting_title.setOnClickListener(new TitleView.OnClickListener() {
