@@ -6,12 +6,6 @@ package com.cxyz.logiccommons.domain;
  */
 
 public class Student extends User{
-
-	//更多信息在User中
-
-	private Grade grade;//所属班级
-	
-	private String college_name;//学院名称
 	
 	public Student(){}
 	
@@ -26,20 +20,6 @@ public class Student extends User{
 		this.setType(User.STUDNET);
 	}
 	
-    public Grade getGrade() {
-		return grade;
-	}
-
-	public void setGrade(Grade grade) {
-		this.grade = grade;
-	}
-
-	public String getCollege_name() {
-		return college_name;
-	}
-
-	public void setCollege_name(String college_name) {
-		this.college_name = college_name;
-	}
+   
 
 }

@@ -24,9 +24,9 @@ public class TaskInfos_ModelImpl implements TaskInfos_Model{
         map.put("method","getTaskInfos");
         map.put("grade",grede_id);
         RequestParams params = new RequestParams(map);
-        LogUtil.e("goudongxi"+NetWorkHomeUrl.TASK_URL);
+        LogUtil.e("goudongxi"+NetWorkHomeUrl.TASKINFOS_URL);
         try {
-            CommonOkHttpClient.post(NetWorkHomeUrl.TASK_URL,params,new DisposeDataHandler(new DisposeDataListener() {
+            CommonOkHttpClient.post(NetWorkHomeUrl.TASKINFOS_URL,params,new DisposeDataHandler(new DisposeDataListener() {
                 @Override
                 public void onSuccess(Object responseObj) {
 

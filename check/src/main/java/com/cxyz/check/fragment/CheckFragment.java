@@ -7,19 +7,21 @@ import android.widget.GridView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.check.R;
-import com.cxyz.check.activity.DailyCheckActivity;
 import com.cxyz.check.adapter.FunctionAdapter;
 import com.cxyz.check.constant.IDs;
 import com.cxyz.check.ipresenter.ICheckPresenter;
 import com.cxyz.check.ipresenter.ipresenterimpl.ICheckPresenterImpl;
-import com.cxyz.commons.IView.IBaseView;
+import com.cxyz.check.view.ICheckView;
 import com.cxyz.commons.fragment.BaseFragment;
+import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.logiccommons.domain.TaskInfo;
 
 /**
  * Created by 夏旭晨 on 2018/10/4.
  */
 @Route(path = "/check/CheckFragment")
-public class CheckFragment extends BaseFragment<ICheckPresenter> implements IBaseView,AdapterView.OnItemClickListener{
+public class CheckFragment extends BaseFragment<ICheckPresenter> implements ICheckView,AdapterView.OnItemClickListener{
 
     private GridView gv_function;
 
@@ -57,7 +59,6 @@ public class CheckFragment extends BaseFragment<ICheckPresenter> implements IBas
 
     @Override
     public void showLoadingView() {
-
     }
 
     @Override
@@ -70,10 +71,25 @@ public class CheckFragment extends BaseFragment<ICheckPresenter> implements IBas
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(id == IDs.DAILYID)
         {
-            getHoldingActivity().startActivity(DailyCheckActivity.class);
+            iPresenter.checkTask();
+            //getHoldingActivity().startActivity(DailyCheckActivity.class);
         }else if(id == IDs.SHORTTIMEID)
         {
 
         }
+    }
+
+    /**
+     * TODO 需要显示一个dialog
+     * @param taskInfo
+     */
+    @Override
+    public void showTask(TaskInfo taskInfo) {
+        LogUtil.e(taskInfo.toString());
+    }
+
+    @Override
+    public void showNoTask(String info) {
+        ToastUtil.showShort(info);
     }
 }

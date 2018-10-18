@@ -17,7 +17,7 @@ public class TakInfoPresenterImpl extends TaskInfoPresenter {
     @Override
     public void getTaskInfoData(String grede_id) {
         mIView.showLoadingView();
-        mIModle.getTaskInfo(grede_id, NetWorkHomeUrl.TASK_URL, new TaskInfos_Model.getTaskInfoListener() {
+        mIModle.getTaskInfo(grede_id, NetWorkHomeUrl.TASKINFOS_URL, new TaskInfos_Model.getTaskInfoListener() {
             @Override
             public void getInfoSuccess(List<TaskInfo> info) {
                 if (info==null){

@@ -28,6 +28,8 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     private TextView tv_mine;
 
+    private TextView tv_home;
+
     private LinearLayout ll_check;
 
     private LinearLayout ll_mine;
@@ -66,6 +68,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         iv_mine = (ImageView) findViewById(R.id.iv_mine);
         tv_check = (TextView) findViewById(R.id.tv_check);
         tv_mine = (TextView) findViewById(R.id.tv_mine);
+        tv_home = (TextView)findViewById(R.id.tv_home);
         tv_title = (TitleView) findViewById(R.id.tv_title);
         ll_check = (LinearLayout) findViewById(R.id.ll_check);
         ll_mine = (LinearLayout) findViewById(R.id.ll_mine);
@@ -128,28 +131,34 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         int id = v.getId();
         if(id == R.id.ll_check)
         {
-            iv_check.setImageResource(R.mipmap.app_check_on);
+            iv_check.setImageResource(R.mipmap.app_statistic_on);
             iv_mine.setImageResource(R.mipmap.app_mine_off);
+            iv_home.setImageResource(R.mipmap.app_home_off);
             tv_check.setTextColor(getResources().getColor(R.color.app_on));
             tv_mine.setTextColor(getResources().getColor(R.color.app_off));
-            tv_title.setTitle("考勤");
+            tv_home.setTextColor(getResources().getColor(R.color.app_off));
+            tv_title.setTitle("统计");
             switchFragment(checkFragment);
         }
         else if(id == R.id.ll_mine)
         {
-            iv_check.setImageResource(R.mipmap.app_check_off);
+            iv_check.setImageResource(R.mipmap.app_statistic_off);
+            iv_home.setImageResource(R.mipmap.app_home_off);
             iv_mine.setImageResource(R.mipmap.app_mine_on);
             tv_mine.setTextColor(getResources().getColor(R.color.app_on));
             tv_check.setTextColor(getResources().getColor(R.color.app_off));
+            tv_home.setTextColor(getResources().getColor(R.color.app_off));
             tv_title.setTitle("我的");
             switchFragment(mineFragment);
         }
         else if(id == R.id.iv_home)
         {
-            iv_check.setImageResource(R.mipmap.app_check_off);
+            iv_check.setImageResource(R.mipmap.app_statistic_off);
             iv_mine.setImageResource(R.mipmap.app_mine_off);
             tv_mine.setTextColor(getResources().getColor(R.color.app_off));
             tv_check.setTextColor(getResources().getColor(R.color.app_off));
+            tv_home.setTextColor(getResources().getColor(R.color.app_on));
+            iv_home.setImageResource(R.mipmap.app_home_on);
             tv_title.setTitle("主页");
             switchFragment(homeFragment);
         }

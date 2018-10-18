@@ -5,23 +5,23 @@ package com.cxyz.logiccommons.domain;
  * 
  * Created by 夏旭晨 on 2018/9/23.
  */
-public class CheckRecord {
+public class CheckRecord{
 	/**
 	 * 请假
 	 */
-	public static final int VACATE = 1;
+	public static final int VACATE = -1;
 	/**
 	 * 早退
 	 */
-	public static final int EARLYLEAVE = 4;
+	public static final int EARLYLEAVE = -2;
 	/**
 	 * 迟到
 	 */
-	public static final int LATE = 0;
+	public static final int LATE = -3;
 	/**
 	 * 缺勤
 	 */
-	public static final int ABSENTEEISM = 3;
+	public static final int ABSENTEEISM = -4;
 	
 	/**
 	 * 撤销

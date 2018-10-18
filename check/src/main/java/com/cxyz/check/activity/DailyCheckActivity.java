@@ -2,6 +2,7 @@ package com.cxyz.check.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.ipresenter.ipresenterimpl.IDailyPresenterImpl;
 import com.cxyz.check.view.IDailyView;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.logiccommons.domain.CheckRecord;
@@ -37,6 +39,8 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     private Button btn_commit;
 
     private StusAdapter adapter;
+
+    private TaskCompletion completion;
 
     //记录不良情况的map
     private Map<String,CheckRecord> crs;
@@ -102,6 +106,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     private void showStateDialog(final int position,final View view)
     {
         final String[] items = new String[]{"迟到","请假","已到达","缺勤","早退"};
+        final int [] values = new int[]{CheckRecord.LATE,CheckRecord.VACATE,CheckRecord.CANCLE,CheckRecord.ABSENTEEISM,CheckRecord.EARLYLEAVE};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.mipmap.common_logo);
         builder.setTitle("选择考勤状态:");
@@ -120,16 +125,12 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                     {
                         CheckRecord cr = new CheckRecord();
                         cr.setStudent(stu);
-                        cr.setTaskCompletion(c);
-                        cr.setResult(which);
+                        cr.setResult(values[which]);
                         crs.put(stu.get_id(),cr);
-                    }else if(r.getResult() != which)
+                    }else if(r.getResult() != values[which])
                     {
-                        CheckRecord cr = new CheckRecord();
-                        cr.setStudent(stu);
-                        cr.setResult(which);
-                        cr.setTaskCompletion(c);
-                        crs.put(stu.get_id(),cr);
+                        r.setResult(values[which]);
+                        crs.put(stu.get_id(),r);
                     }
 
                 }else
@@ -192,5 +193,17 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     public void showCommitResult(String info) {
         ToastUtil.showShort(info);
+    }
+
+    /**
+     * TODO 可能会出现异常情况，后期需要调整
+     * @param intent 跳转时所用的
+     */
+    @Override
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+        LogUtil.e("我正在初始comp");
+        int compId = intent.getIntExtra("compId", -1);
+        completion.set_id(compId);
     }
 }

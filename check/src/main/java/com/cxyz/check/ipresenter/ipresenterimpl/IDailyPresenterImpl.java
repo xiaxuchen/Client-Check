@@ -42,6 +42,7 @@ public class IDailyPresenterImpl extends IDailyPresenter{
     public void commit(Map<String, CheckRecord> crs, TaskCompletion completion) {
         mIView.showLoadingView();
         Check c = Check.getCheck(crs,completion);
+        c.getCompletion().setState(TaskCompletion.NORMAL);
         mIModle.commit(c,new IDailyModel.CommitListener() {
             @Override
             public void onCompletion(String info) {

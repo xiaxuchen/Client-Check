@@ -18,6 +18,10 @@
         android:layout_height="0dp"
         android:layout_weight="1"></FrameLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_off"/>
         <LinearLayout
             android:paddingTop="8dp"
             android:background="@color/common_white"
@@ -41,7 +45,7 @@
                         android:id="@+id/iv_check"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/app_check_off"/>
+                        android:src="@mipmap/app_statistic_off"/>
                     <TextView
                         android:textColor="@color/app_off"
                         android:id="@+id/tv_check"
@@ -49,7 +53,7 @@
                         android:layout_below="@id/iv_check"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_check"/>
+                        android:text="@string/app_statistic"/>
                 </LinearLayout>
             </RelativeLayout>
 
@@ -59,15 +63,22 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
                 <ImageView
-                    android:layout_marginBottom="6dp"
                     android:id="@+id/iv_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/app_home"/>
+                    android:src="@mipmap/app_home_on"/>
+                <TextView
+                    android:textColor="@color/app_off"
+                    android:id="@+id/tv_home"
+                    android:layout_below="@id/iv_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_home"/>
 
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/check"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -87,7 +98,6 @@
                     <TextView
                         android:textColor="@color/app_off"
                         android:id="@+id/tv_mine"
-                        android:layout_marginTop="3dp"
                         android:layout_below="@id/iv_mine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

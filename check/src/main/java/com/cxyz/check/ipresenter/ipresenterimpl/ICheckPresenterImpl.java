@@ -3,7 +3,10 @@ package com.cxyz.check.ipresenter.ipresenterimpl;
 import com.cxyz.check.R;
 import com.cxyz.check.constant.IDs;
 import com.cxyz.check.ipresenter.ICheckPresenter;
-import com.cxyz.commons.IModel.IBaseModel;
+import com.cxyz.check.model.ICheckModel;
+import com.cxyz.check.model.imodelimpl.ICheckModelImpl;
+import com.cxyz.logiccommons.domain.TaskInfo;
+import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
 
 import java.util.ArrayList;
@@ -35,8 +38,8 @@ public class ICheckPresenterImpl extends ICheckPresenter {
      */
     private long ids[] = new long[]{IDs.DAILYID, IDs.SHORTTIMEID,2,3,4,5,6,7,8};
 
-    public IBaseModel createModel() {
-        return null;
+    public ICheckModel createModel() {
+        return new ICheckModelImpl();
     }
 
     public void getStusToShow() {
@@ -57,6 +60,27 @@ public class ICheckPresenterImpl extends ICheckPresenter {
             datas.add(data);
         }
         return datas;
+    }
+
+    @Override
+    public void checkTask() {
+        User u = UserManager.getInstance().getUser();
+        mIView.showLoadingView();
+        mIModle.checkComp(u.get_id(), u.getType(), new ICheckModel.CheckListener() {
+            @Override
+            public void onSuccess(TaskInfo taskInfo) {
+                //请求成功显示成功逻辑
+                mIView.hideLoadingView();
+                mIView.showTask(taskInfo);
+            }
+
+            @Override
+            public void onFail(String error) {
+                //请求失败或数据错误显示失败逻辑
+                mIView.hideLoadingView();
+                mIView.showNoTask(error);
+            }
+        });
     }
 
     private int[] getIndex()

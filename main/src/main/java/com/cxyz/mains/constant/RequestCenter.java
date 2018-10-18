@@ -13,7 +13,12 @@ import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 
 public class RequestCenter {
 
-    public static void login(RequestParams params, DisposeDataListener listener) throws NetworkErrorException {
-        CommonOkHttpClient.post(NetWorkConstant.LOGIN_URL,params,new DisposeDataHandler(listener));
+    public static void login(RequestParams params, DisposeDataListener listener){
+        try {
+            CommonOkHttpClient.post(NetWorkConstant.LOGIN_URL,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
     }
 }
