@@ -12,15 +12,23 @@ import java.util.Arrays;
  */
 
 public class TaskInfo{
-    private String _id;
-	private String _name;
-    private User sponser = new User();
-    private User checker = new User();
-    private DateTime start;
-    private DateTime end;
-    private ClassRoom classRoom = new ClassRoom();
-    private Integer type;
-    private Grade grade = new Grade();
+    private String _id;//任务完成情况id
+	private String _name;//任务名称
+    private User sponser = new User();//发起人
+    private User checker = new User();//考勤人
+    private DateTime start;//开始时间
+    private DateTime end;//结束时间
+    private ClassRoom classRoom = new ClassRoom();//教室
+    private Integer type;//考勤类型
+    private Grade grade = new Grade();//班级
+	private TaskCompletion completion;//完成情况
+	public TaskCompletion getCompletion() {
+		return completion;
+	}
+
+	public void setCompletion(TaskCompletion completion) {
+		this.completion = completion;
+	}
     /*
      * 所有的考勤日期
      */

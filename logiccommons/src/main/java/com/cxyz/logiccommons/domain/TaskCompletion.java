@@ -25,11 +25,11 @@ public class TaskCompletion{
 	 * 特殊情况
 	 */
 	public static final int OTHER = -1;
-    private Integer _id;
-    private TaskInfo taskInfo;
-    private Date date;
-    private Integer state;
-    private DateTime updatetime;
+    private Integer _id;//考勤完成情况id（一次考勤）
+    private TaskInfo taskInfo;//关联的基本信息
+    private Date date;//考勤日期
+    private Integer state;//考勤完成情况
+    private DateTime updatetime;//上次更新时间
     
     public TaskCompletion(){}
     

@@ -23,7 +23,7 @@ public class RequestCenter {
      * @param type 记录类型
      * @param listener 回调
      */
-    public static void getRecords(String id, int type, DisposeDataListener listener)
+    public static void getRecords(String id, Integer type, DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
         map.put("method","getRecordDetails");

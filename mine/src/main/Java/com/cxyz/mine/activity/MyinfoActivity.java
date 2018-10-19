@@ -52,8 +52,8 @@ public class MyinfoActivity extends BaseActivity <IMyinfoPresenter>implements IM
         User u = UserManager.getInstance().getUser();
         tv_myinfo_username.setText(u.get_name());
         tv_myinfo_usersex.setText(u.getSex());
-        tv_myinfo_usercollege.setText(u.getCollege().get_name());
-        tv_myinfo_usercode.setText("萍乡学院(暂时填充)");
+        tv_myinfo_usercollege.setText(u.getCollege()==null?u.getCollege_name():u.getCollege().get_name());
+        tv_myinfo_usercode.setText("萍乡学院");
         tv_myinfo_usertel.setText(u.getTel()==null?"":u.getTel());
         if(u.getType() == User.STUDNET)
         {

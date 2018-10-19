@@ -22,6 +22,7 @@ import com.cxyz.commons.widget.TitleView;
 import com.cxyz.logiccommons.domain.CheckRecord;
 import com.cxyz.logiccommons.domain.Student;
 import com.cxyz.logiccommons.domain.TaskCompletion;
+import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
 
 import java.util.HashMap;
@@ -39,8 +40,6 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     private Button btn_commit;
 
     private StusAdapter adapter;
-
-    private TaskCompletion completion;
 
     //记录不良情况的map
     private Map<String,CheckRecord> crs;
@@ -68,8 +67,6 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     public void initData() {
         crs = new HashMap<>();
-        c = new TaskCompletion(1);
-        c.setState(TaskCompletion.NORMAL);
     }
 
     @Override
@@ -115,7 +112,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         final Student stu = adapter.getItem(position);
         final CheckRecord r = crs.get(stu.get_id());
         if(r!=null)
-            result = r.getResult();
+            result = this.getIndex(values,r.getResult());
         builder.setSingleChoiceItems(items,result, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -158,10 +155,22 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         alertDialog.show();
     }
 
+    private int getIndex(int array[],int value)
+    {
+        int i = 0;
+        for(int v:array)
+        {
+            if(v==value)
+                return i;
+            i++;
+        }
+        return 2;
+    }
+
     @Override
     protected void afterInit() {
         super.afterInit();
-        iPresenter.getStusToShow(((Student) UserManager.getInstance().getUser()).getGrade().get_id());
+        iPresenter.getStusToShow(((User) UserManager.getInstance().getUser()).getGrade().get_id());
     }
 
     @Override
@@ -204,6 +213,6 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         super.handleIntent(intent);
         LogUtil.e("我正在初始comp");
         int compId = intent.getIntExtra("compId", -1);
-        completion.set_id(compId);
+        c = new TaskCompletion(compId);
     }
 }

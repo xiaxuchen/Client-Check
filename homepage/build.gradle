@@ -34,13 +34,15 @@ android {
         }
     }
 }
-
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.haibin:calendarview:3.4.8'//日历控件
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"
+
     compile project(':logiccommons')
-    testCompile 'junit:junit:4.12'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
 }

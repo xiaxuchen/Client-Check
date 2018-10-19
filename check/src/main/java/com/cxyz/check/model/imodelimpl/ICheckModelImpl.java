@@ -7,6 +7,7 @@ import com.cxyz.check.model.ICheckModel;
 import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.logiccommons.domain.TaskInfo;
 
 /**
@@ -25,7 +26,10 @@ public class ICheckModelImpl implements ICheckModel {
                 @Override
                 public void onSuccess(Object responseObj) {
                     if(listener!=null)
+                    {
+                        LogUtil.e(responseObj.toString());
                         listener.onSuccess(GsonUtil.GsonToBean(responseObj.toString(), TaskInfo.class));
+                    }
                 }
 
                 @Override

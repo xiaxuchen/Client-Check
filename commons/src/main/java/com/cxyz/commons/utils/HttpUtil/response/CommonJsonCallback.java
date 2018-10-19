@@ -59,7 +59,10 @@ public class CommonJsonCallback implements Callback {
     private void handlerResponse(String result)
     {
         if(TextUtils.isEmpty(result))
+        {
+            listener.onFailure(null);
             return;
+        }
         if(clazz!=null)
         {
             Object o = null;

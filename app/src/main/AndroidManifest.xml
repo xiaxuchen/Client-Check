@@ -10,8 +10,8 @@
         android:label="@string/common_app_name">
         <activity android:name="com.cxyz.mains.activity.SplashActivity">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

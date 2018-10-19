@@ -5,6 +5,7 @@ import com.cxyz.check.constant.IDs;
 import com.cxyz.check.ipresenter.ICheckPresenter;
 import com.cxyz.check.model.ICheckModel;
 import com.cxyz.check.model.imodelimpl.ICheckModelImpl;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.logiccommons.domain.TaskInfo;
 import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
@@ -76,6 +77,12 @@ public class ICheckPresenterImpl extends ICheckPresenter {
 
             @Override
             public void onFail(String error) {
+                if(error == null)
+                {
+                    mIView.showNoTask("当前暂无考勤任务");
+                    mIView.hideLoadingView();
+                    return;
+                }
                 //请求失败或数据错误显示失败逻辑
                 mIView.hideLoadingView();
                 mIView.showNoTask(error);
@@ -85,7 +92,11 @@ public class ICheckPresenterImpl extends ICheckPresenter {
 
     private int[] getIndex()
     {
-        switch (UserManager.getInstance().getUser().getPower())
+        LogUtil.e("怎么会调用");
+        User user = UserManager.getInstance().getUser();
+        if(user == null)
+            return null;
+        switch (user.getPower())
         {
             case 0:
             {

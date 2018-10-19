@@ -80,6 +80,7 @@ public class ISplashPresenterImpl extends ISplashPresenter {
             new ILoginModelImpl().getLoginInfo(username, pwd, type, new ILoginModel.getLoginInfoListener() {
                 @Override
                 public void getInfoSuccess(User user) {
+                    LogUtil.e(user.toString());
                     //把用户数据保存到UserManager
                     UserManager.getInstance().setUser(user);
                     //显示登录成功

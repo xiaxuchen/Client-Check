@@ -4,7 +4,7 @@ import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.model.IDailyModel;
 import com.cxyz.check.model.imodelimpl.IDailyModelImpl;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
-import com.cxyz.logiccommons.domain.Check;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.logiccommons.domain.CheckRecord;
 import com.cxyz.logiccommons.domain.Student;
 import com.cxyz.logiccommons.domain.TaskCompletion;
@@ -40,7 +40,8 @@ public class IDailyPresenterImpl extends IDailyPresenter{
 
     @Override
     public void commit(Map<String, CheckRecord> crs, TaskCompletion completion) {
-        mIView.showLoadingView();
+        LogUtil.e("我在调用它");
+        /*mIView.showLoadingView();
         Check c = Check.getCheck(crs,completion);
         c.getCompletion().setState(TaskCompletion.NORMAL);
         mIModle.commit(c,new IDailyModel.CommitListener() {
@@ -49,7 +50,7 @@ public class IDailyPresenterImpl extends IDailyPresenter{
                 mIView.showCommitResult(info);
                 mIView.hideLoadingView();
             }
-        });
+        });*/
 
     }
 
