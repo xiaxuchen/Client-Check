@@ -61,6 +61,8 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         //requestWindowFeature必须在setContentView之前调用
         baseInit();
         setContentView(getContentViewId());
+        if(getIntent()!=null)
+            handleIntent(getIntent());
         afterSetContent();
         initData();
         initView();

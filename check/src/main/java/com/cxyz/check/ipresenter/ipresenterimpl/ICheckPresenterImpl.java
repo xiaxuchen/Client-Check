@@ -77,12 +77,6 @@ public class ICheckPresenterImpl extends ICheckPresenter {
 
             @Override
             public void onFail(String error) {
-                if(error == null)
-                {
-                    mIView.showNoTask("当前暂无考勤任务");
-                    mIView.hideLoadingView();
-                    return;
-                }
                 //请求失败或数据错误显示失败逻辑
                 mIView.hideLoadingView();
                 mIView.showNoTask(error);
@@ -92,7 +86,6 @@ public class ICheckPresenterImpl extends ICheckPresenter {
 
     private int[] getIndex()
     {
-        LogUtil.e("怎么会调用");
         User user = UserManager.getInstance().getUser();
         if(user == null)
             return null;

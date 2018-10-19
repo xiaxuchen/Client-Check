@@ -8,6 +8,7 @@ import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.JsonUtil;
+import com.cxyz.commons.utils.LogUtil;
 
 import java.io.IOException;
 
@@ -58,6 +59,7 @@ public class CommonJsonCallback implements Callback {
      */
     private void handlerResponse(String result)
     {
+        LogUtil.e(result);
         if(TextUtils.isEmpty(result))
         {
             listener.onFailure(null);

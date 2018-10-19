@@ -64,6 +64,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         tv_title.setTitle("日常考勤");
     }
 
+
     @Override
     public void initData() {
         crs = new HashMap<>();
@@ -202,6 +203,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     public void showCommitResult(String info) {
         ToastUtil.showShort(info);
+        finish();
     }
 
     /**

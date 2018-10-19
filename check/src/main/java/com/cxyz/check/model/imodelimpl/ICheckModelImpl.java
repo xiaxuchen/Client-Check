@@ -41,7 +41,7 @@ public class ICheckModelImpl implements ICheckModel {
                         else if(error instanceof OKHttpException)
                             listener.onFail(((OKHttpException) error).getMessage());
                         else
-                            listener.onFail("发生未知错误");
+                            listener.onFail("当前暂无考勤任务");
                     }
                 }
             });
