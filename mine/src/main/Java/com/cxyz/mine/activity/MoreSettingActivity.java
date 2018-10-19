@@ -56,7 +56,7 @@ public class MoreSettingActivity extends BaseActivity {
         tv_moresetting_exitlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),check.class);
+                Intent intent=new Intent(getApplicationContext(),CheckHomepageActivity.class);
                 startActivity(intent);
 
             }
