@@ -9,29 +9,35 @@ import java.util.Arrays;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
- * 考勤任务基本信息
  */
 
-public class TaskInfo {
-    private String _id;//考勤任务编号
-	private String _name;//考勤任务名称
-    private User sponser = new User();//考勤任务发起人
-    private User checker = new User();//考勤任务考勤人
-    private DateTime start;//考勤开始时间
-    private DateTime len;//考勤时限
-    private Date end;//最后一次的考勤日期(预留)
-    private ClassRoom classRoom = new ClassRoom();//考勤所在地
-    private Integer type;//考勤任务类型，临时任务或者课程
-    private Grade grade = new Grade();//考勤班级
+public class TaskInfo{
+    private String _id;//任务完成情况id
+	private String _name;//任务名称
+    private User sponser = new User();//发起人
+    private User checker = new User();//考勤人
+    private DateTime start;//开始时间
+    private DateTime end;//结束时间
+    private ClassRoom classRoom = new ClassRoom();//教室
+    private Integer type;//考勤类型
+    private Grade grade = new Grade();//班级
+	private TaskCompletion completion;//完成情况
+	public TaskCompletion getCompletion() {
+		return completion;
+	}
+
+	public void setCompletion(TaskCompletion completion) {
+		this.completion = completion;
+	}
     /*
      * 所有的考勤日期
      */
     private Date[] dates;
-    public Date getEnd() {
+    public DateTime getEnd() {
 		return end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(DateTime end) {
 		this.end = end;
 	}
 
@@ -107,19 +113,12 @@ public class TaskInfo {
 		this.start = start;
 	}
 
-	public DateTime getLen() {
-		return len;
-	}
-
-	public void setLen(DateTime len) {
-		this.len = len;
-	}
 
 	@Override
 	public String toString() {
 		return "TaskInfo [_id=" + _id + ", _name=" + _name + ", sponser="
 				+ sponser + ", checker=" + checker + ", start=" + start
-				+ ", len=" + len + ", end=" + end + ", classRoom=" + classRoom
+				+ ",  end=" + end + ", classRoom=" + classRoom
 				+ ", type=" + type + ", grade=" + grade + ", dates="
 				+ Arrays.toString(dates) + "]";
 	}

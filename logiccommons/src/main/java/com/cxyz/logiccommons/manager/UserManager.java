@@ -12,8 +12,8 @@ public class UserManager {
         return u;
     }
 
-    public void setUser(User u) {
-        this.u = u;
+    public void setUser(User user) {
+        this.u = user;
     }
 
     private User u;

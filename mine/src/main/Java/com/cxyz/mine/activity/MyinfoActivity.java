@@ -7,8 +7,6 @@ import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.logiccommons.domain.College;
 import com.cxyz.logiccommons.domain.Grade;
-import com.cxyz.logiccommons.domain.Student;
-import com.cxyz.logiccommons.domain.Teacher;
 import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.mine.IPresenter.presenter.IMyinfoPresenter;
@@ -54,18 +52,14 @@ public class MyinfoActivity extends BaseActivity <IMyinfoPresenter>implements IM
         User u = UserManager.getInstance().getUser();
         tv_myinfo_username.setText(u.get_name());
         tv_myinfo_usersex.setText(u.getSex());
+        tv_myinfo_usercollege.setText(u.getCollege()==null?u.getCollege_name():u.getCollege().get_name());
+        tv_myinfo_usercode.setText("萍乡学院");
         tv_myinfo_usertel.setText(u.getTel()==null?"":u.getTel());
         if(u.getType() == User.STUDNET)
         {
-            Student stu = (Student)u;
-            tv_myinfo_usercollege.setText(stu.getCollege_name()==null?"暂无":stu.getCollege_name());
-            tv_myinfo_userclass.setText(stu.getGrade().get_name());
-        }else
-        {
-            Teacher tea = (Teacher)u;
-            tv_myinfo_usercollege.setText(tea.getCollege().get_name());
+            tv_myinfo_usercollege.setText(u.getCollege_name()==null?"暂无":u.getCollege_name());
+            tv_myinfo_userclass.setText(u.getGrade().get_name());
         }
-        tv_myinfo_usercode.setText("萍乡学院(暂时填充)");
 
     }
 

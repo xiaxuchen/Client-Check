@@ -3,9 +3,12 @@ package com.cxyz.mine.activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.widget.TitleView;
+import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.mine.R;
 
 /**
@@ -56,9 +59,10 @@ public class MoreSettingActivity extends BaseActivity {
         tv_moresetting_exitlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),CheckHomepageActivity.class);
-                startActivity(intent);
-
+                //跳转到考勤界面
+                ARouter.getInstance().build("/main/LoginActivity").navigation();
+                UserManager.getInstance().setUser(null);
+                finish();
             }
         });
         tv_moresetting_title.setOnClickListener(new TitleView.OnClickListener() {

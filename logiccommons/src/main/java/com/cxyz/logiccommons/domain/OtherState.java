@@ -1,12 +1,11 @@
 package com.cxyz.logiccommons.domain;
 
-
 /**
  * 特殊情况信息
  * Created by 夏旭晨 on 2018/9/23.
  */
 
-public class OtherState {
+public class OtherState{
 	/**
 	 * 对特殊情况的描述
 	 */

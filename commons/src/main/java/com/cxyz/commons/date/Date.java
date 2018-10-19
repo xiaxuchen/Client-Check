@@ -1,5 +1,7 @@
 package com.cxyz.commons.date;
 
+import java.util.Calendar;
+
 public class Date {
 	
 	private String year = "0000";
@@ -79,6 +81,15 @@ public class Date {
 		return this.setYear(String.valueOf(year));
 	}
 
+	/**
+	 * 获取日期字符串
+	 * @return
+	 */
+	public String getDate()
+	{
+		return getYear()+":"+getMonth()+":"+getDay();
+	}
+
 
 	public String getMonth() {
 		return month;
@@ -139,4 +150,26 @@ public class Date {
 		return year+":"+month+":"+day;
 	}
 
+	/**
+	 * 转化为sql的date
+	 * @return
+	 */
+	public java.sql.Date toSDate()
+	{
+		return new java.sql.Date(this.toUDate().getTime());
+	}
+
+	/**
+	 * 转化为util的date
+	 * @return
+	 */
+	public java.util.Date toUDate()
+	{
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear();
+		calendar.set(Integer.parseInt(this.getYear()),Integer.parseInt(
+				this.getMonth())-1,Integer.parseInt(this.getDay()));
+		java.util.Date date= new java.util.Date(calendar.getTimeInMillis());
+		return date;
+	}
 }

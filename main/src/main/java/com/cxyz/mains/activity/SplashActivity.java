@@ -54,7 +54,7 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     protected void afterInit() {
         super.afterInit();
         start_time = System.currentTimeMillis();
-        iPresenter.Update();
+        //iPresenter.Update();
         iPresenter.autoLogin();
     }
 

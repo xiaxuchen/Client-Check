@@ -3,53 +3,20 @@
     android:orientation="vertical"
     android:background="#ffffff"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_kebiao"
-        android:layout_width="match_parent"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_height="114dp"
-        android:layout_gravity="bottom"
-        android:clipChildren="false"
-      >
-
-    </android.support.v4.view.ViewPager>
-    <GridView
-        android:id="@+id/tools_grid"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:columnWidth="80dp"
-        android:stretchMode="spacingWidthUniform"
-        android:numColumns="4">
-
-    </GridView>
-    <LinearLayout
-        android:id="@+id/MyTable"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="9dp"
-        android:orientation="vertical"
-        >
-    </LinearLayout>
+    android:layout_height="match_parent"
+    >
     <TextView
-        android:id="@+id/station"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="我是fragment"/>
+    <Button
+        android:id="@+id/btn_Go"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
-        android:paddingRight="20dp"
-        android:text="考勤情况>"/>
-    <Button
-        android:id="@+id/btn_allege"
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="68dp"
-        android:background="#DC143C"
-        android:text="申诉"
-        android:textColor="#F8F8FF"
-        />
+        android:text="dja;sd;gka;hdhasdh;sdhfasdhhsad"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

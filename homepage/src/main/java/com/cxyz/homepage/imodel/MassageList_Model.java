@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface MassageList_Model extends IBaseModel{
-    public void getMassageInfo(String id,String url,final getMassageInfoListener listener);
+    public void getMassageInfo(String id, String url, final getMassageInfoListener listener);
     public interface getMassageInfoListener{
         public void getInfoSuccess(List<RecordDetail> info);
         public void getInfFail(Object error);
