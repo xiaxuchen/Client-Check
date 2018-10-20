@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.acitivity.MessageActivity;
 import com.cxyz.homepage.ipresenter.IHomePresenter;
 import com.cxyz.homepage.ipresenter.impl.IHomePresenterImpl;
 import com.cxyz.homepage.iview.IHomeView;
@@ -94,6 +95,12 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
             @Override
             public void onClick(View view) {
                 iPresenter.checkTask();
+            }
+        });
+        ll_month_lessons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getHoldingActivity().startActivity(MessageActivity.class);
             }
         });
     }
