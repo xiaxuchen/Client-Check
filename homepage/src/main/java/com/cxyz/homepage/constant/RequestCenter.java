@@ -19,7 +19,7 @@ import java.util.Map;
 public class RequestCenter {
 
     /**
-     * 通过用户id和所查记录类型查找违规记录
+     * 通过用户id和所查记录类型查找违规记录(考勤情况)
      * @param id 用户id
      * @param type 记录类型
      * @param listener 回调
@@ -32,7 +32,7 @@ public class RequestCenter {
         map.put("type",type+"");
         ToastUtil.showShort(map.toString());
         RequestParams params = new RequestParams(map);
-       try {
+        try {
             CommonOkHttpClient.post(NetWorkHomeUrl.RDS_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
@@ -41,7 +41,7 @@ public class RequestCenter {
     }
 
     /**
-     * 通过班级id和日期获取当天所有的考勤任务（可以理解为课程信息）
+     * 通过班级id和日期获取当天所有的考勤任务（课程信息）
      * @param id 班级id
      * @param date 日期
      * @param listener 服务器响应后的回调

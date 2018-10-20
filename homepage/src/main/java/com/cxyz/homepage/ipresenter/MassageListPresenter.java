@@ -9,5 +9,5 @@ import com.cxyz.homepage.iview.MassageListView;
  */
 
 public abstract class MassageListPresenter extends IBasePresenter<MassageListModel,MassageListView>{
-    public abstract void getMassageData(String User_id,String time);
+    public abstract void getMassageData(String User_id,Integer time);
 }

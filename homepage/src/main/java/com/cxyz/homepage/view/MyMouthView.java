@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.TypedValue;
 
+import com.cxyz.commons.utils.ColorsUtil;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.MonthView;
 
@@ -53,7 +54,7 @@ public class MyMouthView extends MonthView {
     @Override
     protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
         mSelectedPaint.setStyle(Paint.Style.FILL);
-        mSelectedPaint.setColor(0x80cfcfcf);//0x80cfcfcf
+        mSelectedPaint.setColor(ColorsUtil.BLUE_LIGHT);//0x80cfcfcf
         canvas.drawCircle(x+mItemWidth/2,y+mItemHeight/2,dipToPx(getContext(),23),mSelectedPaint);
        // canvas.drawRect(x + mPadding, y + mPadding, x + mItemWidth - mPadding, y + mItemHeight - mPadding, mSelectedPaint);
         return true;

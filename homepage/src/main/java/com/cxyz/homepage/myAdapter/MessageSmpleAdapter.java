@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.cxyz.commons.Adapter.AdapterBase;
 import com.cxyz.commons.Adapter.ViewHolder;
+import com.cxyz.commons.utils.ColorsUtil;
+import com.cxyz.homepage.R;
+import com.cxyz.logiccommons.domain.CheckRecord;
 import com.cxyz.logiccommons.domain.RecordDetail;
 
 import java.util.List;
@@ -37,35 +40,35 @@ public class MessageSmpleAdapter extends AdapterBase{
      */
     @Override
     public void convertView(ViewHolder holder, Object item) {
-        //载入数据
-//        int posit = holder.getPosition(); //获取item的位置
-//        String result;//获取考勤结果的文字内容
-//        switch (stu_massage.get(posit).getResult()){
-//            case CheckRecord.ABSENTEEISM:result="缺勤";break;// 缺勤
-//            case CheckRecord.VACATE:result="请假";break;// 请假
-//            case CheckRecord.LATE:result="迟到";break;// 迟到
-//            case CheckRecord.EARLYLEAVE:result="早退";break;// 早退
-//            default:result = "异常";break;
-//        }
-//
-//
-//        ////载入考勤情况的数据
-//        holder.setText(R.id.item_tv_clazzname,stu_massage.get(posit).get_name());
-//        holder.setText(R.id.item_tv_checkperson,stu_massage.get(posit).getChecker().get_name());
-//        holder.setText(R.id.item_tv_checktime,stu_massage.get(posit).getCheckTime().toString());
-//        holder.setText(R.id.item_tv_status,result);
-//        if (result.equals(status[0])){
-//            backC = ColorsUtil.BLUE;
-//        }else if(result.equals(status[1])){
-//            backC = ColorsUtil.RED;
-//        }else if(result.equals(status[2])){
-//            backC = ColorsUtil.YELLOW;
-//        }else if(result.equals(status[3])){
-//            backC = ColorsUtil.BLACK;
-//        }else{
-//            backC = ColorsUtil.LOWLIGHT;
-//        }
-//        holder.setBackgroundColor(R.id.item_tv_status,backC);
+       // 载入数据
+        int posit = holder.getPosition(); //获取item的位置
+        String result;//获取考勤结果的文字内容
+        switch (stu_massage.get(posit).getResult()){
+            case CheckRecord.ABSENTEEISM:result="缺勤";break;// 缺勤
+            case CheckRecord.VACATE:result="请假";break;// 请假
+            case CheckRecord.LATE:result="迟到";break;// 迟到
+            case CheckRecord.EARLYLEAVE:result="早退";break;// 早退
+            default:result = "异常";break;
+        }
+
+
+        ////载入考勤情况的数据
+        holder.setText(R.id.item_tv_clazzname,stu_massage.get(posit).get_name());
+        holder.setText(R.id.item_tv_checkperson,stu_massage.get(posit).getChecker().get_name());
+        holder.setText(R.id.item_tv_checktime,stu_massage.get(posit).getCheckTime().toString());
+        holder.setText(R.id.item_tv_status,result);
+        if (result.equals(status[0])){
+            backC = ColorsUtil.BLUE;
+        }else if(result.equals(status[1])){
+            backC = ColorsUtil.RED;
+        }else if(result.equals(status[2])){
+            backC = ColorsUtil.YELLOW;
+        }else if(result.equals(status[3])){
+            backC = ColorsUtil.BLACK;
+        }else{
+            backC = ColorsUtil.LOWLIGHT;
+        }
+        holder.setBackgroundColor(R.id.item_tv_status,backC);
 
 
     }

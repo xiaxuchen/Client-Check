@@ -22,6 +22,7 @@
         android:layout_margin="5dp"
         android:gravity="center">
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/btn_clazz"
             android:layout_marginRight="1dp"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
@@ -30,6 +31,7 @@
             android:text="  课程 "
             android:textColor="#6495ed"/>
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/btn_check"
             android:layout_marginLeft="1dp"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
@@ -53,10 +55,10 @@
             android:layout_height="wrap_content"
             android:background="#fff"
             app:calendar_height="50dp"
-
             app:current_month_lunar_text_color="#CFCFCF"
             app:current_month_text_color="#333333"
             app:min_year="2004"
+            app:max_year="2020"
             app:month_view="com.cxyz.homepage.view.MyMouthView"
             app:month_view_show_mode="mode_fix"
             app:other_month_text_color="#e1e1e1"
