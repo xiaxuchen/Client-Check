@@ -36,8 +36,8 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     private BaseFragment mineFragment = (BaseFragment) ARouter.getInstance().
             build("/mine/MineFragment").navigation();
 
-    private BaseFragment checkFragment = (BaseFragment) ARouter.getInstance().
-            build("/check/CheckFragment").navigation();
+    private BaseFragment myCheckFragment = (BaseFragment) ARouter.getInstance().
+            build("/check/MyCheckFragment").navigation();
 
     private BaseFragment homeFragment = (BaseFragment) ARouter.getInstance().
             build("/homepage/HomeFragment").navigation();
@@ -137,7 +137,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
             tv_mine.setTextColor(getResources().getColor(R.color.app_off));
             tv_home.setTextColor(getResources().getColor(R.color.app_off));
             tv_title.setTitle("统计");
-            switchFragment(checkFragment);
+            switchFragment(myCheckFragment);
         }
         else if(id == R.id.ll_mine)
         {

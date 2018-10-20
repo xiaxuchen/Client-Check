@@ -62,6 +62,7 @@ public class MoreSettingActivity extends BaseActivity {
                 //跳转到考勤界面
                 ARouter.getInstance().build("/main/LoginActivity").navigation();
                 UserManager.getInstance().setUser(null);
+                getSpUtil().remove("pwd");
                 finish();
             }
         });

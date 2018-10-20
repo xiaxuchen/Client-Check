@@ -24,13 +24,11 @@ import org.json.JSONObject;
 public class ISplashPresenterImpl extends ISplashPresenter {
     @Override
     public void Update() {
-        mIView.showLoadingView();
         mIModle.confirmUpdate(new ISplashModel.ConfirmListener() {
             @Override
             public void onUpdate(JSONObject info) {
                 if(info == null)
                 {
-                    mIView.hideLoadingView();
                     return;
                 }
                 try {
@@ -38,7 +36,6 @@ public class ISplashPresenterImpl extends ISplashPresenter {
                     String version = info.getString("version");
                     if(AppUtil.getVersionName(MyApp.getApplication()).equals(version))
                     {
-                        mIView.hideLoadingView();
                         return;
                     }
                     //版本号不一致则获取app的url和最新版本的描述信息
@@ -49,11 +46,9 @@ public class ISplashPresenterImpl extends ISplashPresenter {
                     {
                         des+=jsonArray.getString(i)+"\n";
                     }
-                    mIView.hideLoadingView();
                     mIView.showUpdateView(version,des,url);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    mIView.hideLoadingView();
                 }
             }
         });
@@ -73,11 +68,9 @@ public class ISplashPresenterImpl extends ISplashPresenter {
         LogUtil.e(username);
         LogUtil.e(pwd);
         LogUtil.e(type+"");
-        mIView.showLoadingView();
         //判断是否在sp中保存完整
         if(username!=""&&pwd!=""&&type!=-2)
         {
-            mIView.showLoadingView();
             //如果完整则登录
             new ILoginModelImpl().getLoginInfo(username, pwd, type, new ILoginModel.getLoginInfoListener() {
                 @Override

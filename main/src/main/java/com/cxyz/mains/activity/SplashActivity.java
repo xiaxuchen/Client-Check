@@ -37,7 +37,6 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
 
     @Override
     public void initView() {
-        pb_pro = (ProgressBar) findViewById(R.id.pb_pro);
     }
 
     @Override
@@ -61,18 +60,6 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     @Override
     protected ISplashPresenter createIPresenter() {
         return new ISplashPresenterImpl();
-    }
-
-    @Override
-    public void showLoadingView() {
-        if(pb_pro != null)
-            pb_pro.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideLoadingView() {
-        if(pb_pro != null)
-            pb_pro.setVisibility(View.GONE);
     }
 
     @Override
@@ -164,12 +151,7 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
                         @Override
                         public void run() {
                             SystemClock.sleep(TARGETTIME-len);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    runnable.run();
-                                }
-                            });
+                            runOnUiThread(runnable);
                         }
                     }
             ).start();
