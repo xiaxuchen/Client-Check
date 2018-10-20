@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import com.cxyz.commons.utils.ColorsUtil;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.WeekView;
 
@@ -53,7 +54,7 @@ public class MyWeekView extends WeekView {
         mSelectedPaint.setStyle(Paint.Style.FILL);
 //        mSelectedPaint.setColor(0x80cfcfcf);
 //        canvas.drawRect(x + mPadding, mPadding, x + mItemWidth - mPadding, mItemHeight - mPadding, mSelectedPaint);
-        mSelectedPaint.setColor(0x80cfcfcf);//0x80cfcfcf
+        mSelectedPaint.setColor(ColorsUtil.BLUE_LIGHT);//0x80cfcfcf
         canvas.drawCircle(x+mItemWidth/2,mItemHeight/2,dipToPx(getContext(),23),mSelectedPaint);
         return true;
     }
