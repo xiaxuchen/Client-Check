@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="2dp">
+    android:layout_weight="1"
+    android:layout_margin="10dp">
     <android.support.v7.widget.CardView
         android:id="@+id/cv_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:clickable="true"
-        cardCornerRadius="48dp"
-        cardElevation="20sp">
+        app:cardElevation="5sp"
+        app:cardCornerRadius="10dp">
         <LinearLayout
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="#E6E6FA">
@@ -34,8 +37,9 @@
 
                 <TextView
                     android:id="@+id/tv_taskinfo_clazzname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginLeft="40dp"
                     android:text="程序设计基础"
                     android:textStyle="bold"
@@ -43,8 +47,9 @@
                     android:textColor="#DC143C"/>
                 <TextView
                     android:id="@+id/tv_taskinfo_clazzteacher"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_marginLeft="80dp"
                     android:textSize="18dp"

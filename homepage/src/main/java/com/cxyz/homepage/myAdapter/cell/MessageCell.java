@@ -27,7 +27,7 @@ public class MessageCell extends CardBaseCell<RecordDetail>{
 
     @Override
     public CardBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CardBaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recylerview_item,null));
+        return new CardBaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recylerview_item,parent,false));
     }
 
     @Override
