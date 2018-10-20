@@ -24,4 +24,5 @@ dependencies {
     compile 'com.hynnet:jxl:2.6.12.1'//exel开源库
     compile "com.alibaba:arouter-api:$rootProject.ext.routerVersion"//router
     testCompile 'junit:junit:4.12'
+    compile 'com.qmuiteam:qmui:1.1.3'
 }

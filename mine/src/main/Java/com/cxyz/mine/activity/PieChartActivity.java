@@ -35,8 +35,6 @@ public class PieChartActivity extends BaseActivity {
             Color.parseColor("#2bc208"),};
     private String[] stateChar = {"缺勤", "请假", "迟到", "正常"};
 
-
-
     @Override
     public int getContentViewId() {
         return R.layout.piechart_layout;

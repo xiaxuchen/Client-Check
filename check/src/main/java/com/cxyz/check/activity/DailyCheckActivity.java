@@ -2,6 +2,7 @@ package com.cxyz.check.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,11 +16,13 @@ import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.ipresenter.ipresenterimpl.IDailyPresenterImpl;
 import com.cxyz.check.view.IDailyView;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.logiccommons.domain.CheckRecord;
 import com.cxyz.logiccommons.domain.Student;
 import com.cxyz.logiccommons.domain.TaskCompletion;
+import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
 
 import java.util.HashMap;
@@ -61,11 +64,10 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         tv_title.setTitle("日常考勤");
     }
 
+
     @Override
     public void initData() {
         crs = new HashMap<>();
-        c = new TaskCompletion(1);
-        c.setState(TaskCompletion.NORMAL);
     }
 
     @Override
@@ -102,6 +104,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     private void showStateDialog(final int position,final View view)
     {
         final String[] items = new String[]{"迟到","请假","已到达","缺勤","早退"};
+        final int [] values = new int[]{CheckRecord.LATE,CheckRecord.VACATE,CheckRecord.CANCLE,CheckRecord.ABSENTEEISM,CheckRecord.EARLYLEAVE};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.mipmap.common_logo);
         builder.setTitle("选择考勤状态:");
@@ -110,7 +113,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         final Student stu = adapter.getItem(position);
         final CheckRecord r = crs.get(stu.get_id());
         if(r!=null)
-            result = r.getResult();
+            result = this.getIndex(values,r.getResult());
         builder.setSingleChoiceItems(items,result, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -120,16 +123,12 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                     {
                         CheckRecord cr = new CheckRecord();
                         cr.setStudent(stu);
-                        cr.setTaskCompletion(c);
-                        cr.setResult(which);
+                        cr.setResult(values[which]);
                         crs.put(stu.get_id(),cr);
-                    }else if(r.getResult() != which)
+                    }else if(r.getResult() != values[which])
                     {
-                        CheckRecord cr = new CheckRecord();
-                        cr.setStudent(stu);
-                        cr.setResult(which);
-                        cr.setTaskCompletion(c);
-                        crs.put(stu.get_id(),cr);
+                        r.setResult(values[which]);
+                        crs.put(stu.get_id(),r);
                     }
 
                 }else
@@ -157,10 +156,22 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         alertDialog.show();
     }
 
+    private int getIndex(int array[],int value)
+    {
+        int i = 0;
+        for(int v:array)
+        {
+            if(v==value)
+                return i;
+            i++;
+        }
+        return 2;
+    }
+
     @Override
     protected void afterInit() {
         super.afterInit();
-        iPresenter.getStusToShow(((Student) UserManager.getInstance().getUser()).getGrade().get_id());
+        iPresenter.getStusToShow(((User) UserManager.getInstance().getUser()).getGrade().get_id());
     }
 
     @Override
@@ -192,5 +203,18 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     public void showCommitResult(String info) {
         ToastUtil.showShort(info);
+        finish();
+    }
+
+    /**
+     * TODO 可能会出现异常情况，后期需要调整
+     * @param intent 跳转时所用的
+     */
+    @Override
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+        LogUtil.e("我正在初始comp");
+        int compId = intent.getIntExtra("compId", -1);
+        c = new TaskCompletion(compId);
     }
 }

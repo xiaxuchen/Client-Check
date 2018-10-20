@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="197dp"
+        android:background="#0ca2ff"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_week"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:text="星期三"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="2018年10月18号"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="21dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/location" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="15dp"
+            android:text="江西省萍乡市萍乡学院鼎新楼四楼" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:background="@color/material_grey_300"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="常用功能"
+            android:textSize="18sp"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/material_grey_300"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_signin"
+                android:layout_width="95dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/circleborder"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/checkin" />
+                </LinearLayout>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:gravity="center"
+                    android:text="签到" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_checkpic"
+                android:layout_width="83dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/circlebordertwo"
+                    android:orientation="horizontal">
+
+                    <ImageView
+
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/checkcharts" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="6dp"
+                    android:text="考勤图表" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_lesson"
+                android:layout_width="82dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/circleborderthree"
+                    android:orientation="horizontal">
+
+                    <ImageView
+
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/monthclass" />
+                </LinearLayout>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="6dp"
+                    android:text="月历课次" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_vacation"
+                android:layout_width="96dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/circleborderfour"
+                    android:orientation="horizontal">
+
+                    <ImageView
+
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/appointapply" />
+                </LinearLayout>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:paddingTop="6dp"
+                    android:paddingLeft="3dp"
+                    android:text="请假申请" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="116dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_lessons"
+                    android:layout_width="95dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/circleborderfive"
+                        android:orientation="horizontal">
+
+                        <ImageView
+
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/classlist" />
+                    </LinearLayout>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="31dp"
+                        android:gravity="center"
+                        android:text="班级课表" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_score"
+                    android:layout_width="83dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="0dp"
+                        android:background="@drawable/circlebordersix"
+                        android:orientation="horizontal">
+
+                        <ImageView
+
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/gradescase" />
+                    </LinearLayout>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="31dp"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="6dp"
+                        android:text="成绩情况" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_statistic"
+                    android:layout_width="82dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="0dp"
+                        android:background="@drawable/circleborderseven"
+                        android:orientation="horizontal">
+
+                        <ImageView
+
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/statistics" />
+                    </LinearLayout>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="31dp"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="6dp"
+                        android:text="统计报告" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_otherinfo"
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="0dp"
+                        android:background="@drawable/circlebordereight"
+                        android:orientation="horizontal">
+
+                        <ImageView
+
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/othercondition" />
+                    </LinearLayout>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="31dp"
+                        android:paddingTop="6dp"
+                        android:paddingLeft="3dp"
+                        android:text="其他信息" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

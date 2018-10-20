@@ -1,6 +1,7 @@
 package com.cxyz.commons.date;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 public class DateTime extends Date{
 	private String hour = "00";
@@ -147,6 +148,35 @@ public class DateTime extends Date{
 	@Override
 	public String toString() {
 		return getYear()+":"+getMonth()+":"+getDay()+":"+hour+":"+minute+":"+second;
+	}
+
+	/**
+	 * 获取timeStamp
+	 * @return
+	 */
+	public Timestamp toTimeStamp()
+	{
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear();
+		calendar.set(toInt(getYear()),toInt(getMonth())-1,
+				toInt(getDay()),toInt(getHour()),toInt(getMinute()),
+				toInt(getSecond()));
+		return new Timestamp(calendar.getTimeInMillis());
+	}
+
+	/**
+	 * 获取时间的字符串
+	 * @return
+	 */
+	public String getTime()
+	{
+		return hour+":"+minute+":"+second;
+	}
+
+
+	private int toInt(String s)
+	{
+		return Integer.parseInt(s);
 	}
 	
 }

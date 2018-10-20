@@ -5,22 +5,31 @@ import com.cxyz.commons.date.DateTime;
 
 /**
  * Created by 夏旭晨 on 2018/9/23.
- * 一个考勤完成情况就是一次考勤
  */
 public class TaskCompletion{
+	
+	/**
+	 * 待考勤
+	 */
+	public static final int WAIT_CHECK = 0;
+	
+	/**
+	 * 未考勤
+	 */
+	public static final int NOT_CHECKED = -2;
 	/**
 	 * 正常考勤
 	 */
-	public static final int NORMAL = 0;
+	public static final int NORMAL = 1;
 	/**
 	 * 特殊情况
 	 */
 	public static final int OTHER = -1;
-    private Integer _id;//考勤完成情况id
-    private TaskInfo taskInfo;//所属任务id
+    private Integer _id;//考勤完成情况id（一次考勤）
+    private TaskInfo taskInfo;//关联的基本信息
     private Date date;//考勤日期
-    private Integer state;//完成情况
-    private DateTime updatetime;//更新时间
+    private Integer state;//考勤完成情况
+    private DateTime updatetime;//上次更新时间
     
     public TaskCompletion(){}
     

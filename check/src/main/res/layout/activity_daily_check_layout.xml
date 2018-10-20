@@ -33,12 +33,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+
         <Button
-            android:layout_alignParentRight="true"
             android:id="@+id/btn_commit"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="提交"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape"
+            android:text="提交"
+            android:textColor="@color/common_white" />
     </RelativeLayout>
 
 </LinearLayout>

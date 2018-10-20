@@ -1,20 +1,30 @@
 package com.cxyz.logiccommons.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by 夏旭晨 on 2018/9/23.
  */
 
-public class User {
+public class User  implements Serializable{
 	public static final int STUDNET = 0;
 	public static final int TEACHER = 1;
+	/**
+	 * 从服务器验证账号错误时返回
+	 */
 	public static final int ERROR = 3;
 	
-	private String _id;//编号
-    private String _name;//姓名
-    private String sex;//性别
-    private String pwd;//密码
-    private String tel;//电话号码
-    private String photo;//照片的url
+
+	private Grade grade;
+	private String college_name;
+	private College college;
+	private String _id;
+	//当登陆错误时作错误信息
+    private String _name;
+    private String sex;
+    private String pwd;
+    private String tel;
+    private String photo;
     
     /**
      * power属性用来区分权限
@@ -35,6 +45,19 @@ public class User {
      * 默认是学生
      */
     private Integer type = 0;
+    
+    public User(){}
+    
+    public User(String id)
+    {
+    	set_id(id);
+    }
+    
+    public User(String id,Integer type)
+    {
+    	set_id(id);
+    	setType(type);
+    }
 	public String get_id() {
 		return _id;
 	}
@@ -83,6 +106,31 @@ public class User {
 	public void setType(Integer type) {
 		this.type = type;
 	}
+	
+	public Grade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Grade grade) {
+		this.grade = grade;
+	}
+
+	public String getCollege_name() {
+		return college_name;
+	}
+
+	public void setCollege_name(String college_name) {
+		this.college_name = college_name;
+	}
+
+	public College getCollege() {
+		return college;
+	}
+
+	public void setCollege(College college) {
+		this.college = college;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + _id + ", _name=" + _name + ", sex=" + sex

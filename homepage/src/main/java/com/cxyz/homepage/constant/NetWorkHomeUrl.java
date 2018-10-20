@@ -5,13 +5,13 @@ package com.cxyz.homepage.constant;
  */
 
 public class NetWorkHomeUrl {
-    public final static String ROOT_URL = "http://qnvkxs.natappfree.cc/Service_Check";
+    public final static String ROOT_URL = "http://192.168.43.73:8080/Service_Check";
 
     public static final String RDS_URL = ROOT_URL+"/servlet/CheckServlet";
 
     /**
      * 请求获取所有的任务信息
      */
-    public static final String TASK_URL = ROOT_URL+"/servlet/CheckServlet";
+    public static final String TASKINFOS_URL = ROOT_URL+"/servlet/CheckServlet";
 
 }

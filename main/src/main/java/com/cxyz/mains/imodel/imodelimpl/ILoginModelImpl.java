@@ -1,15 +1,12 @@
 package com.cxyz.mains.imodel.imodelimpl;
 
-import android.accounts.NetworkErrorException;
-
+import com.cxyz.commons.utils.GsonUtil;
+import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
-import com.cxyz.commons.utils.LogUtil;
-import com.cxyz.mains.constant.NetWorkConstant;
+import com.cxyz.logiccommons.domain.User;
 import com.cxyz.mains.constant.RequestCenter;
 import com.cxyz.mains.imodel.ILoginModel;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,38 +26,49 @@ public class ILoginModelImpl implements ILoginModel{
      */
     public void getLoginInfo(String id, String pwd, int type, final getLoginInfoListener listener)
     {
+        /**
+         * 装填参数
+         */
         Map<String,String> map = new HashMap<>();
         map.put("method","login");
         map.put("id",id);
         map.put("pwd",pwd);
         map.put("type",String.valueOf(type));
         RequestParams params = new RequestParams(map);
-        LogUtil.e(NetWorkConstant.LOGIN_URL);
-        try {
-            RequestCenter.login(params,new DisposeDataListener() {
+        /**
+         * 发送请求
+         */
+        RequestCenter.login(params,new DisposeDataListener() {
 
-                @Override
-                public void onSuccess(Object responseObj) {
-                    try {
-                        if(listener!=null)
-                            listener.getInfoSuccess(new JSONObject((String)responseObj));
-                    }catch (Exception e){
-                        if(listener!=null)
-                            listener.getInfoFail("JSON转化错误");
+            @Override
+            public void onSuccess(Object responseObj) {
+                //成功则把数据传到逻辑层
+                if(listener!=null)
+                {
+                    User user = GsonUtil.GsonToBean(responseObj.toString(), User.class);
+                    if(user.getType()==User.ERROR)
+                    {
+                        listener.getInfoFail(user.get_name());
+                        return;
                     }
+                    listener.getInfoSuccess(user);
                 }
 
-                @Override
-                public void onFailure(Object error) {
-                    if(listener!=null)
-                        listener.getInfoFail(error);
-                }
-            });
-        } catch (NetworkErrorException e) {
-            e.printStackTrace();
-            if(listener!=null)
-                listener.getInfoFail("网络状态异常");
-        }
+            }
+
+            @Override
+            public void onFailure(Object error) {
+                //失败则将错误信息传到逻辑层
+                if(listener==null)
+                    return;
+                if(error instanceof String)
+                    listener.getInfoFail(error);
+                else if(error instanceof OKHttpException)
+                    listener.getInfoFail(((OKHttpException) error).getMessage());
+                else
+                    listener.getInfoFail("未知错误");
+            }
+        });
     }
 
 }

@@ -2,12 +2,9 @@ package com.cxyz.mains.ipresenter.ipresenterimpl;
 
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
-import com.cxyz.commons.utils.JsonUtil;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.logiccommons.application.MyApp;
-import com.cxyz.logiccommons.domain.Student;
-import com.cxyz.logiccommons.domain.Teacher;
 import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.mains.imodel.ILoginModel;
@@ -76,45 +73,20 @@ public class ISplashPresenterImpl extends ISplashPresenter {
         LogUtil.e(username);
         LogUtil.e(pwd);
         LogUtil.e(type+"");
+        mIView.showLoadingView();
         //判断是否在sp中保存完整
         if(username!=""&&pwd!=""&&type!=-2)
         {
+            mIView.showLoadingView();
             //如果完整则登录
             new ILoginModelImpl().getLoginInfo(username, pwd, type, new ILoginModel.getLoginInfoListener() {
                 @Override
-                public void getInfoSuccess(JSONObject info) {
-                    //获取数据后进行判断
-                    if(info == null)
-                    {
-                        mIView.autoLoginFail("服务器异常");
-                        return;
-                    }
-                    try {
-                        if(info.getInt("type") == User.ERROR)
-                        {
-                            //可能因为改了密码，无法登录，所以移除密码
-                            SpUtil.getInstance().remove("pwd");
-                            mIView.autoLoginFail("自动登录异常:"+info.getString("msg"));
-                            return;
-                        }else
-                        {
-                            User user = null;
-                            if(info.getInt("type") == User.STUDNET)
-                            {
-                                user = JsonUtil.jsonToObject(info.toString(), Student.class);
-                            }else if(info.getInt("type") == User.TEACHER)
-                            {
-                                user = JsonUtil.jsonToObject(info.toString(),Teacher.class);
-                            }
-                            //把用户数据保存到UserManager
-                            UserManager.getInstance().setUser(user);
-                            //显示登录成功
-                            mIView.autoLoginSuccess();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    mIView.hideLoadingView();
+                public void getInfoSuccess(User user) {
+                    LogUtil.e(user.toString());
+                    //把用户数据保存到UserManager
+                    UserManager.getInstance().setUser(user);
+                    //显示登录成功
+                    mIView.autoLoginSuccess();
                 }
 
                 @Override
@@ -131,8 +103,6 @@ public class ISplashPresenterImpl extends ISplashPresenter {
         }else{
             mIView.exitSplash();
         }
-
-
     }
 
     @Override
