@@ -14,4 +14,9 @@ public class NetWorkHomeUrl {
      */
     public static final String TASKINFOS_URL = ROOT_URL+"/servlet/CheckServlet";
 
+    /**
+     * 检查是否有考勤任务
+     */
+    public static final String CHECKCOMP_URL = ROOT_URL+"/servlet/CheckServlet";
+
 }

@@ -13,7 +13,7 @@ import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.feature_z_domain.TestTask;
 import com.cxyz.homepage.ipresenter.MassageListPresenter;
-import com.cxyz.homepage.ipresenter.mpl.MassageListPresenterImpl;
+import com.cxyz.homepage.ipresenter.impl.MassageListPresenterImpl;
 import com.cxyz.homepage.iview.MassageListView;
 import com.cxyz.homepage.myAdapter.MyRecyleViewAdapter;
 import com.cxyz.homepage.myAdapter.cell.UserClazzsCell;

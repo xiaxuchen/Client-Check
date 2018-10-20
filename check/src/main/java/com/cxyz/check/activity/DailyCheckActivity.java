@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.check.R;
 import com.cxyz.check.adapter.StusAdapter;
 import com.cxyz.check.ipresenter.IDailyPresenter;
@@ -29,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Route(path = "/check/DailyCheckActivity")
 public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements IDailyView {
 
     private TitleView tv_title;

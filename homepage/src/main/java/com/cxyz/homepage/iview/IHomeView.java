@@ -1,4 +1,4 @@
-package com.cxyz.check.view;
+package com.cxyz.homepage.iview;
 
 import com.cxyz.commons.IView.IBaseView;
 import com.cxyz.logiccommons.domain.TaskInfo;
@@ -7,7 +7,7 @@ import com.cxyz.logiccommons.domain.TaskInfo;
  * Created by 夏旭晨 on 2018/10/18.
  */
 
-public interface ICheckView extends IBaseView {
+public interface IHomeView extends IBaseView {
 
     /**
      * 检查到当前有任务则弹出对话框确认考勤
