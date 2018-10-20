@@ -164,7 +164,12 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
                         @Override
                         public void run() {
                             SystemClock.sleep(TARGETTIME-len);
-                            runOnUiThread(runnable);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    runnable.run();
+                                }
+                            });
                         }
                     }
             ).start();

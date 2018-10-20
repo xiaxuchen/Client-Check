@@ -73,9 +73,11 @@ public class ISplashPresenterImpl extends ISplashPresenter {
         LogUtil.e(username);
         LogUtil.e(pwd);
         LogUtil.e(type+"");
+        mIView.showLoadingView();
         //判断是否在sp中保存完整
         if(username!=""&&pwd!=""&&type!=-2)
         {
+            mIView.showLoadingView();
             //如果完整则登录
             new ILoginModelImpl().getLoginInfo(username, pwd, type, new ILoginModel.getLoginInfoListener() {
                 @Override
@@ -85,7 +87,6 @@ public class ISplashPresenterImpl extends ISplashPresenter {
                     UserManager.getInstance().setUser(user);
                     //显示登录成功
                     mIView.autoLoginSuccess();
-                    mIView.hideLoadingView();
                 }
 
                 @Override
@@ -102,8 +103,6 @@ public class ISplashPresenterImpl extends ISplashPresenter {
         }else{
             mIView.exitSplash();
         }
-
-
     }
 
     @Override

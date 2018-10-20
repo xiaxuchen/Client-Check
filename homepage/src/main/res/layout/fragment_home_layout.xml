@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/tv_week"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:gravity="center"
@@ -20,7 +20,7 @@
             android:textSize="13sp" />
 
         <TextView
-            android:id="@+id/textView28"
+            android:id="@+id/tv_date"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center"
@@ -35,7 +35,6 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView6"
             android:layout_width="25dp"
             android:layout_height="21dp"
             android:layout_gravity="center"
@@ -43,6 +42,7 @@
             android:src="@drawable/location" />
 
         <TextView
+            android:id="@+id/tv_location"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -60,7 +60,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView29"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -91,6 +90,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/ll_signin"
                 android:layout_width="95dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -121,6 +121,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_checkpic"
                 android:layout_width="83dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -142,7 +143,6 @@
                 </LinearLayout>
 
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
                     android:paddingLeft="3dp"
@@ -151,6 +151,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_lesson"
                 android:layout_width="82dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -181,6 +182,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_vacation"
                 android:layout_width="96dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -223,6 +225,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_lessons"
                     android:layout_width="95dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -253,6 +256,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_score"
                     android:layout_width="83dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -283,6 +287,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_statistic"
                     android:layout_width="82dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -313,6 +318,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_otherinfo"
                     android:layout_width="96dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">

@@ -7,6 +7,7 @@ import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
+import com.cxyz.commons.utils.ToastUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +30,9 @@ public class RequestCenter {
         map.put("method","getRecordDetails");
         map.put("id",id);
         map.put("type",type+"");
+        ToastUtil.showShort(map.toString());
         RequestParams params = new RequestParams(map);
-        try {
+       try {
             CommonOkHttpClient.post(NetWorkHomeUrl.RDS_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
@@ -47,10 +49,10 @@ public class RequestCenter {
     public static void getTaskInfos(int id, Date date,DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
-        map.put("method","getRecordDetails");
-        map.put("id",id+"");
+        map.put("method","getTaskInfos");
+        map.put("grade",id+"");
         map.put("date",date.getDate());
-        RequestParams params = new RequestParams();
+        RequestParams params = new RequestParams(map);
         try {
             CommonOkHttpClient.post(NetWorkHomeUrl.TASKINFOS_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
