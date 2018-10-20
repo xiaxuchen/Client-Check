@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="@color/common_white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_item_check"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="0dp"
+            android:src="@mipmap/que"/>
+        <TextView
+            android:id="@+id/tv_item_checkstation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:text="早退"/>
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.layout.QMUILinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv_checkname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="程序设计基础"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tv_checkreson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:text="学累了,想出去走一走,世界这么大我想去看看dfaswfsadfassdfdfsdagdgdagdsgdsafgsdgasdgsadgasfsf"
+            android:textSize="10dp"/>
+    </com.qmuiteam.qmui.layout.QMUILinearLayout>
+    <TextView
+        android:id="@+id/tv_checktime"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="10/26 21:56"
+        android:textSize="13dp"
+        android:textColor="#bfbfbf">
+    </TextView>
+</LinearLayout>

@@ -6,7 +6,7 @@ package com.cxyz.check.constant;
 
 public class NetWorkConstant {
 
-    public static final String ROOT_URL = "http://qnvkxs.natappfree.cc/Service_Check";
+    public static final String ROOT_URL = "http://192.168.43.73:8080/Service_Check";
 
     //获取班级学生的url
     public static final String GET_STUS = ROOT_URL+"/servlet/UserServlet";

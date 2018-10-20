@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:background="@color/common_primary_color"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="bottom"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -17,7 +18,7 @@
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:drawableLeft="@drawable/common_title_back"
+            android:drawableLeft="@mipmap/common_title_back"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:minWidth="45dp"
@@ -32,9 +33,9 @@
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
             android:gravity="center"
-            android:text="caonima"
+            android:text="点到为止"
             android:textColor="@color/common_white"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/title_right"
@@ -55,20 +56,25 @@
                 android:paddingRight="7dp"
                 android:text="设置"
                 android:textColor="#000000"
-                android:visibility="gone"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/title_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="编辑"
                 android:minWidth="50dp"
+                android:text="编辑"
                 android:textColor="#000000"
-                android:visibility="gone"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
 
 </LinearLayout>

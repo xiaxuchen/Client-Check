@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="app_white">#FFFFFF</color>
-    <color name="app_on">#1AFA29</color>
-    <color name="app_off">#bfbfbf</color>
+    <color name="app_on">#1296db</color>
+    <color name="app_off">#8a8a8a</color>
+    <color name="app_line">#bfbfbf</color>
 </resources>

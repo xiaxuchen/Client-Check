@@ -1,76 +1,55 @@
 package com.cxyz.homepage.fragment;
 
 import android.app.AlertDialog;
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.fragment.BaseFragment;
-import com.cxyz.commons.utils.ColorsUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
-import com.cxyz.homepage.acitivity.Massage_Activity;
-import com.cxyz.homepage.ipresenter.TakInfoPresenterImpl;
-import com.cxyz.homepage.ipresenter.TaskInfoPresenter;
-import com.cxyz.homepage.iview.TaskInfosPagerView;
-import com.cxyz.homepage.myAdapter.Index_PagerAdapter;
-import com.cxyz.homepage.view.myTableTextView;
-import com.cxyz.logiccommons.domain.Student;
+import com.cxyz.homepage.ipresenter.IHomePresenter;
+import com.cxyz.homepage.ipresenter.impl.IHomePresenterImpl;
+import com.cxyz.homepage.iview.IHomeView;
 import com.cxyz.logiccommons.domain.TaskInfo;
-import com.cxyz.logiccommons.domain.Teacher;
-import com.cxyz.logiccommons.domain.User;
-import com.cxyz.logiccommons.manager.UserManager;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /**
  * Created by 鱼塘主 on 2018/9/25.
  */
 @Route(path="/homepage/HomeFragment")
-public class HomeFragment extends BaseFragment<TaskInfoPresenter> implements TaskInfosPagerView{
+public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeView{
 
-    //虚拟(假)信息
-    User user = UserManager.getInstance().getUser();
 
-    //搞课表
-    private ViewPager kebiao;
-   // private TextView time_show_data,time_show_week,clazz_1_name,clazz_1_teacher,clazz_1_room;
-    //private List<TaskInfo> list = new ArrayList<>();
-
-    //搞工具
-    private GridView gv_tool;
-    private int[] function_img_R = new int[]{R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo,R.mipmap.logo};
-    private String [] function={"记事本","记事本","记事本","记事本","记事本","记事本","记事本","记事本"};
-    private List<Map<String,Object>> datalist;
-    private SimpleAdapter adapter;
-
-    //搞个人信息
-    private LinearLayout tableLinerLayout,tLinearLayout;
-    private String[] table_title={"学号","姓名","本学期缺勤情况:","工号","本学期班级缺勤人数"};
-    private String[] table_text={UserManager.getInstance().getUser().get_id(),user.get_name(),"100"};
-
-    //搞考勤情况
-    private TextView kaoqinqingkuang;
-
-    //搞申述按钮
-    private Button btn_allege;
-
+    //用于显示第几周
+    private TextView tv_week;
+    //用于显示日期
+    private TextView tv_date;
+    //用于显示准确位置
+    private TextView tv_location;
+    //签到
+    private LinearLayout ll_check;
+    //考勤图表
+    private LinearLayout ll_checkpic;
+    //月历课次
+    private LinearLayout ll_month_lessons;
+    //请假申请
+    private LinearLayout ll_vacation;
+    //班级课表
+    private LinearLayout ll_grade_lessons;
+    //成绩情况
+    private LinearLayout ll_score;
+    //统计报告
+    private LinearLayout ll_statistic;
+    //其他信息
+    private LinearLayout ll_otherinfo;
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_index;
+        return R.layout.fragment_home_layout;
     }
 
     public static HomeFragment newInstance() {
@@ -80,110 +59,108 @@ public class HomeFragment extends BaseFragment<TaskInfoPresenter> implements Tas
 
     @Override
     protected void initData(Bundle bundle) {
-        User user = UserManager.getInstance().getUser();
-       switch (user.getType()){
-           case User.STUDNET:user = (Student)user;iPresenter.getTaskInfoData(((Student) user).getGrade().get_id()+"");break;
-           case User.TEACHER:user= (Teacher)user;break;
-       }
-        /**
-         * 搞课表viewpager(分班级课表,开始周数,从周一至周五录,例:周一:以节数(共7节课)为基准,课程名(object),代课老师(object),上课教室(int),taskinfo)
-         */
-        kebiao = (ViewPager) findViewById(R.id.vp_kebiao);
-        kebiao.setPageMargin(10);  //设置viewpager页面之间的间隔
-        kebiao.setOffscreenPageLimit(5);//设置viewpager预加载页面数
-        //将数据搞到pageradapter中
 
-
-        /**
-         *搞工具表GridView
-         */
-        gv_tool = (GridView) findViewById(R.id.tools_grid);
-        datalist = new ArrayList<>();
-        for (int i = 0; i <function_img_R.length; i++) {
-            Map<String, Object> map=new HashMap<>();
-            map.put("img", function_img_R[i]);
-            map.put("text",function[i]);
-            datalist.add(map);
-        }
-        String[] from={"img","text"};
-        int[] to={R.id.img_tool_0,R.id.tv_tool_0};
-        adapter=new SimpleAdapter(getActivity(), datalist, R.layout.tool_item_1, from, to);
-
-        gv_tool.setAdapter(adapter);//向gridview中载入数据
-
-        gv_tool.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
-                builder.setTitle("提示").setMessage(datalist.get(arg2).get("text").toString()).create().show();
-            }
-        });
-
-        /**
-         * 搞个人信息表
-         */
-        tableLinerLayout = (LinearLayout) this.findViewById(R.id.MyTable);
-
-        //初始化table
-        for (int i = 0 ; i < table_text.length;i++){
-            tLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_index_table, null);
-            myTableTextView title = (myTableTextView) tLinearLayout.findViewById(R.id.list_1_1);
-            title.setText(table_title[i]);
-            title.setTextColor(Color.BLUE);
-            myTableTextView tableText = (myTableTextView) tLinearLayout.findViewById(R.id.list_1_2);
-            tableText.setText(table_text[i]);
-            if(i==2){
-                tableText.setTextColor(ColorsUtil.RED);
-            }else{
-                tableText.setTextColor(ColorsUtil.BLUE);
-            }
-            tableLinerLayout.addView(tLinearLayout);
-        }
-        /**
-         * 考勤情况入口
-         */
-        kaoqinqingkuang = (TextView) findViewById(R.id.station);
-        kaoqinqingkuang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //带着user对象跳到massage_activiy
-                getHoldingActivity().startActivity(Massage_Activity.class,null);
-            }
-        });
-        /**
-         * 申述按钮
-         */
-        btn_allege = (Button) findViewById(R.id.btn_allege);
-        btn_allege.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtil.init(getActivity());
-                ToastUtil.showShort("..还没得上线(`@`)...");
-            }
-        });
     }
-
+    /**
+     * 初始化view的
+     * @param view mRootView
+     * @param savedInstanceState
+     */
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
+        tv_week = findViewById(R.id.tv_week);
+        tv_date = findViewById(R.id.tv_date);
+        tv_location = findViewById(R.id.tv_location);
+        ll_checkpic = findViewById(R.id.ll_checkpic);
+        ll_grade_lessons = findViewById(R.id.ll_grade_lessons);
+        ll_month_lessons = findViewById(R.id.ll_month_lessons);
+        ll_otherinfo = findViewById(R.id.ll_otherinfo);
+        ll_score = findViewById(R.id.ll_score);
+        ll_check = findViewById(R.id.ll_signin);
+        ll_statistic = findViewById(R.id.ll_statistic);
+        ll_vacation = findViewById(R.id.ll_vacation);
     }
     @Override
-    protected TaskInfoPresenter createIPresenter() {
-        return new TakInfoPresenterImpl();
+    protected IHomePresenter createIPresenter() {
+        return new IHomePresenterImpl();
     }
+
+    /**
+     * 设置监听的
+     */
     @Override
     protected void setListener() {
+        ll_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iPresenter.checkTask();
+            }
+        });
     }
+
+
     @Override
     public void showLoadingView() {
+
     }
+
     @Override
     public void hideLoadingView() {
+
+    }
+
+    /**
+     * TODO 需要显示一个dialog
+     * @param taskInfo
+     */
+    @Override
+    public void showTask(TaskInfo taskInfo) {
+        if(taskInfo != null)
+        {
+            showDialog(taskInfo);
+        }
     }
 
     @Override
-    public void setTaskInfosData(List<TaskInfo> taskInfosData) {
-        kebiao.setAdapter(new Index_PagerAdapter(getHoldingActivity(),taskInfosData));
+    public void showNoTask(String info) {
+        ToastUtil.showShort(info);
     }
 
+    /**
+     * 显示对话框
+     * @param info
+     */
+    private void showDialog(final TaskInfo info)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("检查到考勤任务,是否考勤？");
+        builder.setIcon(R.mipmap.common_logo);
+        View view = View.inflate(getActivity(),R.layout.item_dialog_layout,null);
+        TextView tv_task_name = (TextView) view.findViewById(R.id.tv_task_name);
+        tv_task_name.setText(info.get_name());
+        TextView tv_task_tea = (TextView) view.findViewById(R.id.tv_task_tea);
+        tv_task_tea.setText(info.getSponser().get_name());
+        TextView tv_task_time = (TextView) view.findViewById(R.id.tv_task_time);
+        tv_task_time.setText(info.getStart().getHour()+":"+info.getStart().getMinute()
+                +"-"+info.getEnd().getHour()+":"+info.getEnd().getMinute());
+        TextView tv_task_place = (TextView) view.findViewById(R.id.tv_place);
+        //TODO 这里以后需要改成name
+        tv_task_place.setText(info.getClassRoom()==null?"":info.getClassRoom().get_id()+"");
+        builder.setView(view);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ARouter.getInstance().build("/check/DailyCheckActivity").
+                        withInt("compId",info.getCompletion().get_id());
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
+    }
 }

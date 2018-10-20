@@ -3,7 +3,7 @@
     <application android:allowBackup="true"
         android:theme="@style/AppTheme"
         android:supportsRtl="true">
-        <activity android:name=".acitivity.Massage_Activity" />
+        <activity android:name=".acitivity.MessageActivity" />
     </application>
 
 </manifest>

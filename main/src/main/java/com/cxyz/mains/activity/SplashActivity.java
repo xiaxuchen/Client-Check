@@ -54,7 +54,7 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     protected void afterInit() {
         super.afterInit();
         start_time = System.currentTimeMillis();
-        iPresenter.Update();
+        //iPresenter.Update();
         iPresenter.autoLogin();
     }
 
@@ -164,7 +164,12 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
                         @Override
                         public void run() {
                             SystemClock.sleep(TARGETTIME-len);
-                            runOnUiThread(runnable);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    runnable.run();
+                                }
+                            });
                         }
                     }
             ).start();

@@ -6,13 +6,11 @@ import android.widget.ListView;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.ipresenter.MassageList_Presenter;
-import com.cxyz.homepage.ipresenter.MassageList_PresenterImpl;
 import com.cxyz.homepage.iview.MassageListView;
 import com.cxyz.homepage.myAdapter.Massage_SmpleAdapter;
 import com.cxyz.logiccommons.domain.RecordDetail;
 import com.cxyz.logiccommons.manager.UserManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,12 +41,11 @@ public class Massage_Activity extends BaseActivity<MassageList_Presenter> implem
 
     @Override
     public void setEvent() {
-
     }
 
     @Override
     protected MassageList_Presenter createIPresenter() {
-        return new MassageList_PresenterImpl();
+        return null;
     }
 
     @Override
@@ -77,8 +74,4 @@ public class Massage_Activity extends BaseActivity<MassageList_Presenter> implem
         lv_massage.setAdapter(new Massage_SmpleAdapter(getActivity(),listItem,R.layout.item_massage));
     }
 
-    @Override
-    public void refreshData(ArrayList inListDataBean) {
-
-    }
 }

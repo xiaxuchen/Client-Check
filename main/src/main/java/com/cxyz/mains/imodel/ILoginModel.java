@@ -1,8 +1,7 @@
 package com.cxyz.mains.imodel;
 
 import com.cxyz.commons.IModel.IBaseModel;
-
-import org.json.JSONObject;
+import com.cxyz.logiccommons.domain.User;
 
 /**
  * Created by 夏旭晨 on 2018/9/30.
@@ -23,9 +22,9 @@ public interface ILoginModel extends IBaseModel {
     public interface getLoginInfoListener{
         /**
          * 成功获取服务器信息
-         * @param info 获取到的信息
+         * @param u 用户信息
          */
-        public void getInfoSuccess(JSONObject info);
+        public void getInfoSuccess(User u);
 
         /**
          *  获取服务器信息失败
