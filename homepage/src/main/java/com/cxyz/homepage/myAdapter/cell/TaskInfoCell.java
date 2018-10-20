@@ -30,9 +30,9 @@ public class TaskInfoCell extends CardBaseCell<TaskInfo>{
 
     @Override
     public void onBindViewHolder(CardBaseViewHolder holder, int position) {
-        holder.setText(R.id.tv_taskinfo_time,mData.getDates()+"");
+        holder.setText(R.id.tv_taskinfo_time,mData.getStart().getHour()+":"+mData.getStart().getMinute()+" - "+mData.getEnd().getHour()+":"+mData.getEnd().getMinute());
         holder.setText(R.id.tv_taskinfo_clazzname,mData.get_name());
-        holder.setText(R.id.tv_taskinfo_clazzteacher,mData.getChecker().get_name());
+        holder.setText(R.id.tv_taskinfo_clazzteacher,mData.getSponser().get_name());
         holder.setText(R.id.tv_taskinfo_clazzname,mData.getClassRoom().get_name());
     }
 }

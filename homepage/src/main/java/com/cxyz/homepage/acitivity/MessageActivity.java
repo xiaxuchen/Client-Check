@@ -83,12 +83,16 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
             @Override
             public void onClick(View v) {
                 isTaskInfo=true;
+                messageRVAdapter.clear();
+                taskInfoRVAdapter.notifyDataSetChanged();
             }
         });
         btn_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isTaskInfo=false;
+                taskInfoRVAdapter.clear();
+                messageRVAdapter.notifyDataSetChanged();
             }
         });
         calendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
@@ -107,7 +111,7 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
                         public void onSuccess(Object responseObj) {
                             List<TaskInfo> taskInfos = GsonUtil.GsonToList(responseObj.toString(), TaskInfo.class);
                             List<TaskInfoCell> taskInfoCells = new ArrayList<>();
-                            for (int j = 0 ; j <= taskInfos.size() ; j++){
+                            for (int j = 0 ; j < taskInfos.size() ; j++){
                                     taskInfoCells.add(new TaskInfoCell(taskInfos.get(j)));
                             }
                             taskInfoRVAdapter.clear();
@@ -122,12 +126,12 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
                         }
                     });
                 }else{
-                    RequestCenter.getRecords(122+"", 0, new DisposeDataListener() {
+                    RequestCenter.getRecords("17478093", 0, new DisposeDataListener() {
                         @Override
                         public void onSuccess(Object responseObj) {
                             List<RecordDetail> recordDetails = GsonUtil.GsonToList(responseObj.toString(),RecordDetail.class);
                             List<MessageCell> userClazzsCells = new ArrayList<>();
-                            for (int j = 0 ; j <= recordDetails.size() ; j++){
+                            for (int j = 0 ; j < recordDetails.size() ; j++){
                                 userClazzsCells.add(new MessageCell(recordDetails.get(j)));
                             }
                             messageRVAdapter.clear();

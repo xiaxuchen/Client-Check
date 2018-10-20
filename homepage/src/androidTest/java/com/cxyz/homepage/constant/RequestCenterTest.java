@@ -1,5 +1,6 @@
 package com.cxyz.homepage.constant;
 
+import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.logiccommons.domain.CheckRecord;
 import com.cxyz.logiccommons.domain.RecordDetail;
