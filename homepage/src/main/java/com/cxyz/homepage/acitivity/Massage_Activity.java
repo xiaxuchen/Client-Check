@@ -41,7 +41,6 @@ public class Massage_Activity extends BaseActivity<MassageList_Presenter> implem
 
     @Override
     public void setEvent() {
-
     }
 
     @Override

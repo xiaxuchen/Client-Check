@@ -10,7 +10,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.FragmentActivity;
 import com.cxyz.commons.fragment.BaseFragment;
-import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.mains.R;
 
@@ -52,6 +51,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     protected BaseFragment getFirstFragment() {
+        switchFragment(homeFragment);
         return null;
     }
 
@@ -62,7 +62,6 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void initView() {
-        LogUtil.e(homeFragment+"");
         iv_check = (ImageView) findViewById(R.id.iv_check);
         iv_home = (ImageView) findViewById(R.id.iv_home);
         iv_mine = (ImageView) findViewById(R.id.iv_mine);
