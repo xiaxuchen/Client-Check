@@ -1,20 +1,20 @@
-package com.cxyz.check.model.imodelimpl;
+package com.cxyz.homepage.imodel.impl;
 
 import android.accounts.NetworkErrorException;
 
-import com.cxyz.check.constant.RequestCenter;
-import com.cxyz.check.model.ICheckModel;
 import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.homepage.constant.RequestCenter;
+import com.cxyz.homepage.imodel.IHomeModel;
 import com.cxyz.logiccommons.domain.TaskInfo;
 
 /**
  * Created by 夏旭晨 on 2018/10/18.
  */
 
-public class ICheckModelImpl implements ICheckModel {
+public class IHomeModelImpl implements IHomeModel {
     @Override
     public void checkComp(String id, int type, final CheckListener listener){
 

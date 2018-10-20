@@ -60,4 +60,20 @@ public class RequestCenter {
             listener.onFailure("网络状态异常");
         }
     }
+
+    /**
+     * 请求网络，获取当前是否有待考勤的任务
+     * @param id 用户id
+     * @param type 用户类型
+     * @param listener 接受到服务器响应后的回调
+     * @throws NetworkErrorException
+     */
+    public static void checkComp(String id, int type, DisposeDataListener listener) throws NetworkErrorException {
+        Map<String,String> map = new HashMap();
+        map.put("method","checkComp");
+        map.put("id",id);
+        map.put("type",type+"");
+        RequestParams params = new RequestParams(map);
+        CommonOkHttpClient.post(NetWorkHomeUrl.CHECKCOMP_URL,params,new DisposeDataHandler(listener));
+    }
 }
