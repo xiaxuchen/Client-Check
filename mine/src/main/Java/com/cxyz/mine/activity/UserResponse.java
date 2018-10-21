@@ -1,7 +1,5 @@
 package com.cxyz.mine.activity;
 
-import android.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
@@ -51,13 +49,6 @@ public class UserResponse extends BaseActivity {
         bt_userresponse_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LayoutInflater inflater = getLayoutInflater();
-                View view = inflater.inflate(R.layout.dialog_layout,null );
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                builder.setView(view);
-                builder.setTitle("考勤详情");
-                builder.create();
-                builder.show();
             }
         });
         tv_userresponse_title.setOnClickListener(new TitleView.OnClickListener() {

@@ -42,7 +42,9 @@ allprojects {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.haibin:calendarview:3.4.8'//日历控件
+    compile 'com.android.support:cardview-v7:26.+'
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"
 
     compile project(':logiccommons')
+    //compile project(path: ':main')
 }

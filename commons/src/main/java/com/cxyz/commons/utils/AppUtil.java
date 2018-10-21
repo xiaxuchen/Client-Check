@@ -120,4 +120,19 @@ public class AppUtil {
     private static PackageManager getPackageManager(Context context){
         return context.getPackageManager();
     }
+
+    /**
+     * 获取系统版本号
+     *
+     * @return
+     */
+    public static int getSDKVersionNumber() {
+        int sdkVersion;
+        try {
+            sdkVersion = Integer.valueOf(android.os.Build.VERSION.SDK);
+        } catch (NumberFormatException e) {
+            sdkVersion = 0;
+        }
+        return sdkVersion;
+    }
 }

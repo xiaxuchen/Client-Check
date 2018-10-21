@@ -27,6 +27,11 @@ public class CheckRecord{
 	 * 撤销
 	 */
 	public static final int CANCLE = -5;
+
+	/**
+	 * 所有违规记录
+	 */
+	public static final int ALL = 0;
 	/**
 	 * 考勤记录的id
 	 */

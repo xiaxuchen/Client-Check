@@ -2,6 +2,8 @@ package com.cxyz.mains.imodel.imodelimpl;
 
 import android.accounts.NetworkErrorException;
 
+import com.cxyz.commons.autoupdate.UpdateEntity;
+import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
@@ -9,7 +11,6 @@ import com.cxyz.mains.constant.NetWorkConstant;
 import com.cxyz.mains.imodel.ISplashModel;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by 夏旭晨 on 2018/10/2.
@@ -22,13 +23,13 @@ public class ISplashModelImpl implements ISplashModel {
             CommonOkHttpClient.get(NetWorkConstant.UPDATE_URL,null,new DisposeDataHandler(new DisposeDataListener() {
                 @Override
                 public void onSuccess(Object responseObj) {
-                    try {
-                        JSONObject json = new JSONObject((String)responseObj);
-                        listener.onUpdate(json);
-                    }catch (JSONException e)
-                    {
-                        listener.onUpdate(null);
-                    }
+                    if(listener != null)
+                        try {
+                            listener.onUpdate(GsonUtil.GsonToBean(responseObj.toString(), UpdateEntity.class));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            listener.onFail("服务器异常");
+                        }
                 }
 
                 @Override
@@ -38,12 +39,8 @@ public class ISplashModelImpl implements ISplashModel {
             }));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
-            listener.onUpdate(null);
+            listener.onFail(null);
         }
     }
 
-    @Override
-    public void downloadNew(String url) {
-
-    }
 }

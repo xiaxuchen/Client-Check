@@ -12,6 +12,8 @@ import com.cxyz.commons.manager.ActivityStackManager;
 import com.cxyz.commons.manager.ScreenManager;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
 *
@@ -47,6 +49,11 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     protected p iPresenter;
 
+    /**
+     * 加载的进度条
+     */
+    private QMUITipDialog loadingView;
+
     private ScreenManager screenManager;
 
     /**
@@ -57,9 +64,9 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onCreate");
-        super.onCreate(savedInstanceState);
         //requestWindowFeature必须在setContentView之前调用
         baseInit();
+        super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
         if(getIntent()!=null)
             handleIntent(getIntent());
@@ -285,6 +292,10 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     @Override
     protected void onDestroy() {
+        //注册LeakCanary
+        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+        //注销EventBus
+        refWatcher.watch(this);
         super.onDestroy();
         if(iPresenter!=null)
         {
@@ -301,7 +312,6 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     protected void handleIntent(Intent intent)
     {
-
     };
 
     /**
@@ -313,4 +323,46 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         startActivity(clazz,null);
     }
 
+    /**
+     * loadingview是否可以取消，默认不可以
+     * @return
+     */
+    protected boolean loadingViewCancelable(){
+        return false;
+    }
+
+    /**
+     * 通过设置此方法来loadingview的设置文字
+     * @return
+     */
+    protected String loadingText()
+    {
+        return "正在加载";
+    }
+
+    private QMUITipDialog createLoadingView()
+    {
+        QMUITipDialog.Builder builder = new QMUITipDialog.Builder(getActivity());
+        builder.setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING);
+        builder.setTipWord(loadingText());
+        return builder.create(loadingViewCancelable());
+    }
+
+
+    /**
+     * 可以通过重写loadingText、loadingViewCancelable方法设置是否可取消，和文字
+     */
+    @Override
+    public void showLoadingView() {
+        if(loadingView == null)
+            loadingView = createLoadingView();
+        loadingView.show();
+    }
+
+    @Override
+    public void hideLoadingView() {
+        if(loadingView == null)
+            loadingView = createLoadingView();
+        loadingView.dismiss();
+    }
 }

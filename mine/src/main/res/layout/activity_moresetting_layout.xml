@@ -6,7 +6,7 @@
     android:background="@color/common_white">
 
     <com.cxyz.commons.widget.TitleView
-        android:id="@+id/tv_moresetting_title"
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
 
@@ -23,8 +23,8 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_moresetting_update"
-                android:layout_width="275dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
                 android:paddingTop="15dp"
@@ -32,7 +32,8 @@
                 android:text="更新推送" />
 
             <Switch
-                android:id="@+id/sw_moresetting_udpate"
+                android:id="@+id/sw_update"
+                android:layout_marginRight="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/MySwitch"/>
@@ -44,12 +45,12 @@
         android:layout_height="2dp"
         android:background="@color/material_grey_300"></View>
     <LinearLayout
+        android:id="@+id/ll_expand"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_moresetting_expand"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
@@ -64,12 +65,12 @@
         android:layout_height="2dp"
         android:background="@color/material_grey_300"></View>
     <LinearLayout
+        android:id="@+id/ll_exit"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_moresetting_exitlogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"

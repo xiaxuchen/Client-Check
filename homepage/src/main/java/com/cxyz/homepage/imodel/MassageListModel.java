@@ -17,6 +17,7 @@ public interface MassageListModel extends IBaseModel{
      * @param listener
      */
     public void getMassageInfo(String id, Integer type, final getMassageInfoListener listener);
+
     public interface getMassageInfoListener{
         public void getInfoSuccess(List<RecordDetail> info);
         public void getInfFail(Object error);

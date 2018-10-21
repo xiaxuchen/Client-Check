@@ -9,6 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="com.cxyz.logiccommons.application.MyApp">
+        <activity android:name=".acitivity.SDcardActivity">
+
+        </activity>
         <activity android:name=".acitivity.MessageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

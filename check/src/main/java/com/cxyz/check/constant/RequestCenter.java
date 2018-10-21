@@ -16,19 +16,58 @@ import java.util.Map;
 
 public class RequestCenter {
 
-    /**
-     * 请求网络，获取当前是否有待考勤的任务
-     * @param id 用户id
-     * @param type 用户类型
-     * @param listener 接受到服务器响应后的回调
-     * @throws NetworkErrorException
-     */
-    public static void checkComp(String id, int type, DisposeDataListener listener) throws NetworkErrorException {
+
+    public static void getStus(int grade, DisposeDataListener listener)
+    {
         Map<String,String> map = new HashMap();
-        map.put("method","checkComp");
+        map.put("method","getGradeStus");
+        map.put("grade",grade+"");
+        RequestParams params = new RequestParams(map);
+        try {
+            CommonOkHttpClient.post(NetWorkConstant.GET_STUS,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+    }
+
+    /**
+     * 通过用户id和所查记录类型查找违规记录(考勤情况)
+     * @param id 用户id
+     * @param type 记录类型
+     * @param listener 回调
+     */
+    public static void getRecords(String id, Integer type, DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("method","getRecordDetails");
         map.put("id",id);
         map.put("type",type+"");
         RequestParams params = new RequestParams(map);
-        CommonOkHttpClient.post(NetWorkConstant.CHECKCOMP_URL,params,new DisposeDataHandler(listener));
+        try {
+            CommonOkHttpClient.post(NetWorkConstant.RDS_URL,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+    }
+
+    /**
+     * 通过学生id获取考勤统计结果
+     * @param id
+     * @param listener
+     */
+    public static void getStatistic(String id,int grade,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("id",id);
+        map.put("grade",grade+"");
+        map.put("method","querySelfStatistic");
+        try {
+            CommonOkHttpClient.post(NetWorkConstant.STATISTIC_URL,new RequestParams(map),new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
     }
 }

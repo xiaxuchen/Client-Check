@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.check.R;
 import com.cxyz.check.adapter.StusAdapter;
 import com.cxyz.check.ipresenter.IDailyPresenter;
@@ -22,20 +22,21 @@ import com.cxyz.commons.widget.TitleView;
 import com.cxyz.logiccommons.domain.CheckRecord;
 import com.cxyz.logiccommons.domain.Student;
 import com.cxyz.logiccommons.domain.TaskCompletion;
-import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
+import com.qmuiteam.qmui.widget.QMUIEmptyView;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Route(path = "/check/DailyCheckActivity")
 public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements IDailyView {
 
     private TitleView tv_title;
 
     private ListView lv_stus;
 
-    private ProgressBar pb_load;
+    private QMUIEmptyView qmuiev_load;
 
     private Button btn_commit;
 
@@ -58,9 +59,8 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     public void initView() {
         tv_title = (TitleView) findViewById(R.id.tv_title);
         lv_stus = (ListView) findViewById(R.id.lv_stus);
-        pb_load = (ProgressBar) findViewById(R.id.pb_load);
+        qmuiev_load = (QMUIEmptyView) findViewById(R.id.qmuiev_load);
         btn_commit = (Button) findViewById(R.id.btn_commit);
-
         tv_title.setTitle("日常考勤");
     }
 
@@ -91,6 +91,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         btn_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                c.setState(TaskCompletion.NORMAL);
                 iPresenter.commit(crs,c);
             }
         });
@@ -171,7 +172,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     protected void afterInit() {
         super.afterInit();
-        iPresenter.getStusToShow(((User) UserManager.getInstance().getUser()).getGrade().get_id());
+        iPresenter.getStusToShow(( UserManager.getInstance().getUser()).getGrade().get_id());
     }
 
     @Override
@@ -181,12 +182,12 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void showLoadingView() {
-        pb_load.setVisibility(View.VISIBLE);
+        qmuiev_load.show(true);
     }
 
     @Override
     public void hideLoadingView() {
-        pb_load.setVisibility(View.GONE);
+        qmuiev_load.hide();
     }
 
     @Override
@@ -197,7 +198,16 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void showError(Object error) {
-        ToastUtil.showShort(error.toString());
+
+        qmuiev_load.show(false, "发生错误", error.toString(), "重新加载", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /**
+                 * 重新获取学生列表
+                 */
+                iPresenter.getStusToShow(UserManager.getInstance().getUser().getGrade().get_id());
+            }
+        });
     }
 
     @Override
@@ -207,7 +217,6 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     }
 
     /**
-     * TODO 可能会出现异常情况，后期需要调整
      * @param intent 跳转时所用的
      */
     @Override

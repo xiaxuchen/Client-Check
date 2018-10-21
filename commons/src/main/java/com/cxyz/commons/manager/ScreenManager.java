@@ -1,13 +1,11 @@
 package com.cxyz.commons.manager;
 
 
-
 import android.content.pm.ActivityInfo;
-import android.os.Build;
-import android.view.Window;
 import android.view.WindowManager;
 
 import com.cxyz.commons.activity.BaseActivity;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 /**
  * Created by 夏旭晨 on 2018/9/22.
@@ -34,21 +32,17 @@ public class ScreenManager {
             return;
         }
         mActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
+
 
     /**
      * [沉浸状态栏]
      */
-    public void setStatusBar(boolean isChange, BaseActivity mActivity) {
-        if (!isChange) {
+    public void setStatusBar(boolean isChange, BaseActivity activity) {
+        if(!isChange)
             return;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //
-            // 透明状态栏
-            mActivity.getWindow().addFlags( WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            // 透明导航栏
-            mActivity.getWindow().addFlags( WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION); } }
+        QMUIStatusBarHelper.translucent(activity);
+    }
 
     /***
      * 设置旋转屏幕
@@ -62,5 +56,5 @@ public class ScreenManager {
             mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
     }
-        }
+}
 

@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.IView.IBaseView;
 import com.cxyz.commons.activity.FragmentActivity;
+import com.cxyz.commons.application.BaseApplication;
 import com.cxyz.commons.utils.LogUtil;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by 夏旭晨 on 2018/9/21.
@@ -237,6 +239,9 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     @Override
     public void onDestroy() {
+        //注册leakcanary
+        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
         super.onDestroy();
         if(iPresenter!=null)
         {

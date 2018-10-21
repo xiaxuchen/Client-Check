@@ -21,7 +21,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/app_off"/>
+        android:background="@color/app_line"/>
         <LinearLayout
             android:paddingTop="8dp"
             android:background="@color/common_white"

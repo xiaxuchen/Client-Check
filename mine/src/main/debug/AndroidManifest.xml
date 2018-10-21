@@ -9,6 +9,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="com.cxyz.logiccommons.application.MyApp">
+        <activity android:name=".activity.CheckHomepageActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

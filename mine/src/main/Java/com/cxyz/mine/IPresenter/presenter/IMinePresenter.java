@@ -9,8 +9,7 @@ import com.cxyz.mine.iview.IMineView;
  */
 
 public abstract class IMinePresenter extends IBasePresenter<IBaseModel,IMineView> {
-    @Override
-    public IBaseModel createModel() {
-        return null;
-    }
+
+    //更新
+    public abstract void update();
 }

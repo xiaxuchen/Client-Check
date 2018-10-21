@@ -15,15 +15,9 @@ public abstract class ISplashPresenter extends IBasePresenter<ISplashModel,ISpla
     public abstract void Update();
 
     /**
-     * 下载app
-     */
-    public abstract void download(String  url);
-
-    /**
      * 自动登录
      * 如果sp中保存有用户名和密码则自动登录
      */
     public abstract void autoLogin();
-
 
 }

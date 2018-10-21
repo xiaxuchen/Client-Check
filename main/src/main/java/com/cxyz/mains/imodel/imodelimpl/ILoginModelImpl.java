@@ -8,6 +8,8 @@ import com.cxyz.logiccommons.domain.User;
 import com.cxyz.mains.constant.RequestCenter;
 import com.cxyz.mains.imodel.ILoginModel;
 
+import org.json.JSONException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +47,13 @@ public class ILoginModelImpl implements ILoginModel{
                 //成功则把数据传到逻辑层
                 if(listener!=null)
                 {
-                    User user = GsonUtil.GsonToBean(responseObj.toString(), User.class);
+                    User user = null;
+                    try {
+                        user = GsonUtil.GsonToBean(responseObj.toString(), User.class);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        listener.getInfoFail("服务器异常");
+                    }
                     if(user.getType()==User.ERROR)
                     {
                         listener.getInfoFail(user.get_name());
