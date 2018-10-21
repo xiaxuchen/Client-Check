@@ -98,7 +98,6 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
         calendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
             @Override
             public void onCalendarOutOfRange(Calendar calendar) {
-
             }
 
             @Override

@@ -12,4 +12,8 @@ public class NetWorkConstant {
     public static final String GET_STUS = ROOT_URL+"/servlet/UserServlet";
     //提交的url
     public static  final String COMMIT_URL = ROOT_URL+"/servlet/CheckServlet";
+    //查看考勤记录的url
+    public static final String RDS_URL = ROOT_URL+"/servlet/CheckServlet";
+    //获取统计结果
+    public static final String STATISTIC_URL = ROOT_URL+"/servlet/StatisticServlet";
 }

@@ -130,16 +130,23 @@ public class User  implements Serializable{
 	public void setCollege(College college) {
 		this.college = college;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User [id=" + _id + ", _name=" + _name + ", sex=" + sex
-				+ ", pwd=" + pwd + ", tel=" + tel + ", photo=" + photo
-				+ ", power=" + power
-				+ ", type=" + type + "]";
+		return "User{" +
+				"grade=" + grade +
+				", college_name='" + college_name + '\'' +
+				", college=" + college +
+				", _id='" + _id + '\'' +
+				", _name='" + _name + '\'' +
+				", sex='" + sex + '\'' +
+				", pwd='" + pwd + '\'' +
+				", tel='" + tel + '\'' +
+				", photo='" + photo + '\'' +
+				", power=" + power +
+				", type=" + type +
+				'}';
 	}
-    
-	
 }
 
 

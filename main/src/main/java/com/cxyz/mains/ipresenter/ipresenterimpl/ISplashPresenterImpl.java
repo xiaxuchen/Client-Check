@@ -2,7 +2,6 @@ package com.cxyz.mains.ipresenter.ipresenterimpl;
 
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
-import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.logiccommons.application.MyApp;
 import com.cxyz.logiccommons.domain.User;
@@ -65,9 +64,6 @@ public class ISplashPresenterImpl extends ISplashPresenter {
         final String username = SpUtil.getInstance().getString("username", "");
         final String pwd = SpUtil.getInstance().getString("pwd", "");
         final int type = SpUtil.getInstance().getInt("type",-2);
-        LogUtil.e(username);
-        LogUtil.e(pwd);
-        LogUtil.e(type+"");
         //判断是否在sp中保存完整
         if(username!=""&&pwd!=""&&type!=-2)
         {
@@ -75,7 +71,6 @@ public class ISplashPresenterImpl extends ISplashPresenter {
             new ILoginModelImpl().getLoginInfo(username, pwd, type, new ILoginModel.getLoginInfoListener() {
                 @Override
                 public void getInfoSuccess(User user) {
-                    LogUtil.e(user.toString());
                     //把用户数据保存到UserManager
                     UserManager.getInstance().setUser(user);
                     //显示登录成功
