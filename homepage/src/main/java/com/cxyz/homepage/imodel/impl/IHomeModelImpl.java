@@ -10,6 +10,8 @@ import com.cxyz.homepage.constant.RequestCenter;
 import com.cxyz.homepage.imodel.IHomeModel;
 import com.cxyz.logiccommons.domain.TaskInfo;
 
+import org.json.JSONException;
+
 /**
  * Created by 夏旭晨 on 2018/10/18.
  */
@@ -28,7 +30,12 @@ public class IHomeModelImpl implements IHomeModel {
                     if(listener!=null)
                     {
                         LogUtil.e(responseObj.toString());
-                        listener.onSuccess(GsonUtil.GsonToBean(responseObj.toString(), TaskInfo.class));
+                        try {
+                            listener.onSuccess(GsonUtil.GsonToBean(responseObj.toString(), TaskInfo.class));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            listener.onFail("服务器异常");
+                        }
                     }
                 }
 

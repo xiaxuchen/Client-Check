@@ -7,6 +7,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -48,11 +50,16 @@ public class GsonUtil {
      * @param cls
      * @return
      */
-    public static <T> T GsonToBean(String gsonString, Class<T> cls) {
+    public static <T> T GsonToBean(String gsonString, Class<T> cls) throws JSONException {
         T t = null;
         if (gson != null) {
             //传入json对象和对象类型,将json转成对象
-            t = gson.fromJson(gsonString, cls);
+            try {
+                t = gson.fromJson(gsonString, cls);
+            }catch (Exception e)
+            {
+                throw new JSONException(e.getMessage());
+            }
         }
         return t;
     }
@@ -64,12 +71,18 @@ public class GsonUtil {
      * @param gsonString
      * @return
      */
-    public static <T> List<Map<String, T>> GsonToListMaps(String gsonString) {
+    public static <T> List<Map<String, T>> GsonToListMaps(String gsonString) throws JSONException {
         List<Map<String, T>> list = null;
         if (gson != null) {
-            list = gson.fromJson(gsonString,
-                    new TypeToken<List<Map<String, T>>>() {
+            try{
+                list = gson.fromJson(gsonString,
+                    new TypeToken<List<Map<String, T>>>(){
                     }.getType());
+            }
+            catch (Exception e)
+            {
+                throw new JSONException(e.getMessage());
+            }
         }
         return list;
     }

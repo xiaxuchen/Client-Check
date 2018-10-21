@@ -12,6 +12,8 @@ import com.cxyz.logiccommons.domain.RecordDetail;
 import com.cxyz.logiccommons.domain.Statistic;
 import com.cxyz.logiccommons.manager.UserManager;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +39,13 @@ public class IMyCheckIModelImpl implements IMyCheckModel {
                         @Override
                         public void onSuccess(Object responseObj) {
                             //将json字符串转化为对象
-                            Statistic statistic = GsonUtil.GsonToBean(responseObj.toString(), Statistic.class);
+                            Statistic statistic = null;
+                            try {
+                                statistic = GsonUtil.GsonToBean(responseObj.toString(), Statistic.class);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onFail("服务器异常");
+                            }
                             //计算异常次数
                             int checkerror = statistic.getLate()+statistic.getEarly_leave()+statistic
                                     .getTruant()+statistic.get_leave();

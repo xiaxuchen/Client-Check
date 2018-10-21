@@ -1,0 +1,3 @@
+1，要定义string.xml的字符
+2. 记得配置activity和service
+3  URL 链接

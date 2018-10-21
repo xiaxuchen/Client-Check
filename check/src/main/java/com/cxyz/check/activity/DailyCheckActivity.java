@@ -91,6 +91,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         btn_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                c.setState(TaskCompletion.NORMAL);
                 iPresenter.commit(crs,c);
             }
         });

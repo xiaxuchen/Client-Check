@@ -1,8 +1,7 @@
 package com.cxyz.mains.imodel;
 
 import com.cxyz.commons.IModel.IBaseModel;
-
-import org.json.JSONObject;
+import com.cxyz.commons.autoupdate.UpdateEntity;
 
 import java.io.File;
 
@@ -18,18 +17,22 @@ public interface ISplashModel extends IBaseModel {
      */
     public void confirmUpdate(ConfirmListener listener);
 
-    /**
-     * 下载新版本应用
-     * @param url
-     * @return 新版本的文件
-     */
-    public void downloadNew(String url);
 
     /**
      * 确认更新的回调
      */
     interface ConfirmListener{
-        void onUpdate(JSONObject info);
+        /**
+         * 成功时的回调
+         * @param updateEntity 更新信息
+         */
+        void onUpdate(UpdateEntity updateEntity);
+
+        /**
+         * 失败时的回调
+         * @param error
+         */
+        void onFail(String error);
     }
 
     /**

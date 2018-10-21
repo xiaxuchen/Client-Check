@@ -13,6 +13,7 @@ import com.cxyz.commons.manager.ScreenManager;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
 *
@@ -291,6 +292,10 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     @Override
     protected void onDestroy() {
+        //注册LeakCanary
+        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+        //注销EventBus
+        refWatcher.watch(this);
         super.onDestroy();
         if(iPresenter!=null)
         {

@@ -10,6 +10,6 @@ public class NetWorkConstant {
 
     public static final String LOGIN_URL = ROOT_URL+"/UserServlet";
 
-    public static final String UPDATE_URL = ROOT_URL+"/json/update.json";
+    public static final String UPDATE_URL = "http:/192.168.43.73:8080/MySafe/update/app_info.json";
 
 }

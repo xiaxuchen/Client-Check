@@ -1,5 +1,6 @@
 package com.cxyz.mains.ipresenter.ipresenterimpl;
 
+import com.cxyz.commons.autoupdate.UpdateEntity;
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.SpUtil;
@@ -12,10 +13,6 @@ import com.cxyz.mains.imodel.imodelimpl.ILoginModelImpl;
 import com.cxyz.mains.imodel.imodelimpl.ISplashModelImpl;
 import com.cxyz.mains.ipresenter.ISplashPresenter;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 /**
  * Created by 夏旭晨 on 2018/10/2.
  */
@@ -25,38 +22,34 @@ public class ISplashPresenterImpl extends ISplashPresenter {
     public void Update() {
         mIModle.confirmUpdate(new ISplashModel.ConfirmListener() {
             @Override
-            public void onUpdate(JSONObject info) {
-                if(info == null)
-                {
-                    return;
-                }
-                try {
-                    //从json中获取版本信息，如果与当前版本相同则跳转到登录界面
-                    String version = info.getString("version");
-                    if(AppUtil.getVersionName(MyApp.getApplication()).equals(version))
+            public void onUpdate(UpdateEntity info) {
+                    if(info == null)
                     {
+                        mIView.noUpdate();
                         return;
                     }
-                    //版本号不一致则获取app的url和最新版本的描述信息
-                    String url = info.getString("url");
-                    JSONArray jsonArray = info.getJSONArray("des");
-                    String des = new String();
-                    for(int i = 0;i<jsonArray.length();i++)
+                    //从json中获取版本信息，如果与当前版本相同则跳转到登录界面
+                    if(AppUtil.getVersionCode(MyApp.getApplication())== info.getVersionCode())
                     {
-                        des+=jsonArray.getString(i)+"\n";
+                        mIView.noUpdate();
+                        return;
                     }
-                    mIView.showUpdateView(version,des,url);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                    StringBuilder builder = new StringBuilder();
+                    for(String des:info.getDes())
+                    {
+                        builder.append(des+"\n");
+                    }
+                    //版本号不一致则获取app的url和最新版本的描述信息
+                    mIView.showUpdateView(info.getVersionCode(),builder.toString(),info.getUrl());
+            }
+
+            @Override
+            public void onFail(String error) {
+                mIView.noUpdate();
             }
         });
     }
 
-    @Override
-    public void download(String url) {
-
-    }
 
     @Override
     public void autoLogin() {
