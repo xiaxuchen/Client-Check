@@ -12,7 +12,6 @@ import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
-import com.cxyz.logiccommons.application.MyApp;
 import com.cxyz.logiccommons.service.UpdateService;
 import com.cxyz.mains.R;
 import com.cxyz.mains.ipresenter.ISplashPresenter;
@@ -59,14 +58,6 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        LogUtil.e("kkkk");
-        if(requestCode == UpdateService.REQUEST_INSTALL && resultCode == RESULT_CANCELED)
-        {
-            noUpdate();
-        }
-    }
 
     @Override
     protected void afterInit() {
@@ -100,9 +91,9 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(getActivity(),UpdateService.class);
                 intent.putExtra("apkUrl",url);
-                ((MyApp)getMyApp()).setAttribute("splashActivity",getActivity());
                 startService(intent);
                 dialog.dismiss();
+                noUpdate();
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

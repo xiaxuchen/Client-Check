@@ -20,13 +20,7 @@ import android.util.Log;
 
 import com.cxyz.commons.autoupdate.UpdateDownloadListener;
 import com.cxyz.commons.autoupdate.UpdateManager;
-import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.logiccommons.R;
-import com.cxyz.logiccommons.application.MyApp;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 
@@ -37,7 +31,6 @@ import java.io.File;
  * Time: 16:24
  */
 public class UpdateService extends Service{
-    public static  final int REQUEST_INSTALL = 0;
     private String apkUrl;
     private String filePath;
     private NotificationManager notificationManager;
@@ -144,8 +137,7 @@ public class UpdateService extends Service{
         intent.setDataAndType(Uri.parse("file://"+apkFile.getAbsolutePath()),
                 "application/vnd.android.package-archive");
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        ((Activity)((MyApp)getApplication()).getAttribute("splashActivity")).startActivityForResult(intent,UpdateService.REQUEST_INSTALL);
-        ((MyApp)getApplication()).removeAttribute("splashActivity");
+        startActivity(intent);
         return pendingIntent;
 
     }

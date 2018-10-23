@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.mine.IPresenter.presenter.IMinePresenter;
 import com.cxyz.mine.R;
@@ -52,12 +51,7 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
 
     @Override
     protected IMinePresenter createIPresenter() {
-        return new IMinePresenter() {
-            @Override
-            public IBaseModel createModel() {
-                return super.createModel();
-            }
-        };
+        return null;
     }
 
     @Override
