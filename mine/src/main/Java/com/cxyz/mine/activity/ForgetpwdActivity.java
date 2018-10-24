@@ -50,12 +50,14 @@ public class ForgetpwdActivity extends BaseActivity {
       public void onClick(View v) {
        Intent intent=new Intent(getApplicationContext(),RestPwdActivity.class);
        startActivity(intent);
+       overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
       }
      });
      tv_forgetpwd_title.setOnClickListener(new TitleView.OnClickListener() {
       @Override
       public void onBackClick() {
        onBackPressed();
+       overridePendingTransition(R.anim.back_next,R.anim.back_exit);
       }
 
       @Override

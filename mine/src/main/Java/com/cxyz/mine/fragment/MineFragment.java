@@ -94,28 +94,35 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
     public void tv_mine_setting() {
         Intent intent = new Intent(getActivity().getApplicationContext(), MoreSettingActivity.class);
         startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
+
     }
 
     //从我的界面跳转到预约请假界面
     public void tv_mine_appointment() {
         Intent intent = new Intent(getActivity().getApplicationContext(), ApponitmentActivity.class);
         startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
+
     }
 
     //从我的界面跳转到个人信息界面
     public void tv_mine_myinfo() {
         Intent intent = new Intent(getActivity().getApplicationContext(), MyinfoActivity.class);
         startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
     }
     //从我的界面跳转到修改密码界面
     public void tv_mine_alterpwd() {
         Intent intent = new Intent(getActivity().getApplicationContext(), ForgetpwdActivity.class);
         startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
     }
     //从我的界面跳转到用户反馈界面
     public void tv_mine_useradvice() {
         Intent intent = new Intent(getActivity().getApplicationContext(), UserResponse.class);
         startActivity(intent);
+        mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
     }
 
 

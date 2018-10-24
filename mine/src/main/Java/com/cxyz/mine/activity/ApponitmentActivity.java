@@ -44,6 +44,7 @@ public class ApponitmentActivity extends BaseActivity {
             @Override
             public void onBackClick() {
                 onBackPressed();
+                overridePendingTransition(R.anim.back_next,R.anim.back_exit);
             }
 
             @Override
