@@ -1,5 +1,6 @@
 package com.cxyz.mine.activity;
 
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +49,7 @@ public class ResponseActivity extends BaseActivity<IResponsePresenter> implement
             @Override
             public void onBackClick() {
                 onBackPressed();
+                overridePendingTransition(R.anim.back_next,R.anim.back_exit);
             }
 
             @Override
@@ -88,6 +90,14 @@ public class ResponseActivity extends BaseActivity<IResponsePresenter> implement
         if(v.getId() == R.id.btsetting_submit)
             iPresenter.btsetting_submit(etsetting_eduserresponse, pbsetting_submit);
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            this.finish();
+            overridePendingTransition(R.anim.back_next,R.anim.back_exit);
+        }
+        return true;
     }
 }
 

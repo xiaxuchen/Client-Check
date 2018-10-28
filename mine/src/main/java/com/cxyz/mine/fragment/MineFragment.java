@@ -16,7 +16,7 @@ import com.cxyz.logiccommons.service.UpdateService;
 import com.cxyz.mine.IPresenter.presenter.IMineFragmentPresenter;
 import com.cxyz.mine.IPresenter.presenter.IMineFragmentPresenterlmpl;
 import com.cxyz.mine.R;
-import com.cxyz.mine.activity.ApponitmentActivity;
+import com.cxyz.mine.activity.AppointmentApplyStuCheckActivity;
 import com.cxyz.mine.activity.ForgetpwdActivity;
 import com.cxyz.mine.activity.MoreSettingActivity;
 import com.cxyz.mine.activity.MyinfoActivity;
@@ -100,7 +100,7 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
 
     //从我的界面跳转到预约请假界面
     public void tv_mine_appointment() {
-        Intent intent = new Intent(getActivity().getApplicationContext(), ApponitmentActivity.class);
+        Intent intent = new Intent(getActivity().getApplicationContext(), AppointmentApplyStuCheckActivity.class);
         startActivity(intent);
         mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
 

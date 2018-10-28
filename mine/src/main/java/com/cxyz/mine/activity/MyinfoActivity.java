@@ -1,6 +1,7 @@
 package com.cxyz.mine.activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.cxyz.commons.activity.BaseActivity;
@@ -125,5 +126,13 @@ public class MyinfoActivity extends BaseActivity <IMyinfoPresenter>implements IM
     @Override
     public void showMyCollege(College college) {
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            this.finish();
+            overridePendingTransition(R.anim.back_next,R.anim.back_exit);
+        }
+        return true;
     }
 }
