@@ -1,18 +1,24 @@
 package com.cxyz.mains.activity;
 
+import android.content.res.AssetManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.BitmapUtil;
+import com.cxyz.commons.utils.ScreenUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.mains.R;
 import com.cxyz.mains.ipresenter.ILoginPresenter;
 import com.cxyz.mains.ipresenter.ipresenterimpl.ILoginPresenterImpl;
 import com.cxyz.mains.iview.ILoginView;
+
+import java.io.IOException;
 
 /**
  * Created by 夏旭晨 on 2018/9/30.
@@ -42,6 +48,11 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
      */
     private RadioGroup rg_type;
 
+    /**
+     * 背景
+     */
+    private LinearLayout ll_back;
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_logins_layout;
@@ -49,12 +60,25 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
 
     @Override
     public void initView() {
+        AssetManager assetManager = getAssets();
         et_username = (EditText) findViewById(R.id.et_username);
         et_password = (EditText) findViewById(R.id.et_password);
         bt_login = (Button) findViewById(R.id.bt_login);
         rg_type = (RadioGroup) findViewById(R.id.rg_type);
         tv_forget_pwd = findViewById(R.id.tv_forget_pwd);
+        ll_back = findViewById(R.id.ll_back);
+
         et_username.setText(getSpUtil().getString("username",""));
+
+        //加载背景图片
+        try {
+            ll_back.setBackgroundDrawable(BitmapUtil.bitmapToDrawable(getActivity(),BitmapUtil.
+                    getBitmapFromStream(getActivity(), getAssets().open("logo.jpg"),
+                            ScreenUtil.getScreenHeight(getActivity()),ScreenUtil.
+                                    getScreenWidth(getActivity()))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
