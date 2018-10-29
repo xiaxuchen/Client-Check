@@ -1,0 +1,21 @@
+<resources>
+
+    <style name="AppTheme" parent="QMUI"/>
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/material_grey_50</item>
+        <item name="colorControlActivated">@color/material_grey_300</item>
+    </style>
+    <style name="MySwitch">
+        <!--track是switch轨迹部分,这里我们用了一个selector来解决不同状态下轨迹的颜色-->
+        <item name="android:track">@drawable/switch_tradck</item>
+        <!--thumb是switch滑块,这里我们用了Widget.AppCompat.CompoundButton.Switch下带的资源,如果有需要,请自行更换图标-->
+        <item name="android:thumb">@drawable/abc_switch_thumb_material</item>
+        <item name="android:background">@null</item>
+        <!--switch上的文字,插入占位符,解决部分手机不能显示问题-->
+        <item name="android:textOn"> </item>
+        <item name="android:textOff"> </item>
+        <!--这个东西才能控制整个开关的宽度, 有些人会发现设置width会无效,设置一下这个就好啦-->
+        <item name="android:switchMinWidth">50dp</item>
+    </style>
+</resources>

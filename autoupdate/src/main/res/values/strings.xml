@@ -1,0 +1,7 @@
+<resources>
+    <string name="auto_update_app_name">AutoUpdate</string>
+    <string name="auto_update_update_download_progressing">正在下载</string>
+    <string name="auto_update_update_download_start">下载开始</string>
+    <string name="auto_update_update_download_failed">下载失败</string>
+    <string name="auto_update_update_download_finish">下载完成</string>
+</resources>

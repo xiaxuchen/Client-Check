@@ -41,5 +41,5 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"
-    compile project(':logiccommons')
+    compile project(':oldlogiccommons')
 }

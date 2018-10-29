@@ -3,13 +3,25 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Client-Check.iml" filepath="$PROJECT_DIR$/Client-Check.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adapter/adapter.iml" filepath="$PROJECT_DIR$/adapter/adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/annotation/annotation.iml" filepath="$PROJECT_DIR$/annotation/annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/autoupdate/autoupdate.iml" filepath="$PROJECT_DIR$/autoupdate/autoupdate.iml" />
       <module fileurl="file://$PROJECT_DIR$/check/check.iml" filepath="$PROJECT_DIR$/check/check.iml" />
-      <module fileurl="file://$PROJECT_DIR$/commons/commons.iml" filepath="$PROJECT_DIR$/commons/commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/homepage/homepage.iml" filepath="$PROJECT_DIR$/homepage/homepage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imageloader/imageloader.iml" filepath="$PROJECT_DIR$/imageloader/imageloader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/log/log.iml" filepath="$PROJECT_DIR$/log/log.iml" />
       <module fileurl="file://$PROJECT_DIR$/logiccommons/logiccommons.iml" filepath="$PROJECT_DIR$/logiccommons/logiccommons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oldlogiccommons/logiccommons.iml" filepath="$PROJECT_DIR$/oldlogiccommons/logiccommons.iml" />
       <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/mine/mine.iml" filepath="$PROJECT_DIR$/mine/mine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mvp/mvp.iml" filepath="$PROJECT_DIR$/mvp/mvp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/network/network.iml" filepath="$PROJECT_DIR$/network/network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oldlogiccommons/oldlogiccommons.iml" filepath="$PROJECT_DIR$/oldlogiccommons/oldlogiccommons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oldscommons/oldscommons.iml" filepath="$PROJECT_DIR$/oldscommons/oldscommons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parse/parse.iml" filepath="$PROJECT_DIR$/parse/parse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/widget/widget.iml" filepath="$PROJECT_DIR$/widget/widget.iml" />
     </modules>
   </component>
 </project>

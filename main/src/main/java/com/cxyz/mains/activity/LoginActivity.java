@@ -1,13 +1,19 @@
 package com.cxyz.mains.activity;
 
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.BitmapUtil;
+import com.cxyz.commons.utils.ScreenUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.mains.R;
 import com.cxyz.mains.ipresenter.ILoginPresenter;
@@ -41,20 +47,28 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
      * 用户类型
      */
     private RadioGroup rg_type;
+    //加载背景图片的线性布局
+    private LinearLayout ll_back;
 
     @Override
     public int getContentViewId() {
         return R.layout.activity_logins_layout;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void initView() {
         et_username = (EditText) findViewById(R.id.et_username);
         et_password = (EditText) findViewById(R.id.et_password);
         bt_login = (Button) findViewById(R.id.bt_login);
+        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         rg_type = (RadioGroup) findViewById(R.id.rg_type);
         tv_forget_pwd = findViewById(R.id.tv_forget_pwd);
         et_username.setText(getSpUtil().getString("username",""));
+        ll_back.setBackground(BitmapUtil.bitmapToDrawable(getActivity(),BitmapUtil.
+                getBitmapFromResource(getActivity(),R.mipmap.logo,
+                        ScreenUtil.getScreenWidth(getActivity()),ScreenUtil
+                                .getScreenHeight(getActivity()))));
     }
 
     @Override

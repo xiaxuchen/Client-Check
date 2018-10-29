@@ -43,6 +43,6 @@ dependencies {
         compile project(':mine')
         compile project(':main')
     } else
-        compile project(':logiccommons')
+        compile project(':oldlogiccommons')
 }
 

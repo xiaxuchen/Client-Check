@@ -18,6 +18,7 @@ android {
             }
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -39,7 +40,7 @@ dependencies {
     compile 'com.github.lecho:hellocharts-android:v1.5.8'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"
-    compile project(':logiccommons')
+    compile project(':oldlogiccommons')
     testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

@@ -1,1 +1,1 @@
-include ':main', ':check', ':commons', ':mine', ':homepage', ':logiccommons', ':app'
+include ':main', ':check', ':oldscommons', ':mine', ':homepage', ':oldlogiccommons', ':app', ':mvp', ':log', ':autoupdate', ':network', ':parse', ':widget', ':imageloader', ':test', ':test', ':annotation', ':adapter','logiccommons'
