@@ -10,6 +10,8 @@ import com.cxyz.homepage.constant.RequestCenter;
 import com.cxyz.homepage.imodel.IHomeModel;
 import com.cxyz.logiccommons.domain.TaskInfo;
 
+import org.json.JSONException;
+
 /**
  * Created by 夏旭晨 on 2018/10/18.
  */
@@ -28,7 +30,12 @@ public class IHomeModelImpl implements IHomeModel {
                     if(listener!=null)
                     {
                         LogUtil.e(responseObj.toString());
-                        listener.onSuccess(GsonUtil.GsonToBean(responseObj.toString(), TaskInfo.class));
+                        try {
+                            listener.onSuccess((TaskInfo) GsonUtil.fromJson(responseObj.toString(), TaskInfo.class));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            listener.onFail("服务器异常");
+                        }
                     }
                 }
 
@@ -39,9 +46,12 @@ public class IHomeModelImpl implements IHomeModel {
                         if(error instanceof String)
                             listener.onFail(error.toString());
                         else if(error instanceof OKHttpException)
-                            listener.onFail(((OKHttpException) error).getMessage());
-                        else
-                            listener.onFail("当前暂无考勤任务");
+                        {
+                            if(((OKHttpException) error).getCode() == OKHttpException.EMPTY)
+                                listener.onFail("当前暂无考勤任务");
+                            else
+                                listener.onFail(((OKHttpException) error).getMessage());
+                        }
                     }
                 }
             });

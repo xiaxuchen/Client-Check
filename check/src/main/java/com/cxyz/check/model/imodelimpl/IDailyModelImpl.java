@@ -3,6 +3,7 @@ package com.cxyz.check.model.imodelimpl;
 import android.accounts.NetworkErrorException;
 
 import com.cxyz.check.constant.NetWorkConstant;
+import com.cxyz.check.constant.RequestCenter;
 import com.cxyz.check.model.IDailyModel;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
@@ -24,39 +25,37 @@ import java.util.Map;
 public class IDailyModelImpl implements IDailyModel {
     @Override
    public void getStus(int grade, final GetStusListener listener) {
-        Map<String,String> map = new HashMap();
-        map.put("method","getGradeStus");
-        map.put("grade",grade+"");
-        RequestParams params = new RequestParams(map);
-        try {
-            CommonOkHttpClient.post(NetWorkConstant.GET_STUS,params,new DisposeDataHandler(new DisposeDataListener() {
-                @Override
-                public void onSuccess(Object responseObj) {
-                    List<Student> stus = JsonUtil.jsonToListObject(responseObj.toString(),Student.class);
-                    if(listener!=null)
-                    {
-                        if (stus == null) {
-                            listener.onFail("获取资源错误！");
-                            return;
-                        }
-                        else{
-                            listener.onSuccess(stus);
-                        }
-                    }
-                }
 
-                @Override
-                public void onFailure(Object error) {
-                    if(listener!=null)
-                    {
-                        listener.onFail(error);
+        //请求数据并回调listener
+        RequestCenter.getStus(grade,new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                List<Student> stus = JsonUtil.jsonToListObject(responseObj.toString(),Student.class);
+                if(listener!=null)
+                {
+                    if (stus == null) {
+                        listener.onFail("获取资源错误！");
+                        return;
+                    }
+                    else{
+                        listener.onSuccess(stus);
                     }
                 }
-            }));
-        } catch (NetworkErrorException e) {
-            e.printStackTrace();
-            listener.onFail("网络状态异常");
-        }
+            }
+
+            @Override
+            public void onFailure(Object error) {
+                if(listener!=null)
+                {
+                    if(error instanceof OKHttpException)
+                        listener.onFail(((OKHttpException) error).getMessage());
+                    else if(error instanceof String)
+                        listener.onFail(error.toString());
+                    else
+                        listener.onFail(null);
+                }
+            }
+        });
     }
 
     @Override

@@ -6,9 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.fragment.BaseFragment;
-import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.mine.IPresenter.presenter.IMinePresenter;
 import com.cxyz.mine.R;
 import com.cxyz.mine.activity.ApponitmentActivity;
@@ -39,7 +37,6 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
 
     @Override
     protected void initData(Bundle bundle) {
-
     }
 
     @Override
@@ -54,12 +51,7 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
 
     @Override
     protected IMinePresenter createIPresenter() {
-        return new IMinePresenter() {
-            @Override
-            public IBaseModel createModel() {
-                return super.createModel();
-            }
-        };
+        return null;
     }
 
     @Override
@@ -129,6 +121,8 @@ public class MineFragment extends BaseFragment<IMinePresenter> implements View.O
         else if(viewId == R.id.tv_mine_useradvice)
             tv_mine_useradvice();
         else if(viewId == R.id.tv_mine_update)
-            ToastUtil.showShort("已是最新版本");
+        {
+
+        }
     }
 }

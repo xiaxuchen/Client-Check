@@ -3,8 +3,6 @@ package com.cxyz.check.ipresenter.ipresenterimpl;
 import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.model.IDailyModel;
 import com.cxyz.check.model.imodelimpl.IDailyModelImpl;
-import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
-import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.logiccommons.domain.Check;
 import com.cxyz.logiccommons.domain.CheckRecord;
 import com.cxyz.logiccommons.domain.Student;
@@ -30,10 +28,7 @@ public class IDailyPresenterImpl extends IDailyPresenter{
 
             @Override
             public void onFail(Object fail) {
-                if(fail instanceof  String)
-                    mIView.showError(fail);
-                else if(fail instanceof OKHttpException)
-                    mIView.showError(((OKHttpException) fail).getMessage());
+                mIView.showError(fail);
                 mIView.hideLoadingView();
             }
         });

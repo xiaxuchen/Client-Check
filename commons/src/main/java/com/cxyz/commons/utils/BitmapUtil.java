@@ -12,6 +12,7 @@ import android.media.ThumbnailUtils;
 import android.text.TextUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * Created by 夏旭晨 on 2018/9/21.
@@ -38,6 +39,17 @@ public class BitmapUtil {
             options.inSampleSize = calculateSampleSize(height, width, options);
             options.inJustDecodeBounds = false;//加载到内存中
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), id, options);
+            return bitmap;
+        }
+
+        public static Bitmap getBitmapFromStream(Context context, InputStream is,int height,int width)
+        {
+            Options options = new Options();
+            options.inJustDecodeBounds = true;//只读取图片，不加载到内存中
+            BitmapFactory.decodeStream(is,null, options);
+            options.inSampleSize = calculateSampleSize(height, width, options);
+            options.inJustDecodeBounds = false;//加载到内存中
+            Bitmap bitmap = BitmapFactory.decodeStream(is,null, options);
             return bitmap;
         }
 

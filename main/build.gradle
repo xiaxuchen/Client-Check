@@ -1,4 +1,4 @@
-if(isDebug.toBoolean())
+if (isDebug.toBoolean())
     apply plugin: 'com.android.application'
 else
     apply plugin: 'com.android.library'
@@ -32,6 +32,7 @@ android {
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
         }
     }
 }

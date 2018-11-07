@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,10 +14,15 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.adapter.FunctionAdapter;
 import com.cxyz.homepage.ipresenter.IHomePresenter;
 import com.cxyz.homepage.ipresenter.impl.IHomePresenterImpl;
 import com.cxyz.homepage.iview.IHomeView;
 import com.cxyz.logiccommons.domain.TaskInfo;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -24,7 +31,8 @@ import com.cxyz.logiccommons.domain.TaskInfo;
 @Route(path="/homepage/HomeFragment")
 public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeView{
 
-
+    //Adapter需要的数据
+    ArrayList<Map<String,Object>> data;
     //用于显示第几周
     private TextView tv_week;
     //用于显示日期
@@ -47,6 +55,10 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
     private LinearLayout ll_statistic;
     //其他信息
     private LinearLayout ll_otherinfo;
+
+    //功能
+    private GridView gv_function;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home_layout;
@@ -59,7 +71,24 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
 
     @Override
     protected void initData(Bundle bundle) {
-
+        int backs[] = new int[]{R.drawable.circleborder,R.drawable.circlebordertwo,
+                R.drawable.circleborderthree,R.drawable.circleborderfour,R.drawable.circleborderfive
+                ,R.drawable.circlebordersix,R.drawable.circleborderseven,R.drawable.circlebordereight};
+        String texts[] = new String[]{"考勤","考勤图表","月历课次","请假申请",
+                "班级课表","成绩情况","统计报告","其他信息"};
+        int imgs[] = new int[]{R.drawable.checkin,R.drawable.checkcharts,R.drawable.monthclass,
+                R.drawable.appointapply,R.drawable.classlist,R.drawable.gradescase,R.drawable.statistics,
+                R.drawable.othercondition};
+        data = new ArrayList<>();
+        Map<String,Object> map = null;
+        for(int i = 0;i<backs.length;i++)
+        {
+            map = new HashMap<>();
+            map.put("back",backs[i]);
+            map.put("text",texts[i]);
+            map.put("img",imgs[i]);
+            data.add(map);
+        }
     }
     /**
      * 初始化view的
@@ -71,15 +100,10 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
         tv_week = findViewById(R.id.tv_week);
         tv_date = findViewById(R.id.tv_date);
         tv_location = findViewById(R.id.tv_location);
-        ll_checkpic = findViewById(R.id.ll_checkpic);
-        ll_grade_lessons = findViewById(R.id.ll_grade_lessons);
-        ll_month_lessons = findViewById(R.id.ll_month_lessons);
-        ll_otherinfo = findViewById(R.id.ll_otherinfo);
-        ll_score = findViewById(R.id.ll_score);
-        ll_check = findViewById(R.id.ll_signin);
-        ll_statistic = findViewById(R.id.ll_statistic);
-        ll_vacation = findViewById(R.id.ll_vacation);
+        gv_function = findViewById(R.id.gv_function);
+        gv_function.setAdapter(new FunctionAdapter(getActivity(),data,R.layout.item_function_layout));
     }
+
     @Override
     protected IHomePresenter createIPresenter() {
         return new IHomePresenterImpl();
@@ -90,23 +114,17 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
      */
     @Override
     protected void setListener() {
-        ll_check.setOnClickListener(new View.OnClickListener() {
+        gv_function.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
-            public void onClick(View view) {
-                iPresenter.checkTask();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i)
+                {
+                    case 0:iPresenter.checkTask();break;
+                    default:ToastUtil.showShort("此功能正在扩充");
+                }
             }
         });
-    }
-
-
-    @Override
-    public void showLoadingView() {
-
-    }
-
-    @Override
-    public void hideLoadingView() {
-
     }
 
     /**
@@ -151,7 +169,7 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 ARouter.getInstance().build("/check/DailyCheckActivity").
-                        withInt("compId",info.getCompletion().get_id());
+                        withInt("compId",info.getCompletion().get_id()).navigation();
                 dialogInterface.dismiss();
             }
         });
@@ -163,4 +181,5 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
         });
         builder.create().show();
     }
+
 }

@@ -4,11 +4,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
+import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
-import com.cxyz.commons.utils.JsonUtil;
 import com.cxyz.commons.utils.LogUtil;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -62,13 +64,18 @@ public class CommonJsonCallback implements Callback {
         LogUtil.e(result);
         if(TextUtils.isEmpty(result))
         {
-            listener.onFailure(null);
+            listener.onFailure(new OKHttpException(OKHttpException.EMPTY));
             return;
         }
         if(clazz!=null)
         {
             Object o = null;
-            o = JsonUtil.jsonToObject(result, clazz);
+            try {
+                o = GsonUtil.fromJson(result, clazz);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                listener.onFailure("服务器异常");
+            }
             if(o!=null)
             {
                 listener.onSuccess(o);

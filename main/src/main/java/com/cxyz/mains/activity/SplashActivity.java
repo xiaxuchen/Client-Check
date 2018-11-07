@@ -2,6 +2,8 @@ package com.cxyz.mains.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -10,6 +12,7 @@ import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.logiccommons.service.UpdateService;
 import com.cxyz.mains.R;
 import com.cxyz.mains.ipresenter.ISplashPresenter;
 import com.cxyz.mains.ipresenter.ipresenterimpl.ISplashPresenterImpl;
@@ -18,6 +21,7 @@ import com.cxyz.mains.iview.ISplashView;
 import java.io.File;
 
 public class SplashActivity extends BaseActivity<ISplashPresenter> implements ISplashView {
+
 
     /**
      * 至少让用户看三秒钟
@@ -31,13 +35,17 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     private long start_time;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public int getContentViewId() {
         return R.layout.activity_splash_layout;
     }
 
     @Override
     public void initView() {
-        pb_pro = (ProgressBar) findViewById(R.id.pb_pro);
     }
 
     @Override
@@ -50,12 +58,16 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
 
     }
 
+
     @Override
     protected void afterInit() {
         super.afterInit();
         start_time = System.currentTimeMillis();
-        //iPresenter.Update();
-        iPresenter.autoLogin();
+        //初始化完成后根据sp中的update值选择更新或自动登录
+        if(getSpUtil().getBoolean("update",true))
+            iPresenter.Update();
+        else
+            iPresenter.autoLogin();
     }
 
     @Override
@@ -64,38 +76,31 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     }
 
     @Override
-    public void showLoadingView() {
-        if(pb_pro != null)
-            pb_pro.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideLoadingView() {
-        if(pb_pro != null)
-            pb_pro.setVisibility(View.GONE);
-    }
-
-    @Override
     protected boolean isFullScreen() {
         return true;
     }
 
     @Override
-    public void showUpdateView(String version, String des,final String url) {
+    public void showUpdateView(int versionCode, String des,final String url) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.mipmap.common_logo);
-        builder.setTitle("发现新版本"+version);
-        builder.setMessage(des+"是否更新？");
+        builder.setTitle("发现新版本"+versionCode);
+        builder.setMessage(des);
         builder.setPositiveButton("更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                iPresenter.download(url);
+                Intent intent = new Intent(getActivity(),UpdateService.class);
+                intent.putExtra("apkUrl",url);
+                startService(intent);
+                dialog.dismiss();
+                noUpdate();
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                exitSplash();
+                dialog.dismiss();
+                noUpdate();
             }
         });
         dialog = builder.create();
@@ -123,6 +128,11 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
             }
         });
 
+    }
+
+    @Override
+    public void noUpdate() {
+        iPresenter.autoLogin();
     }
 
     @Override
@@ -164,15 +174,14 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
                         @Override
                         public void run() {
                             SystemClock.sleep(TARGETTIME-len);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    runnable.run();
-                                }
-                            });
+                            runOnUiThread(runnable);
                         }
                     }
             ).start();
+        }else
+        {
+            runnable.run();
         }
     }
+
 }

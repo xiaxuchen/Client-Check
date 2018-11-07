@@ -6,14 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".acitivity.MessageActivity">
-    <View
-        android:background="#6495ed"
-        android:layout_width="match_parent"
-        android:layout_height="23dp"/>
     <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp">
+        >
     </com.cxyz.commons.widget.TitleView>
     <LinearLayout
         android:orientation="horizontal"

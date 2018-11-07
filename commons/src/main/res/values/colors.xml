@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="common_primary_color">#0CA2FF</color>
     <color name="common_white">#ffffff</color>
+    <color name="common_line">#bfbfbf</color>
 </resources>
