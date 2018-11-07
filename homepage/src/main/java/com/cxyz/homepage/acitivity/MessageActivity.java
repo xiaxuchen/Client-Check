@@ -69,10 +69,13 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
         recyclerView = findViewById(R.id.recyclerView);
         btn_check = findViewById(R.id.btn_check);
         btn_clazz = findViewById(R.id.btn_clazz);
+
         messageRVAdapter = new MessageRVAdapter();
         taskInfoRVAdapter = new TaskInfoRVAdapter();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
@@ -120,12 +123,11 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
                             for (int j = 0 ; j < taskInfos.size() ; j++){
                                     taskInfoCells.add(new TaskInfoCell(taskInfos.get(j)));
                             }
+                            recyclerView.setAdapter(taskInfoRVAdapter);
                             taskInfoRVAdapter.clear();
                             taskInfoRVAdapter.addAll(taskInfoCells);
-                            recyclerView.setAdapter(taskInfoRVAdapter);
                             LogUtil.e(taskInfos.toString());
                         }
-
 
                         @Override
                         public void onFailure(Object error) {
@@ -146,9 +148,9 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
                             for (int j = 0 ; j < recordDetails.size() ; j++){
                                 userClazzsCells.add(new MessageCell(recordDetails.get(j)));
                             }
+                            recyclerView.setAdapter(taskInfoRVAdapter);
                             messageRVAdapter.clear();
                             messageRVAdapter.addAll(userClazzsCells);
-                            recyclerView.setAdapter(taskInfoRVAdapter);
                             LogUtil.e(recordDetails.toString());
                         }
 
