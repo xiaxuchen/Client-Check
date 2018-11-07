@@ -25,6 +25,7 @@ import java.util.Map;
 public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements IMyCheckView {
     //出勤率
     private QMUIProgressBar qmuiProgressBar;
+    //异常详情
     private ExpandableListView el_checksituation;
     //多少天多少异常
     private TextView tv_dayinfo;
@@ -36,6 +37,8 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
     private TextView tv_progress;
     //考勤异常
     private TextView tv_checkerror;
+    //记录是否为第一次加载
+    private int first = 0;
 
     //进度
     private int progress;
@@ -93,7 +96,6 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
         tv_checkerror = findViewById(R.id.tv_checkerror);
         tv_late = findViewById(R.id.tv_late);
         tv_absent = findViewById(R.id.tv_absent);
-        iPresenter.showRecords();
     }
 
 
@@ -118,6 +120,14 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
 
     }
 
+    @Override
+    protected void onLazyLoad() {
+        super.onLazyLoad();
+        //如果是第一次显示则加载数据，因为加载adapter会显示一次，所以真正第一次用户看到是在第二次
+        if(first == 1)
+            iPresenter.showRecords();
+        first++;
+    }
 
     @Override
     public void showRecords(List<Map<String, Object>> data,int times,int checkerror,int lateAndEarly,int absent,int progress) {
@@ -154,13 +164,4 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
         ToastUtil.showShort(error);
     }
 
-    @Override
-    public void showLoadingView() {
-
-    }
-
-    @Override
-    public void hideLoadingView() {
-
-    }
 }

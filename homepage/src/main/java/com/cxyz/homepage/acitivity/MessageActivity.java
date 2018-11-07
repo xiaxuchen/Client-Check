@@ -26,6 +26,8 @@ import com.haibin.calendarview.CalendarLayout;
 import com.haibin.calendarview.CalendarView;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +110,12 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
                     RequestCenter.getTaskInfos(122, date, new DisposeDataListener() {
                         @Override
                         public void onSuccess(Object responseObj) {
-                            List<TaskInfo> taskInfos = GsonUtil.GsonToList(responseObj.toString(), TaskInfo.class);
+                            List<TaskInfo> taskInfos = null;
+                            try {
+                                taskInfos = (List<TaskInfo>) GsonUtil.fromJson(responseObj.toString(), TaskInfo.class);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             List<TaskInfoCell> taskInfoCells = new ArrayList<>();
                             for (int j = 0 ; j < taskInfos.size() ; j++){
                                     taskInfoCells.add(new TaskInfoCell(taskInfos.get(j)));
@@ -119,6 +126,7 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
                             LogUtil.e(taskInfos.toString());
                         }
 
+
                         @Override
                         public void onFailure(Object error) {
                             LogUtil.e(error.toString());
@@ -128,7 +136,12 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
                     RequestCenter.getRecords("17478093", 0, new DisposeDataListener() {
                         @Override
                         public void onSuccess(Object responseObj) {
-                            List<RecordDetail> recordDetails = GsonUtil.GsonToList(responseObj.toString(),RecordDetail.class);
+                            List<RecordDetail> recordDetails = null;
+                            try {
+                                recordDetails = (List<RecordDetail>) GsonUtil.fromJson(responseObj.toString(),RecordDetail.class);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             List<MessageCell> userClazzsCells = new ArrayList<>();
                             for (int j = 0 ; j < recordDetails.size() ; j++){
                                 userClazzsCells.add(new MessageCell(recordDetails.get(j)));

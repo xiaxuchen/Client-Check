@@ -31,7 +31,7 @@ public class IHomeModelImpl implements IHomeModel {
                     {
                         LogUtil.e(responseObj.toString());
                         try {
-                            listener.onSuccess(GsonUtil.GsonToBean(responseObj.toString(), TaskInfo.class));
+                            listener.onSuccess((TaskInfo) GsonUtil.fromJson(responseObj.toString(), TaskInfo.class));
                         } catch (JSONException e) {
                             e.printStackTrace();
                             listener.onFail("服务器异常");
@@ -46,9 +46,12 @@ public class IHomeModelImpl implements IHomeModel {
                         if(error instanceof String)
                             listener.onFail(error.toString());
                         else if(error instanceof OKHttpException)
-                            listener.onFail(((OKHttpException) error).getMessage());
-                        else
-                            listener.onFail("当前暂无考勤任务");
+                        {
+                            if(((OKHttpException) error).getCode() == OKHttpException.EMPTY)
+                                listener.onFail("当前暂无考勤任务");
+                            else
+                                listener.onFail(((OKHttpException) error).getMessage());
+                        }
                     }
                 }
             });

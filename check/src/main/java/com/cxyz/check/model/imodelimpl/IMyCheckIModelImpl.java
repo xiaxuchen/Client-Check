@@ -31,41 +31,47 @@ public class IMyCheckIModelImpl implements IMyCheckModel {
             @Override
             public void onSuccess(Object responseObj) {
                 if(listener!=null) {
-                    final List<RecordDetail> recordDetails = GsonUtil.GsonToList(responseObj.toString(), RecordDetail.class);
-                    Integer grade_id = UserManager.getInstance().getUser().getGrade().get_id();
-                    LogUtil.e(grade_id+"");
-                    //获取记录成功，获取考勤统计结果
-                    RequestCenter.getStatistic(id,grade_id ,new DisposeDataListener() {
-                        @Override
-                        public void onSuccess(Object responseObj) {
-                            //将json字符串转化为对象
-                            Statistic statistic = null;
-                            try {
-                                statistic = GsonUtil.GsonToBean(responseObj.toString(), Statistic.class);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                listener.onFail("服务器异常");
+                    try {
+                        final List<RecordDetail> recordDetails = (List<RecordDetail>) GsonUtil
+                                .fromJson(responseObj.toString(), RecordDetail.class);
+                        Integer grade_id = UserManager.getInstance().getUser().getGrade().get_id();
+                        LogUtil.e(grade_id+"");
+                        //获取记录成功，获取考勤统计结果
+                        RequestCenter.getStatistic(id,grade_id ,new DisposeDataListener() {
+                            @Override
+                            public void onSuccess(Object responseObj) {
+                                //将json字符串转化为对象
+                                Statistic statistic = null;
+                                try {
+                                    statistic = (Statistic) GsonUtil.fromJson(responseObj.toString(), Statistic.class);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    listener.onFail("服务器异常");
+                                }
+                                //计算异常次数
+                                int checkerror = statistic.getLate()+statistic.getEarly_leave()+statistic
+                                        .getTruant()+statistic.get_leave();
+                                //计算出勤率
+                                int progress = (statistic.getTimes()-checkerror)*100/statistic.getTimes();
+                                listener.onSuccess(handleData(recordDetails),statistic.getTimes()
+                                ,checkerror,statistic.getLate()+statistic.getEarly_leave(),
+                                        statistic.getTruant(),progress);
                             }
-                            //计算异常次数
-                            int checkerror = statistic.getLate()+statistic.getEarly_leave()+statistic
-                                    .getTruant()+statistic.get_leave();
-                            //计算出勤率
-                            int progress = (statistic.getTimes()-checkerror)*100/statistic.getTimes();
-                            listener.onSuccess(handleData(recordDetails),statistic.getTimes()
-                            ,checkerror,statistic.getLate()+statistic.getEarly_leave(),
-                                    statistic.getTruant(),progress);
-                        }
 
-                        @Override
-                        public void onFailure(Object error) {
-                            if(error instanceof String)
-                            listener.onFail(error.toString());
-                            else if (error instanceof OKHttpException)
-                                listener.onFail(((OKHttpException) error).getMessage());
-                            else
-                                listener.onFail("未知错误");
-                        }
-                    });
+                            @Override
+                            public void onFailure(Object error) {
+                                if(error instanceof String)
+                                listener.onFail(error.toString());
+                                else if (error instanceof OKHttpException)
+                                    listener.onFail(((OKHttpException) error).getMessage());
+                                else
+                                    listener.onFail("未知错误");
+                            }
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        listener.onFail(e.getMessage());
+                    }
                 }
 
             }
@@ -75,13 +81,21 @@ public class IMyCheckIModelImpl implements IMyCheckModel {
                 if(error instanceof String)
                     listener.onFail(error.toString());
                 else if (error instanceof OKHttpException)
+                {
                     listener.onFail(((OKHttpException) error).getMessage());
+                    LogUtil.e(((OKHttpException) error).getMessage());
+                }
                 else
                     listener.onFail("未知错误");
             }
         });
     }
 
+    /**
+     * 将数据处理成List<Map<String,Object>> 类型
+     * @param rds
+     * @return
+     */
     private List<Map<String,Object>> handleData(List<RecordDetail> rds)
     {
         List<Map<String,Object>> data = new ArrayList<>();

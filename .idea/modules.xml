@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/check/check.iml" filepath="$PROJECT_DIR$/check/check.iml" />
       <module fileurl="file://$PROJECT_DIR$/commons/commons.iml" filepath="$PROJECT_DIR$/commons/commons.iml" />
-      <module fileurl="file://$PROJECT_DIR$/commons/commons.iml" filepath="$PROJECT_DIR$/commons/commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/homepage/homepage.iml" filepath="$PROJECT_DIR$/homepage/homepage.iml" />
       <module fileurl="file://$PROJECT_DIR$/logiccommons/logiccommons.iml" filepath="$PROJECT_DIR$/logiccommons/logiccommons.iml" />
       <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
