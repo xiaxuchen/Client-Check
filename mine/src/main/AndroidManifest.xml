@@ -19,7 +19,7 @@
         <activity android:name=".activity.RestPwdActivity"></activity>
         <activity android:name=".activity.check"></activity>
         <activity android:name=".activity.CheckHomepageActivity"></activity>
-        <activity android:name=".activity.TestActivity" ></activity>
+        <activity android:name=".activity.AppointmentApplyStuCheckActivity"></activity>
 
     </application>
 

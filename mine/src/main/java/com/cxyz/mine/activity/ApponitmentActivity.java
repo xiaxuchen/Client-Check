@@ -1,5 +1,7 @@
 package com.cxyz.mine.activity;
 
+import android.view.KeyEvent;
+
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.widget.TitleView;
@@ -44,6 +46,7 @@ public class ApponitmentActivity extends BaseActivity {
             @Override
             public void onBackClick() {
                 onBackPressed();
+                overridePendingTransition(R.anim.back_next,R.anim.back_exit);
             }
 
             @Override
@@ -67,5 +70,13 @@ public class ApponitmentActivity extends BaseActivity {
     @Override
     protected IBasePresenter createIPresenter() {
         return null;
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            this.finish();
+            overridePendingTransition(R.anim.back_next,R.anim.back_exit);
+        }
+        return true;
     }
 }
