@@ -133,17 +133,6 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
         });
     }
 
-
-    @Override
-    public void showLoadingView() {
-
-    }
-
-    @Override
-    public void hideLoadingView() {
-
-    }
-
     /**
      * TODO 需要显示一个dialog
      * @param taskInfo
@@ -198,4 +187,5 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
         });
         builder.create().show();
     }
+
 }

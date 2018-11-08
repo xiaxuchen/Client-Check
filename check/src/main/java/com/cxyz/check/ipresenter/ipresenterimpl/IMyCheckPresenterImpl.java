@@ -21,6 +21,7 @@ public class IMyCheckPresenterImpl extends IMyCheckPresenter {
             @Override
             public void onSuccess(List<Map<String, Object>> data, int times, int checkerror, int lateAndEarly, int absent, int progress) {
                 mIView.showRecords(data,times,checkerror,lateAndEarly,absent,progress);
+                mIView.hideLoadingView();
             }
 
             @Override

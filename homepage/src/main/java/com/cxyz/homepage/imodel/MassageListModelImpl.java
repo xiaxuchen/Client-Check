@@ -6,6 +6,10 @@ import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.homepage.constant.RequestCenter;
 import com.cxyz.logiccommons.domain.RecordDetail;
 
+import org.json.JSONException;
+
+import java.util.List;
+
 /**
  * Created by 鱼塘主 on 2018/10/3.
  */
@@ -20,7 +24,12 @@ public class MassageListModelImpl implements MassageListModel {
         RequestCenter.getRecords(id, type, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
-                listener.getInfoSuccess(GsonUtil.GsonToList(responseObj.toString(), RecordDetail.class));
+                try {
+                    listener.getInfoSuccess((List<RecordDetail>) GsonUtil.fromJson(responseObj.toString(), RecordDetail.class));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    listener.getInfFail("服务器解析错误");
+                }
             }
 
             @Override

@@ -25,7 +25,7 @@ public class TaskInfoCell extends CardBaseCell<TaskInfo>{
 
     @Override
     public CardBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CardBaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recylerview_item_taskinfo,null));
+        return new CardBaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recylerview_item_taskinfo,parent,false));
     }
 
     @Override

@@ -49,7 +49,7 @@ public class ILoginModelImpl implements ILoginModel{
                 {
                     User user = null;
                     try {
-                        user = GsonUtil.GsonToBean(responseObj.toString(), User.class);
+                        user = (User) GsonUtil.fromJson(responseObj.toString(), User.class);
                     } catch (JSONException e) {
                         e.printStackTrace();
                         listener.getInfoFail("服务器异常");

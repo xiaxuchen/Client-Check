@@ -3,9 +3,7 @@
     package="com.cxyz.mine">
 
     <application
-
         android:theme="@style/AppTheme">
-
 
         <activity android:name=".activity.oldMyinfoActivity" />
         <activity android:name=".activity.oldAppointmentActivity" />

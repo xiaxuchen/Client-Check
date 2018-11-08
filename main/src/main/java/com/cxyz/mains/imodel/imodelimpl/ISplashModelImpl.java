@@ -9,6 +9,7 @@ import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.mains.constant.NetWorkConstant;
 import com.cxyz.mains.imodel.ISplashModel;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 
@@ -25,7 +26,7 @@ public class ISplashModelImpl implements ISplashModel {
                 public void onSuccess(Object responseObj) {
                     if(listener != null)
                         try {
-                            listener.onUpdate(GsonUtil.GsonToBean(responseObj.toString(), UpdateEntity.class));
+                            listener.onUpdate((UpdateEntity) GsonUtil.fromJson(responseObj.toString(), new TypeToken<UpdateEntity>(){}.getType()));
                         } catch (JSONException e) {
                             e.printStackTrace();
                             listener.onFail("服务器异常");
