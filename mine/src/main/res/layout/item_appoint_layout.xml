@@ -7,6 +7,7 @@
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -18,49 +19,49 @@
 
             <com.qmuiteam.qmui.widget.QMUIRadiusImageView
                 android:id="@+id/iv_appointmentstu_image"
-                android:layout_width="74dp"
+                android:layout_width="70dp"
                 android:layout_height="match_parent" />
 
             <LinearLayout
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_appointmentstu_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="张全蛋"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_appointmentstu_code"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="17478000"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_appointmentstu_info"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="详情信息"
                     android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="178dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/bt_appointmentstu_check"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@drawable/main_shape"
                     android:text="审核"
-                    android:layout_gravity="center"
-                    android:textColor="@color/common_white"
-                    android:background="@drawable/main_shape"/>
+                    android:textColor="@color/common_white" />
             </LinearLayout>
 
         </LinearLayout>

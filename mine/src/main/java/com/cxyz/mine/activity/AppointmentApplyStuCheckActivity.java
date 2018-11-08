@@ -7,7 +7,7 @@ import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.mine.R;
 import com.cxyz.mine.adapter.AppoitmentAdapter;
-import com.cxyz.mine.bean.AppointmentInfo;
+import com.cxyz.mine.bean.AppointmentInfoBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class AppointmentApplyStuCheckActivity extends BaseActivity {
     private ListView lv_applyment_applyinfo;
-    private List<AppointmentInfo> mData;
+    private List<AppointmentInfoBean> mData;
 
     @Override
     public int getContentViewId() {
@@ -39,12 +39,12 @@ public class AppointmentApplyStuCheckActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mData = new ArrayList<AppointmentInfo>();
-        AppointmentInfo tangmaru = new AppointmentInfo("唐马儒", "17478001", "2018.10.28", "心痛2009",
+        mData = new ArrayList<AppointmentInfoBean>();
+        AppointmentInfoBean tangmaru = new AppointmentInfoBean("唐马儒", "17478001", "2018.10.28", "心痛2009",
                 "没法抗拒浓情蜜意  始终思念你 好想给你知 柔情常在心中想放肆  愿对你说声浓情莫变", R.mipmap.member);
-        AppointmentInfo lisi = new AppointmentInfo("李四", "17478002", "2018.10.29", "心痛20010",
+        AppointmentInfoBean lisi = new AppointmentInfoBean("李四", "17478002", "2018.10.29", "心痛20010",
                 "没法抗拒浓情蜜意  始终思念你 好想给你知 柔情常在心中想放肆  愿对你说声浓情莫变",R.mipmap.newspaper);
-        AppointmentInfo zhangsan = new AppointmentInfo("张三", "17478003", "2018.10.30", "心痛20011",
+        AppointmentInfoBean zhangsan = new AppointmentInfoBean("张三", "17478003", "2018.10.30", "心痛20011",
                 "没法抗拒浓情蜜意  始终思念你 好想给你知 柔情常在心中想放肆  愿对你说声浓情莫变", R.mipmap.notice);
         mData.add(tangmaru);
         mData.add(zhangsan);

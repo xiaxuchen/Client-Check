@@ -4,6 +4,7 @@
         android:theme="@style/AppTheme"
         android:supportsRtl="true">
         <activity android:name=".acitivity.MessageActivity" />
+        <activity android:name=".acitivity.DailyCheckActivitymore"></activity>
     </application>
 
 </manifest>

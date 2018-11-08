@@ -4,7 +4,7 @@ package com.cxyz.mine.bean;
  * Created by Administrator on 2018/10/28.
  */
 
-public class AppointmentInfo {
+public class AppointmentInfoBean {
     private int image;
     private  String name;
     private String code;
@@ -14,7 +14,7 @@ public class AppointmentInfo {
 
 
 
-    public   AppointmentInfo(String name ,String code,String time,String reason,String moreinfo,int image){
+    public AppointmentInfoBean(String name , String code, String time, String reason, String moreinfo, int image){
        this.name=name;
        this.code=code;
        this.time=time;

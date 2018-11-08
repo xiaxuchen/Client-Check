@@ -2,6 +2,7 @@ package com.cxyz.homepage.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.acitivity.DailyCheckActivitymore;
 import com.cxyz.homepage.adapter.FunctionAdapter;
 import com.cxyz.homepage.ipresenter.IHomePresenter;
 import com.cxyz.homepage.ipresenter.impl.IHomePresenterImpl;
@@ -121,6 +123,10 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
                 switch (i)
                 {
                     case 0:iPresenter.checkTask();break;
+                    case 1:{
+                        Intent intent=new Intent(getActivity().getApplicationContext(), DailyCheckActivitymore.class);
+                        startActivity(intent);break;
+                    }
                     default:ToastUtil.showShort("此功能正在扩充");
                 }
             }
@@ -179,7 +185,7 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ARouter.getInstance().build("/check/DailyCheckActivity").
+                ARouter.getInstance().build("/check/DailyCheckActivitymore").
                         withInt("compId",info.getCompletion().get_id()).navigation();
                 dialogInterface.dismiss();
             }
