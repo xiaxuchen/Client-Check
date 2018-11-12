@@ -8,7 +8,7 @@ import com.cxyz.commons.date.DateTime;
 
 public class UpdateRecord{
     public int _id;
-    public Student student;
+    public User student;
     public int result;
     public TaskCompletion taskCompletion;
     public User updater;

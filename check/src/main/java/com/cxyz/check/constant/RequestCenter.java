@@ -20,11 +20,10 @@ public class RequestCenter {
     public static void getStus(int grade, DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap();
-        map.put("method","getGradeStus");
         map.put("grade",grade+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.post(NetWorkConstant.GET_STUS,params,new DisposeDataHandler(listener));
+            CommonOkHttpClient.get(NetWorkConstant.GET_STUS,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
@@ -35,17 +34,18 @@ public class RequestCenter {
      * 通过用户id和所查记录类型查找违规记录(考勤情况)
      * @param id 用户id
      * @param type 记录类型
+     * @param grade 班级id
      * @param listener 回调
      */
-    public static void getRecords(String id, Integer type, DisposeDataListener listener)
+    public static void getGradeCheck(String id, Integer type,int grade, DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
-        map.put("method","getRecordDetails");
         map.put("id",id);
         map.put("type",type+"");
+        map.put("grade",grade+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.post(NetWorkConstant.RDS_URL,params,new DisposeDataHandler(listener));
+            CommonOkHttpClient.get(NetWorkConstant.GRADE_CHECK_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
@@ -68,6 +68,21 @@ public class RequestCenter {
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
+        }
+    }
+
+    public static void commitCheck(String commitCheck,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("commitCheck",commitCheck);
+        RequestParams params = new RequestParams(map);
+        //发送请求
+        try {
+            CommonOkHttpClient.post(NetWorkConstant.COMMIT_URL,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            if(listener!=null)
+                listener.onFailure("网络状态异常");
         }
     }
 }

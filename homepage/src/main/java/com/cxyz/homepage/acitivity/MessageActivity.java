@@ -183,16 +183,6 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
     }
 
     @Override
-    protected boolean isShowTitle() {
-        return true;
-    }
-
-    @Override
-    protected boolean isStateBar() {
-        return true;
-    }
-
-    @Override
     public void showLoadingView() {
 
     }

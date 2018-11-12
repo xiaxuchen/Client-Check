@@ -1,12 +1,11 @@
 package com.cxyz.check.ipresenter.ipresenterimpl;
 
+import com.cxyz.check.dto.CheckRecordDto;
 import com.cxyz.check.ipresenter.IMyCheckPresenter;
 import com.cxyz.check.model.IMyCheckModel;
 import com.cxyz.check.model.imodelimpl.IMyCheckIModelImpl;
+import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 夏旭晨 on 2018/10/20.
@@ -15,12 +14,15 @@ import java.util.Map;
 public class IMyCheckPresenterImpl extends IMyCheckPresenter {
     @Override
     public void showRecords() {
+        User user = UserManager.getInstance().getUser();
         mIView.showLoadingView();
-        mIModle.getRds(UserManager.getInstance().getUser().get_id(), new IMyCheckModel.getRdsListener() {
+        mIModle.getCheckRecords(user.getId(), user.getType(), user.getGradeId(),
+                new IMyCheckModel.getCheckRecordsListener() {
+
 
             @Override
-            public void onSuccess(List<Map<String, Object>> data, int times, int checkerror, int lateAndEarly, int absent, int progress) {
-                mIView.showRecords(data,times,checkerror,lateAndEarly,absent,progress);
+            public void onSuccess(CheckRecordDto dto) {
+                mIView.showRecords(dto);
                 mIView.hideLoadingView();
             }
 

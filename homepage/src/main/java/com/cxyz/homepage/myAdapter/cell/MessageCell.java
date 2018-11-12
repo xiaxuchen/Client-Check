@@ -51,7 +51,7 @@ public class MessageCell extends CardBaseCell<RecordDetail>{
                     holder.setText(R.id.tv_item_checkstation,"早退");
                 break;
             }
-            holder.setText(R.id.tv_checkname,mData.getChecker().get_name());
+            holder.setText(R.id.tv_checkname,mData.getChecker().getName());
             holder.setText(R.id.tv_checkreson,mData.getDes());
             holder.setText(R.id.tv_checktime,mData.getCheckTime().toString());
 

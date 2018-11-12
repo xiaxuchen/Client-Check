@@ -8,7 +8,7 @@ package com.cxyz.logiccommons.domain;
 public class School {
 	
 	private String _name;//学校姓名
-    private Teacher manager;//校部管理员
+    private User manager;//校部管理员
     private Integer _id;//学校编号
     
     public School(){}
@@ -28,10 +28,10 @@ public class School {
 	public void set_name(String _name) {
 		this._name = _name;
 	}
-	public Teacher getManager() {
+	public User getManager() {
 		return manager;
 	}
-	public void setManager(Teacher manager) {
+	public void setManager(User manager) {
 		this.manager = manager;
 	}
 	@Override

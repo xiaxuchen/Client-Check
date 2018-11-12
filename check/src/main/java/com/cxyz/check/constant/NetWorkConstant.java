@@ -1,19 +1,21 @@
 package com.cxyz.check.constant;
 
+import com.cxyz.logiccommons.constant.Constant;
+
 /**
  * Created by 夏旭晨 on 2018/9/30.
  */
 
 public class NetWorkConstant {
 
-    public static final String ROOT_URL = "http://192.168.43.73:8080/Service_Check";
+    public static final String ROOT_URL = "http:/119.29.101.171:8080/Server_Check/check";
 
     //获取班级学生的url
-    public static final String GET_STUS = ROOT_URL+"/servlet/UserServlet";
+    public static final String GET_STUS = Constant.ROOT_URL+"/gradeStus";
     //提交的url
-    public static  final String COMMIT_URL = ROOT_URL+"/servlet/CheckServlet";
+    public static  final String COMMIT_URL = Constant.ROOT_URL+"/commitCheck";
     //查看考勤记录的url
-    public static final String RDS_URL = ROOT_URL+"/servlet/CheckServlet";
+    public static final String GRADE_CHECK_URL = Constant.ROOT_URL+"/getGradeCheck";
     //获取统计结果
-    public static final String STATISTIC_URL = ROOT_URL+"/servlet/StatisticServlet";
+    public static final String STATISTIC_URL = Constant.ROOT_URL+"/servlet/StatisticServlet";
 }

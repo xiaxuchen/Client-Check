@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class VacCheck {
     public int _id;
-    public Teacher checker;
+    public User checker;
     public Date update_time;
     public String _describe;
     public int state;

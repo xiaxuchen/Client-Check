@@ -10,14 +10,18 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.check.R;
 import com.cxyz.check.adapter.RecordAdapter;
+import com.cxyz.check.dto.CheckRecordDto;
 import com.cxyz.check.ipresenter.IMyCheckPresenter;
 import com.cxyz.check.ipresenter.ipresenterimpl.IMyCheckPresenterImpl;
 import com.cxyz.check.view.IMyCheckView;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.logiccommons.typevalue.CheckRecordResult;
 import com.qmuiteam.qmui.widget.QMUIProgressBar;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -117,7 +121,6 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
 
     @Override
     protected void setListener() {
-
     }
 
     @Override
@@ -129,17 +132,82 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
         first++;
     }
 
+
+    /**
+     * 进行数据转换获取List<Map<String,Object>>类型数据
+     * @param infos 源数据
+     * @return
+     */
+    private List<Map<String,Object>> parse(List<CheckRecordDto.RecordInfo> infos)
+    {
+        //各种考勤结果
+        int types[] = {CheckRecordResult.ABSENTEEISM,CheckRecordResult.
+                EARLYLEAVE,CheckRecordResult.LATE,CheckRecordResult.VACATE};
+
+        //与考勤结果相对应的子view的数据List
+        List<CheckRecordDto.RecordInfo> infoList[] = new List[4];
+
+        List<Map<String,Object>> list = new ArrayList<>();
+
+
+        //创建List对象
+        for(int i = 0;i<infoList.length;i++)
+        {
+            infoList[i] = new ArrayList<>();
+        }
+
+        //将数据封装到list中
+        for(CheckRecordDto.RecordInfo info:infos)
+        {
+            int i = 0;
+            for(int type:types)
+            {
+                if(type == info.getResult())
+                {
+                    infoList[i].add(info);
+                    break;
+                }
+                i++;
+            }
+        }
+
+        for(int i = 0;i<infoList.length;i++)
+        {
+            if(infoList[i].size() > 0)
+            {
+                Map<String,Object> data = new HashMap<>();
+                data.put("child",infoList[i]);
+                data.put("parent",new RecordAdapter.ParentInfo(types[i],infoList[i].size()));
+                list.add(data);
+            }
+        }
+
+        LogUtil.e(list.toString());
+
+        return list;
+    }
+
     @Override
-    public void showRecords(List<Map<String, Object>> data,int times,int checkerror,int lateAndEarly,int absent,int progress) {
-        el_checksituation.setAdapter(new RecordAdapter(data,getActivity()));
-        tv_absent.setText("旷课"+absent+"次");
-        tv_late.setText("迟到/早退"+lateAndEarly+"次");
-        tv_checkerror.setText(checkerror+"项考勤异常");
-        tv_dayinfo.setText(times+"次考勤共"+checkerror+"次项勤异常");
+    public void showRecords(CheckRecordDto checkRecordDto) {
+
+        //由于进度和不良记录条数由计算得出，为避免重复计算使用变量记录
+        int pro = checkRecordDto.getProgress();
+        int badCount = checkRecordDto.getBadCount();
+
+        //更新view
+        el_checksituation.setAdapter(new RecordAdapter(parse(checkRecordDto.getRecordInfos()),getActivity()));
+        tv_absent.setText("旷课"+checkRecordDto.getAbsenteeism()+"次");
+        tv_late.setText("迟到/早退"+checkRecordDto.getEarlyeave()+checkRecordDto.getLate()+"次");
+        tv_checkerror.setText(badCount+"项考勤异常");
+        tv_dayinfo.setText(checkRecordDto.getAll()+"次考勤共"+badCount+"次项勤异常");
         qmuiProgressBar.setMaxValue(100);
-        qmuiProgressBar.setProgress(progress);
-        tvAnimate(0,progress);
-        this.progress = progress;
+        qmuiProgressBar.setProgress(pro);
+
+        //设置动画
+        tvAnimate(0,pro);
+        this.progress = pro;
+
+        //设置监听
         el_checksituation.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
@@ -147,12 +215,10 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
                 if(el_checksituation.isGroupExpanded(i))
                 {
                     iv_indicate.setImageResource(R.mipmap.check_down);
-                    LogUtil.e("down"+i);
                 }
                 else
                 {
                     iv_indicate.setImageResource(R.mipmap.check_up);
-                    LogUtil.e("up"+i);
                 }
                 return false;
             }

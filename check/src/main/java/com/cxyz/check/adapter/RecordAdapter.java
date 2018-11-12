@@ -8,8 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cxyz.check.R;
-import com.cxyz.logiccommons.domain.CheckRecord;
-import com.cxyz.logiccommons.domain.RecordDetail;
+import com.cxyz.check.dto.CheckRecordDto;
+import com.cxyz.commons.date.DateTime;
+import com.cxyz.logiccommons.typevalue.CheckRecordResult;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ public class RecordAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        return ((List<RecordDetail>)data.get(i).get("child")).size();
+        return ((List<CheckRecordDto.RecordInfo>)data.get(i).get("child")).size();
     }
 
     @Override
@@ -46,7 +47,7 @@ public class RecordAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int i, int i1) {
-        return ((List<RecordDetail>)data.get(i).get("child")).get(i1);
+        return ((List<CheckRecordDto.RecordInfo>)data.get(i).get("child")).get(i1);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class RecordAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int i, int i1) {
-        return Integer.parseInt(i+""+i1);
+        return Long.parseLong(i+""+i1);
     }
 
     @Override
@@ -93,11 +94,12 @@ public class RecordAdapter extends BaseExpandableListAdapter {
         }else{
             holder = (ChildViewHolder) view.getTag();
         }
-        RecordDetail item = (RecordDetail) getChild(i, i1);
+        CheckRecordDto.RecordInfo item = (CheckRecordDto.RecordInfo) getChild(i, i1);
 
-        holder.tv_lesson_name.setText(item.get_name());
-        holder.tv_date.setText(item.getCheckTime().getDate());
-        holder.tv_time.setText(item.getCheckTime().getTime());
+        DateTime date = DateTime.fromUDate(item.getDate());
+        holder.tv_lesson_name.setText(item.getName());
+        holder.tv_date.setText(date.getDate());
+        holder.tv_time.setText(date.getTime());
         holder.tv_des.setText(item.getDes()==null?"":item.getDes());
         return view;
     }
@@ -137,22 +139,22 @@ public class RecordAdapter extends BaseExpandableListAdapter {
         {
             switch (result)
             {
-                case CheckRecord.ABSENTEEISM:
+                case CheckRecordResult.ABSENTEEISM:
                 {
                     pic = R.mipmap.check_icon_red;
                     info = count+"次缺勤记录";
                 }break;
-                case CheckRecord.LATE:
+                case CheckRecordResult.LATE:
                 {
                     pic = R.mipmap.check_icon_yellow;
                     info = count+"次迟到记录";
                 }break;
-                case CheckRecord.VACATE:
+                case CheckRecordResult.VACATE:
                 {
                     pic = R.mipmap.check_icon_green;
                     info = count+"次请假记录";
                 }break;
-                case CheckRecord.EARLYLEAVE:
+                case CheckRecordResult.EARLYLEAVE:
                 {
                     pic = R.mipmap.check_icon_blue;
                     info = count+"次早退记录";

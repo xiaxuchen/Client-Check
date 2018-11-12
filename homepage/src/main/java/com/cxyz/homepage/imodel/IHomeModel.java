@@ -1,7 +1,7 @@
 package com.cxyz.homepage.imodel;
 
 import com.cxyz.commons.IModel.IBaseModel;
-import com.cxyz.logiccommons.domain.TaskInfo;
+import com.cxyz.homepage.dto.CheckTaskDto;
 
 /**
  * Created by 夏旭晨 on 2018/10/18.
@@ -14,14 +14,14 @@ public interface IHomeModel extends IBaseModel {
      * @param type 用户类型
      * @return 考勤信息
      */
-    void checkComp(String id, int type, CheckListener listener);
+    void checkComp(String checkerId, int checkerType,int type, CheckListener listener);
 
     interface CheckListener{
 
         /**
          * 请求成功
          */
-        void onSuccess(TaskInfo taskInfo);
+        void onSuccess(CheckTaskDto checkTaskDto);
 
         /**
          * 请求失败

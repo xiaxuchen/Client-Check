@@ -1,8 +1,8 @@
 package com.cxyz.check.model;
 
+import com.cxyz.check.dto.CommitCheckDto;
+import com.cxyz.check.dto.GradeStusDto;
 import com.cxyz.commons.IModel.IBaseModel;
-import com.cxyz.logiccommons.domain.Check;
-import com.cxyz.logiccommons.domain.Student;
 
 import java.util.List;
 
@@ -18,26 +18,36 @@ public interface IDailyModel extends IBaseModel{
      */
     public void getStus(int grade,GetStusListener listener);
 
-    public void commit(Check check, CommitListener listener);
+    public void commit(CommitCheckDto commitCheckDto, CommitListener listener);
 
     interface GetStusListener{
         /**
          * 获取数据成功调用
          * @param stus 获取到的学生
          */
-        public void onSuccess(List<Student> stus);
+        public void onSuccess(List<GradeStusDto> stus);
 
         /**
          * 获取数据失败调用
          * @param fail 错误信息
          */
-        public void onFail(Object fail);
+        public void onFail(String fail);
     }
 
     /**
      * 提交触发的回调事件
      */
     interface CommitListener{
+        /**
+         * 提交成功时触发
+         * @param info 完成信息
+         */
         void onCompletion(String info);
+
+        /**
+         * 提交失败时触发
+         * @param error 错误信息
+         */
+        void onFail(String error);
     }
 }

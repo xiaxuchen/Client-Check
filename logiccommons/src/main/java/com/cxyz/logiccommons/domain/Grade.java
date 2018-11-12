@@ -8,7 +8,7 @@ public class Grade {
 	private Integer _id;//班级编号
 	private String _name;//班级名称
 	private College college;//所属学院
-	private Teacher headTeacher;//班主任
+	private User headTeacher;//班主任
 	private ClassRoom classRoom;//晚自习教室
 	
 	public Grade(){}
@@ -34,10 +34,10 @@ public class Grade {
 	public void setCollege(College college) {
 		this.college = college;
 	}
-	public Teacher getHeadTeacher() {
+	public User getHeadTeacher() {
 		return headTeacher;
 	}
-	public void setHeadTeacher(Teacher headTeacher) {
+	public void setHeadTeacher(User headTeacher) {
 		this.headTeacher = headTeacher;
 	}
 	public ClassRoom getClassRoom() {
