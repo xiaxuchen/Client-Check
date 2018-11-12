@@ -29,7 +29,7 @@ public class EmptyCell extends CardBaseCell<List<TestTask>>{
     @Override
     public CardBaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new CardBaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_error,null));
+        return new CardBaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_error,parent));
     }
 
     @Override

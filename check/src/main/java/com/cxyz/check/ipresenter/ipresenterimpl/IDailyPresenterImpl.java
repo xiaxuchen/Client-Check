@@ -1,15 +1,13 @@
 package com.cxyz.check.ipresenter.ipresenterimpl;
 
+import com.cxyz.check.dto.CommitCheckDto;
+import com.cxyz.check.dto.GradeStusDto;
 import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.model.IDailyModel;
 import com.cxyz.check.model.imodelimpl.IDailyModelImpl;
-import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
-import com.cxyz.commons.utils.LogUtil;
-import com.cxyz.logiccommons.domain.Check;
-import com.cxyz.logiccommons.domain.CheckRecord;
-import com.cxyz.logiccommons.domain.Student;
-import com.cxyz.logiccommons.domain.TaskCompletion;
+import com.cxyz.logiccommons.typevalue.TaskCompletionState;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,41 +18,65 @@ import java.util.Map;
 public class IDailyPresenterImpl extends IDailyPresenter{
     @Override
     public void getStusToShow(int grade) {
-        mIView.showLoadingView();
         mIModle.getStus(grade, new IDailyModel.GetStusListener() {
             @Override
-            public void onSuccess(List<Student> stus) {
+            public void onSuccess(List<GradeStusDto> stus) {
                 mIView.showStus(stus);
-                mIView.hideLoadingView();
+                mIView.hideLoadStus();
             }
 
             @Override
-            public void onFail(Object fail) {
-                if(fail instanceof  String)
-                    mIView.showError(fail);
-                else if(fail instanceof OKHttpException)
-                    mIView.showError(((OKHttpException) fail).getMessage());
-                mIView.hideLoadingView();
+            public void onFail(String fail) {
+                mIView.showError(fail);
             }
         });
     }
 
     @Override
-    public void commit(Map<String, CheckRecord> crs, TaskCompletion completion) {
+    public void commit(Map<String,CommitCheckDto.StuInfo> stuInfos, int completion) {
         mIView.showLoadingView();
-        Check c = Check.getCheck(crs,completion);
-        mIModle.commit(c,new IDailyModel.CommitListener() {
+        mIModle.commit(getCommitCheckDto(getStus(stuInfos),completion),new IDailyModel.CommitListener() {
             @Override
             public void onCompletion(String info) {
-                mIView.showCommitResult(info);
                 mIView.hideLoadingView();
+                mIView.showCommitResult(info);
+            }
+
+            @Override
+            public void onFail(String error) {
+                mIView.showError(error);
             }
         });
 
+    }
+
+    private List<CommitCheckDto.StuInfo> getStus(Map<String, CommitCheckDto.StuInfo> stuInfos) {
+        List<CommitCheckDto.StuInfo> list = new ArrayList<>();
+        for(String key:stuInfos.keySet())
+        {
+            list.add(stuInfos.get(key));
+        }
+        return list;
     }
 
     @Override
     public IDailyModel createModel() {
         return new IDailyModelImpl();
+    }
+
+
+    /**
+     * 封装为dto
+     * @param stuInfos
+     * @param compId
+     * @return
+     */
+    private CommitCheckDto getCommitCheckDto(List<CommitCheckDto.StuInfo> stuInfos,int compId)
+    {
+        CommitCheckDto commitCheckDto = new CommitCheckDto();
+        commitCheckDto.setTaskId(compId);
+        commitCheckDto.setState(TaskCompletionState.COMPLE);
+        commitCheckDto.setStuInfos(stuInfos);
+        return commitCheckDto;
     }
 }

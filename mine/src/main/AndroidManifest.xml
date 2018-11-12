@@ -3,9 +3,7 @@
     package="com.cxyz.mine">
 
     <application
-
         android:theme="@style/AppTheme">
-
 
         <activity android:name=".activity.oldMyinfoActivity" />
         <activity android:name=".activity.oldAppointmentActivity" />
@@ -21,6 +19,7 @@
         <activity android:name=".activity.RestPwdActivity"></activity>
         <activity android:name=".activity.check"></activity>
         <activity android:name=".activity.CheckHomepageActivity"></activity>
+        <activity android:name=".activity.TestActivity" ></activity>
 
     </application>
 

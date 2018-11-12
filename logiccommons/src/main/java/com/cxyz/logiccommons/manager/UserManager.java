@@ -1,6 +1,7 @@
 package com.cxyz.logiccommons.manager;
 
 
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.logiccommons.domain.User;
 
 /**
@@ -13,6 +14,7 @@ public class UserManager {
     }
 
     public void setUser(User user) {
+        LogUtil.e(user.toString());
         this.u = user;
     }
 

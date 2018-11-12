@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".acitivity.MessageActivity">
-    <View
-        android:background="#6495ed"
-        android:layout_width="match_parent"
-        android:layout_height="23dp"/>
+    >
     <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp">
-    </com.cxyz.commons.widget.TitleView>
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -22,6 +16,7 @@
         android:layout_margin="5dp"
         android:gravity="center">
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/btn_clazz"
             android:layout_marginRight="1dp"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
@@ -29,7 +24,9 @@
             app:qmui_radiusTopLeft="13dp"
             android:text="  课程 "
             android:textColor="#6495ed"/>
+
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/btn_check"
             android:layout_marginLeft="1dp"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
@@ -37,7 +34,9 @@
             app:qmui_radiusTopRight="13dp"
             android:text=" 考勤  "
             android:textColor="#6495ed"/>
+
     </LinearLayout>
+
     <com.haibin.calendarview.CalendarLayout
         android:id="@+id/calendarLayout"
         android:layout_width="match_parent"
@@ -53,10 +52,10 @@
             android:layout_height="wrap_content"
             android:background="#fff"
             app:calendar_height="50dp"
-
             app:current_month_lunar_text_color="#CFCFCF"
             app:current_month_text_color="#333333"
             app:min_year="2004"
+            app:max_year="2020"
             app:month_view="com.cxyz.homepage.view.MyMouthView"
             app:month_view_show_mode="mode_fix"
             app:other_month_text_color="#e1e1e1"
@@ -75,6 +74,7 @@
             android:orientation="vertical"
             android:background="#d4d4d4">
         </android.support.v7.widget.RecyclerView>
+
     </com.haibin.calendarview.CalendarLayout>
 
 </LinearLayout>

@@ -1,27 +1,32 @@
 package com.cxyz.homepage.acitivity;
 
 import android.content.Intent;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ImageView;
+import android.view.View;
 
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.date.Date;
+import com.cxyz.commons.utils.GsonUtil;
+import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
-import com.cxyz.homepage.feature_z_domain.TestTask;
+import com.cxyz.homepage.constant.RequestCenter;
 import com.cxyz.homepage.ipresenter.MassageListPresenter;
-import com.cxyz.homepage.ipresenter.impl.MassageListPresenterImpl;
 import com.cxyz.homepage.iview.MassageListView;
-import com.cxyz.homepage.myAdapter.MyRecyleViewAdapter;
-import com.cxyz.homepage.myAdapter.cell.UserClazzsCell;
+import com.cxyz.homepage.myAdapter.MessageRVAdapter;
+import com.cxyz.homepage.myAdapter.TaskInfoRVAdapter;
+import com.cxyz.homepage.myAdapter.cell.TaskInfoCell;
+import com.cxyz.homepage.myAdapter.cell.MessageCell;
 import com.cxyz.logiccommons.domain.RecordDetail;
-import com.cxyz.logiccommons.domain.Student;
+import com.cxyz.logiccommons.domain.TaskInfo;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarLayout;
 import com.haibin.calendarview.CalendarView;
+import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,110 +35,69 @@ import java.util.List;
  * 这是一个消息页面
  */
 
-public class MessageActivity extends BaseActivity<MassageListPresenter> implements MassageListView {
-    //private ListView lv_massage;
-    //   private CalendarDateView calendarDateView;
-    private ImageView img_back;
-    private List list,lists;//搞点假数据
-    private Student stu;//搞点假数据
-    private TestTask testTask1 = new TestTask("程序设计基础", "爱的痕迹发撒的回复萨兰斯克的叫法是觉得电视机分厘卡即使对方", "10/23 20:21", 1);
-    private TestTask testTask2 = new TestTask("高等数学", "爱的痕迹发撒的回复萨兰斯克的叫法是觉得电视机分厘卡即使对方", "10/23 20:21", 2);
-    private TestTask testTask3 = new TestTask("大学英语", "爱的痕迹发撒的回复萨兰斯克的叫法是觉得电视机分厘卡即使对方", "10/23 20:21", 3);
-    private TestTask testTask4 = new TestTask("javaWEB", "爱的痕迹发撒的回复萨兰斯克的叫法是觉得电视机分厘卡即使对方", "10/23 20:21", 4);
-    private TestTask testTask5 = new TestTask("离散数学", "爱的痕迹发撒的回复萨兰斯克的叫法是觉得电视机分厘卡即使对方", "10/23 20:21", 1);
-    private com.haibin.calendarview.CalendarView calendarView;
+public class MessageActivity extends BaseActivity<MassageListPresenter> implements MassageListView{
+    private boolean isTaskInfo = true;
     private CalendarLayout calendarLayout;
+    private CalendarView calendarView;
     private RecyclerView recyclerView;
-    private MyRecyleViewAdapter myRecyleViewAdapter;
-
+    private MessageRVAdapter messageRVAdapter;
+    private TaskInfoRVAdapter taskInfoRVAdapter;
+    private QMUIRoundButton btn_clazz;
+    private QMUIRoundButton btn_check;
     @Override
     public int getContentViewId() {
         return R.layout.activity_message;
     }
 
-
-
-    @Override
-    protected void handleIntent(Intent intent) {
-        super.handleIntent(intent);
-    }
-
+    /**
+     * 1
+     */
     @Override
     public void initData() {
-        ToastUtil.showLong("我是主页");
-//        //UserManager.getInstance().getUser().get_id()
-//      //  iPresenter.getMassageData(UserManager.getInstance().getUser().get_id());
-        list = new ArrayList();
-        list.add(testTask1);
-        list.add(testTask2);
-        list.add(testTask3);
-        list.add(testTask4);
-        list.add(testTask5);
-        lists = new ArrayList();
-        lists.add(testTask1);
-        myRecyleViewAdapter = new MyRecyleViewAdapter();
-        for(int i = 0 ; i < list.size(); i++){
-            myRecyleViewAdapter.add(new UserClazzsCell(list));
-        }
-
-       // myRecyleViewAdapter.setData(list);
-        Log.e(".();","tmd");
-
+        //UserManager.getInstance().getUser().get_id();
+        // iPresenter.getMassageData(UserManager.getInstance().getUser().get_id());
 
     }
+
+    /**
+     * 2
+     */
     @Override
     public void initView() {
-        // lv_massage = (ListView)findViewById(R.id.lv_massage);
-        // calendarDateView = (CalendarDateView)findViewById(R.id.calendarDateView);
-        recyclerView = findViewById(R.id.recyclerView);
-        calendarView = findViewById(R.id.calendarView);
         calendarLayout = findViewById(R.id.calendarLayout);
+        calendarView = findViewById(R.id.calendarView);
+        recyclerView = findViewById(R.id.recyclerView);
+        btn_check = findViewById(R.id.btn_check);
+        btn_clazz = findViewById(R.id.btn_clazz);
+
+        messageRVAdapter = new MessageRVAdapter();
+        taskInfoRVAdapter = new TaskInfoRVAdapter();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
         recyclerView.setLayoutManager(linearLayoutManager);
-
-        recyclerView.setAdapter(myRecyleViewAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
     }
-    /**
-     * 模拟从服务器取数据
-     */
-//    private void loadData() {
-//        View loadingView = LayoutInflater.from(this).inflate(R.layout.item_error, null);
-//        myRecyleViewAdapter.showLoading(loadingView);
-//        recyclerView.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                myRecyleViewAdapter.hideLoading();
-//                Log.e("myrun","tmd");
-//                myRecyleViewAdapter.addAll(getCells(list));
-//            }
-//        }, 2000);
-//    }
 
     /**
-     * 设置事件
+     * 3
      */
     @Override
     public void setEvent() {
-        calendarView.setOnViewChangeListener(new CalendarView.OnViewChangeListener() {
+        btn_clazz.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onViewChange(boolean isMonthView) {
-                LogUtil.e("setOnViewChangeListener"+isMonthView);
-                if(isMonthView){
-                    ToastUtil.showShort("我是月视图");
-                    myRecyleViewAdapter.clear();
-
-                    for(int i = 0 ; i < list.size(); i++){
-                        myRecyleViewAdapter.add(new UserClazzsCell(list));
-                    }
-                }else{
-                    ToastUtil.showShort("我是周视图");
-                    myRecyleViewAdapter.clear();
-                    myRecyleViewAdapter.add(new UserClazzsCell(lists));
-
-                }
+            public void onClick(View v) {
+                isTaskInfo=true;
+                messageRVAdapter.clear();
+                taskInfoRVAdapter.notifyDataSetChanged();
+            }
+        });
+        btn_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isTaskInfo=false;
+                taskInfoRVAdapter.clear();
+                messageRVAdapter.notifyDataSetChanged();
             }
         });
         calendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
@@ -143,43 +107,93 @@ public class MessageActivity extends BaseActivity<MassageListPresenter> implemen
 
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
-                ToastUtil.showShort(""+calendar.getDay());
+                Date date = new Date();
+                date.setYear(calendar.getYear()).setMonth(calendar.getMonth()).setDay(calendar.getDay());
+                if(isTaskInfo()){
+                    RequestCenter.getTaskInfos(122, date, new DisposeDataListener() {
+                        @Override
+                        public void onSuccess(Object responseObj) {
+                            List<TaskInfo> taskInfos = null;
+                            try {
+                                taskInfos = (List<TaskInfo>) GsonUtil.fromJson(responseObj.toString(), TaskInfo.class);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            List<TaskInfoCell> taskInfoCells = new ArrayList<>();
+                            for (int j = 0 ; j < taskInfos.size() ; j++){
+                                    taskInfoCells.add(new TaskInfoCell(taskInfos.get(j)));
+                            }
+                            recyclerView.setAdapter(taskInfoRVAdapter);
+                            taskInfoRVAdapter.clear();
+                            taskInfoRVAdapter.addAll(taskInfoCells);
+                            LogUtil.e(taskInfos.toString());
+                        }
 
-                iPresenter.getMassageData("17478090",calendar.getMonth()+"-"+calendar.getDay());
+                        @Override
+                        public void onFailure(Object error) {
+                            LogUtil.e(error.toString());
+                        }
+                    });
+                }else{
+                    RequestCenter.getRecords("17478093", 0, new DisposeDataListener() {
+                        @Override
+                        public void onSuccess(Object responseObj) {
+                            List<RecordDetail> recordDetails = null;
+                            try {
+                                recordDetails = (List<RecordDetail>) GsonUtil.fromJson(responseObj.toString(),RecordDetail.class);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            List<MessageCell> userClazzsCells = new ArrayList<>();
+                            for (int j = 0 ; j < recordDetails.size() ; j++){
+                                userClazzsCells.add(new MessageCell(recordDetails.get(j)));
+                            }
+                            recyclerView.setAdapter(taskInfoRVAdapter);
+                            messageRVAdapter.clear();
+                            messageRVAdapter.addAll(userClazzsCells);
+                            LogUtil.e(recordDetails.toString());
+                        }
+
+                        @Override
+                        public void onFailure(Object error) {
+                            ToastUtil.showShort(error+"");
+                        }
+                    });
+                }
+
             }
         });
     }
 
+    /**
+     * 判断显示课程还是时间
+     * @return
+     */
+    public boolean isTaskInfo(){
+        return isTaskInfo;
+    }
     @Override
-    protected MassageListPresenter createIPresenter() {
-        return new MassageListPresenterImpl();
+    protected void handleIntent(Intent intent) {
+        super.handleIntent(intent);
     }
 
+    @Override
+    protected MassageListPresenter createIPresenter() {
+        return null;
+    }
 
-    /**
-     * 显示加载视图
-     */
     @Override
     public void showLoadingView() {
 
     }
 
-    /**
-     * 隐藏加载视图
-     */
     @Override
     public void hideLoadingView() {
 
     }
-
-
-    /**
-     * 回调方法设置数据
-     *
-     * @param listItem
-     */
     @Override
     public void setListItem(List<RecordDetail> listItem) {
-        // lv_massage.setAdapter(new MessageSmpleAdapter(getActivity(),listItem,R.layout.item_massage));
+      //  lv_massage.setAdapter(new Massage_SmpleAdapter(getActivity(),listItem,R.layout.item_massage));
     }
+
 }

@@ -11,4 +11,8 @@
     <string name="app_forget_pwd">忘记密码?</string>
     <string name="app_stu">学生</string>
     <string name="app_tea">老师</string>
+    <string name="update_download_progressing">正在下载</string>
+    <string name="update_download_start">下载开始</string>
+    <string name="update_download_failed">下载失败</string>
+    <string name="update_download_finish">下载完成</string>
 </resources>

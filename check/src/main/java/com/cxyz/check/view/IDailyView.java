@@ -1,7 +1,7 @@
 package com.cxyz.check.view;
 
+import com.cxyz.check.dto.GradeStusDto;
 import com.cxyz.commons.IView.IBaseView;
-import com.cxyz.logiccommons.domain.Student;
 
 import java.util.List;
 
@@ -14,17 +14,25 @@ public interface IDailyView extends IBaseView {
      * 显示学生信息到列表中
      * @param stus
      */
-    public void showStus(List<Student> stus);
+    void showStus(List<GradeStusDto> stus);
 
     /**
      * 显示错误信息
      * @param error
      */
-    public void showError(Object error);
+    void showError(String error);
+
+    /**
+     * 显示提交时的错误信息
+      * @param error 错误信息
+     */
+    void showCommitError(String error);
 
     /**
      * 显示提交结果
      * @param info
      */
-    public void showCommitResult(String info);
+    void showCommitResult(String info);
+
+    void hideLoadStus();
 }

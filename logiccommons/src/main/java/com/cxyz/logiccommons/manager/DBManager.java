@@ -9,7 +9,6 @@ import com.cxyz.logiccommons.domain.ClassRoom;
 import com.cxyz.logiccommons.domain.Grade;
 import com.cxyz.logiccommons.domain.Info;
 import com.cxyz.logiccommons.domain.SQLiteUtil;
-import com.cxyz.logiccommons.domain.Student;
 import com.cxyz.logiccommons.domain.TaskInfo;
 import com.cxyz.logiccommons.domain.User;
 
@@ -177,7 +176,7 @@ public class DBManager {
                     taskInfo.set_id(cursor.getString(cursor.getColumnIndex("_id")));
                     taskInfo.set_name(cursor.getString(cursor.getColumnIndex("_name")));
 
-                    sponser.set_name(cursor.getString(cursor.getColumnIndex("Sponser")));
+                    sponser.setName(cursor.getString(cursor.getColumnIndex("Sponser")));
                     taskInfo.setSponser(sponser);
 
                     classRoom.set_name(cursor.getString(cursor.getColumnIndex("classroomn")));
@@ -191,9 +190,9 @@ public class DBManager {
                 break;
             case SQLiteUtil.TB_NAME_StuInfo:
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                    Student student = new Student();
-                    student.set_id(cursor.getString(cursor.getColumnIndex("_id")));
-                    student.set_name(cursor.getString(cursor.getColumnIndex("_name")));
+                    User student = new User();
+                    student.setId(cursor.getString(cursor.getColumnIndex("_id")));
+                    student.setName(cursor.getString(cursor.getColumnIndex("_name")));
                     list.add(student);
                 }break;
         }

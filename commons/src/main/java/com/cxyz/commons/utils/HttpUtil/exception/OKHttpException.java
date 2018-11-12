@@ -7,7 +7,21 @@ import com.cxyz.commons.exception.BaseException;
  */
 
 public class OKHttpException extends BaseException {
+
+    public static final int EMPTY = 0;
+
+    private int code;
+
     public OKHttpException() {
+    }
+
+    public OKHttpException(int code) {
+        this.code = code;
+    }
+
+    public OKHttpException(String msg,int code) {
+        super(msg);
+        this.code = code;
     }
 
     public OKHttpException(String msg) {
@@ -20,5 +34,9 @@ public class OKHttpException extends BaseException {
 
     public OKHttpException(String msg, Throwable throwable) {
         super(msg, throwable);
+    }
+
+    public int getCode() {
+        return code;
     }
 }

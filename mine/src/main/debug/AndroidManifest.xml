@@ -9,10 +9,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="com.cxyz.logiccommons.application.MyApp">
-        <activity android:name=".activity.CheckHomepageActivity">
+        <activity android:name=".activity.oldAppointmentActivity" />
+        <activity android:name=".activity.ResponseActivity" />
+        <activity android:name=".activity.MyinfoActivity"></activity>
+        <activity android:name=".activity.ExpandFunctionActivity"></activity>
+        <activity android:name=".activity.MoreSettingActivity"></activity>
+        <activity android:name=".activity.PieChartActivity"></activity>
+        <activity android:name=".activity.UserResponse"></activity>
+        <activity android:name=".activity.ApponitmentActivity"></activity>
+        <activity android:name=".activity.ForgetpwdActivity"></activity>
+        <activity android:name=".activity.RestPwdActivity"></activity>
+        <activity android:name=".activity.check"></activity>
+        <activity android:name=".activity.CheckHomepageActivity"></activity>
+        <activity android:name=".activity.TestActivity" >
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

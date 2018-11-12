@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.IView.IBaseView;
+import com.cxyz.commons.IView.IDefaultView;
 import com.cxyz.commons.activity.FragmentActivity;
+import com.cxyz.commons.application.BaseApplication;
 import com.cxyz.commons.utils.LogUtil;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by 夏旭晨 on 2018/9/21.
@@ -53,6 +56,8 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     protected boolean mIsVisible;
 
+    private IBaseView iBaseView;
+
     /**
      * 是否加载完成
      * 当执行完oncreatview,View的初始化方法后方法后即为true
@@ -70,6 +75,7 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
     public void onCreate(Bundle savedInstanceState) {
         iPresenter = createIPresenter();
         super.onCreate(savedInstanceState);
+        iBaseView = getIView();
         if(iPresenter!=null)
             iPresenter.attachV(this);
     }
@@ -139,16 +145,11 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     protected abstract void setListener();
 
-    /**
-     * 在初始化之后调用
-     */
-    protected void afterInit(){}
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         this.mIsVisible = isVisibleToUser;
-        if (isVisibleToUser) {
+        if (isVisibleToUser && isVisible()) {
             onVisibleToUser();
         }
     }
@@ -192,7 +193,7 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
         super.onStart();
         if(iPresenter!=null)
             iPresenter.onStart();
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onStart");
+        LogUtil.i_withoutPre(this.getClass().getSimpleName()+"--onStart");
     }
     /**
      * 生命周期方法，在其中回调了IPresenter中相应的方法
@@ -204,7 +205,7 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
         super.onStop();
         if(iPresenter!=null)
             iPresenter.onStop();
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onStop");
+        LogUtil.i_withoutPre(this.getClass().getSimpleName()+"--onStop");
     }
     /**
      * 生命周期方法，在其中回调了IPresenter中相应的方法
@@ -216,7 +217,7 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
         super.onResume();
         if(iPresenter!=null)
             iPresenter.onResume();
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onResume");
+        LogUtil.i_withoutPre(this.getClass().getSimpleName()+"--onResume");
     }
     /**
      * 生命周期方法，在其中回调了IPresenter中相应的方法
@@ -228,7 +229,7 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
         super.onPause();
         if(iPresenter!=null)
             iPresenter.onPause();
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onPasue");
+        LogUtil.i_withoutPre(this.getClass().getSimpleName()+"--onPasue");
     }
     /**
      * 生命周期方法，在其中回调了IPresenter中相应的方法
@@ -237,13 +238,37 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        //注册leakcanary
+        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
         if(iPresenter!=null)
         {
-            iPresenter.onDestory();
             iPresenter.detachV();
+            iPresenter.onDestory();
         }
-        LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onDestory");
+        LogUtil.i_withoutPre(this.getClass().getSimpleName()+"--onDestory");
+        super.onDestroy();
+    }
+
+    @Override
+    public void showLoadingView() {
+        if(getIView() != null)
+        {
+            iBaseView.showLoadingView();
+        }
+    }
+
+    protected IBaseView getIView()
+    {
+        return new IDefaultView(getActivity(),"正在加载中...",false);
+    }
+
+    @Override
+    public void hideLoadingView() {
+        if(getIView() != null)
+        {
+            iBaseView.hideLoadingView();
+        }
     }
 
 }

@@ -9,7 +9,7 @@ public class College {
 	private Integer _id;//学院编号
     private String _name;//学院名称
     private School school;//所属学校
-    private Teacher manager;//系部管理员
+    private User manager;//系部管理员
     
     public College(){}
     
@@ -35,10 +35,10 @@ public class College {
 	public void setSchool(School school) {
 		this.school = school;
 	}
-	public Teacher getManager() {
+	public User getManager() {
 		return manager;
 	}
-	public void setManager(Teacher manager) {
+	public void setManager(User manager) {
 		this.manager = manager;
 	}
 	@Override
