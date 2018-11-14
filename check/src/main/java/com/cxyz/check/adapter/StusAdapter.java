@@ -1,6 +1,7 @@
 package com.cxyz.check.adapter;
 
 import android.content.Context;
+import android.view.View;
 
 import com.cxyz.check.R;
 import com.cxyz.check.dto.CommitCheckDto;
@@ -18,12 +19,15 @@ import java.util.Map;
 
 public class StusAdapter extends AdapterBase<GradeStusDto> {
 
+    //控制是否显示已到达的状态变量
+    private boolean showNormal = true;
+
     String[] items = new String[]{"迟到","请假","已到达","缺勤","早退"};
 
     int [] values = new int[]{CheckRecordResult.
             LATE,CheckRecordResult.VACATE,CheckRecordResult.NORMAL
             ,CheckRecordResult.ABSENTEEISM,CheckRecordResult.EARLYLEAVE};
-
+    //装载违规学生的信息
     Map<String,CommitCheckDto.StuInfo> dtoMap;
 
     public StusAdapter(Context mContext, List<GradeStusDto> list, Map<String,CommitCheckDto.StuInfo> dtoMap, int mItemLayoutId) {
@@ -37,7 +41,22 @@ public class StusAdapter extends AdapterBase<GradeStusDto> {
         holder.setImageUrl(R.id.iv_photo,item.getPhoto(),R.mipmap.common_logo);
         holder.setText(R.id.tv_name,item.getName());
         holder.setText(R.id.tv_id,item.getId());
+        //如果违规学生map中没有该学生信息则不是违规学生，设置状态为已到达
         holder.setText(R.id.tv_state,stuInfo==null?"已到达":getResultString(stuInfo.getResult()));
+        if(!showNormal&&stuInfo==null)
+        {
+            holder.getConvertView().setVisibility(View.GONE);
+        }
+
+    }
+
+    /**
+     * 设置是否显示正常学生信息
+     * @param showNormal
+     */
+    public void isShowNormal(boolean showNormal)
+    {
+        this.showNormal = showNormal;
     }
 
     /**

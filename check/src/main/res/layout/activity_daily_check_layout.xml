@@ -7,10 +7,30 @@
     android:orientation="vertical"
     tools:context="com.cxyz.check.activity.DailyCheckActivity">
 
-    <com.cxyz.commons.widget.TitleView
-        android:id="@+id/tv_title"
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:padding="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/common_primary_color">
+        <AutoCompleteTextView
+            android:id="@+id/act_find"
+            android:padding="5dp"
+            android:background="@color/app_white"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="搜索"/>
+        <CheckBox
+            android:id="@+id/cb_shownormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隐藏已到达"
+            android:textColor="@color/app_white"
+            />
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -48,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/shape"
+                    android:background="@drawable/btn_shape"
                     android:text="提交"
                     android:textSize="20sp"
                     android:textColor="@color/app_white"
