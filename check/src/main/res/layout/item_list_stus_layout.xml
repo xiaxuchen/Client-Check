@@ -1,45 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:padding="5dp"
-    >
-    <ImageView
-        android:src="@mipmap/ic_launcher"
-        android:id="@+id/iv_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
-        android:id="@+id/ll_info"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/iv_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="夏旭晨"
-            android:textSize="20sp"
-            />
-
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:id="@+id/tv_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="17478093"
-            android:textSize="20sp"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_alignBottom="@+id/iv_photo"
-        android:id="@+id/tv_state"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="当前状态:已到达"
-        android:layout_alignLeft="@+id/ll_info"/>
+        android:orientation="horizontal">
 
-</RelativeLayout>
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="张全蛋"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/tv_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="   17478000"
+                    android:textColor="@color/orange"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_states"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前状态："
+                    android:textColor="@color/small_gray"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:paddingLeft="10dp"
+                    android:id="@+id/tv_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已到达"
+                    android:textColor="@color/small_gray"
+                    android:textSize="16sp"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

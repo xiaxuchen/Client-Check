@@ -24,7 +24,7 @@ public class IMineFragmentModelmpl implements IMineFragmentModel {
                 public void onSuccess(Object responseObj) {
                     if(listener != null)
                         try {
-                            listener.onUpdate(GsonUtil.GsonToBean(responseObj.toString(), UpdateEntity.class));
+                            listener.onUpdate((UpdateEntity) GsonUtil.fromJson(responseObj.toString(), UpdateEntity.class));
                         } catch (JSONException e) {
                             e.printStackTrace();
                             listener.onFail("服务器异常");

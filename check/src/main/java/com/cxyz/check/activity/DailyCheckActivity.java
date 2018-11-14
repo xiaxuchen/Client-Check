@@ -5,8 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.util.ArrayMap;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,7 +31,6 @@ import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.logiccommons.manager.UserManager;
-import com.cxyz.logiccommons.typevalue.CheckRecordResult;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 
 import java.util.HashMap;
@@ -101,7 +103,6 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 adapter.isShowNormal(isChecked);
-                lv_stus.invalidate();
             }
         });
 
@@ -112,6 +113,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
             }
         });
 
+
     }
 
     /**
@@ -121,12 +123,6 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
      */
     private void showStateDialog(final int position,final View view)
     {
-        final String[] items = new String[]{"迟到","请假","已到达","缺勤","早退"};
-
-        final int [] values = new int[]{CheckRecordResult.
-                LATE,CheckRecordResult.VACATE,CheckRecordResult.NORMAL
-                ,CheckRecordResult.ABSENTEEISM,CheckRecordResult.EARLYLEAVE};
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.mipmap.common_logo);
         builder.setTitle("选择考勤状态:");
@@ -135,8 +131,8 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         final GradeStusDto stu = adapter.getItem(position);
         final CommitCheckDto.StuInfo stuInfo = stuInfoMap.get(stu.getId());
         if(stuInfo!=null)
-            result = this.getIndex(values,stuInfo.getResult());
-        builder.setSingleChoiceItems(items,result, new DialogInterface.OnClickListener() {
+            result = this.getIndex(adapter.values,stuInfo.getResult());
+        builder.setSingleChoiceItems(adapter.items,result, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(which != 2)
@@ -145,11 +141,11 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                     {
                         CommitCheckDto.StuInfo stuInfo = new CommitCheckDto.StuInfo();
                         stuInfo.setId(stu.getId());
-                        stuInfo.setResult(values[which]);
+                        stuInfo.setResult(adapter.values[which]);
                         stuInfoMap.put(stu.getId(),stuInfo);
-                    }else if(stuInfo.getResult() != values[which])
+                    }else if(stuInfo.getResult() != adapter.values[which])
                     {
-                        stuInfo.setResult(values[which]);
+                        stuInfo.setResult(adapter.values[which]);
                         stuInfoMap.put(stu.getId(),stuInfo);
                     }
 
@@ -166,8 +162,12 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                     else
                         return;
                 }
-                TextView tv_state = (TextView)view.findViewById(R.id.tv_state);
-                tv_state.setText("当前状态:"+items[which]);
+                TextView tv_state = view.findViewById(R.id.tv_state);
+                TextView tv_states = view.findViewById(R.id.tv_states);
+                tv_state.setText(adapter.items[which]);
+                LogUtil.d("color"+adapter.getStateColor(adapter.values[which]));
+                tv_state.setTextColor(adapter.getStateColor(adapter.values[which]));
+                tv_states.setTextColor(adapter.getStateColor(adapter.values[which]));
                 dialog.dismiss();
             }
         });
@@ -208,6 +208,20 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     public void showStus(List<GradeStusDto> stus) {
         adapter = new StusAdapter(getActivity(),stus,stuInfoMap,R.layout.item_list_stus_layout);
         lv_stus.setAdapter(adapter);
+        ArrayAdapter<String> completionAdapter = new ArrayAdapter<String>
+                (getApplicationContext(), android.R.layout.simple_dropdown_item_1line, adapter.getCompletion());
+        act_find.setAdapter(completionAdapter);
+        act_find.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND
+                        || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER))
+                {
+                }
+                //让mPasswordEdit获取输入焦点
+                    return true;
+            }
+        });
     }
 
     @Override
