@@ -7,7 +7,10 @@ import android.os.Build;
 import android.util.ArrayMap;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,7 +27,6 @@ import com.cxyz.commons.IView.IDefaultView;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
-import com.cxyz.commons.widget.TitleView;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.logiccommons.typevalue.CheckRecordResult;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
@@ -36,8 +38,6 @@ import java.util.Map;
 @Route(path = "/check/DailyCheckActivity")
 public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements IDailyView {
 
-    private TitleView tv_title;
-
     private ListView lv_stus;
 
     private QMUIEmptyView qmuiev_load;
@@ -45,6 +45,12 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     private Button btn_commit;
 
     private StusAdapter adapter;
+
+    //是否显示已到达的cb
+    private CheckBox cb_shownormal;
+
+    //查找学生
+    private AutoCompleteTextView act_find;
 
     //记录不良情况的map
     private Map<String,CommitCheckDto.StuInfo> stuInfoMap;
@@ -61,11 +67,11 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void initView() {
-        tv_title = (TitleView) findViewById(R.id.tv_title);
         lv_stus = (ListView) findViewById(R.id.lv_stus);
         qmuiev_load = (QMUIEmptyView) findViewById(R.id.qmuiev_load);
         btn_commit = (Button) findViewById(R.id.btn_commit);
-        tv_title.setTitle("日常考勤");
+        cb_shownormal = findViewById(R.id.cb_shownormal);
+        act_find = findViewById(R.id.act_find);
 
         qmuiev_load.setDetailText("正在加载中...");
     }
@@ -83,19 +89,19 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void setEvent() {
-        tv_title.setOnClickListener(new TitleView.OnClickListenerWrapper()
-        {
-            @Override
-            public void onBackClick() {
-                super.onBackClick();
-                onBackPressed();
-            }
-        });
 
         lv_stus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 showStateDialog(position,view);
+            }
+        });
+
+        cb_shownormal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                adapter.isShowNormal(isChecked);
+                lv_stus.invalidate();
             }
         });
 
@@ -105,10 +111,11 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                 iPresenter.commit(stuInfoMap,compId);
             }
         });
+
     }
 
     /**
-     * 显示选择状态的对话框
+     * 点击list的item时显示选择状态的对话框
      * @param position
      * @param view
      */
@@ -124,7 +131,6 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         builder.setIcon(R.mipmap.common_logo);
         builder.setTitle("选择考勤状态:");
 
-        //从crs中试图获取到记录，如果没有则是到达
         int result = 2;
         final GradeStusDto stu = adapter.getItem(position);
         final CommitCheckDto.StuInfo stuInfo = stuInfoMap.get(stu.getId());
@@ -151,7 +157,10 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                 {
                     if(stuInfo != null)
                     {
-                        stuInfoMap.remove(stuInfo);
+                        LogUtil.d("before"+stuInfoMap);
+                        LogUtil.d(stuInfo.toString());
+                        stuInfoMap.remove(stuInfo.getId());
+                        LogUtil.d("after"+stuInfoMap);
                         dialog.dismiss();
                     }
                     else
@@ -229,6 +238,11 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     public void hideLoadStus() {
         qmuiev_load.hide();
+    }
+
+    @Override
+    protected boolean isStateBar() {
+        return false;
     }
 
     /**
