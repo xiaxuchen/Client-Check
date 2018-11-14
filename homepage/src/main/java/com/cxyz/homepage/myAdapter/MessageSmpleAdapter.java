@@ -54,7 +54,7 @@ public class MessageSmpleAdapter extends AdapterBase{
 
         ////载入考勤情况的数据
         holder.setText(R.id.item_tv_clazzname,stu_massage.get(posit).get_name());
-        holder.setText(R.id.item_tv_checkperson,stu_massage.get(posit).getChecker().get_name());
+        holder.setText(R.id.item_tv_checkperson,stu_massage.get(posit).getChecker().getName());
         holder.setText(R.id.item_tv_checktime,stu_massage.get(posit).getCheckTime().toString());
         holder.setText(R.id.item_tv_status,result);
         if (result.equals(status[0])){

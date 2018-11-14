@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.StringUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.logiccommons.domain.College;
 import com.cxyz.logiccommons.domain.Grade;
@@ -51,16 +52,12 @@ public class MyinfoActivity extends BaseActivity <IMyinfoPresenter>implements IM
         iv_myinfo_circleview.setOuterRingAlpha(0);
         //设置信息
         User u = UserManager.getInstance().getUser();
-        tv_myinfo_username.setText(u.get_name());
+        tv_myinfo_username.setText(StringUtil.nullStrToEmpty(u.getName()));
         tv_myinfo_usersex.setText(u.getSex());
-        tv_myinfo_usercollege.setText(u.getCollege()==null?u.getCollege_name():u.getCollege().get_name());
         tv_myinfo_usercode.setText("萍乡学院");
-        tv_myinfo_usertel.setText(u.getTel()==null?"":u.getTel());
-        if(u.getType() == User.STUDNET)
-        {
-            tv_myinfo_usercollege.setText(u.getCollege_name()==null?"暂无":u.getCollege_name());
-            tv_myinfo_userclass.setText(u.getGrade().get_name());
-        }
+        tv_myinfo_usertel.setText(StringUtil.nullStrToEmpty(u.getPhone()));
+        tv_myinfo_usercollege.setText(StringUtil.nullStrToEmpty(u.getCollegeName()));
+        tv_myinfo_userclass.setText(StringUtil.nullStrToEmpty(u.getGradeName()));
 
     }
 

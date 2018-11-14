@@ -12,6 +12,7 @@
         <activity android:name=".acitivity.SDcardActivity">
 
         </activity>
+        <activity android:name=".acitivity.PieChartActivity"></activity>
         <activity android:name=".acitivity.MessageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

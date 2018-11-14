@@ -3,6 +3,8 @@ package com.cxyz.check.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.util.ArrayMap;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,17 +14,19 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.check.R;
 import com.cxyz.check.adapter.StusAdapter;
+import com.cxyz.check.dto.CommitCheckDto;
+import com.cxyz.check.dto.GradeStusDto;
 import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.ipresenter.ipresenterimpl.IDailyPresenterImpl;
 import com.cxyz.check.view.IDailyView;
+import com.cxyz.commons.IView.IBaseView;
+import com.cxyz.commons.IView.IDefaultView;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
-import com.cxyz.logiccommons.domain.CheckRecord;
-import com.cxyz.logiccommons.domain.Student;
-import com.cxyz.logiccommons.domain.TaskCompletion;
 import com.cxyz.logiccommons.manager.UserManager;
+import com.cxyz.logiccommons.typevalue.CheckRecordResult;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 
 import java.util.HashMap;
@@ -43,12 +47,12 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     private StusAdapter adapter;
 
     //记录不良情况的map
-    private Map<String,CheckRecord> crs;
+    private Map<String,CommitCheckDto.StuInfo> stuInfoMap;
 
     private AlertDialog alertDialog;
 
     //当前考勤任务
-    private TaskCompletion c;
+    private int compId;
 
     @Override
     public int getContentViewId() {
@@ -62,12 +66,19 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         qmuiev_load = (QMUIEmptyView) findViewById(R.id.qmuiev_load);
         btn_commit = (Button) findViewById(R.id.btn_commit);
         tv_title.setTitle("日常考勤");
+
+        qmuiev_load.setDetailText("正在加载中...");
     }
 
 
     @Override
     public void initData() {
-        crs = new HashMap<>();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            stuInfoMap = new ArrayMap<>();
+        }else
+        {
+            stuInfoMap = new HashMap<>();
+        }
     }
 
     @Override
@@ -91,8 +102,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         btn_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                c.setState(TaskCompletion.NORMAL);
-                iPresenter.commit(crs,c);
+                iPresenter.commit(stuInfoMap,compId);
             }
         });
     }
@@ -105,38 +115,43 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     private void showStateDialog(final int position,final View view)
     {
         final String[] items = new String[]{"迟到","请假","已到达","缺勤","早退"};
-        final int [] values = new int[]{CheckRecord.LATE,CheckRecord.VACATE,CheckRecord.CANCLE,CheckRecord.ABSENTEEISM,CheckRecord.EARLYLEAVE};
+
+        final int [] values = new int[]{CheckRecordResult.
+                LATE,CheckRecordResult.VACATE,CheckRecordResult.NORMAL
+                ,CheckRecordResult.ABSENTEEISM,CheckRecordResult.EARLYLEAVE};
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.mipmap.common_logo);
         builder.setTitle("选择考勤状态:");
+
         //从crs中试图获取到记录，如果没有则是到达
         int result = 2;
-        final Student stu = adapter.getItem(position);
-        final CheckRecord r = crs.get(stu.get_id());
-        if(r!=null)
-            result = this.getIndex(values,r.getResult());
+        final GradeStusDto stu = adapter.getItem(position);
+        final CommitCheckDto.StuInfo stuInfo = stuInfoMap.get(stu.getId());
+        if(stuInfo!=null)
+            result = this.getIndex(values,stuInfo.getResult());
         builder.setSingleChoiceItems(items,result, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(which != 2)
                 {
-                    if(r==null)
+                    if(stuInfo==null)
                     {
-                        CheckRecord cr = new CheckRecord();
-                        cr.setStudent(stu);
-                        cr.setResult(values[which]);
-                        crs.put(stu.get_id(),cr);
-                    }else if(r.getResult() != values[which])
+                        CommitCheckDto.StuInfo stuInfo = new CommitCheckDto.StuInfo();
+                        stuInfo.setId(stu.getId());
+                        stuInfo.setResult(values[which]);
+                        stuInfoMap.put(stu.getId(),stuInfo);
+                    }else if(stuInfo.getResult() != values[which])
                     {
-                        r.setResult(values[which]);
-                        crs.put(stu.get_id(),r);
+                        stuInfo.setResult(values[which]);
+                        stuInfoMap.put(stu.getId(),stuInfo);
                     }
 
                 }else
                 {
-                    if(r != null)
+                    if(stuInfo != null)
                     {
-                        crs.remove(r);
+                        stuInfoMap.remove(stuInfo);
                         dialog.dismiss();
                     }
                     else
@@ -172,7 +187,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     protected void afterInit() {
         super.afterInit();
-        iPresenter.getStusToShow(( UserManager.getInstance().getUser()).getGrade().get_id());
+        iPresenter.getStusToShow(( UserManager.getInstance().getUser()).getGradeId());
     }
 
     @Override
@@ -181,39 +196,39 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     }
 
     @Override
-    public void showLoadingView() {
-        qmuiev_load.show(true);
-    }
-
-    @Override
-    public void hideLoadingView() {
-        qmuiev_load.hide();
-    }
-
-    @Override
-    public void showStus(List<Student> stus) {
-        adapter = new StusAdapter(getActivity(),stus,R.layout.item_list_stus_layout);
+    public void showStus(List<GradeStusDto> stus) {
+        adapter = new StusAdapter(getActivity(),stus,stuInfoMap,R.layout.item_list_stus_layout);
         lv_stus.setAdapter(adapter);
     }
 
     @Override
-    public void showError(Object error) {
+    public void showError(String error) {
 
-        qmuiev_load.show(false, "发生错误", error.toString(), "重新加载", new View.OnClickListener() {
+        qmuiev_load.show(false, "", error, "重新加载", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /**
                  * 重新获取学生列表
                  */
-                iPresenter.getStusToShow(UserManager.getInstance().getUser().getGrade().get_id());
+                iPresenter.getStusToShow(UserManager.getInstance().getUser().getGradeId());
             }
         });
+    }
+
+    @Override
+    public void showCommitError(String error) {
+        ToastUtil.showShort(error);
     }
 
     @Override
     public void showCommitResult(String info) {
         ToastUtil.showShort(info);
         finish();
+    }
+
+    @Override
+    public void hideLoadStus() {
+        qmuiev_load.hide();
     }
 
     /**
@@ -223,7 +238,11 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         LogUtil.e("我正在初始comp");
-        int compId = intent.getIntExtra("compId", -1);
-        c = new TaskCompletion(compId);
+        compId = intent.getIntExtra("compId", -1);
+    }
+
+    @Override
+    protected IBaseView getIView() {
+        return new IDefaultView(getActivity(),"正在提交",false);
     }
 }

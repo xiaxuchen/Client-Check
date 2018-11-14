@@ -28,7 +28,6 @@ public class FunctionAdapter extends AdapterBase<Map<String,Object>> {
     @Override
     public void convertView(ViewHolder holder, Map<String, Object> item) {
         holder.setText(R.id.tv_text,item.get("text").toString());
-        holder.setBackgroundRes(R.id.ll_back,(Integer) item.get("back"));
         holder.setImageResource(R.id.iv_img,(Integer) item.get("img"));
     }
 }

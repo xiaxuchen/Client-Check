@@ -1,22 +1,18 @@
 package com.cxyz.check.model.imodelimpl;
 
-import android.accounts.NetworkErrorException;
-
-import com.cxyz.check.constant.NetWorkConstant;
 import com.cxyz.check.constant.RequestCenter;
+import com.cxyz.check.dto.CommitCheckDto;
+import com.cxyz.check.dto.GradeStusDto;
 import com.cxyz.check.model.IDailyModel;
-import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
+import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
-import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
-import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
-import com.cxyz.commons.utils.JsonUtil;
-import com.cxyz.logiccommons.domain.Check;
-import com.cxyz.logiccommons.domain.Student;
+import com.cxyz.logiccommons.domain.CheckResult;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.HashMap;
+import org.json.JSONException;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 夏旭晨 on 2018/10/5.
@@ -30,15 +26,18 @@ public class IDailyModelImpl implements IDailyModel {
         RequestCenter.getStus(grade,new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
-                List<Student> stus = JsonUtil.jsonToListObject(responseObj.toString(),Student.class);
                 if(listener!=null)
                 {
-                    if (stus == null) {
-                        listener.onFail("获取资源错误！");
-                        return;
-                    }
-                    else{
-                        listener.onSuccess(stus);
+                    try {
+                        CheckResult<List<GradeStusDto>> checkResult = (CheckResult<List<GradeStusDto>>) GsonUtil.fromJson(responseObj.toString(),
+                                new TypeToken<CheckResult<List<GradeStusDto>>>(){}.getType());
+                        if(checkResult.isSuccess())
+                            listener.onSuccess(checkResult.getData());
+                        else
+                            listener.onFail(checkResult.getError());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        listener.onFail("服务器异常");
                     }
                 }
             }
@@ -59,32 +58,39 @@ public class IDailyModelImpl implements IDailyModel {
     }
 
     @Override
-    public void commit(Check check, final CommitListener listener) {
-        String json = JsonUtil.objectToJson(check);
-        Map<String,String> map = new HashMap<>();
-        map.put("method","addRecords");
-        map.put("check",json);
-        RequestParams params = new RequestParams(map);
+    public void commit(CommitCheckDto commitCheckDto,final CommitListener listener) {
+        //装配参数
+        String commitCheck = null;
         try {
-            CommonOkHttpClient.post(NetWorkConstant.COMMIT_URL,params,new DisposeDataHandler(new DisposeDataListener() {
-                @Override
-                public void onSuccess(Object responseObj) {
-                    listener.onCompletion("提交成功！");
-                }
-
-                @Override
-                public void onFailure(Object error) {
-                    if(error instanceof String)
-                        listener.onCompletion(error.toString());
-                    else
-                        listener.onCompletion(((OKHttpException)error).getMessage());
-
-                }
-            }));
-        } catch (NetworkErrorException e) {
+            commitCheck = GsonUtil.toJson(commitCheckDto);
+        } catch (JSONException e) {
             e.printStackTrace();
-            if(listener!=null)
-                listener.onCompletion("网络状态异常");
+            listener.onFail("提交数据异常");
         }
+        //发送请求
+        RequestCenter.commitCheck(commitCheck,new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                try {
+                    CheckResult<String> checkResult = (CheckResult<String>) GsonUtil.fromJson(responseObj.toString(),new TypeToken<CheckResult<String>>(){}.getType());
+                    if(checkResult.isSuccess())
+                        listener.onCompletion(checkResult.getData());
+                    else
+                        listener.onFail(checkResult.getError());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    listener.onFail("服务器异常");
+                }
+            }
+
+            @Override
+            public void onFailure(Object error) {
+                if(error instanceof String)
+                    listener.onFail(error.toString());
+                else
+                    listener.onFail(((OKHttpException)error).getMessage());
+
+            }
+        });
     }
 }

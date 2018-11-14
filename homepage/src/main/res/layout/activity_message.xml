@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".acitivity.MessageActivity">
+    >
     <com.cxyz.commons.widget.TitleView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-    </com.cxyz.commons.widget.TitleView>
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -27,6 +24,7 @@
             app:qmui_radiusTopLeft="13dp"
             android:text="  课程 "
             android:textColor="#6495ed"/>
+
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
             android:id="@+id/btn_check"
             android:layout_marginLeft="1dp"
@@ -36,7 +34,9 @@
             app:qmui_radiusTopRight="13dp"
             android:text=" 考勤  "
             android:textColor="#6495ed"/>
+
     </LinearLayout>
+
     <com.haibin.calendarview.CalendarLayout
         android:id="@+id/calendarLayout"
         android:layout_width="match_parent"
@@ -74,6 +74,7 @@
             android:orientation="vertical"
             android:background="#d4d4d4">
         </android.support.v7.widget.RecyclerView>
+
     </com.haibin.calendarview.CalendarLayout>
 
 </LinearLayout>

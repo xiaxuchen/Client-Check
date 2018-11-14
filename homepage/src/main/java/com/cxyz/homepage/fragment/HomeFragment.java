@@ -2,7 +2,6 @@ package com.cxyz.homepage.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,14 +12,16 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.fragment.BaseFragment;
+import com.cxyz.commons.utils.DateUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
-import com.cxyz.homepage.acitivity.DailyCheckActivitymore;
+import com.cxyz.homepage.acitivity.MessageActivity;
+import com.cxyz.homepage.acitivity.PieChartActivity;
 import com.cxyz.homepage.adapter.FunctionAdapter;
+import com.cxyz.homepage.dto.CheckTaskDto;
 import com.cxyz.homepage.ipresenter.IHomePresenter;
 import com.cxyz.homepage.ipresenter.impl.IHomePresenterImpl;
 import com.cxyz.homepage.iview.IHomeView;
-import com.cxyz.logiccommons.domain.TaskInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,20 +74,16 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
 
     @Override
     protected void initData(Bundle bundle) {
-        int backs[] = new int[]{R.drawable.circleborder,R.drawable.circlebordertwo,
-                R.drawable.circleborderthree,R.drawable.circleborderfour,R.drawable.circleborderfive
-                ,R.drawable.circlebordersix,R.drawable.circleborderseven,R.drawable.circlebordereight};
         String texts[] = new String[]{"考勤","考勤图表","月历课次","请假申请",
                 "班级课表","成绩情况","统计报告","其他信息"};
-        int imgs[] = new int[]{R.drawable.checkin,R.drawable.checkcharts,R.drawable.monthclass,
-                R.drawable.appointapply,R.drawable.classlist,R.drawable.gradescase,R.drawable.statistics,
-                R.drawable.othercondition};
+        int imgs[] = new int[]{R.mipmap.checkin,R.mipmap.checkcharts,R.mipmap.monthclass,
+                R.mipmap.appointapply,R.mipmap.classlists,R.mipmap.gradescase,R.mipmap.statistics,
+                R.mipmap.othercondition};
         data = new ArrayList<>();
         Map<String,Object> map = null;
-        for(int i = 0;i<backs.length;i++)
+        for(int i = 0;i<imgs.length;i++)
         {
             map = new HashMap<>();
-            map.put("back",backs[i]);
             map.put("text",texts[i]);
             map.put("img",imgs[i]);
             data.add(map);
@@ -123,25 +120,21 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
                 switch (i)
                 {
                     case 0:iPresenter.checkTask();break;
-                    case 1:{
-                        Intent intent=new Intent(getActivity().getApplicationContext(), DailyCheckActivitymore.class);
-                        startActivity(intent);break;
-                    }
+                    case 2:getHoldingActivity().startActivity(MessageActivity.class);break;//跳转至日历课次;
+                    case 6:getHoldingActivity().startActivity(PieChartActivity.class);break;//跳转到统计界面
                     default:ToastUtil.showShort("此功能正在扩充");
                 }
             }
         });
     }
 
-    /**
-     * TODO 需要显示一个dialog
-     * @param taskInfo
-     */
+
+
     @Override
-    public void showTask(TaskInfo taskInfo) {
-        if(taskInfo != null)
+    public void showTask(CheckTaskDto taskDto) {
+        if(taskDto != null)
         {
-            showDialog(taskInfo);
+            showDialog(taskDto);
         }
     }
 
@@ -154,28 +147,28 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
      * 显示对话框
      * @param info
      */
-    private void showDialog(final TaskInfo info)
+    private void showDialog(final CheckTaskDto info)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("检查到考勤任务,是否考勤？");
         builder.setIcon(R.mipmap.common_logo);
         View view = View.inflate(getActivity(),R.layout.item_dialog_layout,null);
         TextView tv_task_name = (TextView) view.findViewById(R.id.tv_task_name);
-        tv_task_name.setText(info.get_name());
+        tv_task_name.setText(info.getName());
         TextView tv_task_tea = (TextView) view.findViewById(R.id.tv_task_tea);
-        tv_task_tea.setText(info.getSponser().get_name());
+        tv_task_tea.setText(info.getSponsorName());
         TextView tv_task_time = (TextView) view.findViewById(R.id.tv_task_time);
-        tv_task_time.setText(info.getStart().getHour()+":"+info.getStart().getMinute()
-                +"-"+info.getEnd().getHour()+":"+info.getEnd().getMinute());
+        tv_task_time.setText(DateUtil.dateToString(info.getStart(), DateUtil.DatePattern.ONLY_TIME)+
+                "-"+DateUtil.dateToString(info.getEnd(), DateUtil.DatePattern.ONLY_TIME));
         TextView tv_task_place = (TextView) view.findViewById(R.id.tv_place);
         //TODO 这里以后需要改成name
-        tv_task_place.setText(info.getClassRoom()==null?"":info.getClassRoom().get_id()+"");
+        tv_task_place.setText(info.getSpot()==null?"":info.getSpot());
         builder.setView(view);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ARouter.getInstance().build("/check/DailyCheckActivitymore").
-                        withInt("compId",info.getCompletion().get_id()).navigation();
+                ARouter.getInstance().build("/check/DailyCheckActivity").
+                        withInt("compId",info.getId()).navigation();
                 dialogInterface.dismiss();
             }
         });

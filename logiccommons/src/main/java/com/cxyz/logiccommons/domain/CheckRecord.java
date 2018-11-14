@@ -39,7 +39,7 @@ public class CheckRecord{
     /**
      * 所属学生
      */
-    private Student student;
+    private User student;
     /**
      * 考勤结果
      */
@@ -58,10 +58,10 @@ public class CheckRecord{
 	public void set_id(int _id) {
 		this._id = _id;
 	}
-	public Student getStudent() {
+	public User getStudent() {
 		return student;
 	}
-	public void setStudent(Student student) {
+	public void setStudent(User student) {
 		this.student = student;
 	}
 	public int getResult() {

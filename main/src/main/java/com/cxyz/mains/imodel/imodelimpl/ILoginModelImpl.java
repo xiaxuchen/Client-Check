@@ -4,9 +4,11 @@ import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
+import com.cxyz.logiccommons.domain.CheckResult;
 import com.cxyz.logiccommons.domain.User;
 import com.cxyz.mains.constant.RequestCenter;
 import com.cxyz.mains.imodel.ILoginModel;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 
@@ -26,13 +28,12 @@ public class ILoginModelImpl implements ILoginModel{
      * @param type 用户类型
      * @param listener  获取服务器上返回的信息后回调
      */
-    public void getLoginInfo(String id, String pwd, int type, final getLoginInfoListener listener)
+    public void getLoginInfo(final String id, String pwd, final int type, final getLoginInfoListener listener)
     {
         /**
          * 装填参数
          */
         Map<String,String> map = new HashMap<>();
-        map.put("method","login");
         map.put("id",id);
         map.put("pwd",pwd);
         map.put("type",String.valueOf(type));
@@ -50,16 +51,22 @@ public class ILoginModelImpl implements ILoginModel{
                     User user = null;
                     try {
                         user = (User) GsonUtil.fromJson(responseObj.toString(), User.class);
+                        CheckResult<User> checkResult = (CheckResult<User>) GsonUtil.fromJson(responseObj.toString(),
+                                new TypeToken<CheckResult<User>>(){}.getType());
+                        if (checkResult.isSuccess())
+                        {
+                            User u = checkResult.getData();
+                            u.setId(id);
+                            u.setType(type);
+                            listener.getInfoSuccess(u);
+                        }else
+                        {
+                            listener.getInfoFail(checkResult.getError());
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                         listener.getInfoFail("服务器异常");
                     }
-                    if(user.getType()==User.ERROR)
-                    {
-                        listener.getInfoFail(user.get_name());
-                        return;
-                    }
-                    listener.getInfoSuccess(user);
                 }
 
             }
