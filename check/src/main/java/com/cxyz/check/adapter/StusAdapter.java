@@ -5,6 +5,7 @@ import android.content.Context;
 import com.cxyz.check.R;
 import com.cxyz.check.dto.CommitCheckDto;
 import com.cxyz.check.dto.GradeStusDto;
+import com.cxyz.check.other.MineMap;
 import com.cxyz.commons.Adapter.AdapterBase;
 import com.cxyz.commons.Adapter.ViewHolder;
 import com.cxyz.commons.utils.LogUtil;
@@ -13,7 +14,7 @@ import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by 夏旭晨 on 2018/10/4.
@@ -22,7 +23,7 @@ import java.util.Map;
 public class StusAdapter extends AdapterBase<GradeStusDto>{
 
     //控制是否显示已到达的状态变量
-    private boolean hideNormal = true;
+    private boolean hideNormal = false;
 
     private Context context;
 
@@ -32,28 +33,107 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
             LATE,CheckRecordResult.VACATE,CheckRecordResult.NORMAL
             ,CheckRecordResult.ABSENTEEISM,CheckRecordResult.EARLYLEAVE};
     //装载违规学生的信息
-    Map<String,CommitCheckDto.StuInfo> dtoMap;
+    private MineMap<String,CommitCheckDto.StuInfo> dtoMap;
+
+    //违规学生
+    private List<GradeStusDto> bad;
 
     //全部的记录
     private List<GradeStusDto> all;
 
-    public StusAdapter(Context mContext, List<GradeStusDto> list, Map<String,CommitCheckDto.StuInfo> dtoMap, int mItemLayoutId) {
+
+    public StusAdapter(Context mContext, List<GradeStusDto> list, MineMap<String,CommitCheckDto.StuInfo> dtoMap, int mItemLayoutId) {
         super(mContext, list, mItemLayoutId);
         this.all =  list;
         this.context = mContext;
         this.dtoMap = dtoMap;
+        initBad();
     }
 
-    //获取不良记录的list
-    private List<GradeStusDto> getBad()
+    /**
+     * 获取相应item的position
+     * @param info 学号或姓名
+     * @return position，如果没有则返回-1
+     */
+     public int getItemPostion(String info)
+     {
+         List<GradeStusDto> list = getList();
+         int position = -1;
+         int i = 0;
+
+             try {
+                 //如果可以转成int类型则为学号
+                 Integer.parseInt(info);
+                 //遍历学号获取position
+                 for(GradeStusDto dto:list)
+                 {
+                     if(info.equals(dto.getId()))
+                     {
+                         position = i;
+                         break;
+                     }
+                     i++;
+                 }
+             }catch (NumberFormatException e)
+             {
+                 //如果不能转成数字则为姓名
+                 for(GradeStusDto dto:list)
+                 {
+                     //遍历姓名获取position
+                     if(info.equals(dto.getName()))
+                     {
+                         position = i;
+                         break;
+                     }
+                     i++;
+                 }
+             }
+
+         return position;
+     }
+
+    //将不良记录装载进list
+    private List<GradeStusDto> initBad()
     {
-        List<GradeStusDto> bad = new ArrayList<>();
-        for(GradeStusDto item:all)
+        if(bad == null)
         {
-            if(dtoMap.containsKey(item.getId()))
-            {
-                bad.add(item);
+            bad = new ArrayList<>();
+            for (GradeStusDto item : all) {
+                if (dtoMap.containsKey(item.getId())) {
+                    bad.add(item);
+                }
             }
+            //为dtomap设置观察者
+            dtoMap.setObserver(new MineMap.MineObserver<String, CommitCheckDto.StuInfo>() {
+                @Override
+                public void onRemove(String key, CommitCheckDto.StuInfo value) {
+                    for(GradeStusDto dto:all)
+                    {
+                        if(dto.getId().equals(key))
+                        {
+                            bad.remove(dto);
+                            break;
+                        }
+                    }
+                    if(hideNormal)
+                        notifyDataSetChanged();
+                }
+
+                @Override
+                public void onPut(final String key, CommitCheckDto.StuInfo value) {
+                    for(GradeStusDto dto:all)
+                    {
+                        if(dto.getId().equals(key))
+                        {
+                            if(!bad.contains(dto))
+                                bad.add(dto);
+                            break;
+                        }
+                    }
+                    if(hideNormal)
+                        notifyDataSetChanged();
+                }
+            });
         }
         return bad;
     }
@@ -98,7 +178,7 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
            setList(all);
         }else
         {
-            setList(getBad());
+            setList(bad);
         }
         notifyDataSetInvalidated();
     }
@@ -171,4 +251,56 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
         return strData;
 
     }
+
+
+    /**
+     * 筛选学生信息
+     */
+     public void filter(String info)
+     {
+         //如果输入框中为空则通过isNormal判断将数据设置为不良记录或全部记录
+         if(info==null||info.isEmpty())
+         {
+             if(hideNormal)
+                setList(bad);
+             else
+                 setList(all);
+             notifyDataSetInvalidated();
+             return;
+         }
+         List<GradeStusDto> list;
+         if(hideNormal)
+         {
+             list = bad;
+         }else
+         {
+             list = all;
+         }
+         LogUtil.e(list==null?"null":list.toString());
+         List<GradeStusDto> newValue = new ArrayList<>();
+         Pattern pattern = Pattern.compile("\\w*"+info+"\\w*");
+         LogUtil.e(String.valueOf(pattern.matcher("daskdlas"+info+"asdas").matches()));
+         try {
+             Integer.parseInt(info);
+             for(GradeStusDto dto:list)
+             {
+                if(pattern.matcher(dto.getId()).matches())
+                {
+                    newValue.add(dto);
+                }
+             }
+         }catch (NumberFormatException e)
+         {
+             for(GradeStusDto dto:list)
+             {
+                 if(pattern.matcher(dto.getName()).matches())
+                 {
+                     newValue.add(dto);
+                 }
+             }
+         }
+         //获取到数据后进行设置
+         setList(newValue);
+         notifyDataSetInvalidated();
+     }
 }

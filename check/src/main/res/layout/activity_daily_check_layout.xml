@@ -9,13 +9,16 @@
 
     <LinearLayout
         android:gravity="center_vertical"
-        android:padding="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/common_primary_color">
-        <AutoCompleteTextView
-            android:id="@+id/act_find"
+        <EditText
+            android:id="@+id/et_find"
             android:padding="5dp"
             android:background="@color/app_white"
             android:layout_margin="5dp"
