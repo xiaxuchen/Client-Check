@@ -2,17 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ll_stus"
     android:orientation="vertical">
 
+
+    <LinearLayout android:id="@+id/ll_letter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/letter_back"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_letter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="18sp"
+            />
+
+    </LinearLayout>
+
+
     <LinearLayout
+        android:background="@color/app_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <com.qmuiteam.qmui.widget.QMUIRadiusImageView
             android:id="@+id/iv_photo"
-            android:layout_width="70dp"
-            android:layout_height="70dp" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"/>
 
         <LinearLayout
             android:layout_marginLeft="20dp"
@@ -21,7 +43,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -45,9 +67,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <TextView
@@ -65,8 +87,6 @@
                     android:text="已到达"
                     android:textColor="@color/small_gray"
                     android:textSize="16sp"/>
-
-
             </LinearLayout>
 
         </LinearLayout>

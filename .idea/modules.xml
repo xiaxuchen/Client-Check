@@ -10,7 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/logiccommons/logiccommons.iml" filepath="$PROJECT_DIR$/logiccommons/logiccommons.iml" />
       <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/mine/mine.iml" filepath="$PROJECT_DIR$/mine/mine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>
   </component>
 </project>

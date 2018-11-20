@@ -1,1 +1,1 @@
-include ':main', ':check', ':commons', ':mine', ':homepage', ':logiccommons', ':app', ':test'
+include ':main', ':check', ':commons', ':mine', ':homepage', ':logiccommons', ':app'

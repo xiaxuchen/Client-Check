@@ -4,4 +4,5 @@
     <color name="red">#d81e06</color>
     <color name="blue">@color/common_primary_color</color>
     <color name="orange">#1afa29</color>
+    <color name="letter_back">#ebebeb</color>
 </resources>

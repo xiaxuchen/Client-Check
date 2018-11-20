@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -22,6 +21,7 @@ import com.cxyz.check.dto.CommitCheckDto;
 import com.cxyz.check.dto.GradeStusDto;
 import com.cxyz.check.ipresenter.IDailyPresenter;
 import com.cxyz.check.ipresenter.ipresenterimpl.IDailyPresenterImpl;
+import com.cxyz.check.other.Comparator;
 import com.cxyz.check.other.MineMap;
 import com.cxyz.check.view.IDailyView;
 import com.cxyz.commons.IView.IBaseView;
@@ -29,10 +29,14 @@ import com.cxyz.commons.IView.IDefaultView;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.commons.widget.sideview.SideBar;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 
+import java.util.Collections;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 @Route(path = "/check/DailyCheckActivity")
 public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements IDailyView {
@@ -43,15 +47,18 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     private Button btn_commit;
 
+    /**
+     * 字母导航
+     */
+    private SideBar sb_bar;
+
     private StusAdapter adapter;
 
-    //是否显示已到达的cb
-    private CheckBox cb_shownormal;
+    //是否显示已到达的cb,确认考勤结果复选框
+    private CheckBox cb_shownormal,cb_check;
 
     //记录不良情况的map
     private MineMap<String, CommitCheckDto.StuInfo> stuInfoMap;
-
-    private AlertDialog alertDialog;
 
     //查找输入框
     private EditText et_find;
@@ -66,11 +73,13 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void initView() {
-        lv_stus = (ListView) findViewById(R.id.lv_stus);
-        qmuiev_load = (QMUIEmptyView) findViewById(R.id.qmuiev_load);
-        btn_commit = (Button) findViewById(R.id.btn_commit);
+        lv_stus =  findViewById(R.id.lv_stus);
+        qmuiev_load =  findViewById(R.id.qmuiev_load);
+        btn_commit =  findViewById(R.id.btn_commit);
         cb_shownormal = findViewById(R.id.cb_shownormal);
         et_find = findViewById(R.id.et_find);
+        cb_check = findViewById(R.id.cb_check);
+        sb_bar = findViewById(R.id.sb_bar);
 
         qmuiev_load.setDetailText("正在加载中...");
     }
@@ -85,29 +94,30 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     public void setEvent() {
 
         //设置学生被点击后弹出对话框
-        lv_stus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        lv_stus.setOnItemClickListener(
+            (AdapterView<?> parent, View view, int position, long id) -> {
                 showStateDialog(position, view);
             }
-        });
+        );
 
         //设置选择复选按钮后显示隐藏已到达学生
-        cb_shownormal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                adapter.isShowNormal(isChecked);
-            }
-        });
+        cb_shownormal.setOnCheckedChangeListener(
+            (CompoundButton buttonView, boolean isChecked) -> adapter.isShowNormal(isChecked)
+        );
 
         //向服务器提交数据
-        btn_commit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showConfirm();
-                iPresenter.commit(stuInfoMap, compId);
+        btn_commit.setOnClickListener(
+            (View v) ->
+            {
+                if(cb_check.isChecked())
+                {
+                    iPresenter.commit(stuInfoMap, compId);
+                }else
+                {
+                    confirmCommit();
+                }
             }
-        });
+        );
 
         //当在输入框中输入时触发
         et_find.addTextChangedListener(new TextWatcher() {
@@ -129,12 +139,19 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
             }
         });
 
-    }
+        //设置右侧触摸监听
+        sb_bar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
 
-    /**
-     * 显示当前所有不良记录予以确认
-     */
-    private void showConfirm() {
+            @Override
+            public void onTouchingLetterChanged(String s) {
+                //该字母首次出现的位置
+                int position = adapter.getPositionForSection(s.charAt(0));
+                if(position != -1){
+                    lv_stus.setSelection(position);
+                }
+
+            }
+        });
 
     }
 
@@ -154,15 +171,13 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         final CommitCheckDto.StuInfo stuInfo = stuInfoMap.get(stu.getId());
         if (stuInfo != null)
             result = this.getIndex(adapter.values, stuInfo.getResult());
-        builder.setSingleChoiceItems(adapter.items, result, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setSingleChoiceItems(adapter.items, result,(DialogInterface dialog, int which) ->{
                 if (which != 2) {
                     if (stuInfo == null) {
-                        CommitCheckDto.StuInfo stuInfo = new CommitCheckDto.StuInfo();
-                        stuInfo.setId(stu.getId());
-                        stuInfo.setResult(adapter.values[which]);
-                        stuInfoMap.put(stu.getId(), stuInfo);
+                        CommitCheckDto.StuInfo info = new CommitCheckDto.StuInfo();
+                        info.setId(stu.getId());
+                        info.setResult(adapter.values[which]);
+                        stuInfoMap.put(stu.getId(), info);
                     } else if (stuInfo.getResult() != adapter.values[which]) {
                         stuInfo.setResult(adapter.values[which]);
                         stuInfoMap.put(stu.getId(), stuInfo);
@@ -186,16 +201,35 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                 tv_state.setTextColor(adapter.getStateColor(adapter.values[which]));
                 tv_states.setTextColor(adapter.getStateColor(adapter.values[which]));
                 dialog.dismiss();
-            }
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setNegativeButton("取消",
+            (DialogInterface dialog, int which) -> {
                 dialog.dismiss();
             }
-        });
-        alertDialog = builder.create();
-        alertDialog.show();
+        );
+        builder.create().show();
+    }
+
+    /**
+     * 提示用户确认考勤结果
+     */
+    private void confirmCommit()
+    {
+          new SweetAlertDialog(getActivity(),
+                    SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("确认提交")
+                    .setContentText("请检查记录的正确性,并勾选左下角的复选框\n我们将自动隐藏已到达,以方便检查")
+                    .setConfirmText("知道了")
+                    .setConfirmClickListener(
+                            (SweetAlertDialog sDialog) ->
+                            {
+                                sDialog.dismissWithAnimation();
+                                //直接隐藏已到达人员方便查看
+                                if(!cb_shownormal.isChecked())
+                                    cb_shownormal.setChecked(true);
+                            }
+                    )
+                    .show();
     }
 
 
@@ -228,10 +262,10 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void showStus(List<GradeStusDto> stus) {
+        //为list排序
+        Collections.sort(stus, new Comparator());
         adapter = new StusAdapter(getActivity(), stus, stuInfoMap, R.layout.item_list_stus_layout);
         lv_stus.setAdapter(adapter);
-        ArrayAdapter<String> completionAdapter = new ArrayAdapter<String>
-                (getApplicationContext(), android.R.layout.simple_list_item_1, adapter.getCompletion());
     }
 
     @Override
@@ -255,8 +289,20 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void showCommitResult(String info) {
-        ToastUtil.showShort(info);
-        finish();
+        new SweetAlertDialog(getActivity(),
+                SweetAlertDialog.SUCCESS_TYPE)
+                .showCancelButton(false)
+                .setTitleText(info)
+                .setContentText("考勤记录提交完毕!")
+                .setConfirmText("返回主菜单")
+                .setConfirmClickListener(
+                        (SweetAlertDialog dialog) ->
+                        {
+                            dialog.dismissWithAnimation();
+                            finish();
+                        }
+                )
+                .show();
     }
 
     @Override

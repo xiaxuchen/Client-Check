@@ -1,18 +1,25 @@
 package com.cxyz.check.adapter;
 
 import android.content.Context;
+import android.view.View;
+import android.widget.SectionIndexer;
+import android.widget.TextView;
 
 import com.cxyz.check.R;
 import com.cxyz.check.dto.CommitCheckDto;
 import com.cxyz.check.dto.GradeStusDto;
+import com.cxyz.check.other.Comparator;
 import com.cxyz.check.other.MineMap;
 import com.cxyz.commons.Adapter.AdapterBase;
 import com.cxyz.commons.Adapter.ViewHolder;
+import com.cxyz.commons.utils.ColorsUtil;
 import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.commons.widget.sideview.CharacterParser;
 import com.cxyz.logiccommons.typevalue.CheckRecordResult;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -20,12 +27,16 @@ import java.util.regex.Pattern;
  * Created by 夏旭晨 on 2018/10/4.
  */
 
-public class StusAdapter extends AdapterBase<GradeStusDto>{
+public class StusAdapter extends AdapterBase<GradeStusDto> implements SectionIndexer{
+
+    private CharacterParser parser = CharacterParser.getInstance();
 
     //控制是否显示已到达的状态变量
     private boolean hideNormal = false;
 
     private Context context;
+
+    private Comparator comparator = new Comparator();
 
     public String[] items = new String[]{"迟到","请假","已到达","缺勤","早退"};
 
@@ -50,47 +61,6 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
         initBad();
     }
 
-    /**
-     * 获取相应item的position
-     * @param info 学号或姓名
-     * @return position，如果没有则返回-1
-     */
-     public int getItemPostion(String info)
-     {
-         List<GradeStusDto> list = getList();
-         int position = -1;
-         int i = 0;
-
-             try {
-                 //如果可以转成int类型则为学号
-                 Integer.parseInt(info);
-                 //遍历学号获取position
-                 for(GradeStusDto dto:list)
-                 {
-                     if(info.equals(dto.getId()))
-                     {
-                         position = i;
-                         break;
-                     }
-                     i++;
-                 }
-             }catch (NumberFormatException e)
-             {
-                 //如果不能转成数字则为姓名
-                 for(GradeStusDto dto:list)
-                 {
-                     //遍历姓名获取position
-                     if(info.equals(dto.getName()))
-                     {
-                         position = i;
-                         break;
-                     }
-                     i++;
-                 }
-             }
-
-         return position;
-     }
 
     //将不良记录装载进list
     private List<GradeStusDto> initBad()
@@ -123,10 +93,10 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
                 public void onPut(final String key, CommitCheckDto.StuInfo value) {
                     for(GradeStusDto dto:all)
                     {
-                        if(dto.getId().equals(key))
+                        if(dto.getId().equals(key)&&!bad.contains(dto))
                         {
-                            if(!bad.contains(dto))
-                                bad.add(dto);
+                            bad.add(dto);
+                            Collections.sort(bad,comparator);
                             break;
                         }
                     }
@@ -139,12 +109,33 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
     }
 
     @Override
-    public void convertView(ViewHolder holder, GradeStusDto item) {
+    public void convertView(ViewHolder holder, GradeStusDto item,int position) {
+        char letter = parser.getSelling(item.getName()).toUpperCase().charAt(0);
+        int selection = getPositionForSection(letter);
+        LogUtil.e(position+"");
+        LogUtil.e(selection+"");
+        View view = holder.getConvertView().findViewById(R.id.ll_letter);
+        if(selection == position)
+        {
+            if(!(view.getVisibility() == View.VISIBLE)){
+                    view.setVisibility(View.VISIBLE);
+                    view.setOnClickListener((View v) -> {});
+            }
+            TextView tv_letter = holder.getView(R.id.tv_letter);
+            tv_letter.setText(String.valueOf(letter));
+
+        }else {
+            if(view.getVisibility() == View.VISIBLE)
+            {
+                view.setVisibility(View.GONE);
+            }
+        }
         QMUIRadiusImageView image=holder.getView(R.id.iv_photo);
         image.setCircle(true);
         image.setCornerRadius(100);
         image.setOval(false);//是否椭圆
-        image.setBorderWidth(5);//设置边缘宽度
+        image.setBorderWidth(1);//设置边缘宽度
+        image.setBorderColor(ColorsUtil.TRANSPARENT);
         CommitCheckDto.StuInfo stuInfo = dtoMap.get(item.getId());
         holder.setImageUrl(R.id.iv_photo,item.getPhoto(),R.drawable.beauty);
         holder.setText(R.id.tv_name,item.getName());
@@ -163,7 +154,7 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
             holder.setTextColor(R.id.tv_state,getStateColor(stuInfo.getResult()));
             holder.setTextColor(R.id.tv_states,getStateColor(stuInfo.getResult()));
         }
-
+        super.convertView(holder,item);
     }
 
     /**
@@ -231,27 +222,6 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
 
     }
 
-    /**
-     * 获取自动完成的列表信息
-     * @return
-     */
-    public String[] getCompletion() {
-        List<String> obj = new ArrayList();
-        List<GradeStusDto> data = getList();
-        for(GradeStusDto dto: data)
-        {
-                obj.add(dto.getName());
-                obj.add(dto.getId());
-        }
-        String strData[] = new String[obj.size()];
-        for(int i = 0;i<obj.size();i++)
-        {
-            strData[i] = obj.get(i);
-        }
-        return strData;
-
-    }
-
 
     /**
      * 筛选学生信息
@@ -278,12 +248,13 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
          }
          LogUtil.e(list==null?"null":list.toString());
          List<GradeStusDto> newValue = new ArrayList<>();
-         Pattern pattern = Pattern.compile("\\w*"+info+"\\w*");
-         LogUtil.e(String.valueOf(pattern.matcher("daskdlas"+info+"asdas").matches()));
+
+         Pattern pattern = Pattern.compile(getRegex(info));
          try {
              Integer.parseInt(info);
              for(GradeStusDto dto:list)
              {
+                 //如果学号匹配则显示
                 if(pattern.matcher(dto.getId()).matches())
                 {
                     newValue.add(dto);
@@ -293,7 +264,9 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
          {
              for(GradeStusDto dto:list)
              {
-                 if(pattern.matcher(dto.getName()).matches())
+                 //如果名字的首拼匹配或者名字匹配则显示
+                 if(pattern.matcher(dto.getName()).matches()||
+                         pattern.matcher(getPrimarySpell(dto.getName())).matches())
                  {
                      newValue.add(dto);
                  }
@@ -303,4 +276,65 @@ public class StusAdapter extends AdapterBase<GradeStusDto>{
          setList(newValue);
          notifyDataSetInvalidated();
      }
+
+    /**
+     * 获取名字的首拼
+     * @param name
+     * @return
+     */
+     private String getPrimarySpell(String name)
+     {
+
+         StringBuilder builder = new StringBuilder();
+         for(char c:name.toCharArray())
+         {
+             builder.append(parser.getSelling(String.valueOf(c)).charAt(0));
+         }
+         return builder.toString();
+     }
+
+    /**
+     * 拼接正则表达式
+     * @param info 需要匹配的字符串
+     * @return 正则表达式
+     */
+    private String getRegex(String info)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("\\w*");
+        for(char c:info.toCharArray())
+        {
+            builder.append(String.valueOf(c).toLowerCase());
+            builder.append("\\w*");
+        }
+        return builder.toString();
+    }
+
+    @Override
+    public Object[] getSections() {
+        return null;
+    }
+
+    /**
+     * 根据ListView的当前位置获取分类的首字母的char ascii值
+     */
+    public int getSectionForPosition(int position) {
+        return parser.getSelling(getList().get(position).getName()).charAt(0);
+    }
+
+    /**
+     * 根据分类的首字母的Char ascii值获取其第一次出现该首字母的位置
+     */
+    public int getPositionForSection(int section) {
+        LogUtil.e(String.valueOf((char)section));
+        for (int i = 0; i < getCount(); i++) {
+            String sortStr = parser.getSelling(getList().get(i).getName());;
+            char firstChar = sortStr.toUpperCase().charAt(0);
+            if (firstChar == section) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
