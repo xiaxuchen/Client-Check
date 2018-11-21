@@ -2,7 +2,7 @@ package com.cxyz.homepage.ipresenter.impl;
 
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.imodel.MassageListModel;
-import com.cxyz.homepage.imodel.MassageListModelImpl;
+import com.cxyz.homepage.imodel.impl.MassageListModelImpl;
 import com.cxyz.homepage.ipresenter.MassageListPresenter;
 import com.cxyz.logiccommons.domain.RecordDetail;
 
