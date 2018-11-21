@@ -58,6 +58,14 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        LogUtil.e("kkkk");
+        if(requestCode == UpdateService.REQUEST_INSTALL && resultCode == RESULT_CANCELED)
+        {
+            noUpdate();
+        }
+    }
 
     @Override
     protected void afterInit() {
@@ -91,6 +99,7 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(getActivity(),UpdateService.class);
                 intent.putExtra("apkUrl",url);
+               /* ((MyApp)getMyApp()).setAttribute("splashActivity",getActivity());*/
                 startService(intent);
                 dialog.dismiss();
                 noUpdate();

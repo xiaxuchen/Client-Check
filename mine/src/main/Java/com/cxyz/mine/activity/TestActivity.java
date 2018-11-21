@@ -14,7 +14,7 @@ public class TestActivity extends FragmentActivity {
 
     @Override
     public int getContentViewId() {
-        return R.layout.testlayout;
+        return R.layout.activity_changepwd_layout;
     }
 
     @Override
@@ -39,7 +39,9 @@ public class TestActivity extends FragmentActivity {
 
     @Override
     public int getFragmentContentId() {
-        return R.id.fl_content;
+      /*  return R.id.fl_content;*/
+      return  0;
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.cxyz.mine.activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.view.KeyEvent;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
@@ -107,5 +108,13 @@ public class ExpandFunctionActivity extends BaseActivity {
     @Override
     protected IBasePresenter createIPresenter() {
         return null;
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            this.finish();
+            overridePendingTransition(R.anim.back_next,R.anim.back_exit);
+        }
+        return true;
     }
 }

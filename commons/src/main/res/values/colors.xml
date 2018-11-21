@@ -6,4 +6,5 @@
     <color name="common_primary_color">#0CA2FF</color>
     <color name="common_white">#ffffff</color>
     <color name="common_line">#bfbfbf</color>
+    <color name="gray">#8A8A8A</color>
 </resources>

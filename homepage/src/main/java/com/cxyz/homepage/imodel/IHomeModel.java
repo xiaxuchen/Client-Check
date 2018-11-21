@@ -14,7 +14,7 @@ public interface IHomeModel extends IBaseModel {
      * @param type 用户类型
      * @return 考勤信息
      */
-    void checkComp(String checkerId, int checkerType,int type, CheckListener listener);
+    void checkComp(String checkerId, int checkerType, int type, CheckListener listener);
 
     interface CheckListener{
 

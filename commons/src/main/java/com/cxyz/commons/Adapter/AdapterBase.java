@@ -147,7 +147,7 @@ public abstract class AdapterBase<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder = getViewHolder(position, convertView, parent);
-        convertView(viewHolder, getItem(position));
+        convertView(viewHolder, getItem(position),position);
         return viewHolder.getConvertView();
     }
 
@@ -155,7 +155,11 @@ public abstract class AdapterBase<T> extends BaseAdapter {
         return ViewHolder.get(mContext, convertView, parent, mItemLayoutId, position);
     }
 
-    public abstract void convertView(ViewHolder holder, T item);
+    public void convertView(ViewHolder holder, T item){};
+
+    public void convertView(ViewHolder holder, T item,int position){
+        convertView(holder,item);
+    };
 
     /**
      * 在添加item到list之后、更新listview之前执行

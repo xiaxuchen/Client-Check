@@ -31,6 +31,7 @@ import java.io.File;
  * Time: 16:24
  */
 public class UpdateService extends Service{
+    public static  final int REQUEST_INSTALL = 0;
     private String apkUrl;
     private String filePath;
     private NotificationManager notificationManager;
@@ -60,7 +61,6 @@ public class UpdateService extends Service{
         startDownload();
         return super.onStartCommand(intent, flags, startId);
     }
-
     private void startDownload() {
         UpdateManager.getInstance().startDownloads(apkUrl, filePath, new UpdateDownloadListener() {
             @Override
@@ -129,6 +129,19 @@ public class UpdateService extends Service{
      * 进入apk安装程序
      * @return
      */
+   /* private PendingIntent getContentIntent() {
+        Log.e("tag", "getContentIntent()");
+        File apkFile = new File(filePath);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(Uri.parse("file://"+apkFile.getAbsolutePath()),
+                "application/vnd.android.package-archive");
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        ((Activity)((MyApp)getApplication()).getAttribute("splashActivity")).startActivityForResult(intent,UpdateService.REQUEST_INSTALL);
+        ((MyApp)getApplication()).removeAttribute("splashActivity");
+        return pendingIntent;
+
+    }*/
     private PendingIntent getContentIntent() {
         Log.e("tag", "getContentIntent()");
         File apkFile = new File(filePath);

@@ -16,6 +16,7 @@ import com.cxyz.commons.utils.DateUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.acitivity.MessageActivity;
+import com.cxyz.homepage.acitivity.PieChartActivity;
 import com.cxyz.homepage.adapter.FunctionAdapter;
 import com.cxyz.homepage.dto.CheckTaskDto;
 import com.cxyz.homepage.ipresenter.IHomePresenter;
@@ -118,8 +119,16 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i)
                 {
-                    case 0:iPresenter.checkTask();break;
+                    case 0:
+                    {
+                        if(com.cxyz.logiccommons.manager.UserManager.getInstance().getUser().getPower() == 5)
+                            iPresenter.checkTask();
+                        else
+                            ToastUtil.showShort("您当前暂无此权限");
+                            break;
+                    }
                     case 2:getHoldingActivity().startActivity(MessageActivity.class);break;//跳转至日历课次;
+                    case 6:getHoldingActivity().startActivity(PieChartActivity.class);break;//跳转到统计界面
                     default:ToastUtil.showShort("此功能正在扩充");
                 }
             }
