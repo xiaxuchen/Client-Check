@@ -19,22 +19,29 @@ import java.util.Map;
 
 public class RequestCenter {
 
+    public static void getMySubjects(RequestParams params,DisposeDataListener listener){
+        ToastUtil.showShort(params.toString());
+        try {
+            CommonOkHttpClient.get(NetWorkHomeUrl.CLAZZS_URL,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网路状态异常");
+        }
+    }
     /**
      * 通过用户id和所查记录类型查找违规记录(考勤情况)
-     * @param id 用户id
-     * @param type 记录类型
      * @param listener 回调
      */
-    public static void getRecords(String id, Integer type, DisposeDataListener listener)
+    public static void getRecords(RequestParams params, DisposeDataListener listener)
     {
-        Map<String,String> map = new HashMap<>();
-        map.put("method","getRecordDetails");
-        map.put("id",id);
-        map.put("type",type+"");
-        ToastUtil.showShort(map.toString());
-        RequestParams params = new RequestParams(map);
+//        Map<String,String> map = new HashMap<>();
+//        map.put("method","getRecordDetails");
+//        map.put("id",id);
+//        map.put("type",type+"");
+        ToastUtil.showShort(params.toString());
+//        RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.post(NetWorkHomeUrl.RDS_URL,params,new DisposeDataHandler(listener));
+            CommonOkHttpClient.post(NetWorkHomeUrl.CLAZZS_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
