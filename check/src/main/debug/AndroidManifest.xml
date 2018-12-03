@@ -13,6 +13,10 @@
         android:name="com.cxyz.logiccommons.application.MyApp">
 
         <activity android:name=".activity.DailyCheckActivity" >
+
+        </activity>
+
+        <activity android:name=".activity.CheckActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />

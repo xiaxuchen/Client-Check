@@ -271,15 +271,12 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     public void showError(String error) {
 
-        qmuiev_load.show(false, "", error, "重新加载", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /**
-                 * 重新获取学生列表
-                 */
-                iPresenter.getStusToShow(UserManager.getInstance().getUser().getGradeId());
-            }
-        });
+        qmuiev_load.show(false, "", error, "重新加载", view ->
+        {
+            LogUtil.e("caoonima");
+            ToastUtil.showShort("caonima");
+            iPresenter.getStusToShow(UserManager.getInstance().getUser().getGradeId());
+        }  );
     }
 
     @Override
@@ -328,5 +325,10 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     protected IBaseView getIView() {
         return new IDefaultView(getActivity(), "正在提交", false);
+    }
+
+    @Override
+    public void showLoadingView() {
+        qmuiev_load.show(true,"正在加载...",null,null,null);
     }
 }
