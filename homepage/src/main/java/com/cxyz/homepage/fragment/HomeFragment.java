@@ -122,7 +122,7 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
                     case 0:
                     {
                         if(com.cxyz.logiccommons.manager.UserManager.getInstance().getUser().getPower() == 5)
-                            iPresenter.checkTask();
+                            ARouter.getInstance().build("/check/CheckActivity").navigation();//跳转至考勤页面
                         else
                             ToastUtil.showShort("您当前暂无此权限");
                             break;

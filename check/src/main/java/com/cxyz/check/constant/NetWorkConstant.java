@@ -18,4 +18,9 @@ public class NetWorkConstant {
     public static final String GRADE_CHECK_URL = Constant.ROOT_URL+"/getGradeCheck";
     //获取统计结果
     public static final String STATISTIC_URL = Constant.ROOT_URL+"/servlet/StatisticServlet";
+
+    /**
+     * 检查是否有考勤任务
+     */
+    public static final String CHECKCOMP_URL = Constant.ROOT_URL+"/checkTask";
 }

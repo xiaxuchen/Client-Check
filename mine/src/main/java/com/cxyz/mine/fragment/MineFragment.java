@@ -17,7 +17,7 @@ import com.cxyz.mine.IPresenter.presenter.IMineFragmentPresenter;
 import com.cxyz.mine.IPresenter.presenter.IMineFragmentPresenterlmpl;
 import com.cxyz.mine.R;
 import com.cxyz.mine.activity.AppointmentApplyStuCheckActivity;
-import com.cxyz.mine.activity.ForgetpwdActivity;
+import com.cxyz.mine.activity.ChangePwdACtivity;
 import com.cxyz.mine.activity.MoreSettingActivity;
 import com.cxyz.mine.activity.MyinfoActivity;
 import com.cxyz.mine.activity.UserResponse;
@@ -114,7 +114,7 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
     }
     //从我的界面跳转到修改密码界面
     public void tv_mine_alterpwd() {
-        Intent intent = new Intent(getActivity().getApplicationContext(), ForgetpwdActivity.class);
+        Intent intent = new Intent(getActivity().getApplicationContext(), ChangePwdACtivity.class);
         startActivity(intent);
         mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
     }

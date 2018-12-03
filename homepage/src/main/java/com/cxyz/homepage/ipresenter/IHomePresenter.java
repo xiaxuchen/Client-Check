@@ -10,10 +10,5 @@ import com.cxyz.homepage.iview.IHomeView;
 
 public abstract class IHomePresenter extends IBasePresenter<IHomeModel,IHomeView> {
 
-    /**
-     * 检查当前是否有考勤任务再选择进行考勤
-     * @return
-     */
-    public abstract void checkTask();
 
 }
