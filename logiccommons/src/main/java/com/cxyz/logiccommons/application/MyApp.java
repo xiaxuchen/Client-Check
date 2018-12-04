@@ -24,6 +24,7 @@ public class MyApp extends BaseApplication {
         super.onCreate();
         attributes = new HashMap<>();
         initToast();
+        initCrach();
         initSpUtil();
         initCommonOkHttpClient();
         initARouter(true);
@@ -52,7 +53,7 @@ public class MyApp extends BaseApplication {
      */
     private void initCrach()
     {
-        Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance().init(this));
+        Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance().init(this,"http://192.168.155.2:8080/Server_Check/envir/uploadBugs"));
     }
 
 

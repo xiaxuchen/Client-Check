@@ -70,13 +70,13 @@ public class CommonRequest {
             {
                 if(entry.getValue() instanceof File)
                 {
-                    builder.addPart(MultipartBody.Part.createFormData(entry.getKey(),null,
-                            RequestBody.create(FILE_TYPE,(File)entry.getValue())));
+                    builder.addFormDataPart("file", ((File) entry.getValue()).getName(), RequestBody.create(FILE_TYPE, (File) entry.getValue()));
                 }else{
                     builder.addFormDataPart(entry.getKey(),String.valueOf(entry.getValue()));
                 }
             }
         }
+
         return new Request.Builder().url(url).post(builder.build()).build();
     }
 

@@ -100,6 +100,24 @@ public class CommonOkHttpClient {
     }
 
     /**
+     * post方式请求网络
+     * @param url 请求的地址
+     * @param params 请求参数
+     * @param handler 请求信息的封装类，详细请看DisposeDataHandler
+     * @return
+     */
+    public static Call uploadFile(String url, RequestParams params, DisposeDataHandler handler) throws NetworkErrorException {
+        if(!NetWorkUtil.isNetWorkEnable(context))
+            throw new NetworkErrorException();
+        Request request = CommonRequest.createMultiPostRequest(url, params);
+        Call call = client.newCall(request);
+        call.enqueue(new CommonJsonCallback(handler));
+        return call;
+    }
+
+
+
+    /**
      * 下载文件
      * @param url 请求的地址
      * @param params 请求参数

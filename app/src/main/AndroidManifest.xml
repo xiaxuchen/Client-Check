@@ -10,7 +10,6 @@
         tools:replace="android:icon,android:label"
         android:label="@string/common_app_name">
 
-
     </application>
 
 </manifest>
