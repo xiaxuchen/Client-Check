@@ -187,7 +187,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
     /***
      * 设置是否使用沉浸式状态栏
-     * 默认为不使用，重写该方法来选择是否使用
+     * 默认为使用，重写该方法来选择是否使用
      * @return
      */
     protected boolean isStateBar()

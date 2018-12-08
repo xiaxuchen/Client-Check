@@ -104,6 +104,28 @@ public class RequestCenter {
         map.put("checkerType",checkerType+"");
         map.put("type",type+"");
         RequestParams params = new RequestParams(map);
+        LogUtil.e(NetWorkConstant.CHECKCOMP_URL);
+        LogUtil.e(map.toString());
         CommonOkHttpClient.get(NetWorkConstant.CHECKCOMP_URL,params,new DisposeDataHandler(listener));
+    }
+
+    /**
+     * 获取历史考勤记录
+     * @param id 考勤人id
+     * @param type 考勤人类型
+     * @param listener 回调
+     */
+    public static void getHistory(String id,int type,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap();
+        map.put("id",id);
+        map.put("type",type+"");
+        RequestParams params = new RequestParams(map);
+        try {
+            CommonOkHttpClient.get(NetWorkConstant.HISTORY,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
     }
 }

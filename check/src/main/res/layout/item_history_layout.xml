@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:focusable="true"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/check_block"
+    >
+
+    <TextView
+        android:layout_margin="10dp"
+        android:id="@+id/tv_task_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#5e5e5e"
+        android:text="离散数学"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_des"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/tv_task_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#aeaeae"
+        android:textSize="16sp"
+        android:text="迟到:1 早退:1 缺勤:1 请假:1"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#aeaeae"
+        />
+</RelativeLayout>

@@ -38,11 +38,11 @@ public class StusAdapter extends AdapterBase<GradeStusDto> implements SectionInd
 
     private Comparator comparator = new Comparator();
 
-    public String[] items = new String[]{"迟到","请假","已到达","缺勤","早退"};
+    public String[] items = new String[]{"迟到","请假","已到达","缺勤","早退","待处理"};
 
     public int [] values = new int[]{CheckRecordResult.
             LATE,CheckRecordResult.VACATE,CheckRecordResult.NORMAL
-            ,CheckRecordResult.ABSENTEEISM,CheckRecordResult.EARLYLEAVE};
+            ,CheckRecordResult.ABSENTEEISM,CheckRecordResult.EARLYLEAVE, CheckRecordResult.WAIT_DISPOSE};
     //装载违规学生的信息
     private MineMap<String,CommitCheckDto.StuInfo> dtoMap;
 

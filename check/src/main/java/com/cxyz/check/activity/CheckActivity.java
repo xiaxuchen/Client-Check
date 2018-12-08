@@ -3,6 +3,8 @@ package com.cxyz.check.activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,12 +53,24 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
     /**
      * 显示暂无考勤记录
      */
-    private TextView tv_no_task;
+    private TextView tv_info;
 
     /**
      * 任务完成情况id
      */
-    private int compId;
+    private int compId = -1;
+    
+    //刷新按钮
+    private ImageView iv_refresh;
+
+    //历史考勤
+    private LinearLayout ll_history;
+
+    //忘记考勤
+    private LinearLayout ll_forget;
+
+    //临时考勤
+    private LinearLayout ll_part_time;
 
     @Override
     public int getContentViewId() {
@@ -76,8 +90,12 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
         tv_room = findViewById(R.id.tv_room);
         tv_sponsor = findViewById(R.id.tv_sponsor);
         pb_load = findViewById(R.id.pb_load);
-        tv_no_task = findViewById(R.id.tv_no_task);
+        tv_info = findViewById(R.id.tv_info);
         rl_task = findViewById(R.id.rl_task);
+        iv_refresh = findViewById(R.id.iv_refresh);
+        ll_forget = findViewById(R.id.ll_forget);
+        ll_history = findViewById(R.id.ll_history);
+        ll_part_time = findViewById(R.id.ll_part_time);
     }
 
     @Override
@@ -92,6 +110,9 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
             intent.putExtra("compId",compId);
             startActivity(intent);
         });
+        iv_refresh.setOnClickListener(view -> /*重新加载*/iPresenter.checkTask());
+        //点击历史考勤跳转至历史考勤界面
+        ll_history.setOnClickListener(view->startActivity(CheckHistoryActivity.class));
     }
 
     @Override
@@ -103,7 +124,9 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
     public void showTask(CheckTaskDto taskDto) {
         pb_load.setVisibility(View.INVISIBLE);
         rl_task.setVisibility(View.VISIBLE);
+        tv_info.setText("");
         btn_start.setVisibility(View.VISIBLE);
+        iv_refresh.setVisibility(View.INVISIBLE);
         tv_sponsor.setText(taskDto.getSponsorName());
         tv_room.setText(taskDto.getSpot());
         tv_task_time.setText(DateUtil.dateToString(taskDto.getStart(), DateUtil.DatePattern.ONLY_HOUR_MINUTE)
@@ -114,15 +137,18 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
     @Override
     public void showNoTask() {
         btn_start.setVisibility(View.INVISIBLE);
+        iv_refresh.setVisibility(View.VISIBLE);
         pb_load.setVisibility(View.INVISIBLE);
         rl_task.setVisibility(View.INVISIBLE);
-        tv_no_task.setVisibility(View.VISIBLE);
+        tv_info.setText("暂无考勤任务!");
     }
 
 
     @Override
     public void showLoadTask() {
         rl_task.setVisibility(View.INVISIBLE);
+        iv_refresh.setVisibility(View.INVISIBLE);
+        tv_info.setText("正在检测考勤...");
         pb_load.setVisibility(View.VISIBLE);
         btn_start.setVisibility(View.INVISIBLE);
     }

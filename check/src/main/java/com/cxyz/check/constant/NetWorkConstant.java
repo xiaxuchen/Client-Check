@@ -11,9 +11,9 @@ public class NetWorkConstant {
     public static final String ROOT_URL = "http:/119.29.101.171:8080/Server_Check/check";
 
     //获取班级学生的url
-    public static final String GET_STUS = Constant.ROOT_URL+"/gradeStus";
+    public static final String GET_STUS = Constant.ROOT_URL+"/user/gradeStus";
     //提交的url
-    public static  final String COMMIT_URL = Constant.ROOT_URL+"/commitCheck";
+    public static  final String COMMIT_URL = Constant.ROOT_URL+"/record/commitCheck";
     //查看考勤记录的url
     public static final String GRADE_CHECK_URL = Constant.ROOT_URL+"/getGradeCheck";
     //获取统计结果
@@ -22,5 +22,7 @@ public class NetWorkConstant {
     /**
      * 检查是否有考勤任务
      */
-    public static final String CHECKCOMP_URL = Constant.ROOT_URL+"/checkTask";
+    public static final String CHECKCOMP_URL = Constant.ROOT_URL+"/task/checkTask";
+
+    public static final String HISTORY = Constant.ROOT_URL+"/record/getHistory";
 }

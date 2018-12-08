@@ -12,6 +12,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -66,6 +68,17 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     //当前考勤任务
     private int compId;
 
+    /**
+     * radiobutton的id
+     */
+    private int ids[] = {R.id.rb_late,R.id.rb_vacate,R.id.rb_normal,
+            R.id.rb_absenteeism,R.id.rb_earlyleave,R.id.rb_wait_dispose};
+
+    /**
+     * 待处理数量
+     */
+    private int waitCount = 0;
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_daily_check_layout;
@@ -109,6 +122,11 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         btn_commit.setOnClickListener(
             (View v) ->
             {
+                if(waitCount > 0)
+                {
+                    ToastUtil.showShort("有异常考勤未处理！");
+                    return;
+                }
                 if(cb_check.isChecked())
                 {
                     iPresenter.commit(stuInfoMap, compId);
@@ -162,6 +180,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
      * @param view
      */
     private void showStateDialog(final int position, final View view) {
+        AlertDialog dialog = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.mipmap.common_logo);
         builder.setTitle("选择考勤状态:");
@@ -169,45 +188,164 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         int result = 2;
         final GradeStusDto stu = adapter.getItem(position);
         final CommitCheckDto.StuInfo stuInfo = stuInfoMap.get(stu.getId());
+//        builder.setSingleChoiceItems(adapter.items, result,(DialogInterface dialog, int which) ->{
+//                if (which != 2) {
+//                    if (stuInfo == null) {
+//                        CommitCheckDto.StuInfo info = new CommitCheckDto.StuInfo();
+//                        info.setId(stu.getId());
+//                        info.setResult(adapter.values[which]);
+//                        stuInfoMap.put(stu.getId(), info);
+//                    } else if (stuInfo.getResult() != adapter.values[which]) {
+//                        stuInfo.setResult(adapter.values[which]);
+//                        stuInfoMap.put(stu.getId(), stuInfo);
+//                    }
+//
+//                } else {
+//                    if (stuInfo != null) {
+//                        LogUtil.d("before" + stuInfoMap);
+//                        LogUtil.d(stuInfo.toString());
+//                        stuInfoMap.remove(stuInfo.getId());
+//                        LogUtil.e(stuInfoMap.toString());
+//                        LogUtil.d("after" + stuInfoMap);
+//                        dialog.dismiss();
+//                    } else
+//                        return;
+//                }
+//                TextView tv_state = view.findViewById(R.id.tv_state);
+//                TextView tv_states = view.findViewById(R.id.tv_states);
+//                tv_state.setText(adapter.items[which]);
+//                LogUtil.d("color" + adapter.getStateColor(adapter.values[which]));
+//                tv_state.setTextColor(adapter.getStateColor(adapter.values[which]));
+//                tv_states.setTextColor(adapter.getStateColor(adapter.values[which]));
+//        });
+//        builder.create().show();
+        View v = View.inflate(getActivity(), R.layout.dialog_item_layout, null);
+        RadioGroup rg_state = v.findViewById(R.id.rg_state);
+        EditText et_des = v.findViewById(R.id.et_des);
+        //还原状态
         if (stuInfo != null)
+        {
             result = this.getIndex(adapter.values, stuInfo.getResult());
-        builder.setSingleChoiceItems(adapter.items, result,(DialogInterface dialog, int which) ->{
-                if (which != 2) {
-                    if (stuInfo == null) {
-                        CommitCheckDto.StuInfo info = new CommitCheckDto.StuInfo();
-                        info.setId(stu.getId());
-                        info.setResult(adapter.values[which]);
-                        stuInfoMap.put(stu.getId(), info);
-                    } else if (stuInfo.getResult() != adapter.values[which]) {
-                        stuInfo.setResult(adapter.values[which]);
-                        stuInfoMap.put(stu.getId(), stuInfo);
-                    }
+            RadioButton radiobutton = (RadioButton) (rg_state.getChildAt(result));
+            radiobutton.setChecked(true);
+            if(result != 2 && result != 5)
+                et_des.setVisibility(View.VISIBLE);
+            if(stuInfo.getDes() != null)
+                et_des.setText(stuInfo.getDes());
+        }
+        builder.setView(v);
 
-                } else {
-                    if (stuInfo != null) {
-                        LogUtil.d("before" + stuInfoMap);
-                        LogUtil.d(stuInfo.toString());
-                        stuInfoMap.remove(stuInfo.getId());
-                        LogUtil.e(stuInfoMap.toString());
-                        LogUtil.d("after" + stuInfoMap);
-                        dialog.dismiss();
-                    } else
-                        return;
+        builder.setPositiveButton("确定",(dialogInterface, i) -> {
+            int which = getIndex(rg_state.getCheckedRadioButtonId());
+            LogUtil.e(which+"");
+            //如果不是已到达则加入stuInfoMap
+            if (which != 2) {
+                if (stuInfo == null) {
+                    CommitCheckDto.StuInfo info = new CommitCheckDto.StuInfo();
+                    info.setId(stu.getId());
+                    info.setDes(et_des.getText().toString().trim());
+                    info.setResult(adapter.values[which]);
+                    stuInfoMap.put(stu.getId(), info);
+                } else if (stuInfo.getResult() != adapter.values[which]) {
+                    if(stuInfo.getResult() == adapter.values[5])
+                    {
+                        waitCount--;
+                    }
+                    stuInfo.setResult(adapter.values[which]);
+                    stuInfoMap.put(stu.getId(), stuInfo);
                 }
-                TextView tv_state = view.findViewById(R.id.tv_state);
-                TextView tv_states = view.findViewById(R.id.tv_states);
-                tv_state.setText(adapter.items[which]);
-                LogUtil.d("color" + adapter.getStateColor(adapter.values[which]));
-                tv_state.setTextColor(adapter.getStateColor(adapter.values[which]));
-                tv_states.setTextColor(adapter.getStateColor(adapter.values[which]));
-                dialog.dismiss();
-        });
-        builder.setNegativeButton("取消",
-            (DialogInterface dialog, int which) -> {
-                dialog.dismiss();
+            } else {
+                if (stuInfo != null) {
+                    if(stuInfo.getResult() == adapter.values[5])
+                    {
+                        waitCount--;
+                    }
+                    LogUtil.d("before" + stuInfoMap);
+                    LogUtil.d(stuInfo.toString());
+                    stuInfoMap.remove(stuInfo.getId());
+                    LogUtil.e(stuInfoMap.toString());
+                    LogUtil.d("after" + stuInfoMap);
+                } else
+                    return;
             }
+            TextView tv_state = view.findViewById(R.id.tv_state);
+            TextView tv_states = view.findViewById(R.id.tv_states);
+            tv_state.setText(adapter.items[which]);
+            LogUtil.d("color" + adapter.getStateColor(adapter.values[which]));
+            tv_state.setTextColor(adapter.getStateColor(adapter.values[which]));
+            tv_states.setTextColor(adapter.getStateColor(adapter.values[which]));
+        });
+
+        builder.setNegativeButton("取消",
+                (DialogInterface d, int which) -> {
+                    d.cancel();
+                }
         );
-        builder.create().show();
+        dialog = builder.create();
+        dialog.show();
+        AlertDialog finalDialog = dialog;
+        rg_state.setOnCheckedChangeListener((radioGroup, id) -> {
+            LogUtil.e(stuInfoMap.toString());
+            LogUtil.e(waitCount+"");
+            int which = getIndex(id);
+            if(which != 5 && which != 2)
+                et_des.setVisibility(View.VISIBLE);
+            else
+                et_des.setVisibility(View.GONE);
+
+            //如果是已到达或待处理则直接设置
+            if (which == 5) {
+                if (stuInfo == null) {
+                    CommitCheckDto.StuInfo info = new CommitCheckDto.StuInfo();
+                    info.setId(stu.getId());
+                    info.setResult(adapter.values[which]);
+                    stuInfoMap.put(stu.getId(), info);
+                } else if (stuInfo.getResult() != adapter.values[which]) {
+                    stuInfo.setResult(adapter.values[which]);
+                    stuInfoMap.put(stu.getId(), stuInfo);
+                }
+                waitCount++;
+            } else if(which == 2){
+                if (stuInfo != null) {
+                    if(stuInfo.getResult() == adapter.values[5])
+                    {
+                        waitCount--;
+                    }
+                    LogUtil.d("before" + stuInfoMap);
+                    LogUtil.d(stuInfo.toString());
+                    stuInfoMap.remove(stuInfo.getId());
+                    LogUtil.e(stuInfoMap.toString());
+                    LogUtil.d("after" + stuInfoMap);
+                } else
+                    return;
+            }else
+            {
+                return;
+            }
+            TextView tv_state = view.findViewById(R.id.tv_state);
+            TextView tv_states = view.findViewById(R.id.tv_states);
+            tv_state.setText(adapter.items[which]);
+            LogUtil.d("color" + adapter.getStateColor(adapter.values[which]));
+            tv_state.setTextColor(adapter.getStateColor(adapter.values[which]));
+            tv_states.setTextColor(adapter.getStateColor(adapter.values[which]));
+            finalDialog.cancel();
+        });
+
+    }
+
+    /**
+     * TODO 可能存在问题
+     * 获取单选按钮下标
+     * @param rbId 单选按钮id
+     * @return
+     */
+    private int getIndex(int rbId){
+        for(int i = 0;i<ids.length;i++)
+        {
+            if(ids[i] == rbId)
+                return i;
+        }
+        return 2;
     }
 
     /**
@@ -270,13 +408,12 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void showError(String error) {
-
-        qmuiev_load.show(false, "", error, "重新加载", view ->
+        qmuiev_load.setButton("重新加载", view ->
         {
-            LogUtil.e("caoonima");
-            ToastUtil.showShort("caonima");
             iPresenter.getStusToShow(UserManager.getInstance().getUser().getGradeId());
         }  );
+        qmuiev_load.setTitleText("加载失败");
+        qmuiev_load.show(false);
     }
 
     @Override
@@ -291,7 +428,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                 .showCancelButton(false)
                 .setTitleText(info)
                 .setContentText("考勤记录提交完毕!")
-                .setConfirmText("返回主菜单")
+                .setConfirmText("返回考勤主页")
                 .setConfirmClickListener(
                         (SweetAlertDialog dialog) ->
                         {
