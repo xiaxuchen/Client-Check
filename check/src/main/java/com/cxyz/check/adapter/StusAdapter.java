@@ -32,7 +32,7 @@ public class StusAdapter extends AdapterBase<GradeStusDto> implements SectionInd
     private CharacterParser parser = CharacterParser.getInstance();
 
     //控制是否显示已到达的状态变量
-    private boolean hideNormal = false;
+    private Integer current = -1;
 
     private Context context;
 
@@ -47,7 +47,9 @@ public class StusAdapter extends AdapterBase<GradeStusDto> implements SectionInd
     private MineMap<String,CommitCheckDto.StuInfo> dtoMap;
 
     //违规学生
-    private List<GradeStusDto> bad;
+    private List<GradeStusDto> bad[];
+    
+    private List<GradeStusDto> bads;
 
     //全部的记录
     private List<GradeStusDto> all;
@@ -63,71 +65,122 @@ public class StusAdapter extends AdapterBase<GradeStusDto> implements SectionInd
 
 
     //将不良记录装载进list
-    private List<GradeStusDto> initBad()
+    private void initBad()
     {
-        if(bad == null)
+        bads = new ArrayList<>();
+        bad = new List[6];
+        for(int i = 0;i<6;i++)
         {
-            bad = new ArrayList<>();
-            for (GradeStusDto item : all) {
-                if (dtoMap.containsKey(item.getId())) {
-                    bad.add(item);
+            bad[i] = new ArrayList<>();
+        }
+        //如果异常个数不为0，则初始化bad
+
+        LogUtil.e(dtoMap.size()+"");
+        if(dtoMap.size()!=0)
+        {
+            //用于记录是否添加元素
+            boolean added[] = new boolean[6];
+            for(GradeStusDto dto:all)
+            {
+                CommitCheckDto.StuInfo info = dtoMap.get(dto.getId());
+                LogUtil.e(dto.toString());
+                if(info!=null)
+                {
+                    LogUtil.e(dto.toString());
+                    int index = getIndex(info.getResult());
+                    bad[index].add(dto);
+                    bads.add(dto);
+                    added[index] = true;
                 }
             }
-            //为dtomap设置观察者
-            dtoMap.setObserver(new MineMap.MineObserver<String, CommitCheckDto.StuInfo>() {
-                @Override
-                public void onRemove(String key, CommitCheckDto.StuInfo value) {
-                    for(GradeStusDto dto:all)
-                    {
-                        if(dto.getId().equals(key))
-                        {
-                            bad.remove(dto);
-                            break;
-                        }
-                    }
-                    if(hideNormal)
-                        notifyDataSetChanged();
-                }
-
-                @Override
-                public void onPut(final String key, CommitCheckDto.StuInfo value) {
-                    for(GradeStusDto dto:all)
-                    {
-                        if(dto.getId().equals(key)&&!bad.contains(dto))
-                        {
-                            bad.add(dto);
-                            Collections.sort(bad,comparator);
-                            break;
-                        }
-                    }
-                    if(hideNormal)
-                        notifyDataSetChanged();
-                }
-            });
+            Collections.sort(bads,comparator);//dtomap的大小大于0则bad一定改变，排序
+            for(int i = 0;i<added.length;i++)
+            {
+                if(added[i])
+                    Collections.sort(bad[i],comparator);
+            }
         }
-        return bad;
+        //为dtomap设置观察者
+        dtoMap.setObserver(new MineMap.MineObserver<String, CommitCheckDto.StuInfo>() {
+            @Override
+            public void onRemove(String key, CommitCheckDto.StuInfo value) {
+                int i = getIndex(value.getResult());
+                for(GradeStusDto dto:all)
+                {
+                    if(dto.getId().equals(key))
+                    {
+                        if( i != 2)
+                            bad[i].remove(dto);
+                        bads.remove(dto);
+                        break;
+                    }
+                }
+                if(current == i)
+                    notifyDataSetChanged();
+            }
+
+            @Override
+            public void onPut(final String key, CommitCheckDto.StuInfo value) {
+                int i = getIndex(value.getResult());
+                for(GradeStusDto dto:all)
+                {
+                    if(dto.getId().equals(key)&&!bad[i].contains(dto))
+                    {
+                        if(i != 2)
+                            bad[i].add(dto);
+                        bads.add(dto);
+                        Collections.sort(bads,comparator);
+                        if(i != 2)
+                            Collections.sort(bad[i],comparator);
+                        break;
+                    }
+                }
+                if(current == i)
+                    notifyDataSetChanged();
+            }
+        });
+    }
+
+    /**
+     * 获取相应结果的索引
+     * @param result 考勤结果
+     * @return
+     */
+    private int getIndex(int result )
+    {
+        int i = 0;
+        for(int d:values)
+        {
+            if(d == result)
+                return i;
+            i++;
+        }
+        return -1;
     }
 
     @Override
     public void convertView(ViewHolder holder, GradeStusDto item,int position) {
-        char letter = parser.getSelling(item.getName()).toUpperCase().charAt(0);
-        int selection = getPositionForSection(letter);
-        LogUtil.e(position+"");
-        LogUtil.e(selection+"");
-        View view = holder.getConvertView().findViewById(R.id.ll_letter);
-        if(selection == position)
+        if(mItemLayoutId[0] == R.layout.item_list_stus_layout)
         {
-            if(!(view.getVisibility() == View.VISIBLE)){
+            char letter = parser.getSelling(item.getName()).toUpperCase().charAt(0);
+            int selection = getPositionForSection(letter);
+            LogUtil.e(position+"");
+            LogUtil.e(selection+"");
+            View view = holder.getConvertView().findViewById(R.id.ll_letter);
+            if(selection == position)
+            {
+                if(!(view.getVisibility() == View.VISIBLE)){
                     view.setVisibility(View.VISIBLE);
                     view.setOnClickListener((View v) -> {});
-            }
-            TextView tv_letter = holder.getView(R.id.tv_letter);
-            tv_letter.setText(String.valueOf(letter));
+                }
+                TextView tv_letter = holder.getView(R.id.tv_letter);
+                tv_letter.setText(String.valueOf(letter));
 
-        }else {
-            if(view.getVisibility() == View.VISIBLE)
-            {
-                view.setVisibility(View.GONE);
+            }else {
+                if(view.getVisibility() == View.VISIBLE)
+                {
+                    view.setVisibility(View.GONE);
+                }
             }
         }
         QMUIRadiusImageView image=holder.getView(R.id.iv_photo);
@@ -146,33 +199,43 @@ public class StusAdapter extends AdapterBase<GradeStusDto> implements SectionInd
         {
             holder.setText(R.id.tv_state,items[2]);
             holder.setTextColor(R.id.tv_state,context.getResources().getColor(R.color.small_gray));
-            holder.setTextColor(R.id.tv_states,context.getResources().getColor(R.color.small_gray));
         }else
         {
             //根据当前学生的状态值设置颜色以及状态
             holder.setText(R.id.tv_state,getResultString(stuInfo.getResult()));
             holder.setTextColor(R.id.tv_state,getStateColor(stuInfo.getResult()));
-            holder.setTextColor(R.id.tv_states,getStateColor(stuInfo.getResult()));
         }
+        CommitCheckDto.StuInfo info = dtoMap.get(item.getId());
+        if(info != null)
+            holder.setText(R.id.tv_des,info.getDes());
         super.convertView(holder,item);
     }
 
+    public Integer getCurrent() {
+        return current;
+    }
+
     /**
-     * 设置是否显示正常学生信息
-     * @param hideNormal
+     * 设置显示什么类型学生信息
+     * @param current 若为null则全部
      */
-    public void isShowNormal(boolean hideNormal)
-    {
-        this.hideNormal = hideNormal;
-        if(!hideNormal)
+    public void setCurrent(Integer current) {
+        if(current.equals(this.current))
+            return;
+        this.current = current;
+        if(current == -1)
+            setList(all);
+        else if(current == 2)
         {
-           setList(all);
-        }else
+            setList(bads);
+        }
+        else
         {
-            setList(bad);
+            setList(bad[current]);
         }
         notifyDataSetInvalidated();
     }
+
 
     /**
      * 获取相应的状态字符串用以显示
@@ -204,7 +267,7 @@ public class StusAdapter extends AdapterBase<GradeStusDto> implements SectionInd
     }
 
 
-    private int getColorId(int result)
+    public static int getColorId(int result)
     {
         LogUtil.d(result+"");
         //缺勤显示为红色
@@ -231,17 +294,17 @@ public class StusAdapter extends AdapterBase<GradeStusDto> implements SectionInd
          //如果输入框中为空则通过isNormal判断将数据设置为不良记录或全部记录
          if(info==null||info.isEmpty())
          {
-             if(hideNormal)
-                setList(bad);
+             if(current != null)
+                setList(bad[current]);
              else
                  setList(all);
              notifyDataSetInvalidated();
              return;
          }
          List<GradeStusDto> list;
-         if(hideNormal)
+         if(current != null)
          {
-             list = bad;
+             list = bad[current];
          }else
          {
              list = all;

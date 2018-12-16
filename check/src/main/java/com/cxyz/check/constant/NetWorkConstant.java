@@ -24,5 +24,24 @@ public class NetWorkConstant {
      */
     public static final String CHECKCOMP_URL = Constant.ROOT_URL+"/task/checkTask";
 
+    /**
+     * 获取考勤历史
+     */
     public static final String HISTORY = Constant.ROOT_URL+"/record/getHistory";
+
+    /**
+     * 加载更多考勤历史
+     */
+    public static final String LOAD_MORE = Constant.ROOT_URL+"/record/loadMore";
+
+    /**
+     * 获取考勤详细记录
+     */
+    public static final String ALTER_RECORDS = Constant.ROOT_URL+"/record/getAlterRecords";
+
+    /**
+     * 修改考勤记录
+     */
+    public static final String UPDATE_RECORDS = Constant.ROOT_URL+"/record/updateAlteds";
+
 }

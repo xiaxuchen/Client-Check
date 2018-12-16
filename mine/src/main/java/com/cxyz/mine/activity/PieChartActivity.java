@@ -68,28 +68,7 @@ public class PieChartActivity extends BaseActivity {
         pv_checkcondition_weekcheck.setOnValueTouchListener(weekselectListener);
         pv_checkcondition_monthcheck.setOnValueTouchListener(monthselectListener);
         pv_checkcondition_termcheck.setOnValueTouchListener(termselectListener);
-        tv_checkcondition_title.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
-
+        tv_checkcondition_title.setBackClickListener(v -> onBackPressed());
     }
 
     @Override

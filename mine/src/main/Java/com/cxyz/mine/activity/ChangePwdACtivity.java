@@ -48,27 +48,7 @@ public class ChangePwdACtivity extends BaseActivity <IChangePwdPresenter>impleme
 
     @Override
     public void setEvent() {
-        tv_changepwd_title.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
+        tv_changepwd_title.setBackClickListener(v -> onBackPressed());
         bt_changepwd_finsh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

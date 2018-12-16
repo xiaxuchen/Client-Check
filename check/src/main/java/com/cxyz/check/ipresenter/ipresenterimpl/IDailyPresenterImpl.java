@@ -18,12 +18,12 @@ import java.util.Map;
 public class IDailyPresenterImpl extends IDailyPresenter{
     @Override
     public void getStusToShow(int grade) {
-        mIView.showLoadingView();
+        mIView.showLoadStus();
         mIModle.getStus(grade, new IDailyModel.GetStusListener() {
             @Override
             public void onSuccess(List<GradeStusDto> stus) {
                 mIView.showStus(stus);
-                mIView.hideLoadStus();
+                mIView.changeLoadStus();
             }
 
             @Override

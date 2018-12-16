@@ -3,4 +3,6 @@
     <string name="table_class">课表</string>
     <string name="main_page">首页</string>
     <string name="mine">我的</string>
+    <string name="check_history">考勤历史</string>
+    <string name="check_back">返回</string>
 </resources>

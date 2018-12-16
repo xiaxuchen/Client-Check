@@ -39,7 +39,7 @@
                     android:id="@+id/ll_check"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:id="@+id/iv_check"
@@ -62,18 +62,26 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
-                <ImageView
-                    android:id="@+id/iv_home"
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:id="@+id/ll_home"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/app_home_on"/>
-                <TextView
-                    android:textColor="@color/app_off"
-                    android:id="@+id/tv_home"
-                    android:layout_below="@id/iv_home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_home"/>
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/iv_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/app_home_on"/>
+                    <TextView
+                        android:textColor="@color/app_off"
+                        android:id="@+id/tv_home"
+                        android:layout_below="@id/iv_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_home"/>
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -88,7 +96,7 @@
                     android:id="@+id/ll_mine"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:id="@+id/iv_mine"

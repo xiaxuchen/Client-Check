@@ -85,27 +85,7 @@ public class check extends BaseActivity {
     @Override
     public void setEvent() {
         check_piechart.setOnValueTouchListener(checkListener);//设置点击事件监听
-        check_title.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
+        check_title.setBackClickListener(v -> onBackPressed());
         tv_check_setfinshtime.setOnClickListener(tvfinshtimeListner);
         tv_check_setbegintime.setOnClickListener(tvbegintimeListner);
 

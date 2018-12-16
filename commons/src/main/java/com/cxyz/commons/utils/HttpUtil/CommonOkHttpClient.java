@@ -30,7 +30,7 @@ import okhttp3.Request;
  * </ul>
  */
 public class CommonOkHttpClient {
-    private static final int TIME_OUT = 10;
+    private static final int TIME_OUT = 5;
     private static OkHttpClient client;
     private static Context context;
 

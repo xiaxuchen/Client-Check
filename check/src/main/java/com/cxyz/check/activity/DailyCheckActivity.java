@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -34,6 +33,9 @@ import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.sideview.SideBar;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Collections;
 import java.util.List;
@@ -49,6 +51,11 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     private Button btn_commit;
 
+    private QMUIBottomSheet sl_current;
+
+    //当前显示类型
+    private TextView tv_current;
+
     /**
      * 字母导航
      */
@@ -57,7 +64,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     private StusAdapter adapter;
 
     //是否显示已到达的cb,确认考勤结果复选框
-    private CheckBox cb_shownormal,cb_check;
+    private CheckBox cb_check;
 
     //记录不良情况的map
     private MineMap<String, CommitCheckDto.StuInfo> stuInfoMap;
@@ -79,6 +86,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
      */
     private int waitCount = 0;
 
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_daily_check_layout;
@@ -87,14 +95,13 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     public void initView() {
         lv_stus =  findViewById(R.id.lv_stus);
+        tv_current = findViewById(R.id.tv_current);
+        et_find = findViewById(R.id.et_find);
         qmuiev_load =  findViewById(R.id.qmuiev_load);
         btn_commit =  findViewById(R.id.btn_commit);
-        cb_shownormal = findViewById(R.id.cb_shownormal);
-        et_find = findViewById(R.id.et_find);
         cb_check = findViewById(R.id.cb_check);
         sb_bar = findViewById(R.id.sb_bar);
-
-        qmuiev_load.setDetailText("正在加载中...");
+        lv_stus.setEmptyView(qmuiev_load);
     }
 
 
@@ -106,6 +113,24 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
     @Override
     public void setEvent() {
 
+        tv_current.setOnClickListener(view -> {
+            QMUIBottomSheet.BottomListSheetBuilder builder = new QMUIBottomSheet.BottomListSheetBuilder(getActivity());
+            builder.addItem("显示全部");
+            builder.addItem("显示迟到");
+            builder.addItem("显示请假");
+            builder.addItem("显示未到达");
+            builder.addItem("显示缺勤");
+            builder.addItem("显示早退");
+            builder.addItem("显示待处理");
+            builder.setOnSheetItemClickListener((dialog, itemView, position, tag) -> {
+                adapter.setCurrent(position - 1);
+                tv_current.setText(tag);
+                dialog.dismiss();
+            });
+            sl_current = builder.build();
+            sl_current.show();
+        });
+
         //设置学生被点击后弹出对话框
         lv_stus.setOnItemClickListener(
             (AdapterView<?> parent, View view, int position, long id) -> {
@@ -113,10 +138,6 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
             }
         );
 
-        //设置选择复选按钮后显示隐藏已到达学生
-        cb_shownormal.setOnCheckedChangeListener(
-            (CompoundButton buttonView, boolean isChecked) -> adapter.isShowNormal(isChecked)
-        );
 
         //向服务器提交数据
         btn_commit.setOnClickListener(
@@ -124,7 +145,21 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
             {
                 if(waitCount > 0)
                 {
-                    ToastUtil.showShort("有异常考勤未处理！");
+                    new SweetAlertDialog(getActivity(),
+                            SweetAlertDialog.WARNING_TYPE)
+                            .showCancelButton(false)
+                            .setTitleText("提交异常")
+                            .setContentText("有异常记录未处理!")
+                            .setConfirmText("去处理")
+                            .setConfirmClickListener(
+                                    (SweetAlertDialog dialog) ->
+                                    {
+                                        dialog.dismissWithAnimation();
+                                        tv_current.setText("显示待处理");
+                                        adapter.setCurrent(5);
+                                    }
+                            )
+                            .show();
                     return;
                 }
                 if(cb_check.isChecked())
@@ -158,17 +193,15 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         });
 
         //设置右侧触摸监听
-        sb_bar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
-
-            @Override
-            public void onTouchingLetterChanged(String s) {
+        sb_bar.setOnTouchingLetterChangedListener((String s) -> {
+                //如果没有加载则do nothing
+                if(adapter == null || adapter.getList() == null || adapter.getList().size() == 0)
+                    return;
                 //该字母首次出现的位置
                 int position = adapter.getPositionForSection(s.charAt(0));
                 if(position != -1){
                     lv_stus.setSelection(position);
                 }
-
-            }
         });
 
     }
@@ -246,10 +279,13 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                     info.setDes(et_des.getText().toString().trim());
                     info.setResult(adapter.values[which]);
                     stuInfoMap.put(stu.getId(), info);
-                } else if (stuInfo.getResult() != adapter.values[which]) {
+                } else {
                     if(stuInfo.getResult() == adapter.values[5])
                     {
                         waitCount--;
+                    }else
+                    {
+                        stuInfo.setDes(et_des.getText().toString().trim());
                     }
                     stuInfo.setResult(adapter.values[which]);
                     stuInfoMap.put(stu.getId(), stuInfo);
@@ -269,11 +305,14 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                     return;
             }
             TextView tv_state = view.findViewById(R.id.tv_state);
-            TextView tv_states = view.findViewById(R.id.tv_states);
+            TextView tv_des = view.findViewById(R.id.tv_des);
+            if(which!=2&&which!=5)
+                tv_des.setText(et_des.getText().toString().trim());
+            else
+                tv_des.setText("");
             tv_state.setText(adapter.items[which]);
             LogUtil.d("color" + adapter.getStateColor(adapter.values[which]));
             tv_state.setTextColor(adapter.getStateColor(adapter.values[which]));
-            tv_states.setTextColor(adapter.getStateColor(adapter.values[which]));
         });
 
         builder.setNegativeButton("取消",
@@ -323,11 +362,15 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                 return;
             }
             TextView tv_state = view.findViewById(R.id.tv_state);
-            TextView tv_states = view.findViewById(R.id.tv_states);
+            TextView tv_des = view.findViewById(R.id.tv_des);
+            if(which!=2&&which!=5)
+                tv_des.setText(et_des.getText().toString().trim());
+            else
+                tv_des.setText("");
+            tv_state.setText(adapter.items[which]);
             tv_state.setText(adapter.items[which]);
             LogUtil.d("color" + adapter.getStateColor(adapter.values[which]));
             tv_state.setTextColor(adapter.getStateColor(adapter.values[which]));
-            tv_states.setTextColor(adapter.getStateColor(adapter.values[which]));
             finalDialog.cancel();
         });
 
@@ -363,8 +406,9 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                             {
                                 sDialog.dismissWithAnimation();
                                 //直接隐藏已到达人员方便查看
-                                if(!cb_shownormal.isChecked())
-                                    cb_shownormal.setChecked(true);
+                                adapter.setCurrent(2);
+//                                if(!cb_shownormal.isChecked())
+//                                    cb_shownormal.setChecked(true);
                             }
                     )
                     .show();
@@ -408,12 +452,8 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     public void showError(String error) {
-        qmuiev_load.setButton("重新加载", view ->
-        {
-            iPresenter.getStusToShow(UserManager.getInstance().getUser().getGradeId());
-        }  );
-        qmuiev_load.setTitleText("加载失败");
-        qmuiev_load.show(false);
+        qmuiev_load.show(false,error,null,"重新加载",view ->
+                iPresenter.getStusToShow(UserManager.getInstance().getUser().getGradeId()));
     }
 
     @Override
@@ -437,11 +477,18 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
                         }
                 )
                 .show();
+        //通知checkActivity更新任务
+        EventBus.getDefault().post(new CheckActivity.CheckTask());
     }
 
     @Override
-    public void hideLoadStus() {
-        qmuiev_load.hide();
+    public void showLoadStus() {
+        qmuiev_load.show(true,"正在加载中...",null,null,null);
+    }
+
+    @Override
+    public void changeLoadStus() {
+        qmuiev_load.show(false,"暂无",null,null,null);
     }
 
     @Override
@@ -464,8 +511,4 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         return new IDefaultView(getActivity(), "正在提交", false);
     }
 
-    @Override
-    public void showLoadingView() {
-        qmuiev_load.show(true,"正在加载...",null,null,null);
-    }
 }

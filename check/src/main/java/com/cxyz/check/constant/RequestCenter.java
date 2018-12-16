@@ -2,13 +2,18 @@ package com.cxyz.check.constant;
 
 import android.accounts.NetworkErrorException;
 
+import com.cxyz.check.dto.AlterRecordDto;
+import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 import com.cxyz.commons.utils.LogUtil;
 
+import org.json.JSONException;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -72,6 +77,11 @@ public class RequestCenter {
         }
     }
 
+    /**
+     * 提交考勤
+     * @param commitCheck
+     * @param listener
+     */
     public static void commitCheck(String commitCheck,DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
@@ -123,6 +133,63 @@ public class RequestCenter {
         RequestParams params = new RequestParams(map);
         try {
             CommonOkHttpClient.get(NetWorkConstant.HISTORY,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+    }
+
+    /**
+     * 获取更多历史考勤记录
+     * @param id 考勤人id
+     * @param type 考勤人类型
+     * @param start 开始条目
+     * @param listener 回调
+     */
+    public static void loadMore(String id,int type,int start,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap();
+        map.put("id",id);
+        map.put("type",type+"");
+        map.put("start",start+"");
+        RequestParams params = new RequestParams(map);
+        try {
+            CommonOkHttpClient.get(NetWorkConstant.LOAD_MORE,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+    }
+
+    public static void getAlterRecords(Integer compId,Integer gradeId,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("compId",compId+"");
+        map.put("gradeId",gradeId+"");
+        RequestParams params = new RequestParams(map);
+        try {
+            CommonOkHttpClient.get(NetWorkConstant.ALTER_RECORDS,params, new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+    }
+
+    public static void updateAlteds(Integer compId, List<AlterRecordDto> dtos,String updaterId,int updaterType,DisposeDataListener listener){
+        Map<String,String> map = new HashMap<>();
+        map.put("compId",compId+"");
+        map.put("updaterId",updaterId);
+        map.put("updaterType",updaterType+"");
+        try {
+            map.put("alteds", GsonUtil.toJson(dtos));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            listener.onFailure("数据异常");
+            return;
+        }
+        RequestParams params = new RequestParams(map);
+        try {
+            CommonOkHttpClient.post(NetWorkConstant.UPDATE_RECORDS,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");

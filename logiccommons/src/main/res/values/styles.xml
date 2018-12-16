@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="QMUI">
+    <style name="CheckTheme" parent="QMUI">
     </style>
 
     <style name="MyEditText" parent="Theme.AppCompat.Light">

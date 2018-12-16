@@ -3,7 +3,7 @@
     package="com.cxyz.mine">
 
     <application
-        android:theme="@style/AppTheme">
+        android:theme="@style/CheckTheme">
 
         <activity android:name=".activity.ResponseActivity" />
         <activity android:name=".activity.MyinfoActivity"></activity>

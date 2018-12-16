@@ -54,29 +54,7 @@ public class ForgetpwdActivity extends BaseActivity {
        overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
       }
      });
-     tv_forgetpwd_title.setOnClickListener(new TitleView.OnClickListener() {
-      @Override
-      public void onBackClick() {
-       onBackPressed();
-       overridePendingTransition(R.anim.back_next,R.anim.back_exit);
-      }
-
-      @Override
-      public void onEditClick() {
-
-      }
-
-      @Override
-      public void onNameClick() {
-
-      }
-
-      @Override
-      public void onSetClick() {
-
-      }
-     });
-
+     tv_forgetpwd_title.setBackClickListener(v -> onBackPressed());
     }
 
     @Override

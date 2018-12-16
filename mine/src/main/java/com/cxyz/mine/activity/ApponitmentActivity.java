@@ -42,28 +42,7 @@ public class ApponitmentActivity extends BaseActivity {
 
     @Override
     public void setEvent() {
-        tv_appointment_title.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-                overridePendingTransition(R.anim.back_next,R.anim.back_exit);
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
+        tv_appointment_title.setBackClickListener(v -> onBackPressed());
 
     }
 

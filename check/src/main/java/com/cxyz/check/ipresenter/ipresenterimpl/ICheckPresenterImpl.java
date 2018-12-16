@@ -4,7 +4,6 @@ import com.cxyz.check.dto.CheckTaskDto;
 import com.cxyz.check.ipresenter.ICheckPresenter;
 import com.cxyz.check.model.ICheckModel;
 import com.cxyz.check.model.imodelimpl.ICheckModelImpl;
-import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.logiccommons.typevalue.TaskType;
@@ -29,7 +28,6 @@ public class ICheckPresenterImpl extends ICheckPresenter {
             @Override
             public void onFail(String error) {
                 //请求失败或数据错误显示失败逻辑
-                mIView.hideLoadingView();
                 mIView.showNoTask();
             }
         });

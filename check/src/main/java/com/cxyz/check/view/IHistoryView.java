@@ -25,6 +25,12 @@ public interface IHistoryView extends IBaseView {
     /**
      * 完成加载
      */
-    void finishLoad();
+    void finishLoad(List<CheckHistoryDto> historyDtos);
+
+    /**
+     * 加载更多失败
+     * @param error 错误信息
+     */
+    void loadMoreFail(String error);
 
 }

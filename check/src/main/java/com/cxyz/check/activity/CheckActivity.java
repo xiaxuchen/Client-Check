@@ -12,11 +12,16 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.check.R;
 import com.cxyz.check.dto.CheckTaskDto;
+import com.cxyz.check.icon.IconfontModule;
 import com.cxyz.check.ipresenter.ICheckPresenter;
 import com.cxyz.check.ipresenter.ipresenterimpl.ICheckPresenterImpl;
 import com.cxyz.check.view.ICheckView;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.DateUtil;
+import com.cxyz.logiccommons.application.MyApp;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Administrator on 2018/12/2.
@@ -55,6 +60,9 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
      */
     private TextView tv_info;
 
+    //报告异常
+    private TextView tv_otherstate;
+
     /**
      * 任务完成情况id
      */
@@ -74,7 +82,13 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
 
     @Override
     public int getContentViewId() {
+        MyApp.withIcon(new IconfontModule());
         return R.layout.activity_check_layout;
+    }
+
+    @Override
+    protected boolean eventBusEnable() {
+        return true;
     }
 
     @Override
@@ -89,6 +103,7 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
         tv_task_time = findViewById(R.id.tv_task_time);
         tv_room = findViewById(R.id.tv_room);
         tv_sponsor = findViewById(R.id.tv_sponsor);
+        tv_otherstate = findViewById(R.id.tv_otherstate);
         pb_load = findViewById(R.id.pb_load);
         tv_info = findViewById(R.id.tv_info);
         rl_task = findViewById(R.id.rl_task);
@@ -100,7 +115,6 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
 
     @Override
     public void initData() {
-
     }
 
     @Override
@@ -113,6 +127,12 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
         iv_refresh.setOnClickListener(view -> /*重新加载*/iPresenter.checkTask());
         //点击历史考勤跳转至历史考勤界面
         ll_history.setOnClickListener(view->startActivity(CheckHistoryActivity.class));
+        tv_otherstate.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(),OtherstateActivity.class);
+            intent.putExtra("compId",compId);
+            startActivity(intent);
+        });
+
     }
 
     @Override
@@ -120,9 +140,18 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
         return new ICheckPresenterImpl();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUpdate(CheckTask task)
+    {
+        iPresenter.checkTask();
+    };
+
+    public static class CheckTask{}
+
     @Override
     public void showTask(CheckTaskDto taskDto) {
         pb_load.setVisibility(View.INVISIBLE);
+        tv_otherstate.setVisibility(View.VISIBLE);
         rl_task.setVisibility(View.VISIBLE);
         tv_info.setText("");
         btn_start.setVisibility(View.VISIBLE);
@@ -130,13 +159,14 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
         tv_sponsor.setText(taskDto.getSponsorName());
         tv_room.setText(taskDto.getSpot());
         tv_task_time.setText(DateUtil.dateToString(taskDto.getStart(), DateUtil.DatePattern.ONLY_HOUR_MINUTE)
-                +DateUtil.dateToString(taskDto.getEnd(), DateUtil.DatePattern.ONLY_HOUR_MINUTE));
+                +"-"+DateUtil.dateToString(taskDto.getEnd(), DateUtil.DatePattern.ONLY_HOUR_MINUTE));
         compId = taskDto.getId();
     }
 
     @Override
     public void showNoTask() {
         btn_start.setVisibility(View.INVISIBLE);
+        tv_otherstate.setVisibility(View.INVISIBLE);
         iv_refresh.setVisibility(View.VISIBLE);
         pb_load.setVisibility(View.INVISIBLE);
         rl_task.setVisibility(View.INVISIBLE);
@@ -148,8 +178,10 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
     public void showLoadTask() {
         rl_task.setVisibility(View.INVISIBLE);
         iv_refresh.setVisibility(View.INVISIBLE);
+        tv_otherstate.setVisibility(View.INVISIBLE);
         tv_info.setText("正在检测考勤...");
         pb_load.setVisibility(View.VISIBLE);
         btn_start.setVisibility(View.INVISIBLE);
     }
+
 }

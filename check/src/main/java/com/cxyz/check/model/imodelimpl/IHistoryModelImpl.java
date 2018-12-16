@@ -54,7 +54,35 @@ public class IHistoryModelImpl implements IHistoryModel {
     }
 
     @Override
-    public void loadMoreHistory(LoadMoreHistoryListener listener) {
+    public void loadMoreHistory(int start,LoadMoreHistoryListener listener) {
+        User u = UserManager.getInstance().getUser();
+        RequestCenter.loadMore(u.getId(), u.getType(),start,new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                try {
+                    CheckResult<List<CheckHistoryDto>> checkResult =
+                            (CheckResult<List<CheckHistoryDto>>) GsonUtil.
+                                    fromJson(responseObj.toString(),new TypeToken
+                                            <CheckResult<List<CheckHistoryDto>>>(){}.getType());
+                    if(checkResult.isSuccess())
+                        listener.LoadMoreSuccess(checkResult.getData());
+                    else
+                        listener.LoadMoreFail(checkResult.getError());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    listener.LoadMoreFail("服务器异常");
+                }
+            }
 
+            @Override
+            public void onFailure(Object error) {
+                if(error instanceof String)
+                    listener.LoadMoreFail(error.toString());
+                else if(error instanceof OKHttpException)
+                    listener.LoadMoreFail(((OKHttpException) error).getMessage());
+                else
+                    listener.LoadMoreFail("未知错误");
+            }
+        });
     }
 }

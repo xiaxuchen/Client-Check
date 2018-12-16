@@ -34,5 +34,13 @@ public interface IDailyView extends IBaseView {
      */
     void showCommitResult(String info);
 
-    void hideLoadStus();
+    /**
+     * 显示加载学生信息
+     */
+    void showLoadStus();
+
+    /**
+     * 改变loadview为暂无
+     */
+    void changeLoadStus();
 }

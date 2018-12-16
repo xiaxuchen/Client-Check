@@ -1,5 +1,7 @@
 package com.cxyz.homepage.constant;
 
+import com.cxyz.logiccommons.constant.Constant;
+
 /**
  * Created by 鱼塘主 on 2018/10/6.
  */
@@ -17,6 +19,6 @@ public class NetWorkHomeUrl {
     /**
      *
      */
-    public static final String CLAZZS_URL = ROOT_URL+"MessagesServlet";
+    public static final String CLAZZS_URL = Constant.ROOT_URL+"/task/getSubjects";
 
 }

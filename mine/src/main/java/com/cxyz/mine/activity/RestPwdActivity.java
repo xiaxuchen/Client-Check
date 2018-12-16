@@ -61,27 +61,7 @@ public class RestPwdActivity extends BaseActivity {
                 ToastUtil.showShort("已完成");
             }
         });
-        tv_resetpwd_title.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
+        tv_resetpwd_title.setBackClickListener(v -> onBackPressed());
 
     }
 

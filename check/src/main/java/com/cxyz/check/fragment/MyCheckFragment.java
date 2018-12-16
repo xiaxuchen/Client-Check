@@ -93,8 +93,8 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
 
     @Override
     public void initView(View view, Bundle savedInstanceState) {
-        el_checksituation = (ExpandableListView) findViewById(R.id.el_checksituation);
-        qmuiProgressBar = (QMUIProgressBar) findViewById(R.id.qmuiProgressBar);
+        el_checksituation = findViewById(R.id.el_checksituation);
+        qmuiProgressBar = findViewById(R.id.qmuiProgressBar);
         tv_progress = findViewById(R.id.tv_progress);
         tv_dayinfo = findViewById(R.id.tv_dayinfo);
         tv_checkerror = findViewById(R.id.tv_checkerror);

@@ -10,6 +10,10 @@ import java.util.List;
 public class CheckHistoryDto {
 
     /**
+     * 任务id
+     */
+    private int id;
+    /**
      * 任务名称
      */
     private String taskName;
@@ -60,10 +64,19 @@ public class CheckHistoryDto {
         this.state = state;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "CheckHistoryDto{" +
-                "taskName='" + taskName + '\'' +
+                "id=" + id +
+                ", taskName='" + taskName + '\'' +
                 ", state=" + state +
                 ", results=" + results +
                 ", commitTime=" + commitTime +

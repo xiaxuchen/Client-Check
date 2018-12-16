@@ -1,6 +1,5 @@
 package com.cxyz.homepage.acitivity;
 
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -10,18 +9,19 @@ import android.widget.Toast;
 
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.date.Date;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.feature_z_domain.MySubject;
-import com.cxyz.homepage.feature_z_domain.SubjectRepertory;
 import com.cxyz.homepage.ipresenter.impl.MySubjectsPresenterImpl;
 import com.cxyz.homepage.iview.SubjectsView;
 import com.zhuangfei.timetable.TimetableView;
 import com.zhuangfei.timetable.listener.ISchedule;
-import com.zhuangfei.timetable.listener.IWeekView;
+import com.zhuangfei.timetable.listener.OnItemBuildAdapter;
 import com.zhuangfei.timetable.listener.OnSlideBuildAdapter;
 import com.zhuangfei.timetable.model.Schedule;
 import com.zhuangfei.timetable.view.WeekView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,11 +37,10 @@ public class ClazzActivity extends BaseActivity<MySubjectsPresenterImpl> impleme
 
     LinearLayout layout;
     TextView titleTextView;
-    List<MySubject> mySubjects;
+    List<MySubject> mySubjects = new ArrayList<>();
 
     //记录切换的周次，不一定是当前周
     int target = -1;
-    private List<MySubject> mySubjects1;
 
     @Override
     public int getContentViewId() {
@@ -62,9 +61,8 @@ public class ClazzActivity extends BaseActivity<MySubjectsPresenterImpl> impleme
         titleTextView = findViewById(R.id.id_title);
         layout = findViewById(R.id.id_layout);
         Date date = new Date();
-        iPresenter.setMySubjects("17478090",date);//这个也是要改的
-        mySubjects = SubjectRepertory.loadDefaultSubjects();//这个是要改的
         initTimetableView();
+        iPresenter.setMySubjects("17478090",date);//这个也是要改的
     }
 
 
@@ -73,11 +71,15 @@ public class ClazzActivity extends BaseActivity<MySubjectsPresenterImpl> impleme
         layout.setOnClickListener(this);
     }
     @Override
-    public void setSubjects(List<MySubject> m) {//这个是回调的方法也是要改的
-        mySubjects.addAll(m);
-        if (m==null || m.equals("")){
-            mySubjects = SubjectRepertory.loadDefaultSubjects();
+    public void setSubjects(List<MySubject> subjects) {//这个是回调的方法也是要改的
+        LogUtil.e(subjects);
+        List<Schedule> dataSource=mTimetableView.dataSource();
+        int size = dataSource.size();
+        for(MySubject subject:subjects)
+        {
+            dataSource.add(subject.getSchedule());
         }
+        mTimetableView.updateView();
     }
     @Override
     protected MySubjectsPresenterImpl createIPresenter() {
@@ -96,22 +98,14 @@ public class ClazzActivity extends BaseActivity<MySubjectsPresenterImpl> impleme
         //设置周次选择属性<选择当前周>
         mWeekView.source(mySubjects)
                 .curWeek(1)
-                .callback(new IWeekView.OnWeekItemClickedListener() {
-                    @Override
-                    public void onWeekClicked(int week) {
-                        int cur = mTimetableView.curWeek();
-                        //更新切换后的日期，从当前周cur->切换的周week
-                        mTimetableView.onDateBuildListener()
-                                .onUpdateDate(cur, week);
-                        mTimetableView.changeWeekOnly(week);
-                    }
+                .callback(week -> {
+                    int cur = mTimetableView.curWeek();
+                    //更新切换后的日期，从当前周cur->切换的周week
+                    mTimetableView.onDateBuildListener()
+                            .onUpdateDate(cur, week);
+                    mTimetableView.changeWeekOnly(week);
                 })
-                .callback(new IWeekView.OnWeekLeftClickedListener() {
-                    @Override
-                    public void onWeekLeftClicked() {
-                        onWeekLeftLayoutClicked();
-                    }
-                })
+                .callback(() -> onWeekLeftLayoutClicked())
                 .isShow(false)//设置隐藏，默认显示
                 .showView();
 
@@ -124,36 +118,30 @@ public class ClazzActivity extends BaseActivity<MySubjectsPresenterImpl> impleme
                 //日期栏0.1f、侧边栏0.1f，周次选择栏0.6f
                 //透明度范围为0->1，0为全透明，1为不透明
 //                .alpha(0.1f, 0.1f, 0.6f)
-                .callback(new ISchedule.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View v, List<Schedule> scheduleList) {
-                        display(scheduleList);
-                    }
+                .callback((ISchedule.OnItemClickListener) (v, scheduleList) -> display(scheduleList))
+                .callback((v, day, start) -> Toast.makeText(ClazzActivity.this,
+                        "长按:周" + day  + ",第" + start + "节",
+                        Toast.LENGTH_SHORT).show())
+                .callback(curWeek -> {
+                    titleTextView.setText("第" + curWeek + "周");
                 })
-                .callback(new ISchedule.OnItemLongClickListener() {
-                    @Override
-                    public void onLongClick(View v, int day, int start) {
-                        Toast.makeText(ClazzActivity.this,
-                                "长按:周" + day  + ",第" + start + "节",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .callback(new ISchedule.OnWeekChangedListener() {
-                    @Override
-                    public void onWeekChanged(int curWeek) {
-                        titleTextView.setText("第" + curWeek + "周");
-                    }
-                })
-                .callback(new ISchedule.OnFlaglayoutClickListener() {
-                    @Override
-                    public void onFlaglayoutClick(int day, int start) { //旗标布局点击监听<课程卡片点击监听>
-                        mTimetableView.hideFlaglayout();
-                        Toast.makeText(ClazzActivity.this,
-                                "点击了旗标:周" + (day + 1) + ",第" + start + "节",
-                                Toast.LENGTH_SHORT).show();
-                    }
+                .callback((ISchedule.OnFlaglayoutClickListener) (day, start) -> { //旗标布局点击监听<课程卡片点击监听>
+                    mTimetableView.hideFlaglayout();
+                    Toast.makeText(ClazzActivity.this,
+                            "点击了旗标:周" + (day + 1) + ",第" + start + "节",
+                            Toast.LENGTH_SHORT).show();
                 })
                 .showView();
+
+        mTimetableView.callback(new OnItemBuildAdapter() {
+            @Override
+            public String getItemText(Schedule schedule, boolean isThisWeek) {
+                StringBuilder builder = new StringBuilder();
+                builder.append(schedule.getName()).append("\n").append(schedule.getTeacher()).append("\n").append(schedule.getRoom());
+                return builder.toString();
+            }
+        })
+                .updateView();
     }
 
     /**
@@ -180,19 +168,11 @@ public class ClazzActivity extends BaseActivity<MySubjectsPresenterImpl> impleme
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("设置当前周");
         builder.setSingleChoiceItems(items, mTimetableView.curWeek() - 1,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        target = i;
-                    }
-                });
-        builder.setPositiveButton("设置为当前周", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (target != -1) {
-                    mWeekView.curWeek(target + 1).updateView();
-                    mTimetableView.changeWeekForce(target + 1);
-                }
+                (dialogInterface, i) -> target = i);
+        builder.setPositiveButton("设置为当前周", (dialog, which) -> {
+            if (target != -1) {
+                mWeekView.curWeek(target + 1).updateView();
+                mTimetableView.changeWeekForce(target + 1);
             }
         });
         builder.setNegativeButton("取消", null);

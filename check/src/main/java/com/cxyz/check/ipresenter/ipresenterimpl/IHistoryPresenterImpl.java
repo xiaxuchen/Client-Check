@@ -28,8 +28,18 @@ public class IHistoryPresenterImpl extends IHistoryPresenter {
     }
 
     @Override
-    public void loadMoreHistory() {
+    public void loadMoreHistory(int start) {
+        mIModle.loadMoreHistory(start, new IHistoryModel.LoadMoreHistoryListener() {
+            @Override
+            public void LoadMoreSuccess(List<CheckHistoryDto> history) {
+                mIView.finishLoad(history);
+            }
 
+            @Override
+            public void LoadMoreFail(String error) {
+                mIView.loadMoreFail(error);
+            }
+        });
     }
 
     @Override

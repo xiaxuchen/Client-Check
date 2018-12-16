@@ -52,29 +52,7 @@ public class UserResponse extends BaseActivity {
             public void onClick(View v) {
             }
         });
-        tv_userresponse_title.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-                overridePendingTransition(R.anim.back_next,R.anim.back_exit);
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
-
+        tv_userresponse_title.setBackClickListener(v -> onBackPressed());
     }
 
     @Override

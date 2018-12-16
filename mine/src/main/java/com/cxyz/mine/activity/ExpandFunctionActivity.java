@@ -81,27 +81,7 @@ public class ExpandFunctionActivity extends BaseActivity {
 
     @Override
     public void setEvent() {
-        tv_expand_title.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
+        tv_expand_title.setBackClickListener(v -> onBackPressed());
 
     }
 

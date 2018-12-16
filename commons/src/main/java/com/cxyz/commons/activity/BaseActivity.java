@@ -15,6 +15,8 @@ import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
 import com.squareup.leakcanary.RefWatcher;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
 *
 *<h1>1.注意事项</h1>
@@ -60,6 +62,8 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(eventBusEnable())
+            EventBus.getDefault().register(this);
         LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onCreate");
         //requestWindowFeature必须在setContentView之前调用
         baseInit();
@@ -73,6 +77,12 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         setEvent();
         afterInit();
     }
+
+    /**
+     * 是否启用EventBus
+     * @return
+     */
+    protected boolean eventBusEnable(){ return false;};
 
     /**
      * 在setEvent之后调用
@@ -295,6 +305,8 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
         //注销EventBus
         refWatcher.watch(this);
+        if(eventBusEnable())
+            EventBus.getDefault().unregister(this);
         super.onDestroy();
         if(iPresenter!=null)
         {
@@ -332,7 +344,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
     protected IBaseView getIView()
     {
-        return new IDefaultView(this,"正在加载中...",false);
+        return new IDefaultView(getActivity(),"正在加载中...",false);
     }
 
     @Override

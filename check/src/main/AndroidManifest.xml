@@ -2,8 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cxyz.check">
 
-    <application android:theme="@style/AppTheme">
+    <application >
         <activity android:name=".activity.DailyCheckActivity"></activity>
+        <activity android:name=".activity.CheckHistoryActivity"/>
+        <activity android:name=".activity.CheckActivity" />
+        <activity android:name=".activity.AlterCheckActivity"/>
     </application>
 
 </manifest>

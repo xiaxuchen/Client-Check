@@ -9,6 +9,9 @@ import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.logiccommons.R;
+import com.joanzapata.iconify.IconFontDescriptor;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -21,14 +24,17 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by 夏旭晨 on 2018/9/20.
  */
 
 public class MyApp extends BaseApplication {
 
-
     private HashMap<String,Object> attributes;
+
+    private static HashMap<Class,IconFontDescriptor> ICONS = new HashMap<>();
 
     @Override
     public void onCreate() {
@@ -40,6 +46,26 @@ public class MyApp extends BaseApplication {
         initRefresh();
         initCommonOkHttpClient();
         initARouter(true);
+        initIconify();
+    }
+
+    public static void withIcon(IconFontDescriptor descriptor)
+    {
+        if(ICONS.containsKey(descriptor.getClass()))
+            return;
+        ICONS.put(descriptor.getClass(),descriptor);
+        Iconify.with(descriptor);
+    }
+
+    private void initIconify()
+    {
+        Iconify.with(new FontAwesomeModule());
+    }
+
+    private void initJpush()
+    {
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     /**
@@ -101,7 +127,7 @@ public class MyApp extends BaseApplication {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);//全局设置主题颜色
+                layout.setPrimaryColorsId(R.color.gray, android.R.color.white);//全局设置主题颜色
                 return new ClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
             }
         });

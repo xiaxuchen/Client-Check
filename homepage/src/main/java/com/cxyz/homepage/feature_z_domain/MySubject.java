@@ -12,6 +12,9 @@ import java.util.List;
 
 public class MySubject implements ScheduleEnable {
     public static final String EXTRAS_ID="extras_id";
+    /**
+     *
+     */
     private int id;
 
     /**
@@ -156,6 +159,32 @@ public class MySubject implements ScheduleEnable {
         this.colorRandom = colorRandom;
     }
 
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "MySubject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", time='" + time + '\'' +
+                ", room='" + room + '\'' +
+                ", teacher='" + teacher + '\'' +
+                ", weekList=" + weekList +
+                ", start=" + start +
+                ", step=" + step +
+                ", day=" + day +
+                ", term='" + term + '\'' +
+                ", colorRandom=" + colorRandom +
+                '}';
+    }
+
     @Override
     public Schedule getSchedule() {
         Schedule schedule=new Schedule();
@@ -166,16 +195,7 @@ public class MySubject implements ScheduleEnable {
         schedule.setStep(getStep());
         schedule.setTeacher(getTeacher());
         schedule.setWeekList(getWeekList());
-        schedule.setColorRandom(2);
-        schedule.putExtras(EXTRAS_ID,getId());
+        schedule.setColorRandom(getColorRandom());
         return schedule;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
     }
 }

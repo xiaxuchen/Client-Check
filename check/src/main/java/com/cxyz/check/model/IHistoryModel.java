@@ -18,8 +18,10 @@ public interface IHistoryModel extends IBaseModel {
 
     /**
      * 加载更多考勤记录
+     * @param start 开始条目
+     * @param listener
      */
-    void loadMoreHistory(LoadMoreHistoryListener listener);
+    void loadMoreHistory(int start,LoadMoreHistoryListener listener);
 
     interface GetHistoryListener
     {

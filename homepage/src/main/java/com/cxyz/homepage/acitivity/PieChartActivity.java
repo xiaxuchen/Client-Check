@@ -1,6 +1,7 @@
 package com.cxyz.homepage.acitivity;
 
 import android.graphics.Color;
+import android.view.View;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
@@ -68,27 +69,10 @@ public class PieChartActivity extends BaseActivity {
         pv_checkcondition_weekcheck.setOnValueTouchListener(weekselectListener);
         pv_checkcondition_monthcheck.setOnValueTouchListener(monthselectListener);
         pv_checkcondition_termcheck.setOnValueTouchListener(termselectListener);
-        tv_checkcondition_title.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
+        tv_checkcondition_title.setBackClickListener((View v) -> {
                 onBackPressed();
             }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
+        );
 
     }
 

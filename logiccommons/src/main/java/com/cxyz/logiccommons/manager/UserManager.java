@@ -2,8 +2,11 @@ package com.cxyz.logiccommons.manager;
 
 
 import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.logiccommons.application.MyApp;
 import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.typevalue.UserType;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by 夏旭晨 on 2018/10/5.
@@ -17,6 +20,7 @@ public class UserManager {
     public void setUser(User user) {
         LogUtil.e(user.toString());
         this.u = user;
+        JPushInterface.setAlias(MyApp.getApplication(),1,u.getId());
     }
 
     private User u = getFakeUser();

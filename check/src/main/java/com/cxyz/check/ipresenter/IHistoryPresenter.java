@@ -17,6 +17,7 @@ public abstract class IHistoryPresenter extends IBasePresenter<IHistoryModel,IHi
 
     /**
      * 加载更多考勤记录
+     * @param start 开始条目
      */
-    public abstract void loadMoreHistory();
+    public abstract void loadMoreHistory(int start);
 }

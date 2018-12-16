@@ -77,28 +77,7 @@ public class MyinfoActivity extends BaseActivity <IMyinfoPresenter>implements IM
 
     @Override
     public void setEvent() {
-        tv_myinfo_title.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-                overridePendingTransition(R.anim.back_next,R.anim.back_exit);
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
+        tv_myinfo_title.setBackClickListener(v -> onBackPressed());
         iPresenter.getInfo();
         iPresenter.getClassname();
         iPresenter.getCollege();

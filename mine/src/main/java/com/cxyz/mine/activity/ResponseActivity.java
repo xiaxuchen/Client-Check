@@ -45,28 +45,7 @@ public class ResponseActivity extends BaseActivity<IResponsePresenter> implement
     public void setEvent() {
         etsetting_eduserresponse.setOnClickListener(this);
         btsetting_submit.setOnClickListener(this);
-        tvsetting_responsetitle.setOnClickListener(new TitleView.OnClickListener() {
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-                overridePendingTransition(R.anim.back_next,R.anim.back_exit);
-            }
-
-            @Override
-            public void onEditClick() {
-
-            }
-
-            @Override
-            public void onNameClick() {
-
-            }
-
-            @Override
-            public void onSetClick() {
-
-            }
-        });
+        tvsetting_responsetitle.setBackClickListener(v -> onBackPressed());
 
     }
 

@@ -3,6 +3,7 @@ package com.cxyz.commons.widget;
 
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -34,9 +35,21 @@ import com.cxyz.commons.R;
  */
 public class TitleView extends LinearLayout implements View.OnClickListener {
 
-    private TextView edit,set,name,back;
+    private TextView more,title,back;
 
-    private OnClickListener onClickImpl;
+    private String txt_title = "",txt_more = "",txt_back = "";
+
+    //返回的icon，更多的icon
+    private int backRes = R.mipmap.common_title_back,moreRes = 0;
+
+    //相应的颜色
+    private int backColor,moreColor,titleColor;
+
+    private OnClickListener listener;
+
+    private OnBackClickListener backClickListener;
+
+    private OnMoreClickListener moreClickListener;
 
     public TitleView(Context context) {
         this(context,null);
@@ -48,14 +61,20 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
 
     public TitleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initAttr(context.obtainStyledAttributes(attrs,R.styleable.TitleView));
         initView();
-        initAttr(attrs);
     }
 
     /**
      * 初始化属性
      */
-    private void initAttr(AttributeSet attrs) {
+    private void initAttr(TypedArray array) {
+        txt_title = array.getString(R.styleable.TitleView_title);
+        txt_more = array.getString(R.styleable.TitleView_moreText);
+        txt_back = array.getString(R.styleable.TitleView_backText);
+        backRes = array.getResourceId(R.styleable.TitleView_backIcon,backRes);
+        moreRes = array.getResourceId(R.styleable.TitleView_moreIcon,moreRes);
+        array.recycle();
     }
 
     /**
@@ -65,34 +84,81 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
     {
         setOrientation(LinearLayout.VERTICAL);
         View.inflate(getContext(), R.layout.views_title_layout, this);
-        back = (TextView) findViewById(R.id.title_back);
-        edit = (TextView) findViewById(R.id.title_edit);
-        set = (TextView) findViewById(R.id.title_set);
-        name = (TextView) findViewById(R.id.title_name);
+        back = findViewById(R.id.title_back);
+        title = findViewById(R.id.title_title);
+        more = findViewById(R.id.title_more);
+
+        setBack(backRes,txt_back);
+        setMore(moreRes,txt_more);
+        setTitle(txt_title);
 
         back.setOnClickListener(this);
-        edit.setOnClickListener(this);
-        set.setOnClickListener(this);
-        name.setOnClickListener(this);
+        title.setOnClickListener(this);
+        more.setOnClickListener(this);
+    }
+
+    public TextView getMore() {
+        return more;
+    }
+
+    public TextView getTitle() {
+        return title;
+    }
+
+    public TextView getBack() {
+        return back;
+    }
+
+    public void setBackColor(int backColor) {
+        this.backColor = backColor;
+    }
+
+    public void setMoreColor(int moreColor) {
+        this.moreColor = moreColor;
+    }
+
+    public void setTitleColor(int titleColor) {
+        this.titleColor = titleColor;
     }
 
     /**
      * 设置标题栏的标题（中间的文字）
-     * @param title
+     * @param t
      */
-    public void setTitle(String title)
+    public void setTitle(String t)
     {
-        name.setText(title);
+        title.setText(t);
+    }
+
+    /**
+     * 设置更多
+     * @param txt 文本
+     * @param res icon
+     */
+    public void setMore(int res,String txt)
+    {
+        setMoreText(txt);
+        setMoreIcon(res);
     }
 
     /**
      * 设置标题右边的图标
      * @param res 资源id
      */
-    public void setIcon(int res)
+    public void setMoreIcon(int res)
     {
-        setTextDrwRight(name,res);
+        setTextDrwRight(more,res);
     }
+
+    /**
+     * 设置更多的文本
+     * @param txt 字符串
+     */
+    public void setMoreText(String txt)
+    {
+        more.setText(txt);
+    }
+
 
     /**
      * 设置返回的图标和文字，如果图标资源为0则为默认
@@ -101,29 +167,29 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
      */
     public void setBack(int res,String txt)
     {
+        setBackText(txt);
+        setBackIcon(res);
+    }
+
+    /**
+     * 设置返回的文本
+     * @param txt 字符串
+     */
+    public void setBackText(String txt)
+    {
         back.setText(txt);
+    }
+
+    /**
+     * 设置返回图标
+     * @param res 资源id
+     */
+    public void setBackIcon(int res)
+    {
         setTextDrwLeft(back,res);
     }
 
-    /**
-     * 设置编辑位置的文字
-     * @param txt 文字
-     */
-    public void setEdit(String txt)
-    {
-        edit.setText(txt);
-        edit.setVisibility(View.VISIBLE);
-    }
 
-    /**
-     * 设置控件右边的文字
-     * @param txt
-     */
-    public void setSet(String txt)
-    {
-        set.setText(txt);
-        set.setVisibility(View.VISIBLE);
-    }
 
     /**
      * 设置左侧的图标
@@ -161,63 +227,91 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
      */
     public void setOnClickListener(OnClickListener listener)
     {
-        this.onClickImpl = listener;
+        this.listener = listener;
     }
 
+    /**
+     * 返回的监听
+     * @param backClickListener
+     */
+    public void setBackClickListener(OnBackClickListener backClickListener) {
+        this.backClickListener = backClickListener;
+    }
+
+    /**
+     * 更多的监听
+     * @param moreClickListener
+     */
+    public void setMoreClickListener(OnMoreClickListener moreClickListener) {
+        this.moreClickListener = moreClickListener;
+    }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if(onClickImpl != null)
+
+//        if(onClickImpl != null)
+//        {
+//            if(id == R.id.title_back)
+//            {
+//                if((txt_back == null || txt_back.isEmpty())&& backRes == 0)
+//                    return;
+//            }
+//            else if(id == R.id.title_more)
+//            {
+//                if((txt_more == null || txt_more.isEmpty())&& moreRes == 0)
+//                    return;
+//            }
+//            else if(id == R.id.title_title)
+//                if(txt_title == null || txt_title.isEmpty())
+//                    return;
+//        }
+        if(id == R.id.title_back)
         {
-            if(id == R.id.title_back)
-                onClickImpl.onBackClick();
-            else if(id == R.id.title_edit)
-                onClickImpl.onEditClick();
-            else if(id == R.id.title_name)
-                onClickImpl.onNameClick();
-            else if(id == R.id.title_set)
-                onClickImpl.onSetClick();
+            if (backClickListener != null)
+            {
+                if ((txt_back != null && !txt_back.isEmpty()) || backRes != 0)
+                    backClickListener.onBackClick(back);
+            }
+            else if(listener != null)
+                listener.onBackClick(back);
         }
+        else if(id == R.id.title_more)
+        {
+            if (moreClickListener != null)
+            {
+                if ((txt_more != null && !txt_more.isEmpty()) || moreRes != 0)
+                    moreClickListener.onMoreClick(more);
+            }
+            else if(listener != null)
+                listener.onMoreClick(more);
 
-
+        }
     }
+
 
     /**
      * TitleView点击事件的接口
      */
-    public interface OnClickListener{
-        void onBackClick();
-        void onEditClick();
-        void onNameClick();
-        void onSetClick();
+    public interface OnClickListener extends OnBackClickListener,OnMoreClickListener{
     }
 
-    /**
-     * TitleView的OnClickListener包装类
-     */
-    public static class OnClickListenerWrapper implements OnClickListener
-    {
 
-        @Override
-        public void onBackClick() {
+    public interface OnBackClickListener{
+        /**
+         * 返回点击的事件
+         * @param v
+         */
+        void onBackClick(View v);
+    }
 
-        }
+    public interface OnMoreClickListener{
 
-        @Override
-        public void onEditClick() {
-
-        }
-
-        @Override
-        public void onNameClick() {
-
-        }
-
-        @Override
-        public void onSetClick() {
-
-        }
+        /**
+         * 更多点击的事件
+         * @param v
+         */
+        void onMoreClick(View v);
     }
 }
 

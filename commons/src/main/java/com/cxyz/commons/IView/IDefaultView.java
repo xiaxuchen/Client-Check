@@ -54,7 +54,7 @@ public class IDefaultView implements IBaseView{
 
     @Override
     public void hideLoadingView() {
-        if(loadingView != null)
-            loadingView.dismiss();
+        if(loadingView != null && loadingView.isShowing())
+            loadingView.cancel();
     }
 }

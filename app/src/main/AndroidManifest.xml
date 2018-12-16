@@ -6,9 +6,16 @@
         android:name="com.cxyz.logiccommons.application.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/common_logo"
-        android:theme="@style/AppTheme"
+        android:theme="@style/CheckTheme"
         tools:replace="android:icon,android:label"
         android:label="@string/common_app_name">
+
+        <activity android:name="com.cxyz.mains.activity.SplashActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
     </application>
 

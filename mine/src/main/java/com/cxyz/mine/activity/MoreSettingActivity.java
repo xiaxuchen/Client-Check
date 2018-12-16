@@ -3,7 +3,6 @@ package com.cxyz.mine.activity;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
@@ -73,19 +72,8 @@ public class MoreSettingActivity extends BaseActivity {
                 finish();
             }
         });
-        tv_title.setOnClickListener(new TitleView.OnClickListenerWrapper(){
-            @Override
-            public void onBackClick() {
-                onBackPressed();
-               overridePendingTransition(R.anim.back_next,R.anim.back_exit);
-            }
-        });
-        sw__udpate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                getSpUtil().putBoolean("update",b);
-            }
-        });
+        tv_title.setBackClickListener(v->onBackPressed());
+        sw__udpate.setOnCheckedChangeListener((compoundButton, b) -> getSpUtil().putBoolean("update",b));
 
     }
 

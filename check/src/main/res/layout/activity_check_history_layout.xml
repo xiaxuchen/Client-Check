@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/refresh"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00000000">
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/lv_history"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+        <com.cxyz.commons.widget.TitleView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
+            android:layout_height="wrap_content"
+            app:title="@string/check_history"
+            app:backText="@string/check_back"
             />
 
-        <com.qmuiteam.qmui.widget.QMUIEmptyView
-            android:id="@+id/ev_empty"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:visibility="visible"
-            />
-    </RelativeLayout>
+            android:layout_height="0dp">
 
 
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                        <ListView
+                            android:id="@+id/lv_history"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <com.qmuiteam.qmui.widget.QMUIEmptyView
+                            android:id="@+id/ev_empty"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone"/>
+
+                </FrameLayout>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

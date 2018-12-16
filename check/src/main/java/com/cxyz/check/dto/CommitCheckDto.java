@@ -58,7 +58,7 @@ public class CommitCheckDto {
                 '}';
     }
 
-    public static class StuInfo{
+    public static class StuInfo implements Cloneable{
         private String id;//学号
         private int result;//考勤结果
         private String des;//描述
@@ -94,6 +94,11 @@ public class CommitCheckDto {
                     ", result=" + result +
                     ", des='" + des + '\'' +
                     '}';
+        }
+
+        @Override
+        public StuInfo clone() throws CloneNotSupportedException {
+            return (StuInfo)super.clone();
         }
     }
 

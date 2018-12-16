@@ -66,6 +66,7 @@ public class IDailyModelImpl implements IDailyModel {
         } catch (JSONException e) {
             e.printStackTrace();
             listener.onFail("提交数据异常");
+            return;
         }
         //发送请求
         RequestCenter.commitCheck(commitCheck,new DisposeDataListener() {

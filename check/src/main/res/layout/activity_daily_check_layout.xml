@@ -31,13 +31,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="首拼/姓名/学号"/>
-            <CheckBox
-                android:id="@+id/cb_shownormal"
+
+            <TextView
+                android:id="@+id/tv_current"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="隐藏已到达"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:textColor="@color/app_white"
-                />
+                android:text="显示全部"/>
         </LinearLayout>
 
         <FrameLayout
@@ -49,24 +52,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />
-
-            <LinearLayout
+            <ListView
+                android:id="@+id/lv_stus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <ListView
-                        android:id="@+id/lv_stus"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scrollbars="none"
-                        />
-
-                </RelativeLayout>
-            </LinearLayout>
+                android:scrollbars="none"
+                />
             <com.cxyz.commons.widget.sideview.SideBar
                 android:id="@+id/sb_bar"
                 android:layout_gravity="right"

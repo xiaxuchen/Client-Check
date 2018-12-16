@@ -9,7 +9,7 @@
         android:icon="@mipmap/common_logo"
         tools:replace="android:icon,android:label"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/CheckTheme"
         android:name="com.cxyz.logiccommons.application.MyApp">
 
         <activity android:name=".activity.DailyCheckActivity" >
@@ -24,6 +24,10 @@
         </activity>
 
         <activity android:name=".activity.CheckHistoryActivity" />
+        <activity android:name=".activity.AlterCheckActivity">
+        </activity>
+
+        <activity android:name=".activity.OtherstateActivity"/>
     </application>
 
 </manifest>

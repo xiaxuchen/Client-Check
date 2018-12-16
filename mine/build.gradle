@@ -2,6 +2,7 @@ if (isDebug.toBoolean())
     apply plugin: 'com.android.application'
 else
     apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -17,6 +18,12 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : "com.cxyz.untilchecked",
+                JPUSH_APPKEY : "9a1fc9d813243fb8f9f707da", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
     buildTypes {
         release {
@@ -32,6 +39,10 @@ android {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
