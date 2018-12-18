@@ -77,6 +77,9 @@ public class ClazzActivity extends BaseActivity<MySubjectsPresenterImpl> impleme
         int size = dataSource.size();
         for(MySubject subject:subjects)
         {
+            subject.setRoom("2419");
+            subject.setTime("8:00");
+            subject.setTerm("diyixueqi");
             dataSource.add(subject.getSchedule());
         }
         mTimetableView.updateView();

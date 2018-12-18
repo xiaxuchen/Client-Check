@@ -45,6 +45,7 @@ dependencies {
         compile project(':homepage')
         compile project(':mine')
         compile project(':main')
+        compile project(':info')
     } else
         compile project(':logiccommons')
 }

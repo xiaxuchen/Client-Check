@@ -3,6 +3,10 @@ package com.cxyz.commons.IPresenter;
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.IView.IBaseView;
 
+import java.util.List;
+
+import okhttp3.Call;
+
 /**
  * Created by 夏旭晨 on 2018/9/22.
  * IPresenter的基类
@@ -12,6 +16,9 @@ public abstract class IBasePresenter<M extends IBaseModel, V extends IBaseView> 
 
     public M mIModle;
     public V mIView;
+
+    //所有请求的列表
+    List<Call> callList;
 
     /**
      * 依附相应的IView

@@ -7,6 +7,7 @@ import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.logiccommons.application.MyApp;
 import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
+import com.cxyz.mains.constant.NetWorkConstant;
 import com.cxyz.mains.imodel.ILoginModel;
 import com.cxyz.mains.imodel.ISplashModel;
 import com.cxyz.mains.imodel.imodelimpl.ILoginModelImpl;
@@ -40,7 +41,7 @@ public class ISplashPresenterImpl extends ISplashPresenter {
                         builder.append(des+"\n");
                     }
                     //版本号不一致则获取app的url和最新版本的描述信息
-                    mIView.showUpdateView(info.getVersionCode(),builder.toString(),info.getUrl());
+                    mIView.showUpdateView(info.getVersionCode(),builder.toString(), NetWorkConstant.GETAPP);
             }
 
             @Override

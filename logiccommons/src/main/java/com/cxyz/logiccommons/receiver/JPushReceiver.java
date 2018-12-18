@@ -1,12 +1,21 @@
 package com.cxyz.logiccommons.receiver;
 
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.ToastUtil;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+
+import java.util.HashMap;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -17,6 +26,7 @@ import cn.jpush.android.api.JPushInterface;
 public class JPushReceiver extends BroadcastReceiver
 {
     private final String TAG ="jpush";
+
 
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
@@ -41,5 +51,32 @@ public class JPushReceiver extends BroadcastReceiver
         } else {
             Log.d(TAG, "Unhandled intent - " + intent.getAction());
         }
+    }
+
+    private void notifyInfo(Context context,String extras)
+    {
+        HashMap<String,String> map;
+        try {
+            map = (HashMap<String, String>)
+                    GsonUtil.fromJson(extras,new TypeToken<HashMap<String,String>>(){}.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        NotificationManager manager = (NotificationManager)
+                context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        builder.setLargeIcon(BitmapFactory.decodeResource
+                (context.getResources(), 0))
+        .setContentTitle(map.get("title"))
+        .setContentText(map.get("content"))
+        .setWhen(System.currentTimeMillis())
+        .setTicker(map.get("ticker"))
+        .setDefaults(NotificationCompat.DEFAULT_SOUND);
+
+        manager.notify();
+
+
     }
 }
