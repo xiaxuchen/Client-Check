@@ -20,5 +20,6 @@ public class NetWorkHomeUrl {
      *
      */
     public static final String CLAZZS_URL = Constant.ROOT_URL+"/task/getSubjects";
+    public static final String TASKRECORD_URL ="http://127.0.0.1:8080/MySafe/json.txt";
 
 }

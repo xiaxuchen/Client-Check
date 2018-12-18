@@ -68,4 +68,21 @@ public class RequestCenter {
         }
     }
 
+
+
+    public static void getTaskRecord(String start,String end,int gradeid,int  classname,DisposeDataListener listener){
+        Map<String,String> map = new HashMap<>();
+        map.put("start",start+"");
+        map.put("end",end+"");
+        map.put("gradeid",gradeid+"");
+        map.put("classname",classname+"");
+        RequestParams params = new RequestParams(map);
+        try {
+            CommonOkHttpClient.post(NetWorkHomeUrl.TASKRECORD_URL,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+    }
+
 }

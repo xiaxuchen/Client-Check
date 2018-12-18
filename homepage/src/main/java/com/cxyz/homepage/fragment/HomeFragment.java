@@ -15,6 +15,7 @@ import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.DateUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.acitivity.CheckRedordActivity;
 import com.cxyz.homepage.acitivity.MessageActivity;
 import com.cxyz.homepage.acitivity.PieChartActivity;
 import com.cxyz.homepage.adapter.FunctionAdapter;
@@ -128,6 +129,7 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
                             break;
                     }
                     case 2:getHoldingActivity().startActivity(MessageActivity.class);break;//跳转至日历课次;
+                    case 1:getHoldingActivity().startActivity(CheckRedordActivity.class);break;//跳转到考勤图表
                     case 6:getHoldingActivity().startActivity(PieChartActivity.class);break;//跳转到统计界面
                     default:ToastUtil.showShort("此功能正在扩充");
                 }

@@ -10,21 +10,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="146dp"
+        android:layout_height="160dp"
         android:background="#0ca2ff"
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.cxyz.mine.activity.CircleImage
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp">
+            <!--  <com.qmuiteam.qmui.widget.QMUIRadiusImageView
                 android:id="@+id/iv_myinfo_circleview"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/pxxy" />
+                android:scaleType="centerCrop" />-->
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                android:id="@+id/iv_myinfo_circleview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
         </RelativeLayout>
 
     </LinearLayout>
