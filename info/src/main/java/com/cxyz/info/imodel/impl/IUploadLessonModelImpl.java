@@ -3,47 +3,35 @@ package com.cxyz.info.imodel.impl;
 import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDownLoadListener;
-import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.info.constant.NetWorkConstant;
 import com.cxyz.info.constant.RequestCenter;
-import com.cxyz.info.imodel.IUploadStuModel;
-import com.cxyz.logiccommons.application.MyApp;
+import com.cxyz.info.imodel.IUploadLessonModel;
 import com.cxyz.logiccommons.domain.CheckResult;
-import com.cxyz.logiccommons.typevalue.UserType;
+import com.cxyz.logiccommons.typevalue.TaskType;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
-
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Administrator on 2018/12/17.
  */
 
-public class IUploadStuModelImpl extends IUploadStuModel {
+public class IUploadLessonModelImpl extends IUploadLessonModel {
+
 
     @Override
     public void upload(File file,UploadListener listener) {
 
-        addCall(RequestCenter.Upload(NetWorkConstant.UPLOAD_STU, UserType.STUDENT,file, new DisposeDataListener() {
+        addCall((RequestCenter.Upload(NetWorkConstant.UPLOAD_LESSON, TaskType.DAILYCHECK,file, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 try {
-                    CheckResult<List<String>> checkResult = (CheckResult<List<String>>) GsonUtil.fromJson(responseObj.toString(),new TypeToken<CheckResult<List<String>>>(){}.getType());
-                    if(checkResult.isSuccess()) {
-                        final List<String> ids = checkResult.getData();
-                        LogUtil.e(ids);
-                        for (String id : ids)
-                        {
-                            JPushInterface.setAlias(MyApp.getApplication(),Integer.parseInt(id),id);
-                            JPushInterface.deleteAlias(MyApp.getApplication(),Integer.parseInt(id));
-                        }
-                        listener.onSuccess("导入成功");
-                    }
+                    CheckResult<String> checkResult = (CheckResult<String>) GsonUtil.fromJson(responseObj.toString(),new TypeToken<CheckResult<String>>(){}.getType());
+                    if(checkResult.isSuccess())
+                        listener.onSuccess(checkResult.getData());
                     else
                         listener.onFail(checkResult.getError());
                 } catch (JSONException e) {
@@ -59,12 +47,12 @@ public class IUploadStuModelImpl extends IUploadStuModel {
                 else
                     listener.onFail(error.toString());
             }
-        }));
+        })));
     }
 
     @Override
     public void download(DownloadListener listener) {
-        addCall(RequestCenter.DownloadTemplate(NetWorkConstant.DOWNLOAD_STU_TEMPLATE,"stuTemplate.xlsx",new HashMap<>(), new DisposeDownLoadListener() {
+        addCall(RequestCenter.DownloadTemplate(NetWorkConstant.DOWNLOAD_LESSON_TEMPLATE,"lessonTemplate.xlsx",new HashMap<>(), new DisposeDownLoadListener() {
             @Override
             public void onProgress(int progrss) {
                 listener.updateProgress(progrss);

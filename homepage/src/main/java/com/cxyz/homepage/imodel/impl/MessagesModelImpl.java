@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by 鱼塘主 on 2018/11/18.
  */
 
-public class MessagesModelImpl implements MessagesModel {
+public class MessagesModelImpl extends MessagesModel {
     @Override
     public void getMessagesJson(String _id, Date time, final getMessagesInfo listtener) {
         Map<String, String> map = new HashMap<>();

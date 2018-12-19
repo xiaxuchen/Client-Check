@@ -8,12 +8,12 @@ import java.io.File;
  * Created by Administrator on 2018/12/17.
  */
 
-public abstract class IUploadStuModel extends IBaseModel {
+public abstract class IUploadLessonModel extends IBaseModel {
 
     /**
      * 导入学生
      */
-    public abstract void upload(File file,UploadListener listener);
+    public abstract void upload(File file, UploadListener listener);
 
     /**
      * 下载模板

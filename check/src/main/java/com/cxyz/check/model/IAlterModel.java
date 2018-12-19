@@ -9,13 +9,13 @@ import java.util.List;
  * Created by Administrator on 2018/12/9.
  */
 
-public interface IAlterModel extends IBaseModel {
+public abstract class IAlterModel extends IBaseModel {
     /**
      * 获取考勤记录信息
      * @param compId 考勤id
      * @param gradeId 班级id
      */
-    void getAlterRecords(int compId,int gradeId,getAlterRecordsListener listener);
+    public abstract void getAlterRecords(int compId,int gradeId,getAlterRecordsListener listener);
 
     /**
      * 更新记录
@@ -23,9 +23,9 @@ public interface IAlterModel extends IBaseModel {
      * @param dtos
      * @param listener 回调
      */
-    void updateRecords(int compId,List<AlterRecordDto> dtos,updateRecordsListener listener);
+    public abstract void updateRecords(int compId,List<AlterRecordDto> dtos,updateRecordsListener listener);
 
-    interface updateRecordsListener{
+    public interface updateRecordsListener{
         /**
          * 成功的回调
          * @param info 信息
@@ -39,7 +39,7 @@ public interface IAlterModel extends IBaseModel {
         void onFail(String error);
     }
 
-    interface getAlterRecordsListener{
+    public interface getAlterRecordsListener{
         /**
          * 成功的回调
          * @param dtos 历史记录详情

@@ -10,7 +10,9 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.cxyz.commons.utils.GsonUtil;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.logiccommons.R;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -37,7 +39,7 @@ public class JPushReceiver extends BroadcastReceiver
             String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
             Log.d(TAG, "[MyReceiver] 接收 Registration Id : " + regId);
         }else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-            Log.d(TAG, "收到了自定义消息。消息内容是：" + bundle.getString(JPushInterface.EXTRA_EXTRA));
+            notifyInfo(context,bundle.getString(JPushInterface.EXTRA_EXTRA));
             // 自定义消息不会展示在通知栏，完全要开发者写代码去处理
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "收到了通知");
@@ -59,24 +61,23 @@ public class JPushReceiver extends BroadcastReceiver
         try {
             map = (HashMap<String, String>)
                     GsonUtil.fromJson(extras,new TypeToken<HashMap<String,String>>(){}.getType());
+            for(String s:map.keySet())
+                LogUtil.e(s+":"+map.get(s));
         } catch (JSONException e) {
             e.printStackTrace();
             return;
         }
         NotificationManager manager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
-
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setLargeIcon(BitmapFactory.decodeResource
-                (context.getResources(), 0))
+                (context.getResources(), R.mipmap.common_logo))
         .setContentTitle(map.get("title"))
         .setContentText(map.get("content"))
         .setWhen(System.currentTimeMillis())
-        .setTicker(map.get("ticker"))
+        .setTicker(map.get("ticker")).setSmallIcon(R.mipmap.common_logo)
         .setDefaults(NotificationCompat.DEFAULT_SOUND);
 
-        manager.notify();
-
-
+        manager.notify(0,builder.build());
     }
 }

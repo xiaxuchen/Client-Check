@@ -14,7 +14,17 @@ public interface NetWorkConstant {
     String UPLOAD_STU = Constant.ROOT_URL+"/user/addStus";
 
     /**
-     * 下载模板
+     * 下载学生模板
      */
-    String DOWNLOAD_TEMPLATE = Constant.ROOT_URL+"/resource/stuTemplate";
+    String DOWNLOAD_STU_TEMPLATE = Constant.ROOT_URL+"/resource/stuTemplate";
+
+    /**
+     * 导入学生
+     */
+    String UPLOAD_LESSON = Constant.ROOT_URL+"/task/addTask";
+
+    /**
+     * 下载课程模板
+     */
+    String DOWNLOAD_LESSON_TEMPLATE = Constant.ROOT_URL+"/resource/lessonTemplate";
 }

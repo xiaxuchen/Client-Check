@@ -15,6 +15,7 @@ import okhttp3.RequestBody;
  */
 
 public class CommonRequest {
+
     /**
      *
      * @param url
@@ -30,6 +31,7 @@ public class CommonRequest {
                 urlBuilder.append(entry.getKey()+"="+entry.getValue()+"&");
             }
         }
+
         return new Request.Builder().get().url(urlBuilder.substring(0,urlBuilder.length()-1).toString()).build();
     }
     /**

@@ -7,6 +7,7 @@
         <activity android:name=".activity.CheckHistoryActivity"/>
         <activity android:name=".activity.CheckActivity" />
         <activity android:name=".activity.AlterCheckActivity"/>
+        <activity android:name=".activity.OtherstateActivity"/>
     </application>
 
 </manifest>

@@ -18,7 +18,7 @@ import java.util.List;
  * Created by 夏旭晨 on 2018/10/5.
  */
 
-public class IDailyModelImpl implements IDailyModel {
+public class IDailyModelImpl extends IDailyModel {
     @Override
    public void getStus(int grade, final GetStusListener listener) {
 

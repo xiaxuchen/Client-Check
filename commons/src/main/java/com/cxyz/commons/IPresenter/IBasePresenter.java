@@ -3,10 +3,6 @@ package com.cxyz.commons.IPresenter;
 import com.cxyz.commons.IModel.IBaseModel;
 import com.cxyz.commons.IView.IBaseView;
 
-import java.util.List;
-
-import okhttp3.Call;
-
 /**
  * Created by 夏旭晨 on 2018/9/22.
  * IPresenter的基类
@@ -16,9 +12,6 @@ public abstract class IBasePresenter<M extends IBaseModel, V extends IBaseView> 
 
     public M mIModle;
     public V mIView;
-
-    //所有请求的列表
-    List<Call> callList;
 
     /**
      * 依附相应的IView
@@ -30,8 +23,12 @@ public abstract class IBasePresenter<M extends IBaseModel, V extends IBaseView> 
             mIModle = createModel();
         }
     }
-    //当View被销毁掉时删除Presenter层对View层的引用
-     public void detachV(){ mIView = null; }
+    //当View被销毁掉时删除Presenter层对View层的引用,并关闭所有请求
+     public void detachV(){
+        if(mIModle != null)
+            mIModle.ClearCalls();
+        mIView = null;
+    }
 
     /**
      * 创建model

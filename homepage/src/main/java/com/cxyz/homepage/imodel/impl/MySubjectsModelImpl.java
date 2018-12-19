@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by 鱼塘主 on 2018/11/20.
  */
 
-public class MySubjectsModelImpl implements MySubjectsModel{
+public class MySubjectsModelImpl extends MySubjectsModel{
 
     @Override
     public void getMySubjects(String _id, Date date, final getMySubjectInfo listener) {

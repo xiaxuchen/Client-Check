@@ -24,6 +24,7 @@ android {
 }
 
 dependencies {
+    compile 'org.greenrobot:greendao:3.2.2'//greenDao
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.github.lecho:hellocharts-android:v1.5.8'
     compile 'cn.pedant.sweetalert:library:1.3'

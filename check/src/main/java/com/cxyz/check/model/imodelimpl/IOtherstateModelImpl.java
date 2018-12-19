@@ -14,7 +14,7 @@ import org.json.JSONException;
  * Created by Administrator on 2018/12/15.
  */
 
-public class IOtherstateModelImpl implements IOtherstateModel {
+public class IOtherstateModelImpl extends IOtherstateModel {
     @Override
     public void commitOtherstate(CommitCheckDto dto, CommitListener listener) {
         String json;

@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Administrator on 2018/12/10.
  */
 
-public class IAlterModelImpl implements IAlterModel {
+public class IAlterModelImpl extends IAlterModel {
     @Override
     public void getAlterRecords(int compId, int gradeId,getAlterRecordsListener listener) {
         RequestCenter.getAlterRecords(compId, gradeId, new DisposeDataListener() {

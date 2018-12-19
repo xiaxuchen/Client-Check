@@ -17,7 +17,7 @@ import org.json.JSONException;
  * Created by 夏旭晨 on 2018/10/2.
  */
 
-public class ISplashModelImpl implements ISplashModel {
+public class ISplashModelImpl extends ISplashModel {
     @Override
     public void confirmUpdate(final ConfirmListener listener) {
         try {

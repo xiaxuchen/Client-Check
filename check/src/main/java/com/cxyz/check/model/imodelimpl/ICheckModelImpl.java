@@ -18,7 +18,7 @@ import org.json.JSONException;
  * Created by Administrator on 2018/12/3.
  */
 
-public class ICheckModelImpl implements ICheckModel {
+public class ICheckModelImpl extends ICheckModel {
 
     @Override
     public void checkComp(final String checkerId, int checkerType, int type, final CheckListener listener) {
