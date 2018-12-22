@@ -55,6 +55,4 @@ public class CheckResult<T> {
         this.error = error;
         this.success = false;
     }
-
-
 }

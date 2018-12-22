@@ -78,12 +78,20 @@ public class CommonJsonCallback implements Callback {
             }
             if(o!=null)
             {
-                listener.onSuccess(o);
+                try {
+                    listener.onSuccess(o);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }else{
                 listener.onFailure(new OKHttpException("无法转化为相应的对象，请检查Json或者Class是否正确"));
             }
             return;
         }
-        listener.onSuccess(result);
+        try {
+            listener.onSuccess(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -7,6 +7,8 @@ package com.cxyz.mains.constant;
 public class NetWorkConstant {
 
     public static final String ROOT_URL = "http:/119.29.101.171:8080/Server_Check";
+  //  public static final String ROOT_URL = "http:/119.29.101.171:8080/check";
+
 
     public static final String LOGIN_URL = ROOT_URL+"/check/login";
 

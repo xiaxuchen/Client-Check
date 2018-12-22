@@ -68,21 +68,63 @@ public class RequestCenter {
         }
     }
 
+    /**
+     *
+     * @param start  开始时间
+     * @param end  结束时间
+     * @param gradeId  学院id
 
-
-    public static void getTaskRecord(String start,String end,int gradeid,int  classname,DisposeDataListener listener){
+     * @param listener  服务器响应后的回调
+     */
+    public static void getTaskRecord(String start,String end,int gradeId ,DisposeDataListener listener){
         Map<String,String> map = new HashMap<>();
         map.put("start",start+"");
         map.put("end",end+"");
-        map.put("gradeid",gradeid+"");
-        map.put("classname",classname+"");
+        map.put("gradeId",gradeId+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.post(NetWorkHomeUrl.TASKRECORD_URL,params,new DisposeDataHandler(listener));
+            CommonOkHttpClient.get(NetWorkHomeUrl.GET_STATISTIC,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
     }
+    /**
+     *
+     * @param start  开始时间
+     * @param end  结束时间
+     * @param gradeId  学院id
+     * @param resultType  异常类型
+     * @param listener  服务器响应后的回调
+     */
+    public static void getStaticRecoeds(String start,String end,int gradeId,int resultType,DisposeDataListener listener){
+        Map<String,String> map = new HashMap<>();
+        map.put("start",start+"");
+        map.put("end",end+"");
+        map.put("gradeId",gradeId+"");
+        map.put("resultType",resultType+"");
+        RequestParams params = new RequestParams(map);
+        try {
+            CommonOkHttpClient.get(NetWorkHomeUrl.GET_STATISTICRECORD,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+    }
+    public  static  void  getCollegeGradeID(int collegeId,DisposeDataListener listener){
+        Map<String,String> map = new HashMap<>();
+        map.put("collegeId",collegeId+"");
+
+        RequestParams params = new RequestParams(map);
+        try {
+            CommonOkHttpClient.get(NetWorkHomeUrl.GET_COLLEGEID,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+
+    }
+
+
 
 }

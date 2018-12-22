@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.DateUtil;
 import com.cxyz.commons.utils.ToastUtil;
@@ -19,7 +18,15 @@ import com.cxyz.commons.widget.TitleView;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.adapter.CheckRecordListAdapter;
 import com.cxyz.homepage.bean.CheckRecordBean;
+import com.cxyz.homepage.dto.CheckTaskDto;
+import com.cxyz.homepage.dto.GradeDto;
+import com.cxyz.homepage.dto.StatisticDto;
+import com.cxyz.homepage.dto.StatisticRecordDto;
 import com.cxyz.homepage.dto.TaskRecordDto;
+import com.cxyz.homepage.ipresenter.CheckRecordPresenter;
+import com.cxyz.homepage.ipresenter.impl.CheckRecordPresenterlmpl;
+import com.cxyz.homepage.view.CheckRecordView;
+import com.cxyz.logiccommons.typevalue.CheckRecordResult;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,9 +41,11 @@ import lecho.lib.hellocharts.view.PieChartView;
  * Created by Administrator on 2018/10/17.
  */
 
-public class CheckRedordActivity extends BaseActivity {
+public class CheckRedordActivity extends BaseActivity<CheckRecordPresenter>  implements CheckRecordView{
     private TaskRecordDto info;
     private Calendar calender;
+    private LinearLayout ll_check_early;
+    private TextView tv_check_early;
     private int bMonth,fMonth;
     private int bDay,fDay;
     private int bYear,fYear;
@@ -60,22 +69,13 @@ public class CheckRedordActivity extends BaseActivity {
     private List<CheckRecordBean>  mData;
     List<SliceValue> values = new ArrayList<SliceValue>();
     //定义数据，实际情况肯定不是这样写固定值的
-   /* private int[] data = {30, 20, 10, 15};*/
-    private int[] data ;/*= {info.getAbsent(), info.getApply(), info.getLate(), info.getNormal()};*/
+    private int[] data = {25, 20, 10, 15,5};
     private int[] colorData = {Color.parseColor("#ec063d"),
             Color.parseColor("#f1c704"),
             Color.parseColor("#c9c9c9"),
-            Color.parseColor("#2bc208"),};
-    private String[] stateChar = {"缺勤", "请假", "迟到", "正常"};
-    @Override
-    public void showLoadingView() {
-
-    }
-
-    @Override
-    public void hideLoadingView() {
-
-    }
+            Color.parseColor("#2bc208"),
+            Color.parseColor("#1E90FF")};
+    private String[] stateChar = {"缺勤", "请假", "迟到", "正常","早退"};
 
     @Override
     public int getContentViewId() {
@@ -97,13 +97,15 @@ public class CheckRedordActivity extends BaseActivity {
         tv_check_actul=findViewById(R.id.tv_check_actul);
         tv_check_apply=findViewById(R.id.tv_check_apply);
         tv_check_late=findViewById(R.id.tv_check_late);
+        tv_check_early=findViewById(R.id.tv_check_early);
         tv_check_absent=findViewById(R.id.tv_check_absent);
         ll_check_apply=findViewById(R.id.ll_check_apply);
         ll_check_late=findViewById(R.id.ll_check_late);
         ll_check_absent=findViewById(R.id.ll_check_absent);
+        ll_check_early=findViewById(R.id.ll_check_early);
         int all=info.getAbsent()+info.getNormal()+info.getLate()+info.getApply();
         int actul=info.getLate()+info.getNormal();
-           tv_check_actul.setText("实际到达人数"+actul+"/"+all+"人");
+          /* tv_check_actul.setText("实际到达人数"+actul+"/"+all+"人");*/
         tv_check_apply.setText(""+info.getApply());
         tv_check_absent.setText(""+info.getAbsent());
         tv_check_late.setText(""+info.getLate());
@@ -112,11 +114,11 @@ public class CheckRedordActivity extends BaseActivity {
         CheckRecordListAdapter adapter = new CheckRecordListAdapter(inflater, mData);
         //将布局添加到ListView中
         lv_ckeck_stuinfo.setAdapter(adapter);
+       getInfo();
     }
 
     @Override
     public void initData() {
-
         info=new TaskRecordDto();
         calender= Calendar.getInstance();
         bYear = calender.get(Calendar.YEAR);
@@ -125,12 +127,12 @@ public class CheckRedordActivity extends BaseActivity {
         fYear = calender.get(Calendar.YEAR);
         fMonth = calender.get(Calendar.MONTH);
         fDay = calender.get(Calendar.DAY_OF_MONTH);
-        loadinfo(info);
+   /*     loadinfo(info);
         data=new int [4];
         data[0]=info.getAbsent();
         data[1]=info.getApply();
         data[2]=info.getLate();
-        data[3]=info.getNormal();
+        data[3]=info.getNormal();*/
         setPieChartData();
         mData = new ArrayList<CheckRecordBean>();
         CheckRecordBean tangmaru = new CheckRecordBean("唐马儒", "17478001", "离散数学","12-09-14:17");
@@ -148,7 +150,10 @@ public class CheckRedordActivity extends BaseActivity {
         sp_check_classname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtil.showShort(""+sp_check_classname.getSelectedItem().toString());
+               /* ToastUtil.showShort(""+sp_check_classname.getSelectedItem().toString());*/
+               /*getinfo(tv_check_setbegintime.getText().toString(),tv_check_setfinshtime.getText().toString(),1702);*/
+               tv_check_classname.setText(sp_check_classname.getSelectedItem().toString()+"");
+               getInfo();
             }
 
             @Override
@@ -192,8 +197,8 @@ public class CheckRedordActivity extends BaseActivity {
     }
 
     @Override
-    protected IBasePresenter createIPresenter() {
-        return null;
+    protected CheckRecordPresenterlmpl createIPresenter() {
+        return new CheckRecordPresenterlmpl();
     }
      private void initPieChart() {
          checkchartdata = new PieChartData();
@@ -256,25 +261,27 @@ public class CheckRedordActivity extends BaseActivity {
             String days;
             if (bMonth + 1 < 10) {
                 if (bDay < 10) {
-                    days = new StringBuffer().append(bYear).append("年").append("0").
-                            append(bMonth + 1).append("月").append("0").append(bDay).append("日").toString();
+                    days = new StringBuffer().append(bYear).append("-").append("").
+                            append(bMonth + 1).append("-").append("").append(bDay).append("").toString();
                 } else {
-                    days = new StringBuffer().append(bYear).append("年").append("0").
-                            append(bMonth + 1).append("月").append(bDay).append("日").toString();
+                    days = new StringBuffer().append(bYear).append("-").append("").
+                            append(bMonth + 1).append("-").append(bDay).append("").toString();
                 }
 
             } else {
                 if (bDay < 10) {
-                    days = new StringBuffer().append(bYear).append("年").
-                            append(bMonth + 1).append("月").append("0").append(bDay).append("日").toString();
+                    days = new StringBuffer().append(bYear).append("-").
+                            append(bMonth + 1).append("-").append("").append(bDay).append("").toString();
                 } else {
-                    days = new StringBuffer().append(bYear).append("年").
-                            append(bMonth + 1).append("月").append(bDay).append("日").toString();
+                    days = new StringBuffer().append(bYear).append("-").
+                            append(bMonth + 1).append("-").append(bDay).append("").toString();
                 }
 
             }
             tv_check_setbegintime.setText(days);
             info.setStarttime(DateUtil.stringToDate(days, DateUtil.DatePattern.ONLY_DAY));
+
+            ToastUtil.showLong(tv_check_setbegintime.getText().toString()+tv_check_setfinshtime.getText().toString());
         }
     };
     //结束时间对话框
@@ -282,6 +289,7 @@ public class CheckRedordActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             new DatePickerDialog(CheckRedordActivity.this, finishtimetListener, fYear, fMonth, fDay).show();
+
         }
     };
     private DatePickerDialog.OnDateSetListener finishtimetListener = new DatePickerDialog.OnDateSetListener() {
@@ -294,25 +302,26 @@ public class CheckRedordActivity extends BaseActivity {
             String days;
             if (fMonth + 1 < 10) {
                 if (fDay < 10) {
-                    days = new StringBuffer().append(fYear).append("年").append("0").
-                            append(fMonth + 1).append("月").append("0").append(fDay).append("日").toString();
+                    days = new StringBuffer().append(fYear).append("-").append("").
+                            append(fMonth + 1).append("-").append("").append(fDay).append("").toString();
                 } else {
-                    days = new StringBuffer().append(fYear).append("年").append("0").
-                            append(fMonth + 1).append("月").append(fDay).append("日").toString();
+                    days = new StringBuffer().append(fYear).append("-").append("").
+                            append(fMonth + 1).append("-").append(fDay).append("").toString();
                 }
 
             } else {
                 if (fDay < 10) {
-                    days = new StringBuffer().append(fYear).append("年").
-                            append(fMonth + 1).append("月").append("0").append(fDay).append("日").toString();
+                    days = new StringBuffer().append(fYear).append("-").
+                            append(fMonth + 1).append("-").append("").append(fDay).append("").toString();
                 } else {
-                    days = new StringBuffer().append(fYear).append("年").
-                            append(fMonth + 1).append("月").append(fDay).append("日").toString();
+                    days = new StringBuffer().append(fYear).append("-").
+                            append(fMonth + 1).append("-").append(fDay).append("").toString();
                 }
 
             }
             tv_check_setfinshtime.setText(days);
             info.setEndtime(DateUtil.stringToDate(days, DateUtil.DatePattern.ONLY_DAY));
+
         }
     };
 
@@ -333,14 +342,52 @@ public class CheckRedordActivity extends BaseActivity {
             values.add(sliceValue);
         }
     }
-private void loadinfo(TaskRecordDto info){
-    info.setAbsent(1);
-    info.setApply(2);
-    info.setLate(3);
-    info.setNormal(48);
-    info.setAbsentname("张全蛋");
-    info.setApplyname("唐马儒"+","+"大队长");
-    info.setLatename("王尼玛"+","+"王蜜桃"+","+"木子");
 
-}
+    @Override
+    public void setCheckTaskData(CheckTaskDto CheckTaskData) {
+
+    }
+
+    @Override
+    public void setGradeData(GradeDto gradeData) {
+
+    }
+
+    @Override
+    public void setStatisticData(StatisticDto statisticData) {
+        tv_check_actul.setText(""+statisticData.getPersonCount());
+      /*tv_check_late.setText(statisticData.getResults().get(CheckRecordResult.LATE).getCount());
+      tv_check_early.setText(statisticData.getResults().get(CheckRecordResult.EARLYLEAVE).getCount());*/
+     for (int i=0;i<8;i++){
+         if (statisticData.getResults().get(i).getResultType()== CheckRecordResult.ABSENTEEISM){
+             tv_check_absent.setText(statisticData.getResults().get(i).getCount()+"");
+         }else if (statisticData.getResults().get(i).getResultType()== CheckRecordResult.EARLYLEAVE){
+             tv_check_early.setText(statisticData.getResults().get(i).getCount()+"");
+         }else if (statisticData.getResults().get(i).getResultType()== CheckRecordResult.LATE){
+             tv_check_late.setText(statisticData.getResults().get(i).getCount()+"");
+         }else  if (statisticData.getResults().get(i).getResultType()== CheckRecordResult.VACATE){
+             tv_check_apply.setText(statisticData.getResults().get(i).getCount()+"");
+         }
+        }
+    }
+
+    @Override
+    public void setStatisticRecordData(StatisticRecordDto statisticRecordData) {
+        CheckRecordBean one = new CheckRecordBean(statisticRecordData.getStu().getName(), statisticRecordData.getStu().getId(),
+                statisticRecordData.getSubject(),statisticRecordData.getTime().toString());
+        mData.add(one);
+    }
+
+    @Override
+    public void showFail() {
+        tv_check_actul.setText("失败了");
+        ToastUtil.showShort("获取失败");
+    }
+    public  void  getInfo(){
+        if(tv_check_setfinshtime.getText().toString().contains("2")||tv_check_setbegintime.getText().toString().contains("2")){
+            iPresenter.getRecord("2018-9-3","2018-9-6",1702);
+            iPresenter.getStasticRecord(tv_check_setbegintime.getText().toString(),
+                    tv_check_setfinshtime.getText().toString(),1702,CheckRecordResult.ABSENTEEISM);
+        }
+    }
 }

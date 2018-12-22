@@ -20,6 +20,18 @@ public class NetWorkHomeUrl {
      *
      */
     public static final String CLAZZS_URL = Constant.ROOT_URL+"/task/getSubjects";
-    public static final String TASKRECORD_URL ="http://127.0.0.1:8080/MySafe/json.txt";
 
+    /**
+     * 获取考勤统计
+     */
+    public static final String GET_STATISTIC = Constant.ROOT_URL+"/record/getStatistic";
+    /**
+     * 获取考勤异常类型人数统计
+     */
+    public static final String GET_STATISTICRECORD = Constant.ROOT_URL+"/record/getStatisticRecords";
+    /**
+     * 获取学院id
+     */
+    public static final String GET_COLLEGEID = Constant.ROOT_URL+"/envir/getCollegeGrades";
+    
 }
