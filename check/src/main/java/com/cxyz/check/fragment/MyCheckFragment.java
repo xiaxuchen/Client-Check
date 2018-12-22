@@ -16,8 +16,8 @@ import com.cxyz.check.ipresenter.ipresenterimpl.IMyCheckPresenterImpl;
 import com.cxyz.check.view.IMyCheckView;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.LogUtil;
-import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.logiccommons.typevalue.CheckRecordResult;
+import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUIProgressBar;
 
 import java.util.ArrayList;
@@ -27,8 +27,11 @@ import java.util.Map;
 
 @Route(path = "/check/MyCheckFragment")
 public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements IMyCheckView {
+
     //出勤率
     private QMUIProgressBar qmuiProgressBar;
+    //当没有数据时显示
+    private QMUIEmptyView qm_empty;
     //异常详情
     private ExpandableListView el_checksituation;
     //多少天多少异常
@@ -46,11 +49,6 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
 
     //进度
     private int progress;
-
-
-    private RecordAdapter adapter;
-
-
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -77,29 +75,27 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
         tv_progress.setText(progress+"%");
         if(progress == max)
             return;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SystemClock.sleep(10);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        tvAnimate(progress+1,max);
-                    }
-                });
-            }
+        new Thread(() -> {
+            SystemClock.sleep(10);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvAnimate(progress+1,max);
+                }
+            });
         }).start();
     }
 
     @Override
     public void initView(View view, Bundle savedInstanceState) {
-        el_checksituation = (ExpandableListView) findViewById(R.id.el_checksituation);
-        qmuiProgressBar = (QMUIProgressBar) findViewById(R.id.qmuiProgressBar);
+        el_checksituation = findViewById(R.id.el_checksituation);
+        qmuiProgressBar = findViewById(R.id.qmuiProgressBar);
         tv_progress = findViewById(R.id.tv_progress);
         tv_dayinfo = findViewById(R.id.tv_dayinfo);
         tv_checkerror = findViewById(R.id.tv_checkerror);
         tv_late = findViewById(R.id.tv_late);
         tv_absent = findViewById(R.id.tv_absent);
+        qm_empty = findViewById(R.id.qm_empty);
     }
 
 
@@ -189,7 +185,6 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
 
     @Override
     public void showRecords(CheckRecordDto checkRecordDto) {
-
         //由于进度和不良记录条数由计算得出，为避免重复计算使用变量记录
         int pro = checkRecordDto.getProgress();
         int badCount = checkRecordDto.getBadCount();
@@ -227,7 +222,18 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
 
     @Override
     public void showError(String error) {
-        ToastUtil.showShort(error);
+        qm_empty.show(false,error,null,"重新加载",view -> {
+            iPresenter.showRecords();
+        });
     }
 
+    @Override
+    public void showLoadingView() {
+        qm_empty.show(true);
+    }
+
+    @Override
+    public void hideLoadingView() {
+        qm_empty.hide();
+    }
 }

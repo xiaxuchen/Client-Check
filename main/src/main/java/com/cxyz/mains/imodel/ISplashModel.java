@@ -9,19 +9,19 @@ import java.io.File;
  * Created by 夏旭晨 on 2018/10/2.
  */
 
-public interface ISplashModel extends IBaseModel {
+public abstract class ISplashModel extends IBaseModel {
 
     /**
      * 确认是否可更新
      * @return
      */
-    public void confirmUpdate(ConfirmListener listener);
+    public abstract void confirmUpdate(ConfirmListener listener);
 
 
     /**
      * 确认更新的回调
      */
-    interface ConfirmListener{
+    public interface ConfirmListener{
         /**
          * 成功时的回调
          * @param updateEntity 更新信息
@@ -38,7 +38,7 @@ public interface ISplashModel extends IBaseModel {
     /**
      * 下载的回调监听
      */
-    interface DownloadListener{
+    public interface DownloadListener{
         /**
          * 下载完成
          * @param f 下载的文件

@@ -25,4 +25,9 @@ public interface CheckRecordResult {
      * 正常
      */
     public static final int NORMAL = 1;
+
+    /**
+     * 待处理
+     */
+    public static final int WAIT_DISPOSE = 2;
 }

@@ -66,7 +66,7 @@
         android:layout_height="36dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/main_shape"
+        android:background="@drawable/button_selector"
         android:text="完成"
         android:textColor="@color/common_white" />
 </LinearLayout>

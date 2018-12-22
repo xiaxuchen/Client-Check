@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cxyz.homepage">
+    package="com.cxyz.homepage"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/CheckTheme"
+        tools:replace="android:icon,android:label"
         android:name="com.cxyz.logiccommons.application.MyApp">
         <activity android:name=".acitivity.SDcardActivity">
 
         </activity>
+        <activity android:name=".acitivity.PieChartActivity"></activity>
         <activity android:name=".acitivity.MessageActivity">
+
+        </activity>
+        <activity android:name=".acitivity.ClazzActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

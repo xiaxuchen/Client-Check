@@ -11,6 +11,12 @@ public class GradeStusDto{
     private String id;//学生学号
     private String photo;//学生照片路径
 
+    public GradeStusDto(){}
+
+    public GradeStusDto(String id){
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

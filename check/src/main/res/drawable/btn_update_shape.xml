@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item  android:state_enabled="true" android:state_pressed="false" >
+        <shape>
+            <!-- 填充的颜色 -->
+            <solid android:color="@color/common_primary_color"/>
+            <!-- 设置按钮的四个角为弧形 -->
+            <!-- android:radius 弧形的半径 -->
+            <corners android:radius="5dip" />
+        </shape>
+    </item>
+    <item android:state_enabled="false" android:state_pressed="false">
+        <shape>
+            <!-- 填充的颜色 -->
+            <solid android:color="@color/common_line" />
+            <!-- 设置按钮的四个角为弧形 -->
+            <!-- android:radius 弧形的半径 -->
+            <corners android:radius="5dip" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true" android:state_enabled="true">
+        <shape>
+            <!-- 填充的颜色 -->
+            <solid android:color="@color/common_fifth_cyan" />
+            <!-- 设置按钮的四个角为弧形 -->
+            <!-- android:radius 弧形的半径 -->
+            <corners android:radius="5dip" />
+        </shape>
+    </item>
+</selector>

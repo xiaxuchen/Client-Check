@@ -2,6 +2,7 @@ if(isDebug.toBoolean())
     apply plugin: 'com.android.application'
 else
     apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -17,6 +18,12 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : "com.cxyz.untilchecked",
+                JPUSH_APPKEY : "9a1fc9d813243fb8f9f707da", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
     buildTypes {
         release {
@@ -33,6 +40,10 @@ android {
             }
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 allprojects {
     repositories {
@@ -42,9 +53,10 @@ allprojects {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.haibin:calendarview:3.4.8'//日历控件
+    //noinspection GradleCompatible
     compile 'com.android.support:cardview-v7:26.+'
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"
-
+    compile 'com.zhuangfei:TimetableView:2.0.6'//课表库
     compile project(':logiccommons')
     //compile project(path: ':main')
 }

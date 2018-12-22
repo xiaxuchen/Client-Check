@@ -9,7 +9,7 @@
         android:name="com.cxyz.logiccommons.application.MyApp"
         android:allowBackup="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/CheckTheme" >
         <activity
             android:name="com.cxyz.mains.activity.HomeActivity">
         </activity>

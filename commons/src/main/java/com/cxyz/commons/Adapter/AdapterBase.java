@@ -13,21 +13,23 @@ import java.util.List;
 /**
  * Created by 夏旭晨 on 2018/9/22.
  * listView适配器的基类，泛型T为传递给Adapter的数据类型
+ * 默认只支持单种布局,若需要支持多种布局则需重写getItemViewType以适配布局
  */
 public abstract class AdapterBase<T> extends BaseAdapter {
     protected List<T> mList = new LinkedList<T>();
     protected Context mContext;
-    protected int mItemLayoutId;
+    protected int[] mItemLayoutId;
 
     public AdapterBase() {
     }
 
-    public AdapterBase(Context mContext, List<T> list, int mItemLayoutId) {
+
+    public AdapterBase(Context mContext, List<T> list, int ... mItemLayoutId) {
         initAdp(mContext, list, mItemLayoutId);
     }
 
 
-    private void initAdp(Context mContext, List<T> list, int mItemLayoutId) {
+    private void initAdp(Context mContext, List<T> list, int ... mItemLayoutId) {
         if (list == null) {
             return;
         }
@@ -35,6 +37,17 @@ public abstract class AdapterBase<T> extends BaseAdapter {
         this.mContext = mContext;
         this.mItemLayoutId = mItemLayoutId;
         notifyDataSetChanged();
+    }
+
+
+    @Override
+    public int getViewTypeCount() {
+        return mItemLayoutId.length;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mItemLayoutId[0];
     }
 
     /**
@@ -147,15 +160,19 @@ public abstract class AdapterBase<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder = getViewHolder(position, convertView, parent);
-        convertView(viewHolder, getItem(position));
+        convertView(viewHolder, getItem(position),position);
         return viewHolder.getConvertView();
     }
 
     private ViewHolder getViewHolder(int position, View convertView, ViewGroup parent) {
-        return ViewHolder.get(mContext, convertView, parent, mItemLayoutId, position);
+        return ViewHolder.get(mContext, convertView, parent, getItemViewType(position), position);
     }
 
-    public abstract void convertView(ViewHolder holder, T item);
+    public void convertView(ViewHolder holder, T item){};
+
+    public void convertView(ViewHolder holder, T item,int position){
+        convertView(holder,item);
+    };
 
     /**
      * 在添加item到list之后、更新listview之前执行

@@ -87,7 +87,7 @@ public class Date {
 	 */
 	public String getDate()
 	{
-		return getYear()+":"+getMonth()+":"+getDay();
+		return getYear()+"-"+getMonth()+"-"+getDay();
 	}
 
 

@@ -15,6 +15,7 @@ import okhttp3.RequestBody;
  */
 
 public class CommonRequest {
+
     /**
      *
      * @param url
@@ -30,6 +31,7 @@ public class CommonRequest {
                 urlBuilder.append(entry.getKey()+"="+entry.getValue()+"&");
             }
         }
+
         return new Request.Builder().get().url(urlBuilder.substring(0,urlBuilder.length()-1).toString()).build();
     }
     /**
@@ -70,13 +72,13 @@ public class CommonRequest {
             {
                 if(entry.getValue() instanceof File)
                 {
-                    builder.addPart(MultipartBody.Part.createFormData(entry.getKey(),null,
-                            RequestBody.create(FILE_TYPE,(File)entry.getValue())));
+                    builder.addFormDataPart("file", ((File) entry.getValue()).getName(), RequestBody.create(FILE_TYPE, (File) entry.getValue()));
                 }else{
                     builder.addFormDataPart(entry.getKey(),String.valueOf(entry.getValue()));
                 }
             }
         }
+
         return new Request.Builder().url(url).post(builder.build()).build();
     }
 

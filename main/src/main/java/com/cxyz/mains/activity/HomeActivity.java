@@ -45,6 +45,8 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     private LinearLayout ll_mine;
 
+    private LinearLayout ll_home;
+
     //装载fragment的viewpager
     private ViewPager vp_content;
 
@@ -62,15 +64,16 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void initView() {
-        iv_check = (ImageView) findViewById(R.id.iv_check);
-        iv_home = (ImageView) findViewById(R.id.iv_home);
-        iv_mine = (ImageView) findViewById(R.id.iv_mine);
-        tv_check = (TextView) findViewById(R.id.tv_check);
-        tv_mine = (TextView) findViewById(R.id.tv_mine);
-        tv_home = (TextView)findViewById(R.id.tv_home);
-        tv_title = (TitleView) findViewById(R.id.tv_title);
-        ll_check = (LinearLayout) findViewById(R.id.ll_check);
-        ll_mine = (LinearLayout) findViewById(R.id.ll_mine);
+        iv_check = findViewById(R.id.iv_check);
+        iv_home = findViewById(R.id.iv_home);
+        iv_mine = findViewById(R.id.iv_mine);
+        tv_check = findViewById(R.id.tv_check);
+        tv_mine = findViewById(R.id.tv_mine);
+        tv_home = findViewById(R.id.tv_home);
+        tv_title = findViewById(R.id.tv_title);
+        ll_check = findViewById(R.id.ll_check);
+        ll_mine = findViewById(R.id.ll_mine);
+        ll_home = findViewById(R.id.ll_home);
         vp_content = findViewById(R.id.vp_content);
         //将fragment添加进viewpager
         vp_content.setAdapter(pagerAdapter);
@@ -87,7 +90,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         fragmentList.add(getFragment("/homepage/HomeFragment"));
         fragmentList.add(getFragment("/mine/MineFragment"));
         int i = 0;
-        ids = new int[]{R.id.ll_check,R.id.iv_home,R.id.ll_mine};
+        ids = new int[]{R.id.ll_check,R.id.ll_home,R.id.ll_mine};
         //初始化pagerAdapter
         pagerAdapter = new FragmentAdapter(getFragmentManager()) {
             @Override
@@ -113,7 +116,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
     public void setEvent() {
         ll_check.setOnClickListener(this);
         ll_mine.setOnClickListener(this);
-        iv_home.setOnClickListener(this);
+        ll_home.setOnClickListener(this);
         vp_content.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -173,7 +176,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
             tv_home.setTextColor(getResources().getColor(R.color.app_off));
             tv_title.setTitle("我的");
         }
-        else if(id == R.id.iv_home)
+        else if(id == R.id.ll_home)
         {
             iv_check.setImageResource(R.mipmap.app_statistic_off);
             iv_mine.setImageResource(R.mipmap.app_mine_off);

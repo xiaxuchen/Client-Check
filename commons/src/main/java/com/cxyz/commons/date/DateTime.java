@@ -170,7 +170,7 @@ public class DateTime extends Date{
 	 */
 	public String getTime()
 	{
-		return hour+":"+minute+":"+second;
+		return hour+":"+minute;
 	}
 
 

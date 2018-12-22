@@ -22,14 +22,14 @@ public class IMyCheckPresenterImpl extends IMyCheckPresenter {
 
             @Override
             public void onSuccess(CheckRecordDto dto) {
-                mIView.showRecords(dto);
                 mIView.hideLoadingView();
+                mIView.showRecords(dto);
             }
 
             @Override
             public void onFail(String error) {
-                mIView.showError(error);
                 mIView.hideLoadingView();
+                mIView.showError(error);
             }
         });
     }

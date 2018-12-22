@@ -23,8 +23,12 @@ public abstract class IBasePresenter<M extends IBaseModel, V extends IBaseView> 
             mIModle = createModel();
         }
     }
-    //当View被销毁掉时删除Presenter层对View层的引用
-     public void detachV(){ mIView = null; }
+    //当View被销毁掉时删除Presenter层对View层的引用,并关闭所有请求
+     public void detachV(){
+        if(mIModle != null)
+            mIModle.ClearCalls();
+        mIView = null;
+    }
 
     /**
      * 创建model

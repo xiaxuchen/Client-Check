@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/rg_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_late"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="迟到"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rb_vacate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请假"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rb_normal"
+            android:checked="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="已到达"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rb_absenteeism"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="缺勤"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rb_earlyleave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="早退"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/rb_wait_dispose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="待处理"
+            android:textSize="18sp" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/et_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:hint="描述信息"
+        />
+</LinearLayout>

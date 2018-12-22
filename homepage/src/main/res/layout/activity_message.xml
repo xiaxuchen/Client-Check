@@ -8,34 +8,8 @@
     <com.cxyz.commons.widget.TitleView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="center">
-        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-            android:id="@+id/btn_clazz"
-            android:layout_marginRight="1dp"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            app:qmui_radiusBottomLeft="13dp"
-            app:qmui_radiusTopLeft="13dp"
-            android:text="  课程 "
-            android:textColor="#6495ed"/>
-
-        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-            android:id="@+id/btn_check"
-            android:layout_marginLeft="1dp"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            app:qmui_radiusBottomRight="13dp"
-            app:qmui_radiusTopRight="13dp"
-            android:text=" 考勤  "
-            android:textColor="#6495ed"/>
-
-    </LinearLayout>
+        android:layout_height="wrap_content">
+    </com.cxyz.commons.widget.TitleView>
 
     <com.haibin.calendarview.CalendarLayout
         android:id="@+id/calendarLayout"

@@ -1,14 +1,30 @@
 package com.cxyz.logiccommons.application;
 
+import android.content.Context;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.application.BaseApplication;
 import com.cxyz.commons.utils.CrashHandler;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.logiccommons.R;
+import com.joanzapata.iconify.IconFontDescriptor;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
+import com.scwang.smartrefresh.layout.api.RefreshFooter;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by 夏旭晨 on 2018/9/20.
@@ -16,17 +32,40 @@ import java.util.Map;
 
 public class MyApp extends BaseApplication {
 
-
     private HashMap<String,Object> attributes;
+
+    private static HashMap<Class,IconFontDescriptor> ICONS = new HashMap<>();
 
     @Override
     public void onCreate() {
         super.onCreate();
         attributes = new HashMap<>();
         initToast();
+        initCrach();
         initSpUtil();
+        initRefresh();
         initCommonOkHttpClient();
         initARouter(true);
+        initIconify();
+    }
+
+    public static void withIcon(IconFontDescriptor descriptor)
+    {
+        if(ICONS.containsKey(descriptor.getClass()))
+            return;
+        ICONS.put(descriptor.getClass(),descriptor);
+        Iconify.with(descriptor);
+    }
+
+    private void initIconify()
+    {
+        Iconify.with(new FontAwesomeModule());
+    }
+
+    private void initJpush()
+    {
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     /**
@@ -52,7 +91,7 @@ public class MyApp extends BaseApplication {
      */
     private void initCrach()
     {
-        Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance().init(this));
+        Thread.setDefaultUncaughtExceptionHandler(CrashHandler.getInstance().init(this,"http://192.168.155.2:8080/Server_Check/envir/uploadBugs"));
     }
 
 
@@ -77,6 +116,29 @@ public class MyApp extends BaseApplication {
             ARouter.openLog();
         }
         ARouter.init(this);
+    }
+
+    /**
+     * 初始化refresh
+     */
+    private void initRefresh()
+    {
+        //设置全局的Header构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
+            @Override
+            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
+                layout.setPrimaryColorsId(R.color.gray, android.R.color.white);//全局设置主题颜色
+                return new ClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+            }
+        });
+        //设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
+            @Override
+            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
+                //指定为经典Footer，默认是 BallPulseFooter
+                return new ClassicsFooter(context).setDrawableSize(20);
+            }
+        });
     }
 
 

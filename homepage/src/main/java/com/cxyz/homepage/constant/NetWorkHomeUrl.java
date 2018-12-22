@@ -7,18 +7,18 @@ import com.cxyz.logiccommons.constant.Constant;
  */
 
 public class NetWorkHomeUrl {
-    public final static String ROOT_URL = "http:/119.29.101.171:8080/Server_Check";
+    public final static String ROOT_URL = "http:/localhost:8080/";
 
     public static final String RDS_URL = ROOT_URL+"/servlet/CheckServlet";
 
     /**
      * 请求获取所有的任务信息
      */
-    public static final String TASKINFOS_URL = ROOT_URL+"/check/gradeStus";
+    public static final String TASKINFOS_URL = Constant.ROOT_URL+"/user/gradeStus";
 
     /**
-     * 检查是否有考勤任务
+     *
      */
-    public static final String CHECKCOMP_URL = Constant.ROOT_URL+"/checkTask";
+    public static final String CLAZZS_URL = Constant.ROOT_URL+"/task/getSubjects";
 
 }
