@@ -15,7 +15,7 @@ import org.json.JSONException;
  * Created by Administrator on 2018/10/22.
  */
 
-public class IMineFragmentModelmpl implements IMineFragmentModel {
+public class IMineFragmentModelmpl extends IMineFragmentModel {
     @Override
     public void confirmUpdate( final ConfirmListener listener) {
         try {

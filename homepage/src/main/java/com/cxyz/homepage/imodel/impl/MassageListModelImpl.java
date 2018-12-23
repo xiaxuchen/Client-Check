@@ -6,7 +6,7 @@ import com.cxyz.homepage.imodel.MassageListModel;
  * Created by 鱼塘主 on 2018/10/3.
  */
 
-public class MassageListModelImpl implements MassageListModel {
+public class MassageListModelImpl extends MassageListModel {
     /**
      * 获取该学生的个人的一个又一个的考勤情况
      * @return

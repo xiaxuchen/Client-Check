@@ -3,8 +3,9 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle-2.14.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -12,6 +13,7 @@
             <option value="$PROJECT_DIR$/check" />
             <option value="$PROJECT_DIR$/commons" />
             <option value="$PROJECT_DIR$/homepage" />
+            <option value="$PROJECT_DIR$/info" />
             <option value="$PROJECT_DIR$/logiccommons" />
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/mine" />

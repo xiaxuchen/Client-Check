@@ -59,25 +59,6 @@ public class RequestCenter {
     }
 
     /**
-     * 通过学生id获取考勤统计结果
-     * @param id
-     * @param listener
-     */
-    public static void getStatistic(String id,int grade,DisposeDataListener listener)
-    {
-        Map<String,String> map = new HashMap<>();
-        map.put("id",id);
-        map.put("grade",grade+"");
-        map.put("method","querySelfStatistic");
-        try {
-            CommonOkHttpClient.post(NetWorkConstant.STATISTIC_URL,new RequestParams(map),new DisposeDataHandler(listener));
-        } catch (NetworkErrorException e) {
-            e.printStackTrace();
-            listener.onFailure("网络状态异常");
-        }
-    }
-
-    /**
      * 提交考勤
      * @param commitCheck
      * @param listener

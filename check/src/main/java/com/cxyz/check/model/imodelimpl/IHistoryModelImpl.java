@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Administrator on 2018/12/5.
  */
 
-public class IHistoryModelImpl implements IHistoryModel {
+public class IHistoryModelImpl extends IHistoryModel {
     @Override
     public void getHistory(GetHistoryListener listener) {
         User u = UserManager.getInstance().getUser();

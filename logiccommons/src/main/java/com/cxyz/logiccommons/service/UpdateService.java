@@ -4,7 +4,6 @@ package com.cxyz.logiccommons.service;
  * Created by Administrator on 2018/10/10.
  */
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -36,7 +35,6 @@ public class UpdateService extends Service{
     private String filePath;
     private NotificationManager notificationManager;
     private Notification notification;
-    private Activity activity;
 
 
 

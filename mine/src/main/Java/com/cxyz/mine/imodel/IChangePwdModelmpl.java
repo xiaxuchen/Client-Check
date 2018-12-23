@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by ${喻济生} on 2018/11/13.
  */
 
-public class IChangePwdModelmpl implements IChangePwdModel {
+public class IChangePwdModelmpl extends IChangePwdModel {
     /**
      *
      * @param oldpwd  旧密码

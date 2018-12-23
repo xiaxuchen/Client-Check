@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 对请求参数的封装
  */
 public class RequestParams {
+
     public ConcurrentHashMap<String,String> urlParams = new ConcurrentHashMap<String, String>();
     public ConcurrentHashMap<String,Object> fileparams = new ConcurrentHashMap<String, Object>();
 

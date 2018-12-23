@@ -9,21 +9,21 @@ import java.util.List;
  * Created by Administrator on 2018/12/5.
  */
 
-public interface IHistoryModel extends IBaseModel {
+public abstract class IHistoryModel extends IBaseModel {
 
     /**
      * 获取历史考勤记录
      */
-    void getHistory(GetHistoryListener listener);
+    public abstract void getHistory(GetHistoryListener listener);
 
     /**
      * 加载更多考勤记录
      * @param start 开始条目
      * @param listener
      */
-    void loadMoreHistory(int start,LoadMoreHistoryListener listener);
+    public abstract void loadMoreHistory(int start,LoadMoreHistoryListener listener);
 
-    interface GetHistoryListener
+    public interface GetHistoryListener
     {
         /**
          * 获取历史纪录成功的回调
@@ -38,7 +38,7 @@ public interface IHistoryModel extends IBaseModel {
         void getHistoryFail(String error);
     }
 
-    interface LoadMoreHistoryListener
+    public interface LoadMoreHistoryListener
     {
         /**
          * 获取历史纪录成功的回调

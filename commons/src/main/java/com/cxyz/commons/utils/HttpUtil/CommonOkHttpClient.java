@@ -8,14 +8,18 @@ import com.cxyz.commons.utils.HttpUtil.request.CommonRequest;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 import com.cxyz.commons.utils.HttpUtil.response.CommonFileCallback;
 import com.cxyz.commons.utils.HttpUtil.response.CommonJsonCallback;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.NetWorkUtil;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
-
 import okhttp3.Call;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
@@ -40,6 +44,7 @@ public class CommonOkHttpClient {
         //创建okhttpclient的构建者
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
+
         //填充超时时间
         builder.connectTimeout(TIME_OUT, TimeUnit.SECONDS);
         builder.readTimeout(3 * TIME_OUT, TimeUnit.SECONDS);
@@ -47,10 +52,42 @@ public class CommonOkHttpClient {
         //设置为可转发
         builder.followRedirects(true);
         //https支持
-        builder.hostnameVerifier(new HostnameVerifier() {
+        builder.hostnameVerifier((s, sslSession) -> true);
+        builder.cookieJar(new CookieJar()
+        {
+            private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
+
             @Override
-            public boolean verify(String s, SSLSession sslSession) {
-                return true;
+            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+                LogUtil.e(url.host());
+                LogUtil.e(cookies.size());
+                LogUtil.e(url.toString());
+                cookieStore.put(url.host(),cookies);
+                for(Cookie cookie:cookies){
+                    if(cookie == null)
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            @Override
+            public List<Cookie> loadForRequest(HttpUrl url) {
+                List<Cookie> cookies = new ArrayList<>();
+                List<Cookie> cookies1 = cookieStore.get(url.host());
+                if(cookies1 == null || cookies1.isEmpty())
+                    return cookies;
+                for(Cookie cookie:cookies1){
+                    if(cookie == null)
+                    {
+                        LogUtil.e("cookie为空");
+                        continue;
+                    }
+                    if(!cookie.name().equals("rememberMe"))
+                        cookies.add(cookie);
+                }
+
+                return cookies;
             }
         });
 
@@ -66,6 +103,7 @@ public class CommonOkHttpClient {
     {
         context = c;
     }
+
 
     /**
      * get方式请求网络

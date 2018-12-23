@@ -4,6 +4,7 @@ import com.cxyz.commons.autoupdate.UpdateEntity;
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.logiccommons.application.MyApp;
+import com.cxyz.mine.constant.NetWorkConstant;
 import com.cxyz.mine.imodel.IMineFragmentModel;
 import com.cxyz.mine.imodel.IMineFragmentModelmpl;
 
@@ -35,7 +36,7 @@ public  class IMineFragmentPresenterlmpl extends IMineFragmentPresenter {
                     builder.append(des+"\n");
                 }
                 //版本号不一致则获取app的url和最新版本的描述信息
-                mIView.showUpdateView(info.getVersionCode(),builder.toString(),info.getUrl());
+                mIView.showUpdateView(info.getVersionCode(),builder.toString(), NetWorkConstant.GETAPP);
 
             }
 

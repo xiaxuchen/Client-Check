@@ -6,5 +6,5 @@ import com.cxyz.commons.IModel.IBaseModel;
  * Created by 夏旭晨 on 2018/10/18.
  */
 
-public interface IHomeModel extends IBaseModel {
+public abstract class IHomeModel extends IBaseModel {
 }

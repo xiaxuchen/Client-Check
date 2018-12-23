@@ -10,10 +10,10 @@ import java.util.List;
  * Created by 鱼塘主 on 2018/11/20.
  */
 
-public interface MySubjectsModel extends IBaseModel{
-    public void getMySubjects(String _id, Date date,final getMySubjectInfo listener);
+public abstract class MySubjectsModel extends IBaseModel{
+    public abstract void getMySubjects(String _id, Date date,final getMySubjectInfo listener);
     public interface getMySubjectInfo{
-        public void getMySubjectsSuccess(List<MySubject> mySubjects);
-        public void getMySubjectsFail(Object error);
+        void getMySubjectsSuccess(List<MySubject> mySubjects);
+        void getMySubjectsFail(Object error);
     }
 }

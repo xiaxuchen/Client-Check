@@ -7,7 +7,7 @@ import com.cxyz.logiccommons.domain.User;
  * Created by ${喻济生} on 2018/11/13.
  */
 
-public interface IChangePwdModel extends IBaseModel {
+public abstract class IChangePwdModel extends IBaseModel {
 
     public interface getChangeInfoListener {
         /**

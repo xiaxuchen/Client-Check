@@ -14,7 +14,7 @@ public class NetWorkHomeUrl {
     /**
      * 请求获取所有的任务信息
      */
-    public static final String TASKINFOS_URL = ROOT_URL+"/check/gradeStus";
+    public static final String TASKINFOS_URL = Constant.ROOT_URL+"/user/gradeStus";
 
     /**
      *

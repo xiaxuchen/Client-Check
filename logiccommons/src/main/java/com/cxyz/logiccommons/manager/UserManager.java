@@ -20,7 +20,7 @@ public class UserManager {
     public void setUser(User user) {
         LogUtil.e(user.toString());
         this.u = user;
-        JPushInterface.setAlias(MyApp.getApplication(),1,u.getId());
+        JPushInterface.setAlias(MyApp.getApplication(),17478094,u.getId());
     }
 
     private User u = getFakeUser();
@@ -44,7 +44,7 @@ public class UserManager {
         User u = new User();
         u.setGradeId(1702);
         u.setName("夏旭晨");
-        u.setId("17478093");
+        u.setId("17478094");
         u.setGradeName("17软工二班");
         u.setCollegeName("信息与计算机工程学院");
         u.setPower(5);

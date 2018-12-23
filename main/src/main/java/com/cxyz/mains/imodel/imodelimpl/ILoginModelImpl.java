@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by 夏旭晨 on 2018/9/30.
  */
 
-public class ILoginModelImpl implements ILoginModel{
+public class ILoginModelImpl extends ILoginModel{
 
     /**
      *
