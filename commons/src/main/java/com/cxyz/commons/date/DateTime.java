@@ -1,5 +1,7 @@
 package com.cxyz.commons.date;
 
+import com.cxyz.commons.utils.LogUtil;
+
 import java.sql.Timestamp;
 import java.util.Calendar;
 
@@ -7,7 +9,65 @@ public class DateTime extends Date{
 	private String hour = "00";
 	private String minute = "00";
 	private String second = "00";
-	
+
+
+	public DateTime(){}
+
+	public DateTime(String year,String month,String day,String hour, String minute, String second) {
+		setYear(year);
+		setMonth(month);
+		setDay(day);
+		setHour(hour);
+		setMinute(minute);
+		setSecond(second);
+	}
+
+	/**
+	 * 比较
+	 * @param anOther
+	 * @return
+	 */
+	public int compareTo(DateTime anOther)
+	{
+		if(toInt(getYear())>toInt(anOther.getYear()))
+			return 1;
+		else if(toInt(getYear())<toInt(anOther.getYear()))
+			return -1;
+		else {
+			if(toInt(getMonth())>toInt(anOther.getMonth()))
+				return 1;
+			else if(toInt(getMonth())<toInt(anOther.getMonth()))
+				return -1;
+			else{
+				if(toInt(getDay())>toInt(anOther.getDay()))
+					return 1;
+				else if(toInt(getDay())<toInt(anOther.getDay()))
+					return -1;
+				else{
+					if(toInt(getHour())>toInt(anOther.getHour()))
+						return 1;
+					else if(toInt(getHour())<toInt(anOther.getHour()))
+						return -1;
+					else{
+						if(toInt(getMinute())>toInt(anOther.getMinute()))
+							return 1;
+						else if(toInt(getMinute())<toInt(anOther.getMinute()))
+							return -1;
+						else{
+							if(toInt(getSecond())>toInt(anOther.getSecond()))
+								return 1;
+							else if(toInt(getSecond())<toInt(anOther.getSecond()))
+								return -1;
+							else{
+								return 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	/**
 	 * 默认加上1900年
 	 * @param date
@@ -158,10 +218,22 @@ public class DateTime extends Date{
 	{
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
-		calendar.set(toInt(getYear()),toInt(getMonth())-1,
-				toInt(getDay()),toInt(getHour()),toInt(getMinute()),
-				toInt(getSecond()));
+		calendar.set(2018,0,1,0,0,0);
 		return new Timestamp(calendar.getTimeInMillis());
+	}
+
+	/**
+	 * 获取毫秒数
+	 * @return
+	 */
+	public Long getTimeInMillis()
+	{
+		LogUtil.e(getYear()+getMonth()+getDay()+getHour()+getMinute());
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear();
+		calendar.set(2018,0,1,0,0,0);
+		LogUtil.e(calendar.getTime().toLocaleString());
+		return calendar.getTimeInMillis();
 	}
 
 	/**

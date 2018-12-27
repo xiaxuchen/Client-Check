@@ -20,6 +20,7 @@
                 <category android:name="com.cxyz.untilchecked" />
             </intent-filter>
         </receiver>
+        <activity android:name=".activity.TempActivity" />
     </application>
 
 </manifest>

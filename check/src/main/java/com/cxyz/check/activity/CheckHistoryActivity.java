@@ -77,7 +77,10 @@ public class CheckHistoryActivity extends BaseActivity<IHistoryPresenter> implem
         });
         refresh.setOnLoadMoreListener(refreshLayout -> {
             if(adapter == null)
+            {
                 iPresenter.getHistory();
+                return;
+            }
             iPresenter.loadMoreHistory(adapter.getCount());
         });
         lv_history.setOnItemClickListener((adapterView, view, i, l) -> {
@@ -106,16 +109,17 @@ public class CheckHistoryActivity extends BaseActivity<IHistoryPresenter> implem
     public void finishRefresh(List<CheckHistoryDto> historyDtos) {
         if(adapter == null)
         {
-            adapter = new HistoryAdapter(getActivity(),historyDtos,R.layout.item_history_layout);
+            adapter = new HistoryAdapter(getActivity(),historyDtos,R.layout.item_my_history_layout);
+            lv_history.setAdapter(adapter);
             adapter.setListener((view, position) -> {
                 Intent intent = new Intent(getActivity(),AlterCheckActivity.class);
                 intent.putExtra("compId",adapter.getItem(position).getId());
                 startActivity(intent);
             });
+        }else {
+            adapter.setList(historyDtos);
+            adapter.notifyDataSetChanged();
         }
-        adapter.setList(historyDtos);
-        adapter.notifyDataSetChanged();
-        lv_history.setAdapter(adapter);
         refresh.finishRefresh();
         ev_empty.setTitleText("暂无考勤历史");
         ev_empty.setLoadingShowing(false);

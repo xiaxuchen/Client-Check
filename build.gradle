@@ -16,6 +16,8 @@ buildscript {
 
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'//greenDao支持
 
+        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.9.1')//tinker
+
     }
 }
 

@@ -48,25 +48,17 @@ public class CommonFileCallback implements Callback {
 
     @Override
     public void onFailure(final Call call, final IOException ioexception) {
-        mDeliveryHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                mListener.onFailure(new OKHttpException("服务器无响应"));
-            }
-        });
+        mDeliveryHandler.post(() -> mListener.onFailure(new OKHttpException("服务器无响应")));
     }
 
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         final File file = handleResponse(response);
-        mDeliveryHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (file != null) {
-                    mListener.onSuccess(file);
-                } else {
-                    mListener.onFailure(new OKHttpException("找不到资源"));
-                }
+        mDeliveryHandler.post(() -> {
+            if (file != null) {
+                mListener.onSuccess(file);
+            } else {
+                mListener.onFailure(new OKHttpException("找不到资源"));
             }
         });
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="48dp"
     android:background="@color/common_primary_color"
     android:orientation="vertical">
 
@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/title_back"
             android:layout_width="110dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:drawableLeft="@mipmap/common_title_back"
@@ -53,9 +53,5 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1.5dp"
-        android:background="@color/common_line"/>
 
 </LinearLayout>

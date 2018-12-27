@@ -21,21 +21,7 @@
         android:text="10次旷课"
         android:textSize="20sp"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/app_off"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_margin="5dp"
-            android:id="@+id/iv_indicate"
-            android:layout_gravity="end"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@mipmap/check_down"
-            />
-    </LinearLayout>
 
 </LinearLayout>

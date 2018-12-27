@@ -11,8 +11,8 @@ import android.util.Log;
 
 import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.LogUtil;
-import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.logiccommons.R;
+import com.cxyz.logiccommons.typevalue.NotifyType;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -27,12 +27,13 @@ import cn.jpush.android.api.JPushInterface;
 
 public class JPushReceiver extends BroadcastReceiver
 {
+
     private final String TAG ="jpush";
 
+    private HashMap<Integer,Integer> notifyIds;//缓存notifyid
 
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        ToastUtil.showShort("caosandiasd");
         Log.d(TAG, "onReceive - " + intent.getAction());
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -57,10 +58,10 @@ public class JPushReceiver extends BroadcastReceiver
 
     private void notifyInfo(Context context,String extras)
     {
-        HashMap<String,String> map;
+        HashMap<String,Object> map;
         try {
-            map = (HashMap<String, String>)
-                    GsonUtil.fromJson(extras,new TypeToken<HashMap<String,String>>(){}.getType());
+            map = (HashMap<String, Object>)
+                    GsonUtil.fromJson(extras,new TypeToken<HashMap<String,Object>>(){}.getType());
             for(String s:map.keySet())
                 LogUtil.e(s+":"+map.get(s));
         } catch (JSONException e) {
@@ -72,12 +73,62 @@ public class JPushReceiver extends BroadcastReceiver
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setLargeIcon(BitmapFactory.decodeResource
                 (context.getResources(), R.mipmap.common_logo))
-        .setContentTitle(map.get("title"))
-        .setContentText(map.get("content"))
-        .setWhen(System.currentTimeMillis())
-        .setTicker(map.get("ticker")).setSmallIcon(R.mipmap.common_logo)
-        .setDefaults(NotificationCompat.DEFAULT_SOUND);
+                .setSmallIcon(R.mipmap.common_logo)
+                .setDefaults(NotificationCompat.DEFAULT_SOUND)
+                .setAutoCancel(true)
+                .setWhen(System.currentTimeMillis());
+        Integer type = (Integer) map.get("type");
+        Integer notifyiId = type;
+        //如果是自定义的推送则直接获取
 
-        manager.notify(0,builder.build());
+
+        manager.notify(notifyiId,builder.build());
+
     }
+
+    private int setBuilder(NotificationCompat.Builder builder,HashMap<String,Object> map)
+    {
+        int type = (Integer) map.get("type");
+        String title;
+        String content;
+        String ticker;
+        switch (type)
+        {
+            case NotifyType.CUSTOM:{
+                title = (String) map.get("title");
+                content = (String) map.get("content");
+                ticker = (String) map.get("ticker");
+            }break;
+            case NotifyType.BAD_CHECK_RECORD:{
+                Integer count = notifyIds.get(type);
+                if(count == null)
+                    count = 0;
+                title = "考勤异常";
+                content = "您有"+count+"项考勤异常";
+                ticker = "最新考勤信息";
+            }break;
+            case NotifyType.VACATION:{
+                title = "请假信息新动态";
+                content = "您的请假有新进展了";
+                ticker = "最新请假信息";
+            }break;
+            case NotifyType.VACATION_AUDIT:{
+                title = "请假待审核";
+                content = "您有新的请假待审核";
+                ticker = "最新请假信息";
+            }break;
+            default:return NotifyType.ERROR;
+        }
+
+        builder.setContentTitle(title)
+                .setContentText(content)
+                .setTicker(ticker);
+
+        if(map.get(type)!=null)
+            builder.setDefaults(0);
+
+        return type;
+    }
+
+
 }

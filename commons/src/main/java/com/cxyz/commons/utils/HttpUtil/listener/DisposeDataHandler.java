@@ -1,12 +1,14 @@
 package com.cxyz.commons.utils.HttpUtil.listener;
 
+import java.lang.reflect.Type;
+
 /**
  * Created by 夏旭晨 on 2018/9/23.
  * 封装回调及数据处理的参数
  */
 public class DisposeDataHandler {
     public DisposeDataListener listener = null;
-    public Class<?> clazz = null;
+    public Type clazz = null;
     public String mSource;
 
     /**
@@ -21,11 +23,11 @@ public class DisposeDataHandler {
     /**
      * 在返回对象的时候使用此构造方法
      * @param listener 回调
-     * @param clazz 实体对象的Class
+     * @param type 实体对象的Class
      */
-    public DisposeDataHandler(DisposeDataListener listener,Class<?> clazz){
+    public DisposeDataHandler(DisposeDataListener listener,Type type){
         this.listener = listener;
-        this.clazz = clazz;
+        this.clazz = type;
     }
 
     /**
@@ -35,7 +37,6 @@ public class DisposeDataHandler {
      */
     public DisposeDataHandler(DisposeDataListener listener,String source){
         this.listener = listener;
-        this.clazz = clazz;
         this.mSource = source;
     }
 

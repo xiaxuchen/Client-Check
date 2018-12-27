@@ -17,6 +17,10 @@
             </intent-filter>
         </activity>
 
+        <!--<service-->
+            <!--android:name="com.cxyz.untilchecked.tinker.service.SampleResultService"-->
+            <!--android:exported="false"/>-->
+
     </application>
 
 </manifest>

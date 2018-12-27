@@ -146,7 +146,7 @@ public abstract class AdapterBase<T> extends BaseAdapter {
 
     @Override
     public T getItem(int position) {
-        if (position > mList.size() - 1) {
+        if (mList == null || position > mList.size() - 1) {
             return null;
         }
         return mList.get(position);

@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="common_primary_color">#0CA2FF</color>
+    <color name="common_primary_color">#FF0CA2FF</color>
     <!--第二色调-->
     <color name="common_second_yellow">#eaf048</color>
     <!--第三色调-->

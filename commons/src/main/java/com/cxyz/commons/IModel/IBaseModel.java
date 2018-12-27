@@ -19,7 +19,8 @@ public abstract class IBaseModel {
      */
     public void addCall(Call call)
     {
-        calls.add(call);
+        if(call != null)
+            calls.add(call);
     }
 
     /**
@@ -43,6 +44,26 @@ public abstract class IBaseModel {
                 call.cancel();
             calls.remove(call);
         }
+    }
+
+    /**
+     * 通用的请求回调
+     * @param <D>
+     * @param <E>
+     */
+    public interface ModelListener<D,E>{
+
+        /**
+         * 请求成功时的回调
+         * @param data 数据
+         */
+        void onSuccess(D data);
+
+        /**
+         * 请求失败时的回调
+         * @param e 错误
+         */
+        void onFail(E e);
     }
 
 
