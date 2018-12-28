@@ -51,6 +51,9 @@ allprojects {
     }
 }
 dependencies {
+    compile 'com.flaviofaria:kenburnsview:1.0.7'//静态图片动画效果
+   compile 'com.github.florent37:diagonallayout:1.0.9'//切角图片
+    compile 'com.github.florent37:diagonallayout:1.0.9'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.haibin:calendarview:3.4.8'//日历控件
     //noinspection GradleCompatible

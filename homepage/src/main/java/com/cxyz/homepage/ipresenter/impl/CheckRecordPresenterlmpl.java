@@ -6,6 +6,8 @@ import com.cxyz.homepage.imodel.CheckRecordModel;
 import com.cxyz.homepage.imodel.impl.CheckRecordModellmpl;
 import com.cxyz.homepage.ipresenter.CheckRecordPresenter;
 
+import java.util.List;
+
 /**
  * Created by ${喻济生} on 2018/12/19.
  */
@@ -38,8 +40,8 @@ public class CheckRecordPresenterlmpl extends CheckRecordPresenter {
     public void getStasticRecord(String start, String end, Integer gradeID, Integer typeResult) {
         mIModle.getStasticRecord(start, end, gradeID, typeResult,new CheckRecordModel.getStasticRecordListener() {
             @Override
-            public void onSuccess(StatisticRecordDto statisticRecordDto) {
-                mIView.setStatisticRecordData(statisticRecordDto);
+            public void onSuccess(List<StatisticRecordDto> statisticRecordDto) {
+                mIView.setStatisticRecordData( statisticRecordDto);
             }
             @Override
             public void onFail(String error) {

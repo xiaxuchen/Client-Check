@@ -12,26 +12,29 @@ import com.cxyz.commons.utils.ToastUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Call;
+
 /**
  * Created by 夏旭晨 on 2018/10/18.
  */
 
 public class RequestCenter {
 
-    public static void getMySubjects(RequestParams params,DisposeDataListener listener){
+    public static Call getMySubjects(RequestParams params,DisposeDataListener listener){
         ToastUtil.showShort(params.toString());
         try {
-            CommonOkHttpClient.get(NetWorkHomeUrl.CLAZZS_URL,params,new DisposeDataHandler(listener));
+           return CommonOkHttpClient.get(NetWorkHomeUrl.CLAZZS_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网路状态异常");
         }
+        return null;
     }
     /**
      * 通过用户id和所查记录类型查找违规记录(考勤情况)
      * @param listener 回调
      */
-    public static void getRecords(RequestParams params, DisposeDataListener listener)
+    public static Call getRecords(RequestParams params, DisposeDataListener listener)
     {
 //        Map<String,String> map = new HashMap<>();
 //        map.put("method","getRecordDetails");
@@ -40,11 +43,12 @@ public class RequestCenter {
         ToastUtil.showShort(params.toString());
 //        RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.post(NetWorkHomeUrl.CLAZZS_URL,params,new DisposeDataHandler(listener));
+           return CommonOkHttpClient.post(NetWorkHomeUrl.CLAZZS_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
 
     /**
@@ -53,7 +57,7 @@ public class RequestCenter {
      * @param date 日期
      * @param listener 服务器响应后的回调
      */
-    public static void getTaskInfos(int id, Date date,DisposeDataListener listener)
+    public static Call getTaskInfos(int id, Date date,DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
         map.put("method","getTaskInfos");
@@ -61,11 +65,12 @@ public class RequestCenter {
         map.put("date",date.getDate());
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.post(NetWorkHomeUrl.TASKINFOS_URL,params,new DisposeDataHandler(listener));
+          return   CommonOkHttpClient.post(NetWorkHomeUrl.TASKINFOS_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
 
     /**
@@ -76,18 +81,19 @@ public class RequestCenter {
 
      * @param listener  服务器响应后的回调
      */
-    public static void getTaskRecord(String start,String end,int gradeId ,DisposeDataListener listener){
+    public static Call getTaskRecord(String start,String end,int gradeId ,DisposeDataListener listener){
         Map<String,String> map = new HashMap<>();
         map.put("start",start+"");
         map.put("end",end+"");
         map.put("gradeId",gradeId+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.get(NetWorkHomeUrl.GET_STATISTIC,params,new DisposeDataHandler(listener));
+           return CommonOkHttpClient.get(NetWorkHomeUrl.GET_STATISTIC,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
     /**
      *
@@ -97,7 +103,7 @@ public class RequestCenter {
      * @param resultType  异常类型
      * @param listener  服务器响应后的回调
      */
-    public static void getStaticRecoeds(String start,String end,int gradeId,int resultType,DisposeDataListener listener){
+    public static Call getStaticRecoeds(String start, String end, int gradeId, int resultType, DisposeDataListener listener){
         Map<String,String> map = new HashMap<>();
         map.put("start",start+"");
         map.put("end",end+"");
@@ -105,11 +111,12 @@ public class RequestCenter {
         map.put("resultType",resultType+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.get(NetWorkHomeUrl.GET_STATISTICRECORD,params,new DisposeDataHandler(listener));
+            return CommonOkHttpClient.get(NetWorkHomeUrl.GET_STATISTICRECORD,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
     public  static  void  getCollegeGradeID(int collegeId,DisposeDataListener listener){
         Map<String,String> map = new HashMap<>();

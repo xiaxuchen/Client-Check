@@ -23,12 +23,12 @@
         android:background="@color/common_white"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <com.joanzapata.iconify.widget.IconTextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:src="@drawable/datatime" />
+            android:text="{icon-time 30dp}"
+            android:textColor="@color/game1_blue"
+            android:textSize="16sp"/>
 
         <TextView
             android:layout_width="72dp"
@@ -63,12 +63,12 @@
         android:background="@color/common_white"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView1"
+        <com.joanzapata.iconify.widget.IconTextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:src="@drawable/datatime" />
+            android:text="{icon-time 30dp}"
+            android:textColor="@color/game1_blue"
+            android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/testview3"
@@ -103,12 +103,12 @@
         android:layout_height="45dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView3"
-           android:layout_gravity="center"
+        <com.joanzapata.iconify.widget.IconTextView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/classicon" />
+            android:text="{icon-people 30dp}"
+            android:textColor="@color/game1_blue"
+            android:textSize="16sp"/>
 
         <TextView
             android:layout_width="72dp"
@@ -127,9 +127,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_marginRight="0dp"
-            android:entries="@array/classname"
             android:gravity="end"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"/>
+            <!--android:entries="@array/classname"-->
 
 
     </LinearLayout>
@@ -322,12 +322,13 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/imageView4"
+                    <com.joanzapata.iconify.widget.IconTextView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:text="{icon-task 40dp}"
                         android:layout_gravity="center"
-                        android:src="@drawable/collegeicon" />
+                        android:textColor="@color/game1_blue"
+                        android:textSize="18sp"/>
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
@@ -377,7 +378,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:text="实际到达人数70/100次" />
+                                android:text="实际到达人数0/0次" />
                             <View
                                 android:layout_width="1dp"
                                 android:layout_height="match_parent"
@@ -419,7 +420,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="13次" />
+                        android:text="0" />
                 </LinearLayout>
                 <View
                     android:layout_width="1dp"
@@ -446,7 +447,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="3次" />
+                        android:text="0" />
                 </LinearLayout>
                 <View
                     android:layout_width="1dp"
@@ -473,7 +474,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="1" />
+                        android:text="0" />
                 </LinearLayout>
                 <View
                     android:layout_width="1dp"
@@ -500,7 +501,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="1次" />
+                        android:text="0" />
                 </LinearLayout>
             </LinearLayout>
 

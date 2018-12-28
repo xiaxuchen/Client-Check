@@ -18,9 +18,12 @@ public class UserManager {
     }
 
     public void setUser(User user) {
-        LogUtil.e(user.toString());
         this.u = user;
-        JPushInterface.setAlias(MyApp.getApplication(),17478094,u.getId());
+        if (user!=null) {
+            LogUtil.e(user.toString());
+
+            JPushInterface.setAlias(MyApp.getApplication(), Integer.parseInt(u.getId()), u.getId());
+        }
     }
 
     private User u = getFakeUser();

@@ -6,9 +6,10 @@
         <activity android:name=".acitivity.MessageActivity" />
         <activity android:name=".acitivity.SDcardActivity"/>
         <activity android:name=".acitivity.ClazzActivity"/>
-        <activity android:name=".acitivity.newCheckrecord"></activity>
         <activity android:name=".acitivity.NoDailyTaskActivity"></activity>
         <activity android:name=".acitivity.CheckRedordActivity"></activity>
+        <activity android:name=".acitivity.PieChartActivity"></activity>
+        <activity android:name=".acitivity.ExinportActivity"></activity>
     </application>
 
 </manifest>

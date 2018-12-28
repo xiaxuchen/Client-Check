@@ -5,7 +5,6 @@
     <application
         android:theme="@style/CheckTheme">
 
-        <activity android:name=".activity.ResponseActivity" />
         <activity android:name=".activity.MyinfoActivity"></activity>
         <activity android:name=".activity.ExpandFunctionActivity"></activity>
         <activity android:name=".activity.MoreSettingActivity"></activity>

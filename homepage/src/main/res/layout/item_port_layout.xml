@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_itport_name"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="张全蛋"
+            android:textSize="16sp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/material_grey_300"></View>
+
+        <TextView
+            android:id="@+id/tv_checkstu_id"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:text="17478000"
+            android:textSize="16sp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/material_grey_300"></View>
+
+        <TextView
+            android:id="@+id/tv_checkstu_classname"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="马克思主义基本原理"
+            android:textSize="16sp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/material_grey_300"></View>
+
+        <TextView
+            android:id="@+id/tv_checkstu_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12-09  13:17"
+            android:gravity="center"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/material_grey_300"></View>
+</LinearLayout>

@@ -3,7 +3,6 @@ package com.cxyz.homepage.imodel.impl;
 import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.LogUtil;
-import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.constant.RequestCenter;
 import com.cxyz.homepage.dto.StatisticDto;
 import com.cxyz.homepage.dto.StatisticRecordDto;
@@ -13,19 +12,19 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 
+import java.util.List;
+
 /**
  * Created by ${喻济生} on 2018/12/19.
  */
 
-public class CheckRecordModellmpl implements CheckRecordModel {
+public class CheckRecordModellmpl extends CheckRecordModel {
 
     @Override
     public void getRecord(String start, String end, Integer gradeID,final getRecordListener listener) {
         if (start.contains("2") || end.contains("2")) {
             //获取考勤人数
             try {
-
-
                 RequestCenter.getTaskRecord(start, end, gradeID, new DisposeDataListener() {
                     @Override
                     public void onSuccess(Object responseObj) throws JSONException {
@@ -38,7 +37,7 @@ public class CheckRecordModellmpl implements CheckRecordModel {
                                 listener.onSuccess(checkResult.getData());
                             } else {
                                 listener.onFail(checkResult.getError());
-                                ToastUtil.showShort("获取失败1111");
+
                             }
 
                         } catch (Exception e) {
@@ -68,10 +67,11 @@ public class CheckRecordModellmpl implements CheckRecordModel {
                 @Override
                 public void onSuccess(Object responseObj) throws JSONException {
                     try {
-                        CheckResult<StatisticRecordDto> checkResult= (CheckResult<StatisticRecordDto>) GsonUtil.fromJson(responseObj.toString(),
-                                new TypeToken<CheckResult<StatisticRecordDto>>(){}.getType());
+                        CheckResult<List<StatisticRecordDto>> checkResult= (CheckResult<List<StatisticRecordDto>>) GsonUtil.fromJson(responseObj.toString(),
+                                new TypeToken<CheckResult<List<StatisticRecordDto>>>(){}.getType());
                         if (checkResult.isSuccess()) {
-                            listener.onSuccess(checkResult.getData());
+                            listener.onSuccess(
+                                    checkResult.getData());
                         } else {
                             listener.onFail(checkResult.getError());
                             LogUtil.d("异常2");

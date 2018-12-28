@@ -6,6 +6,8 @@ import com.cxyz.homepage.dto.GradeDto;
 import com.cxyz.homepage.dto.StatisticDto;
 import com.cxyz.homepage.dto.StatisticRecordDto;
 
+import java.util.List;
+
 /**
  * Created by ${喻济生} on 2018/12/19.
  */
@@ -14,7 +16,7 @@ public interface CheckRecordView extends IBaseView {
     public  void setCheckTaskData(CheckTaskDto CheckTaskData);
     public  void setGradeData(GradeDto gradeData);
     public  void setStatisticData(StatisticDto statisticData);
-    public  void setStatisticRecordData(StatisticRecordDto statisticRecordData);
+    public  void setStatisticRecordData(List<StatisticRecordDto> statisticRecordData);
     public  void showFail();
 
 
