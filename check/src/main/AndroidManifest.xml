@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cxyz.check">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application >
         <activity android:name=".activity.DailyCheckActivity" />
         <activity android:name=".activity.CheckHistoryActivity"/>

@@ -3,6 +3,7 @@ package com.cxyz.check.activity;
 import android.content.Intent;
 import android.widget.ListView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.check.R;
 import com.cxyz.check.adapter.MyHistoryAdapter;
 import com.cxyz.check.dto.MyHistoryDto;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2018/12/5.
  */
-
+@Route(path = "/check/MyHistoryActivity")
 public class MyHistoryActivity extends BaseActivity<IMyHistoryPresenter> implements IMyHistoryView{
 
     //考勤历史

@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.date.DateTime;
-import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.vac.R;
 import com.cxyz.vac.icon.IconfontModule;
@@ -23,6 +22,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import java.util.Calendar;
 
 import cn.addapp.pickers.picker.DateTimePicker;
+import cn.addapp.pickers.picker.NumberPicker;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class VacateActivity extends BaseActivity<IVacatePresenter> implements IVacateView {
@@ -33,6 +33,8 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
 
     private TextView tv_vac_end;//结束时间
 
+    private TextView tv_time_len;//请假时长
+
     private EditText et_des;//请假事由
 
     private Button btn_commit;//提交按钮
@@ -42,6 +44,8 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
     private IconTextView tv_start_icon;//开始图标
 
     private IconTextView tv_end_icon;//结束图标
+
+    private IconTextView tv_time_len_icon;
 
     private DateTime start;//开始毫秒
 
@@ -62,8 +66,10 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
         tv_vac_type = findViewById(R.id.tv_vac_type);
         tv_vac_start = findViewById(R.id.tv_vac_start);
         tv_vac_end = findViewById(R.id.tv_vac_end);
+        tv_time_len = findViewById(R.id.tv_time_len);
         tv_type_icon = findViewById(R.id.tv_type_icon);
         tv_start_icon = findViewById(R.id.tv_start_icon);
+        tv_time_len_icon = findViewById(R.id.tv_time_len_icon);
         tv_end_icon = findViewById(R.id.tv_end_icon);
         et_des = findViewById(R.id.et_des);
         btn_commit = findViewById(R.id.btn_commit);
@@ -76,8 +82,9 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
      */
     private void toggleEnable()
     {
-        RelativeLayout rl_start = (RelativeLayout) getParent(tv_vac_start);
-        RelativeLayout rl_end = (RelativeLayout) getParent(tv_vac_end);
+        RelativeLayout rl_start = getParent(tv_vac_start);
+        RelativeLayout rl_end = getParent(tv_vac_end);
+        RelativeLayout rl_len = getParent(tv_time_len);
 
         rl_start.setEnabled(!rl_start.isEnabled());
         rl_end.setEnabled(!rl_end.isEnabled());
@@ -92,6 +99,13 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
             View v = rl_end.getChildAt(i);
             v.setEnabled(!v.isEnabled());
         }
+
+        for(int i = 0;i<rl_len.getChildCount();i++)
+        {
+            View v = rl_len.getChildAt(i);
+            v.setEnabled(!v.isEnabled());
+        }
+
     }
 
     @Override
@@ -112,6 +126,10 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
             showDatePicker(tv_vac_end,tv_end_icon);
         });
 
+        getParent(tv_time_len).setOnClickListener(view -> {
+            showNumberPicker();
+        });
+
         tv_type_icon.setOnClickListener(view -> {
             if(tv_vac_type.getText().toString().equals("请选择"))
             {
@@ -129,6 +147,15 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
 
         tv_start_icon.setOnClickListener(view -> onIconClick(tv_vac_start, (IconTextView) view));
         tv_end_icon.setOnClickListener(view -> onIconClick(tv_vac_end, (IconTextView) view));
+        tv_time_len_icon.setOnClickListener(view -> {
+            if(tv_time_len.getText().toString().equals("请选择"))
+            {
+                showNumberPicker();
+            }else {
+                tv_time_len_icon.setText("{next}");
+                tv_time_len.setText("请选择");
+            }
+        });
 
         btn_commit.setOnClickListener(view -> {
             if(tv_vac_type.getText().toString().equals("请选择"))
@@ -149,8 +176,6 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
 
             String s = new StringBuilder(start.getDate()).append(" ").append(start.getTime()).append(":").append(start.getSecond()).toString();
             String e = new StringBuilder(end.getDate()).append(" ").append(end.getTime()).append(":").append(end.getSecond()).toString();
-            LogUtil.d(s);
-            LogUtil.d(e);
             iPresenter.vacate(s,e,et_des.getText().toString());
         });
     }
@@ -204,6 +229,23 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
                 if(start.compareTo(end) != -1)
                     ToastUtil.showShort("开始时间必须早于结束时间");
 
+            }
+        });
+        picker.show();
+    }
+
+    /**
+     * 选择数字
+     */
+    private void showNumberPicker()
+    {
+        NumberPicker picker = new NumberPicker(getActivity());
+        picker.setRange(0,10);
+        picker.setOnNumberPickListener(new NumberPicker.OnNumberPickListener() {
+            @Override
+            public void onNumberPicked(int i, Number number) {
+                tv_time_len.setText(number.intValue()+"天");
+                tv_time_len_icon.setText("{clear}");
             }
         });
         picker.show();

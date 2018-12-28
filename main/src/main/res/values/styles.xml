@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--SplashActivity Theme-->
+    <style name="SplashTheme" parent="CheckTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 透明背景 --> <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

@@ -17,6 +17,7 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <action android:name="notification_cancelled"/>
                 <category android:name="com.cxyz.untilchecked" />
             </intent-filter>
         </receiver>

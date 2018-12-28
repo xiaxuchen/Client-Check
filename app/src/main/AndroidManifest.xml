@@ -10,12 +10,13 @@
         tools:replace="android:icon,android:label,android:theme"
         android:label="@string/common_app_name">
 
-        <activity android:name="com.cxyz.mains.activity.SplashActivity">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+        <!--<activity android:name="com.cxyz.mains.activity.SplashActivity"-->
+            <!--android:theme="@style/SplashTheme">-->
+            <!--<intent-filter>-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
 
         <!--<service-->
             <!--android:name="com.cxyz.untilchecked.tinker.service.SampleResultService"-->
