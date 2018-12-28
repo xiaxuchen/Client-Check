@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources  xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
     <string-array name="calendar_week">
         <item>日</item>
         <item>一</item>

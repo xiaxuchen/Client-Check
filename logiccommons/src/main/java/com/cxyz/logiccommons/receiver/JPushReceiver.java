@@ -1,6 +1,7 @@
 package com.cxyz.logiccommons.receiver;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +12,9 @@ import android.util.Log;
 
 import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.LogUtil;
-import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.logiccommons.R;
+import com.cxyz.logiccommons.activity.TempActivity;
+import com.cxyz.logiccommons.typevalue.NotifyType;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -27,12 +29,24 @@ import cn.jpush.android.api.JPushInterface;
 
 public class JPushReceiver extends BroadcastReceiver
 {
+
     private final String TAG ="jpush";
 
+    //当取消通知时
+    public static final String NOTIFICATION_CANCEL = "notification_cancelled";
+
+    public static HashMap<Integer, Integer> getNotifyIds() {
+        return notifyIds;
+    }
+
+    public static void setNotifyIds(HashMap<Integer, Integer> notifyIds) {
+        JPushReceiver.notifyIds = notifyIds;
+    }
+
+    private static HashMap<Integer,Integer> notifyIds = new HashMap<>();//缓存notifyid
 
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        ToastUtil.showShort("caosandiasd");
         Log.d(TAG, "onReceive - " + intent.getAction());
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -50,7 +64,16 @@ public class JPushReceiver extends BroadcastReceiver
 //            Intent i = new Intent(context, .class);  //自定义打开的界面
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            context.startActivity(i);
-        } else {
+        }else if(NOTIFICATION_CANCEL.equals(intent.getAction()))
+        {
+            int type = intent.getIntExtra("type", NotifyType.ERROR);
+            if(type != NotifyType.ERROR)
+            {
+                notifyIds.remove(type);
+                LogUtil.e("cancel notification");
+            }
+        }
+        else {
             Log.d(TAG, "Unhandled intent - " + intent.getAction());
         }
     }
@@ -71,13 +94,93 @@ public class JPushReceiver extends BroadcastReceiver
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setLargeIcon(BitmapFactory.decodeResource
-                (context.getResources(), R.mipmap.common_logo))
-        .setContentTitle(map.get("title"))
-        .setContentText(map.get("content"))
-        .setWhen(System.currentTimeMillis())
-        .setTicker(map.get("ticker")).setSmallIcon(R.mipmap.common_logo)
-        .setDefaults(NotificationCompat.DEFAULT_SOUND);
+                (context.getResources(), R.mipmap.common_logo_fill))
+                .setSmallIcon(R.mipmap.common_logo_fill)
+                .setAutoCancel(true)
+                .setWhen(System.currentTimeMillis())
+                .setPriority(NotificationCompat.PRIORITY_MAX);
+        Integer type = setBuilder(builder,map,context);
+        if(type == NotifyType.ERROR)
+            return;
 
-        manager.notify(0,builder.build());
+        manager.notify(type,builder.build());
+
     }
+
+    /**
+     * 设置notification
+     * @param builder
+     * @param map
+     * @param context
+     * @return
+     */
+    private int setBuilder(NotificationCompat.Builder builder,HashMap<String,String> map,Context context)
+    {
+        int type = Integer.parseInt(map.get("type"));
+        String title;
+        String content;
+        String ticker;
+        String path = null;
+        Bundle bundle = new Bundle();
+        switch (type)
+        {
+            case NotifyType.CUSTOM:{
+                title =  map.get("title");
+                content =  map.get("content");
+                ticker =  map.get("ticker");
+                path = map.get("path");
+            }break;
+            case NotifyType.BAD_CHECK_RECORD:{
+                Integer count = notifyIds.get(type);
+                if(count == null)
+                    count = 1;
+                else
+                    count++;
+                title = "考勤异常";
+                content = "您有"+count+"项考勤异常";
+                ticker = "最新考勤信息";
+                path = "/check/MyHistoryActivity";
+                notifyIds.put(type,count);
+            }break;
+            case NotifyType.VACATION:{
+                title = "请假信息新动态";
+                content = "您的请假有新进展了";
+                ticker = "最新请假信息";
+            }break;
+            case NotifyType.VACATION_AUDIT:{
+                title = "请假待审核";
+                content = "您有新的请假待审核";
+                ticker = "最新请假信息";
+            }break;
+            default:return NotifyType.ERROR;
+        }
+
+
+        builder.setContentTitle(title)
+                .setContentText(content)
+                .setTicker(ticker);
+        if(path != null)
+        {
+            Intent intent = new Intent(context, TempActivity.class);
+            intent.putExtra("path",path);
+            intent.putExtra("data",bundle);
+            PendingIntent pendingIntentClick = PendingIntent.getActivity(context, type, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            Intent intentCancel = new Intent(context, JPushReceiver.class);
+            intentCancel.setAction(NOTIFICATION_CANCEL);
+            intentCancel.putExtra("type", type);
+            PendingIntent pendingIntentCancel = PendingIntent.getBroadcast(context, 0, intentCancel, PendingIntent.FLAG_ONE_SHOT);
+            builder.setContentIntent(pendingIntentClick);
+            builder.setDeleteIntent(pendingIntentCancel);
+        }
+
+        if(map.get(type)!=null)
+            builder.setDefaults(0);
+        else
+            builder.setDefaults(NotificationCompat.DEFAULT_ALL);
+
+        return type;
+    }
+
+
+
 }

@@ -6,4 +6,7 @@
     <color name="app_white">#FFFFFF</color>
     <color name="app_on">#1AFA29</color>
     <color name="app_off">#bfbfbf</color>
+    <color name="logic_background">#e6e6e6</color>
+    <color name="logic_bigTitle">#5e5e5e</color>
+    <color name="logic_press">#1296db</color>
 </resources>

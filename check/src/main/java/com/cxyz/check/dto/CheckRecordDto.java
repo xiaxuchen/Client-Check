@@ -1,9 +1,7 @@
 package com.cxyz.check.dto;
 
-import com.cxyz.logiccommons.domain.CheckRecord;
+import com.cxyz.logiccommons.dto.ResultCustom;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,20 +13,8 @@ public class CheckRecordDto {
     //总考勤次数
     private int all;
 
-    //请假
-    private int vacate;
+    private List<ResultCustom> results;//考勤结果
 
-    //迟到
-    private int late;
-
-    //缺勤
-    private int absenteeism;
-
-    //早退
-    private int earlyeave;
-
-    //考勤详情
-    private List<RecordInfo> recordInfos;
 
     public int getAll() {
         return all;
@@ -38,20 +24,29 @@ public class CheckRecordDto {
         this.all = all;
     }
 
-    public int getVacate() {
-        return vacate;
+    public List<ResultCustom> getResults() {
+        return results;
     }
 
-    public int getLate() {
-        return late;
+    public void setResults(List<ResultCustom> results) {
+        this.results = results;
     }
 
-    public int getAbsenteeism() {
-        return absenteeism;
-    }
-
-    public int getEarlyeave() {
-        return earlyeave;
+    /**
+     * 获取type类型的count
+     * @param type
+     * @return
+     */
+    public int getTypeCount(int type)
+    {
+        if(results == null || results.isEmpty())
+            return 0;
+        for(ResultCustom rc:results)
+        {
+            if(rc.getResultType() == type)
+                return rc.getCount();
+        }
+        return 0;
     }
 
     /**
@@ -60,7 +55,12 @@ public class CheckRecordDto {
      */
     public int getBadCount()
     {
-        return vacate+absenteeism+late+earlyeave;
+        int count = 0;
+        for(ResultCustom rc:results)
+        {
+           count+=rc.getCount();
+        }
+        return count;
     }
 
     /**
@@ -80,106 +80,11 @@ public class CheckRecordDto {
         return progress;
     }
 
-    public List<RecordInfo> getRecordInfos() {
-        return recordInfos;
-    }
-
-    public void setRecordInfos(List<RecordInfo> recordInfos) {
-        this.recordInfos = recordInfos;
-        reInit();
-        for(RecordInfo ri:recordInfos)
-        {
-            switch (ri.getResult()) {
-                case CheckRecord.ABSENTEEISM: {
-                    absenteeism++;
-                }
-                break;
-                case CheckRecord.EARLYLEAVE: {
-                    earlyeave++;
-                }
-                break;
-                case CheckRecord.LATE: {
-                    late++;
-                }
-                break;
-                case CheckRecord.VACATE: {
-                    vacate++;
-                }
-                break;
-            }
-        }
-    }
-
-    //重置
-    private void reInit()
-    {
-        late = 0;
-        vacate = 0;
-        absenteeism = 0;
-        earlyeave = 0;
-    }
-
-    //考勤详细信息
-    public static class RecordInfo{
-        //课程名
-        private String name;
-        //描述信息
-        private String des;
-        //考勤结果
-        private int result;
-        //考勤时间
-        private Timestamp date;
-        //完成情况id
-        private int compId;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getDes() {
-            return des;
-        }
-
-        public void setDes(String des) {
-            this.des = des;
-        }
-
-        public int getResult() {
-            return result;
-        }
-
-        public void setResult(int result) {
-            this.result = result;
-        }
-
-        public Date getDate() {
-            return date;
-        }
-
-        public void setDate(Timestamp date) {
-            this.date = date;
-        }
-
-        public int getCompId() {
-            return compId;
-        }
-
-        public void setCompId(int compId) {
-            this.compId = compId;
-        }
-
-        @Override
-        public String toString() {
-            return "RecordInfo{" +
-                    "des='" + des + '\'' +
-                    ", result=" + result +
-                    ", date=" + date +
-                    ", compId=" + compId +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "CheckRecordDto{" +
+                "all=" + all +
+                ", results=" + results +
+                '}';
     }
 }

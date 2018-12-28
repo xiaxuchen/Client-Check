@@ -3,6 +3,7 @@ package com.cxyz.commons.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
@@ -116,9 +117,13 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         if(!isShowTitle()){
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
-        screenManager.setStatusBar(isStateBar(), this);
+        screenManager.setStatusBar(isStateBar(), this,statusColor());
         screenManager.setScreenRotate(isScreenRotate(), this);
         screenManager.setFullScreen(isFullScreen(), this);
+    }
+
+    protected Integer statusColor(){
+        return null;
     }
 
     /*
@@ -353,5 +358,15 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         {
             iBaseView.hideLoadingView();
         }
+    }
+
+    /**
+     * 获取view的Parent
+     * @param view
+     * @return
+     */
+    public <T extends View> T  getParent(View view)
+    {
+        return (T)view.getParent();
     }
 }

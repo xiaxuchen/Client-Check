@@ -176,4 +176,30 @@ public class RequestCenter {
             listener.onFailure("网络状态异常");
         }
     }
+
+    /**
+     * 获取个人考勤历史
+     * @param id 学生id
+     * @param result 考勤结果类型，null为获取所有
+     * @param start 开始记录条数
+     * @param listener
+     * @return
+     */
+    public static okhttp3.Call getMyHistory(String id, Integer result, Integer start, DisposeDataListener listener)
+    {
+        HashMap<String,String> map = new HashMap<>();
+        map.put("id",id);
+        if(result!=null)
+            map.put("result",result+"");
+        else
+            map.put("result",null);
+        map.put("start",start+"");
+        try {
+            return CommonOkHttpClient.get(NetWorkConstant.GET_MY_HISTORY,new RequestParams(map),new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+        return null;
+    }
 }

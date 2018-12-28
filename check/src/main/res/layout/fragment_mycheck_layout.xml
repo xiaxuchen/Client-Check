@@ -7,12 +7,8 @@
     android:orientation="vertical"
     >
 
-    <com.qmuiteam.qmui.widget.QMUIEmptyView
-        android:id="@+id/qm_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        />
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -86,6 +82,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ProgressBar
+                    android:id="@+id/pb_load"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="10dp"
+                    android:visibility="gone"
+                    />
+
 
                 <TextView
                     android:layout_marginTop="20dp"
@@ -94,7 +99,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:text="你在21天考勤中有5项异常"
                     android:textColor="@color/common_white"
                     android:textSize="20sp" />
                 <LinearLayout
@@ -122,7 +126,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:paddingTop="5dp"
-                        android:text="旷课2次"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -146,7 +149,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="迟到早退两次"
                         android:paddingTop="5dp"
                         android:textColor="#ffffff"
                         android:textSize="15sp" />
@@ -193,26 +195,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:gravity="start"
-                android:text="点击展开记录"
+                android:text="点击查看详情"
                 android:textColor="#000"
                 android:textSize="18sp" />
 
+
         </LinearLayout>
 
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看所有考勤记录"
+            android:textColor="@color/app_white"
+            android:visibility="gone"
+            android:textSize="14sp"/>
+
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1">
+            >
 
             <LinearLayout
-                android:layout_marginTop="15dp"
                 android:layout_gravity="center"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-                android:weightSum="1">
+                >
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -232,7 +244,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:textSize="25sp"
-                        android:text="15项考勤异常"
+                        android:text="0项考勤异常"
                         android:textColor="@color/app_white"
                         android:layout_marginLeft="10dp"
                          />
@@ -242,18 +254,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1">
-                    <ExpandableListView
+                    <ListView
                         android:scrollbars="none"
                         android:fadingEdge="none"
                         android:layout_marginTop="15dp"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
-                        android:id="@+id/el_checksituation"
+                        android:id="@+id/lv_check"
                         android:layout_width="match_parent"
                         android:dividerHeight="15dp"
                         android:divider="#00000000"
-                        android:childDivider="#00000000"
-                        android:groupIndicator="@null"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="50dp"
                         android:footerDividersEnabled="false"/>

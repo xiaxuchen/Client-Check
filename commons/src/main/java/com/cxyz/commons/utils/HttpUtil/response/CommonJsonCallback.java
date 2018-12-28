@@ -13,6 +13,7 @@ import com.cxyz.commons.utils.LogUtil;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -25,7 +26,7 @@ import okhttp3.Response;
 public class CommonJsonCallback implements Callback {
 
     private DisposeDataListener listener;
-    private Class<?> clazz;
+    private Type clazz;
     private Handler handler;
 
     public CommonJsonCallback(DisposeDataHandler disposeDataHandler){
@@ -47,12 +48,7 @@ public class CommonJsonCallback implements Callback {
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         final String result = response.body().string();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                handlerResponse(result);
-            }
-        });
+        handler.post(() -> handlerResponse(result));
     }
 
     /**
@@ -72,6 +68,7 @@ public class CommonJsonCallback implements Callback {
             Object o = null;
             try {
                 o = GsonUtil.fromJson(result, clazz);
+                LogUtil.e(result);
             } catch (JSONException e) {
                 e.printStackTrace();
                 listener.onFailure("服务器异常");
@@ -84,7 +81,7 @@ public class CommonJsonCallback implements Callback {
                     e.printStackTrace();
                 }
             }else{
-                listener.onFailure(new OKHttpException("无法转化为相应的对象，请检查Json或者Class是否正确"));
+                listener.onFailure(new OKHttpException("数据异常"));
             }
             return;
         }

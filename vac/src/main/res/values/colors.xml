@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="vac_colorPrimary">#3F51B5</color>
+    <color name="vac_colorPrimaryDark">#303F9F</color>
+    <color name="vac_colorAccent">#FF4081</color>
+    <color name="vac_s_white">#f9f9f9</color>
+    <color name="software_textColor_selected">#FF1C94EA</color>
+    <color name="software_textColor_unselected">#FFDCE0DF</color>
+</resources>

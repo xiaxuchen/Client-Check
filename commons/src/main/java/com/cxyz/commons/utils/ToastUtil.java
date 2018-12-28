@@ -27,18 +27,18 @@ public class ToastUtil {
      * 显示一个短时间的吐司
      * @param text 吐司的文本
      */
-    public static void showShort(String text)
+    public static void showShort(Object text)
     {
         if(context!=null)
-            Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, text.toString(), Toast.LENGTH_SHORT).show();
     }
     /***
      * 显示一个长时间的吐司
      * @param text 吐司的文本
      */
-    public static void showLong(String text)
+    public static void showLong(Object text)
     {
         if(context!=null)
-            Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+            Toast.makeText(context, text.toString(), Toast.LENGTH_LONG).show();
     }
 }

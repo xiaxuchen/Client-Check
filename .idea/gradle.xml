@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/logiccommons" />
             <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/mine" />
+            <option value="$PROJECT_DIR$/vac" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

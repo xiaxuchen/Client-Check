@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/logic_background"
+    tools:context="com.cxyz.vac.activity.VacateActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.cxyz.commons.widget.TitleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="请假"
+            />
+
+        <RelativeLayout
+            android:background="@color/app_white"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请假类型"
+                android:textSize="18sp"
+                android:textColor="@color/logic_bigTitle"
+                />
+
+            <TextView
+                android:layout_toLeftOf="@+id/tv_type_icon"
+                android:id="@+id/tv_vac_type"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择"
+                android:textColor="@color/logic_bigTitle"
+                android:textSize="18sp"
+                />
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:id="@+id/tv_type_icon"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{next}"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@color/app_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始时间"
+                android:textSize="18sp"
+                android:textColor="@drawable/vac_item_background"
+                />
+
+            <TextView
+                android:id="@+id/tv_vac_start"
+                android:layout_toLeftOf="@+id/tv_start_icon"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择"
+                android:textSize="18sp"
+                android:textColor="@drawable/vac_item_background"/>
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:id="@+id/tv_start_icon"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/vac_item_background"
+                android:text="{next}"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/common_line"/>
+
+        <RelativeLayout
+            android:background="@color/app_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="结束时间"
+                android:textColor="@drawable/vac_item_background"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_vac_end"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tv_end_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择"
+                android:textColor="@drawable/vac_item_background"
+                android:textSize="18sp"/>
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:id="@+id/tv_end_icon"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/vac_item_background"
+                android:text="{next}"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/common_line"/>
+
+        <RelativeLayout
+            android:background="@color/app_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时长"
+                android:textColor="@drawable/vac_item_background"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_time_len"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tv_time_len_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择"
+                android:textColor="@drawable/vac_item_background"
+                android:textSize="18sp"/>
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:id="@+id/tv_time_len_icon"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/vac_item_background"
+                android:text="{next}"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/common_line"/>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:background="@color/app_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请假事由"
+                android:textSize="18dp"
+                android:textColor="@color/logic_bigTitle"/>
+
+            <EditText
+                android:id="@+id/et_des"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/app_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="4"
+                android:textColor="@color/logic_bigTitle"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:hint="请输入请假原因"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btn_commit"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="提交"
+        android:textSize="18sp"
+        android:background="@drawable/vac_btn_background"
+        android:textColor="@color/app_white"
+        />
+
+</RelativeLayout>

@@ -2,6 +2,7 @@ package com.cxyz.commons.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 
 import com.cxyz.commons.manager.ActivityStackManager;
 import com.squareup.leakcanary.LeakCanary;
@@ -11,7 +12,7 @@ import com.squareup.leakcanary.RefWatcher;
  * Created by 夏旭晨 on 2018/10/2.
  */
 
-public class BaseApplication extends Application {
+public class BaseApplication extends MultiDexApplication {
 
     //检测内存泄漏利器
     private static RefWatcher refWatcher;

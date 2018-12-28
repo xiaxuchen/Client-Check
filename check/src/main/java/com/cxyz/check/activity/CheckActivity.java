@@ -144,7 +144,7 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
     public void onUpdate(CheckTask task)
     {
         iPresenter.checkTask();
-    };
+    }
 
     public static class CheckTask{}
 

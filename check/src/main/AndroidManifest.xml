@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cxyz.check">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application >
-        <activity android:name=".activity.DailyCheckActivity"></activity>
+        <activity android:name=".activity.DailyCheckActivity" />
         <activity android:name=".activity.CheckHistoryActivity"/>
         <activity android:name=".activity.CheckActivity" />
         <activity android:name=".activity.AlterCheckActivity"/>
         <activity android:name=".activity.OtherstateActivity"/>
+        <activity android:name=".activity.MyHistoryActivity" />
     </application>
 
 </manifest>

@@ -8,8 +8,6 @@ import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDownLoadListener;
 
-import org.json.JSONException;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -50,29 +48,17 @@ public class CommonFileCallback implements Callback {
 
     @Override
     public void onFailure(final Call call, final IOException ioexception) {
-        mDeliveryHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                mListener.onFailure(new OKHttpException("服务器无响应"));
-            }
-        });
+        mDeliveryHandler.post(() -> mListener.onFailure(new OKHttpException("服务器无响应")));
     }
 
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         final File file = handleResponse(response);
-        mDeliveryHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (file != null) {
-                    try {
-                        mListener.onSuccess(file);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    mListener.onFailure(new OKHttpException("找不到资源"));
-                }
+        mDeliveryHandler.post(() -> {
+            if (file != null) {
+                mListener.onSuccess(file);
+            } else {
+                mListener.onFailure(new OKHttpException("找不到资源"));
             }
         });
     }
