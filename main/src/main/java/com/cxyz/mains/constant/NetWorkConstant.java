@@ -9,6 +9,8 @@ import com.cxyz.logiccommons.constant.Constant;
 public class NetWorkConstant {
 
     public static final String ROOT_URL = "http:/119.29.101.171:8080/Server_Check";
+  //  public static final String ROOT_URL = "http:/119.29.101.171:8080/check";
+
 
     //用户登录
     public static final String LOGIN_URL = Constant.ROOT_URL+"/user/login";

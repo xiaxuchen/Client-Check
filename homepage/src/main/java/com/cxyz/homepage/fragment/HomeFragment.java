@@ -15,7 +15,9 @@ import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.DateUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.acitivity.CheckRedordActivity;
 import com.cxyz.homepage.acitivity.ClazzActivity;
+import com.cxyz.homepage.acitivity.ExinportActivity;
 import com.cxyz.homepage.acitivity.PieChartActivity;
 import com.cxyz.homepage.adapter.FunctionAdapter;
 import com.cxyz.homepage.dto.CheckTaskDto;
@@ -74,19 +76,29 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
 
     @Override
     protected void initData(Bundle bundle) {
-        String texts[] = new String[]{"考勤","考勤图表","月历课次","请假申请",
-                "班级课表","成绩情况","统计报告","其他信息"};
-        int imgs[] = new int[]{R.mipmap.checkin,R.mipmap.checkcharts,R.mipmap.monthclass,
-                R.mipmap.appointapply,R.mipmap.classlists,R.mipmap.gradescase,R.mipmap.statistics,
+        String texts[] = new String[]{"考勤", "考勤图表", "月历课次", "请假申请",
+                "班级课表", "成绩情况", "统计报告", "其他信息"};
+        String textstu[] = new String[]{"班级课表", "请假申请", "上传假条", "其他信息"};
+        int imgstu[] = new int[]{R.mipmap.classlists, R.mipmap.appointapply, R.mipmap.statistics, R.mipmap.othercondition};
+        int imgs[] = new int[]{R.mipmap.checkin, R.mipmap.checkcharts, R.mipmap.monthclass,
+                R.mipmap.appointapply, R.mipmap.classlists, R.mipmap.gradescase, R.mipmap.statistics,
                 R.mipmap.othercondition};
         data = new ArrayList<>();
-        Map<String,Object> map = null;
-        for(int i = 0;i<imgs.length;i++)
-        {
-            map = new HashMap<>();
-            map.put("text",texts[i]);
-            map.put("img",imgs[i]);
-            data.add(map);
+        Map<String, Object> map = null;
+        if (com.cxyz.logiccommons.manager.UserManager.getInstance().getUser().getPower() == 0) {
+            for (int i = 0; i < imgstu.length; i++) {
+                map = new HashMap<>();
+                map.put("text", textstu[i]);
+                map.put("img", imgstu[i]);
+                data.add(map);
+            }
+        }else {
+            for (int i = 0; i < imgs.length; i++) {
+                map = new HashMap<>();
+                map.put("text", texts[i]);
+                map.put("img", imgs[i]);
+                data.add(map);
+            }
         }
     }
     /**
@@ -117,20 +129,24 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (com.cxyz.logiccommons.manager.UserManager.getInstance().getUser().getPower() == 0){
+                   switch (i){
+                       case 0: getHoldingActivity().startActivity(ClazzActivity.class);break;//跳转至考勤图表;
+                       case 1: ToastUtil.showShort("请假申请正在努力...");
+                       case 2: ToastUtil.showShort("上传假条正在努力...");
+                       case 3: ToastUtil.showShort("其他信息正在努力...");
+                   }
+                }else {
                 switch (i)
                 {
-                    case 0:
-                    {
-                        if(com.cxyz.logiccommons.manager.UserManager.getInstance().getUser().getPower() == 5)
-                            ARouter.getInstance().build("/check/CheckActivity").navigation();//跳转至考勤页面
-                        else
-                            ToastUtil.showShort("您当前暂无此权限");
-                            break;
-                    }
+                    case 0:ARouter.getInstance().build("/check/CheckActivity").navigation();break;//跳转至考勤页面
+                    case 1:getHoldingActivity().startActivity(CheckRedordActivity.class);break;//跳转至考勤图表;
                     case 2:getHoldingActivity().startActivity(ClazzActivity.class);break;//跳转至日历课次;
                     case 6:getHoldingActivity().startActivity(PieChartActivity.class);break;//跳转到统计界面
+                    case 7:getHoldingActivity().startActivity(ExinportActivity.class);break;
                     default:ToastUtil.showShort("此功能正在扩充");
                 }
+             }
             }
         });
     }

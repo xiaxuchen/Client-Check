@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/common_white"
+    android:orientation="vertical"
+    android:fillViewport="false">
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_check_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_height="45dp"
+        android:background="@color/common_white"
+        android:orientation="horizontal">
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="{icon-time 30dp}"
+            android:textColor="@color/game1_blue"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="开始时间"
+            android:textSize="16sp"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/material_grey_300"></View>
+
+        <TextView
+            android:id="@+id/tv_check_setbegintime"
+            android:layout_width="168dp"
+            android:paddingTop="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:paddingRight="5dp"
+            android:text="设置开始时间" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/material_grey_300"></View>
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/common_white"
+        android:orientation="horizontal">
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="{icon-time 30dp}"
+            android:textColor="@color/game1_blue"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/testview3"
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="结束时间" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/material_grey_300"></View>
+
+        <TextView
+            android:id="@+id/tv_check_setfinshtime"
+            android:layout_width="168dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:paddingTop="10dp"
+            android:paddingRight="5dp"
+            android:text="设置结束时间" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/material_grey_300"></View>
+    <LinearLayout
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="{icon-people 30dp}"
+            android:textColor="@color/game1_blue"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="选择班级"
+            android:textSize="16sp"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/material_grey_300"></View>
+
+        <Spinner
+            android:id="@+id/sp_check_classname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginRight="0dp"
+            android:gravity="end"
+            android:textAlignment="textEnd"/>
+            <!--android:entries="@array/classname"-->
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:background="@color/material_grey_300"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="汇总" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="152dp"
+        android:orientation="horizontal">
+
+        <lecho.lib.hellocharts.view.PieChartView
+            android:id="@+id/check_piechart"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"></lecho.lib.hellocharts.view.PieChartView>
+
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="缺勤" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="10dp"
+                        android:background="#ec063d" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="23dp"
+                        android:text="请假" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="10dp"
+                        android:background="#f1c704" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="迟到" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="10dp"
+                        android:background="#c9c9c9" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="早退" />
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="10dp"
+                        android:background="#1E90FF" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="23dp"
+                        android:text="正常" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="10dp"
+                        android:background="#2bc208" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/material_grey_300"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@drawable/linerlayout_shapecolormore"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <com.joanzapata.iconify.widget.IconTextView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:text="{icon-task 40dp}"
+                        android:layout_gravity="center"
+                        android:textColor="@color/game1_blue"
+                        android:textSize="18sp"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/material_grey_300"></View>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_check_college"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="信计学院" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/material_grey_300"></View>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_check_classname"
+                                android:layout_width="103dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="1702软件工程" />
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/material_grey_300"></View>
+
+                            <TextView
+                                android:id="@+id/tv_check_actul"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="实际到达人数0/0次" />
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/material_grey_300"></View>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/material_grey_300"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_check_apply"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:gravity="center"
+                        android:text="请假" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/material_grey_300"></View>
+
+                    <TextView
+                        android:id="@+id/tv_check_apply"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="0" />
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/material_grey_300"></View>
+                <LinearLayout
+                    android:id="@+id/ll_check_late"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:gravity="center"
+                        android:text="迟到" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/material_grey_300"></View>
+                    <TextView
+                        android:id="@+id/tv_check_late"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="0" />
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/material_grey_300"></View>
+                <LinearLayout
+                    android:id="@+id/ll_check_early"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView110"
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:gravity="center"
+                        android:text="早退" />
+                    <View
+                        android:layout_width="90dp"
+                        android:layout_height="1dp"
+                        android:background="@color/material_grey_300"></View>
+                    <TextView
+                        android:id="@+id/tv_check_early"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="0" />
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/material_grey_300"></View>
+                <LinearLayout
+                    android:id="@+id/ll_check_absent"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:gravity="center"
+                        android:text="缺勤" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/material_grey_300"></View>
+                    <TextView
+                        android:id="@+id/tv_check_absent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="0" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:background="@color/material_grey_300"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="详情" />
+    </LinearLayout>
+<LinearLayout
+    android:layout_marginLeft="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+   <!-- <TextView
+        android:id="@+id/tv_check_moreinfo"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:text="张三，李四，王二麻子哦"
+        android:textSize="16sp" />-->
+    <ListView
+        android:id="@+id/lv_ckeck_stuinfo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"></ListView>
+</LinearLayout>
+</LinearLayout>
+</ScrollView>

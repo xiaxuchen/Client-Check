@@ -44,7 +44,6 @@ public class MoreSettingActivity extends BaseActivity {
         sw__udpate = findViewById(R.id.sw_update);
         tv_title=findViewById(R.id.tv_title);
         tv_title.setTitle("更多设置");
-
         sw__udpate.setChecked(getSpUtil().getBoolean("update",true));
     }
 

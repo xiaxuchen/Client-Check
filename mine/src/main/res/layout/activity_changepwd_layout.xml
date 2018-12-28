@@ -35,10 +35,17 @@
 
         <EditText
             android:id="@+id/et_changepwd_oldpwd"
-            android:layout_width="match_parent"
+            android:layout_width="210dp"
             android:layout_height="match_parent"
-            android:theme="@style/MyEditText"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:inputType="textPassword"
+            android:theme="@style/MyEditText" />
+
+        <ImageView
+            android:id="@+id/iv_changepwd_oldpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/invisible" />
 
 
     </LinearLayout>
@@ -61,11 +68,18 @@
             android:textSize="15sp" />
 
         <EditText
+            android:inputType="textPassword"
             android:id="@+id/et_changepwd_newpwd"
-            android:layout_width="match_parent"
+            android:layout_width="210dp"
             android:layout_height="match_parent"
             android:theme="@style/MyEditText"
             android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/iv_changepwd_newpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/invisible" />
 
 
     </LinearLayout>
@@ -89,11 +103,18 @@
             android:textSize="15sp" />
 
         <EditText
+            android:inputType="textPassword"
             android:id="@+id/et_changepwd_confirm"
-            android:layout_width="match_parent"
+            android:layout_width="210dp"
             android:layout_height="match_parent"
             android:theme="@style/MyEditText"
             android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/iv_changepwd_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/invisible" />
 
 
     </LinearLayout>
@@ -104,8 +125,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_selector"
-        android:text="完成"
+        android:text="确认修改"
         android:textColor="@color/common_white" />
+
+
 
 
 </LinearLayout>

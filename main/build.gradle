@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    compile 'com.flaviofaria:kenburnsview:1.0.7'//静态图片动画效果
     compile 'com.github.lecho:hellocharts-android:v1.5.8'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"

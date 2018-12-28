@@ -1,6 +1,6 @@
 package com.cxyz.mine.activity;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
@@ -14,6 +14,7 @@ import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.mine.IPresenter.presenter.IMyinfoPresenter;
 import com.cxyz.mine.R;
 import com.cxyz.mine.iview.IMyinfoView;
+import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 
 
 /**
@@ -28,7 +29,7 @@ public class MyinfoActivity extends BaseActivity <IMyinfoPresenter>implements IM
     private TextView  tv_myinfo_usercollege;
     private TextView tv_myinfo_usertel;
     private TitleView tv_myinfo_title;
-    private CircleImage iv_myinfo_circleview;
+    private QMUIRadiusImageView iv_myinfo_circleview;
     private Bitmap bitmap;
     @Override
     public int getContentViewId() {
@@ -46,10 +47,11 @@ public class MyinfoActivity extends BaseActivity <IMyinfoPresenter>implements IM
         tv_myinfo_title=findViewById(R.id.tv_myinfo_title);
         iv_myinfo_circleview=findViewById(R.id.iv_myinfo_circleview);
         tv_myinfo_title.setTitle("个人信息");
-        bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.beauty);
-        iv_myinfo_circleview.setBitmap(bitmap);
-        iv_myinfo_circleview.setmOuterRing(20);
-        iv_myinfo_circleview.setOuterRingAlpha(0);
+        iv_myinfo_circleview.setImageResource(R.drawable.beauty);
+        iv_myinfo_circleview.setCircle(true);
+        iv_myinfo_circleview.setBorderWidth(6);
+        iv_myinfo_circleview.setClickable(true);
+        iv_myinfo_circleview.setBorderColor(Color.GRAY);
         //设置信息
         User u = UserManager.getInstance().getUser();
         tv_myinfo_username.setText(StringUtil.nullStrToEmpty(u.getName()));

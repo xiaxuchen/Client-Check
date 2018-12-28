@@ -75,12 +75,20 @@ public class CommonJsonCallback implements Callback {
             }
             if(o!=null)
             {
-                listener.onSuccess(o);
+                try {
+                    listener.onSuccess(o);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }else{
                 listener.onFailure(new OKHttpException("数据异常"));
             }
             return;
         }
-        listener.onSuccess(result);
+        try {
+            listener.onSuccess(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

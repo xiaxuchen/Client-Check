@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.AppUtil;
+import com.cxyz.commons.utils.StringUtil;
+import com.cxyz.logiccommons.domain.User;
+import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.logiccommons.service.UpdateService;
 import com.cxyz.mine.IPresenter.presenter.IMineFragmentPresenter;
 import com.cxyz.mine.IPresenter.presenter.IMineFragmentPresenterlmpl;
@@ -22,6 +26,7 @@ import com.cxyz.mine.activity.MoreSettingActivity;
 import com.cxyz.mine.activity.MyinfoActivity;
 import com.cxyz.mine.activity.UserResponse;
 import com.cxyz.mine.iview.IMineFragementView;
+import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 
 import java.io.File;
 
@@ -29,10 +34,12 @@ import java.io.File;
  * Created by Administrator on 2018/9/25.
  */
 @Route(path = "/mine/MineFragment")
-public class MineFragment extends BaseFragment<IMineFragmentPresenter> implements View.OnClickListener ,IMineFragementView{
+public class MineFragment extends BaseFragment<IMineFragmentPresenter> implements View.OnClickListener ,IMineFragementView {
     private Dialog dialog;
     private ProgressBar pb_pro;
-    private TextView tv_mine_myinfo;
+    private QMUIRadiusImageView iv_mine_image;
+    private TextView tv_mine_name;
+    private TextView tv_mine_id;
     private TextView tv_mine_update;
     private TextView tv_mine_useradvice;
     private TextView tv_mine_setting;
@@ -49,16 +56,27 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
 
     @Override
     protected void initData(Bundle bundle) {
+
     }
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        tv_mine_myinfo = findViewById(R.id.tv_mine_myinfo);
         tv_mine_appointment = findViewById(R.id.tv_mine_appointment);
         tv_mine_update = findViewById(R.id.tv_mine_update);
         tv_mine_useradvice = findViewById(R.id.tv_mine_useradvice);
         tv_mine_setting = findViewById(R.id.tv_mine_setting);
         tv_mine_alterpwd = findViewById(R.id.tv_mine_alterpwd);
+        iv_mine_image=findViewById(R.id.iv_mine_image);
+        iv_mine_image.setImageResource(R.drawable.beauty);
+        iv_mine_image.setCircle(true);
+        iv_mine_image.setBorderWidth(6);
+        iv_mine_image.setClickable(true);
+        iv_mine_image.setBorderColor(Color.GRAY);
+        tv_mine_name=findViewById(R.id.tv_mine_name);
+        tv_mine_id=findViewById(R.id.tv_mine_id);
+        User u = UserManager.getInstance().getUser();
+        tv_mine_name.setText(StringUtil.nullStrToEmpty(u.getName()));
+        tv_mine_id.setText(StringUtil.nullStrToEmpty(u.getId()));
     }
 
     @Override
@@ -68,12 +86,12 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
 
     @Override
     protected void setListener() {
-        tv_mine_myinfo.setOnClickListener(this);
         tv_mine_appointment.setOnClickListener(this);
         tv_mine_update.setOnClickListener(this);
         tv_mine_useradvice.setOnClickListener(this);
         tv_mine_setting.setOnClickListener(this);
         tv_mine_alterpwd.setOnClickListener(this);
+        iv_mine_image.setOnClickListener(this);
     }
 
     @Override
@@ -107,7 +125,7 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
     }
 
     //从我的界面跳转到个人信息界面
-    public void tv_mine_myinfo() {
+    public void iv_mine_image() {
         Intent intent = new Intent(getActivity().getApplicationContext(), MyinfoActivity.class);
         startActivity(intent);
         mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
@@ -129,9 +147,7 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
-        if(viewId == R.id.tv_mine_myinfo)
-            tv_mine_myinfo();
-        else if(viewId == R.id.tv_mine_appointment)
+        if(viewId == R.id.tv_mine_appointment)
             tv_mine_appointment();
         else if(viewId == R.id.tv_mine_setting)
             tv_mine_setting();
@@ -141,6 +157,9 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
             tv_mine_useradvice();
         else if(viewId == R.id.tv_mine_update){
             tv_mine_update();
+        }
+        else  if (viewId==R.id.iv_mine_image){
+            iv_mine_image();
         }
     }
     public void tv_mine_update(){

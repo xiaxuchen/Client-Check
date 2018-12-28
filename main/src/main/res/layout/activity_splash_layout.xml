@@ -7,5 +7,4 @@
     android:background="@mipmap/main_splash"
     tools:context="com.cxyz.mains.activity.SplashActivity">
 
-
 </RelativeLayout>

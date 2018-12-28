@@ -40,12 +40,12 @@ public class AppointmentApplyStuCheckActivity extends BaseActivity {
     @Override
     public void initData() {
         mData = new ArrayList<AppointmentInfoBean>();
-        AppointmentInfoBean tangmaru = new AppointmentInfoBean("唐马儒", "17478001", "2018.10.28", "心痛2009",
-                "没法抗拒浓情蜜意  始终思念你 好想给你知 柔情常在心中想放肆  愿对你说声浓情莫变", R.mipmap.member);
-        AppointmentInfoBean lisi = new AppointmentInfoBean("李四", "17478002", "2018.10.29", "心痛20010",
-                "没法抗拒浓情蜜意  始终思念你 好想给你知 柔情常在心中想放肆  愿对你说声浓情莫变",R.mipmap.newspaper);
-        AppointmentInfoBean zhangsan = new AppointmentInfoBean("张三", "17478003", "2018.10.30", "心痛20011",
-                "没法抗拒浓情蜜意  始终思念你 好想给你知 柔情常在心中想放肆  愿对你说声浓情莫变", R.mipmap.notice);
+        AppointmentInfoBean tangmaru = new AppointmentInfoBean("唐马儒", "17478001", "2018.10.28",
+                "没法抗拒浓情蜜意  始终思念你 好想给你知 柔情常在心中想放肆  愿对你说声浓情莫变", R.mipmap.belief);
+        AppointmentInfoBean lisi = new AppointmentInfoBean("李四", "17478002", "2018.10.29",
+                "没法抗拒浓情蜜意  始终思念你 好想给你知 柔情常在心中想放肆  愿对你说声浓情莫变",R.mipmap.belief);
+        AppointmentInfoBean zhangsan = new AppointmentInfoBean("张三", "17478003", "2018.10.30",
+                "没法抗拒浓情蜜意  始终思念你 好想给你知 柔情常在心中想放肆  愿对你说声浓情莫变", R.mipmap.belief);
         mData.add(tangmaru);
         mData.add(zhangsan);
         mData.add(lisi);

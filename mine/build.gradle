@@ -47,6 +47,8 @@ android {
 }
 
 dependencies {
+    compile 'com.flaviofaria:kenburnsview:1.0.7'//静态图片动画效果
+    compile 'com.github.florent37:diagonallayout:1.0.9'//切角图片
     compile 'com.squareup.okio:okio:1.5.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.github.lecho:hellocharts-android:v1.5.8'
