@@ -9,16 +9,14 @@ public class AppointmentInfoBean {
     private  String name;
     private String code;
     private  String time ;
-    private  String reason;
     private  String moreinfo;
 
 
 
-    public AppointmentInfoBean(String name , String code, String time, String reason, String moreinfo, int image){
+    public AppointmentInfoBean(String name , String code, String time, String moreinfo, int image){
        this.name=name;
        this.code=code;
        this.time=time;
-       this.reason=reason;
        this.moreinfo=moreinfo;
        this.image=image;
    }
@@ -45,14 +43,6 @@ public class AppointmentInfoBean {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
     }
 
     public int getImage() {
