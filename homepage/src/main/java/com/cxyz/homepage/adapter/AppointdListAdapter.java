@@ -49,7 +49,7 @@ public class AppointdListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //获得ListView中的view
-        View viewStudent = mInflater.inflate(R.layout.item_appoint_list, null);
+        View viewStudent = mInflater.inflate(R.layout.cvitem_appoint_list, null);
         //获得学生对象
         AppointListBean studentinfo = mData.get(position);
         //获得自定义布局中每一个控件的对象。
@@ -62,8 +62,9 @@ public class AppointdListAdapter extends BaseAdapter {
         TextView advice = (TextView) viewStudent.findViewById(R.id.tv_itemappoint_advice);
         Button state=viewStudent.findViewById(R.id.bt_itemappoint_state);
         QMUIRadiusImageView image=viewStudent.findViewById(R.id.iv_itemappoint_image);
-        LinearLayout linearLayout= viewStudent.findViewById(R.id.ll_itemappoint_info);
+        LinearLayout ll_itemappoint_info= viewStudent.findViewById(R.id.ll_itemappoint_info);
         TextView info=viewStudent.findViewById(R.id.tv_itemappoint_info);
+        LinearLayout ll_itemappoint_list=viewStudent.findViewById(R.id.ll_itemappoint_list);
         TextView  time = (TextView) viewStudent.findViewById(R.id.tv_itemappoint_time);
         TextView reason = (TextView) viewStudent.findViewById(R.id.tv_itemappoint_reason);
         image.setCircle(true);
@@ -83,19 +84,19 @@ public class AppointdListAdapter extends BaseAdapter {
         image.setImageResource(studentinfo.getImage());
         time.setText(studentinfo.getTime());
         reason.setText(studentinfo.getReason());
-        info.setOnClickListener(new View.OnClickListener() {
+        ll_itemappoint_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(click==true){
                     click=false;
 
-                    linearLayout.setVisibility(View.VISIBLE);
+                    ll_itemappoint_info.setVisibility(View.VISIBLE);
 
 
                 }else if(click==false){
                     click=true;
-                    linearLayout.setVisibility(View.GONE);
+                    ll_itemappoint_info.setVisibility(View.GONE);
 
                 }
             }

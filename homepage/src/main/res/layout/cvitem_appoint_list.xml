@@ -3,51 +3,80 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:orientation="horizontal"
+            android:id="@+id/ll_itemappoint_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-                <com.qmuiteam.qmui.widget.QMUIRadiusImageView
-                    android:layout_marginLeft="20dp"
-                    android:id="@+id/iv_itemappoint_image"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                android:id="@+id/iv_itemappoint_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp" />
+
             <LinearLayout
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="姓名：" />
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_itemappoint_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="唐马儒" />
-                <TextView
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="学号：" />
+                    android:layout_gravity="center"
+                    android:text="唐马儒"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/tv_itemappoint_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="17478000" />
+                    android:text="17478000"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/bt_itemappoint_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/button_selector"
+                        android:text="通过" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_itemappoint_info"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="240dp"
@@ -88,32 +117,12 @@
                         android:text="2018-9-10-14:00" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_itemappoint_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="详情信息" />
+
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <Button
-                    android:id="@+id/bt_itemappoint_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/button_selector"
-                    android:text="通过" />
-                </RelativeLayout>
-            </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_itemappoint_info"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -209,4 +218,3 @@
 
     </LinearLayout>
 
-</LinearLayout>
