@@ -10,6 +10,7 @@
         <activity android:name=".acitivity.CheckRedordActivity"></activity>
         <activity android:name=".acitivity.PieChartActivity"></activity>
         <activity android:name=".acitivity.ExinportActivity"></activity>
+        <activity android:name=".acitivity.AppointActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.DateUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.acitivity.AppointActivity;
 import com.cxyz.homepage.acitivity.CheckRedordActivity;
 import com.cxyz.homepage.acitivity.ClazzActivity;
 import com.cxyz.homepage.acitivity.ExinportActivity;
@@ -134,7 +135,7 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
                        case 0: getHoldingActivity().startActivity(ClazzActivity.class);break;//跳转至考勤图表;
                        case 1: ToastUtil.showShort("请假申请正在努力...");
                        case 2: ToastUtil.showShort("上传假条正在努力...");
-                       case 3: ToastUtil.showShort("其他信息正在努力...");
+                       case 3:  getHoldingActivity().startActivity(AppointActivity.class);break;
                    }
                 }else {
                 switch (i)
@@ -142,6 +143,7 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
                     case 0:ARouter.getInstance().build("/check/CheckActivity").navigation();break;//跳转至考勤页面
                     case 1:getHoldingActivity().startActivity(CheckRedordActivity.class);break;//跳转至考勤图表;
                     case 2:getHoldingActivity().startActivity(ClazzActivity.class);break;//跳转至日历课次;
+                    case 3:getHoldingActivity().startActivity(AppointActivity.class);break;
                     case 6:getHoldingActivity().startActivity(PieChartActivity.class);break;//跳转到统计界面
                     case 7:getHoldingActivity().startActivity(ExinportActivity.class);break;
                     default:ToastUtil.showShort("此功能正在扩充");

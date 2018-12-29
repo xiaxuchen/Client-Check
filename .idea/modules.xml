@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://G:\AndroidStudioProjects\Client-Check12.17\Client-Check.iml" filepath="G:\AndroidStudioProjects\Client-Check12.17\Client-Check.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Client-Check12.17.iml" filepath="$PROJECT_DIR$/.idea/Client-Check12.17.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/check/check.iml" filepath="$PROJECT_DIR$/check/check.iml" />

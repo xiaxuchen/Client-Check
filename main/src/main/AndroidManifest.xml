@@ -11,6 +11,10 @@
             android:name="com.cxyz.mains.activity.HomeActivity">
         </activity>
         <activity android:name="com.cxyz.mains.activity.SplashActivity">
+          <intent-filter >
+              <category android:name="android.intent.category.LAUNCHER"></category>
+              <action android:name="android.intent.action.MAIN"></action>
+          </intent-filter>
         </activity>
         <activity android:name="com.cxyz.mains.activity.LoginActivity">
         </activity>

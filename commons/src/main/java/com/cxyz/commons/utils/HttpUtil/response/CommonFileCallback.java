@@ -8,6 +8,8 @@ import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDownLoadListener;
 
+import org.json.JSONException;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,7 +58,11 @@ public class CommonFileCallback implements Callback {
         final File file = handleResponse(response);
         mDeliveryHandler.post(() -> {
             if (file != null) {
-                mListener.onSuccess(file);
+                try {
+                    mListener.onSuccess(file);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             } else {
                 mListener.onFailure(new OKHttpException("找不到资源"));
             }
