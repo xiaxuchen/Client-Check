@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">UntilChecked</string>
+    <string name="main_name">UntilChecked</string>
     <string name="table_class">课表</string>
-    <string name="app_main_page">首页</string>
-    <string name="app_mine">我的</string>
-    <string name="app_statistic">统计</string>
-    <string name="app_home">主页</string>
-    <string name="app_login">登录</string>
-    <string name="app_account">账号</string>
-    <string name="app_pwd">密码</string>
-    <string name="app_forget_pwd">忘记密码?</string>
-    <string name="app_stu">学生</string>
-    <string name="app_tea">老师</string>
+    <string name="main_page">首页</string>
+    <string name="main_mine">我的</string>
+    <string name="main_statistic">统计</string>
+    <string name="main_home">主页</string>
+    <string name="main_login">登录</string>
+    <string name="main_account">账号</string>
+    <string name="main_pwd">密码</string>
+    <string name="main_forget_pwd">忘记密码?</string>
+    <string name="main_stu">&#x0020;&#x0020;学生</string>
+    <string name="main_tea">&#x0020;&#x0020;老师</string>
 </resources>

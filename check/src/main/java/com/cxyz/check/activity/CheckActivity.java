@@ -18,7 +18,7 @@ import com.cxyz.check.ipresenter.ipresenterimpl.ICheckPresenterImpl;
 import com.cxyz.check.view.ICheckView;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.DateUtil;
-import com.cxyz.logiccommons.application.MyApp;
+import com.joanzapata.iconify.Iconify;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -82,7 +82,7 @@ public class CheckActivity extends BaseActivity<ICheckPresenter> implements IChe
 
     @Override
     public int getContentViewId() {
-        MyApp.withIcon(new IconfontModule());
+        Iconify.with(new IconfontModule());
         return R.layout.activity_check_layout;
     }
 

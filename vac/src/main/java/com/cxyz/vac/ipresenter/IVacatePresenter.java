@@ -10,5 +10,13 @@ import com.cxyz.vac.iview.IVacateView;
 
 public abstract class IVacatePresenter extends IBasePresenter<IVacateModel,IVacateView> {
 
-    public abstract void vacate(String start,String end,String des);
+    /**
+     * 请假
+     * @param start 开始时间
+     * @param end 结束时间
+     * @param timeLen 请假天数
+     * @param type 请假类型
+     * @param des 请假原因
+     */
+    public abstract void vacate(String start,String end,Integer timeLen,Integer type,String des);
 }

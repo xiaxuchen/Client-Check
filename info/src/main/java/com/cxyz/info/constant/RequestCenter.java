@@ -8,7 +8,9 @@ import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDownLoadListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
+import com.cxyz.logiccommons.domain.CheckResult;
 import com.cxyz.logiccommons.manager.UserManager;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.util.HashMap;
@@ -61,6 +63,42 @@ public class RequestCenter {
         params.put("gradeId",UserManager.getInstance().getUser().getGradeId());
         try {
             return CommonOkHttpClient.uploadFile(URL,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+
+        return null;
+    }
+
+    public static Call isUserImportEnable(Integer gradeId,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("gradeId",gradeId+"");
+        try {
+            return CommonOkHttpClient.get(NetWorkConstant.isUserImportEnable,new RequestParams(map)
+                    ,new DisposeDataHandler(listener,new TypeToken<CheckResult<Boolean>>(){}.getType()));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+
+        return null;
+    }
+
+    /**
+     * 是否可以导入课程信息
+     * @param gradeId
+     * @param listener
+     * @return
+     */
+    public static Call isLessonImportEnable(Integer gradeId,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("gradeId",gradeId+"");
+        try {
+            return CommonOkHttpClient.get(NetWorkConstant.isLessonImportEnable,new RequestParams(map)
+                    ,new DisposeDataHandler(listener,new TypeToken<CheckResult<Boolean>>(){}.getType()));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");

@@ -27,4 +27,14 @@ public interface NetWorkConstant {
      * 下载课程模板
      */
     String DOWNLOAD_LESSON_TEMPLATE = Constant.ROOT_URL+"/resource/lessonTemplate";
+
+    /**
+     * 检查是否可以导入用户信息
+     */
+    String isUserImportEnable = Constant.ROOT_URL+"/envir/isUserImportEnable";
+
+    /**
+     * 检查是否可以导入课程信息
+     */
+    String isLessonImportEnable = Constant.ROOT_URL+"/envir/isLessonImportEnable";
 }

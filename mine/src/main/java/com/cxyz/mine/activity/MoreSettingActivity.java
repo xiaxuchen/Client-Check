@@ -2,13 +2,13 @@ package com.cxyz.mine.activity;
 
 import android.content.Intent;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.manager.ActivityStackManager;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.mine.R;
@@ -22,15 +22,6 @@ public class MoreSettingActivity extends BaseActivity {
     private LinearLayout ll_expand;
     private Switch sw__udpate;
     private TitleView tv_title;
-    @Override
-    public void showLoadingView() {
-
-    }
-
-    @Override
-    public void hideLoadingView() {
-
-    }
 
     @Override
     public int getContentViewId() {
@@ -55,22 +46,16 @@ public class MoreSettingActivity extends BaseActivity {
 
     @Override
     public void setEvent() {
-        ll_expand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),ExpandFunctionActivity.class);
-                startActivity(intent);
-            }
+        ll_expand.setOnClickListener(v -> {
+            Intent intent=new Intent(getApplicationContext(),ExpandFunctionActivity.class);
+            startActivity(intent);
         });
-        ll_exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //跳转到考勤界面
-                ARouter.getInstance().build("/main/LoginActivity").navigation();
-                UserManager.getInstance().setUser(null);
-                getSpUtil().remove("pwd");
-                finish();
-            }
+        ll_exit.setOnClickListener(v -> {
+            //跳转到考勤界面
+            ARouter.getInstance().build("/main/LoginActivity").navigation();
+            UserManager.getInstance().setUser(null);
+            getSpUtil().remove("pwd");
+            ActivityStackManager.getActivityStackManager().popAllActivity();
         });
         tv_title.setBackClickListener(v->onBackPressed());
         sw__udpate.setOnCheckedChangeListener((compoundButton, b) -> getSpUtil().putBoolean("update",b));

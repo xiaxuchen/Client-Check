@@ -13,7 +13,11 @@ public abstract class IVacateModel extends IBaseModel {
      * @param start 开始时间
      * @param end 结束时间
      * @param des 事由
+     * @param len 请假时长
+     * @param type 请假类型
      * @param listener 回调
      */
-    public abstract void vacate(String start,String end,String des,ModelListener<String,String> listener);
+    public abstract void vacate(String start,String end,Integer len,String des,Integer type,ModelListener<String,String> listener);
+
+
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/gray_btn_bg_color"
+    >
+
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/common_title_shadow_style"
+        app:title="请假审核"
+        />
+
+    <ListView
+        android:layout_marginTop="16dp"
+        android:id="@+id/lv_audits"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:scrollbars="none"
+        android:fadingEdge="none"
+        android:dividerHeight="16dp"
+        android:divider="#00000000"
+        android:footerDividersEnabled="false"
+        />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="暂无请假信息"
+        android:visibility="gone"
+        android:textSize="18sp"
+        />
+</LinearLayout>
+

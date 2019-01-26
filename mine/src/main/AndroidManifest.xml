@@ -16,7 +16,7 @@
         <activity android:name=".activity.RestPwdActivity"></activity>
         <activity android:name=".activity.check"></activity>
         <activity android:name=".activity.CheckHomepageActivity"></activity>
-        <activity android:name=".activity.AppointmentApplyStuCheckActivity"></activity>
+        <activity android:name=".activity.AuditActivity"></activity>
         <activity android:name=".activity.ChangePwdACtivity"></activity>
 
     </application>

@@ -3,10 +3,22 @@ package com.cxyz.commons.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import org.json.JSONException;
 
 import java.lang.reflect.Type;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class GsonUtil {
     //不用创建对象,直接使用Gson.就可以调用方法
@@ -16,7 +28,7 @@ public class GsonUtil {
         if (gson == null) {
             //gson = new Gson();
             //当使用GsonBuilder方式时属性为空的时候输出来的json字符串是有键值key的,显示形式是"key":null，而直接new出来的就没有"key":null的
-            gson= new GsonBuilder().setPrettyPrinting().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+            gson = new GsonBuilder().registerTypeAdapter(Timestamp.class,new TimestampTypeAdapter()).setPrettyPrinting().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         }
     }
     //无参的私有构造方法
@@ -67,5 +79,24 @@ public class GsonUtil {
         return obj;
     }
 
+    static class TimestampTypeAdapter implements JsonSerializer<Timestamp>, JsonDeserializer<Timestamp> {
+        private final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        public JsonElement serialize(Timestamp ts, Type t, JsonSerializationContext jsc) {
+            String dfString = format.format(new Date(ts.getTime()));
+            return new JsonPrimitive(dfString);
+        }
+        public Timestamp deserialize(JsonElement json, Type t, JsonDeserializationContext jsc) throws JsonParseException {
+            if (!(json instanceof JsonPrimitive)) {
+                throw new JsonParseException("The date should be a string value");
+            }
+
+            try {
+                Date date = format.parse(json.getAsString());
+                return new Timestamp(date.getTime());
+            } catch (ParseException e) {
+                throw new JsonParseException(e);
+            }
+        }
+    }
 
 } 

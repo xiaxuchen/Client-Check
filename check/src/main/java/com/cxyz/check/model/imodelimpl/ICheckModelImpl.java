@@ -1,7 +1,5 @@
 package com.cxyz.check.model.imodelimpl;
 
-import android.accounts.NetworkErrorException;
-
 import com.cxyz.check.constant.RequestCenter;
 import com.cxyz.check.dto.CheckTaskDto;
 import com.cxyz.check.model.ICheckModel;
@@ -26,51 +24,45 @@ public class ICheckModelImpl extends ICheckModel {
         /**
          * 请求网络获取数据，处理数据后给逻辑层
          */
-        try {
-            RequestCenter.checkComp(checkerId, checkerType,type, new DisposeDataListener() {
-                @Override
-                public void onSuccess(Object responseObj) {
-                    if(listener!=null)
-                    {
-                        LogUtil.e(responseObj.toString());
-                        try {
-                            CheckResult<CheckTaskDto> checkResult = (CheckResult<CheckTaskDto>) GsonUtil.
-                                    fromJson(responseObj.toString(),
-                                            new TypeToken<CheckResult<CheckTaskDto>>() {
-                                            }.getType());
-                            if(checkResult.isSuccess())
-                            {
-                                listener.onSuccess(checkResult.getData());
-                            }else {
-                                listener.onFail(checkResult.getError());
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            listener.onFail("服务器异常");
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Object error) {
-                    if(listener!=null)
-                    {
-                        if(error instanceof String)
-                            listener.onFail(error.toString());
-                        else if(error instanceof OKHttpException)
+        addCall(RequestCenter.checkComp(checkerId, checkerType,type, new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                if(listener!=null)
+                {
+                    LogUtil.e(responseObj.toString());
+                    try {
+                        CheckResult<CheckTaskDto> checkResult = (CheckResult<CheckTaskDto>) GsonUtil.
+                                fromJson(responseObj.toString(),
+                                        new TypeToken<CheckResult<CheckTaskDto>>() {
+                                        }.getType());
+                        if(checkResult.isSuccess())
                         {
-                            if(((OKHttpException) error).getCode() == OKHttpException.EMPTY)
-                                listener.onFail("当前暂无考勤任务");
-                            else
-                                listener.onFail(((OKHttpException) error).getMessage());
+                            listener.onSuccess(checkResult.getData());
+                        }else {
+                            listener.onFail(checkResult.getError());
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        listener.onFail("服务器异常");
                     }
                 }
-            });
-        } catch (NetworkErrorException e) {
-            e.printStackTrace();
-            if(listener!=null)
-                listener.onFail("网络状态异常");
-        }
+            }
+
+            @Override
+            public void onFailure(Object error) {
+                if(listener!=null)
+                {
+                    if(error instanceof String)
+                        listener.onFail(error.toString());
+                    else if(error instanceof OKHttpException)
+                    {
+                        if(((OKHttpException) error).getCode() == OKHttpException.EMPTY)
+                            listener.onFail("当前暂无考勤任务");
+                        else
+                            listener.onFail(((OKHttpException) error).getMessage());
+                    }
+                }
+            }
+        }));
     }
 }

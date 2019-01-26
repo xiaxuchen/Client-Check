@@ -10,7 +10,7 @@ public interface IChangePwdView extends IBaseView {
     /**
      *  显示修改成功
      */
-    void changeSuccess( String message);
+    void changeSuccess(String message);
 
     /**
      * 显示报错信息

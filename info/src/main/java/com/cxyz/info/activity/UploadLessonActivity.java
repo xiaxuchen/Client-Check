@@ -1,16 +1,20 @@
 package com.cxyz.info.activity;
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.FileUtil;
+import com.cxyz.commons.utils.ScreenUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.info.R;
@@ -26,12 +30,16 @@ import ru.bartwell.exfilepicker.data.ExFilePickerResult;
 
 public class UploadLessonActivity extends BaseActivity<IUploadLessonPresenter> implements IUploadLessonView {
 
+    private static final int SCALE = 8;
+
+    private static final int OFFSET_SCALE = 10;
+
     private static final int EX_FILE_PICKER_RESULT = 1;
     private TitleView tv_title;
 
     private LinearLayout ll_download,ll_upload;//上传下载
 
-    private AlertDialog dialog;//上传下载进度dialog
+    private Dialog dialog;//上传下载进度dialog
 
     private ProgressBar pb_pro;//上传下载进度条
 
@@ -113,13 +121,22 @@ public class UploadLessonActivity extends BaseActivity<IUploadLessonPresenter> i
     public void updateProgress(int progress) {
         if(dialog == null)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
             View view = View.inflate(getActivity(),R.layout.dialog_progress_layout,null);
             pb_pro = view.findViewById(R.id.pb_pro);
             tv_hint = view.findViewById(R.id.tv_hint);
             tv_pro = view.findViewById(R.id.tv_pro);
-            builder.setView(view);
-            dialog = builder.create();
+            dialog = new Dialog(getActivity(),R.style.info_progress_dialog);
+            Window window = dialog.getWindow();
+            dialog.setContentView(view);
+            if(window!=null)
+            {
+                WindowManager.LayoutParams lp = window.getAttributes();
+                lp.width = ScreenUtil.getScreenWidth(getActivity())/SCALE;
+                lp.height = ScreenUtil.getScreenHeight(getActivity())/SCALE;
+                lp.height = lp.height+ScreenUtil.getScreenHeight(getActivity())/OFFSET_SCALE;
+                lp.gravity = Gravity.CENTER;
+            }
         }
         pb_pro.setProgress(progress);
         tv_pro.setText(progress+"");

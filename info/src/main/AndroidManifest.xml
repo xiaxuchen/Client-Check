@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cxyz.info">
 
-    <application
-        android:allowBackup="true"
-        android:theme="@style/CheckTheme">
+    <application>
+        <activity android:name=".activity.UploadLessonActivity"/>
+        <activity android:name=".activity.UploadStuActivity"/>
+        <activity android:name=".activity.UploadActivity"/>
     </application>
 
 </manifest>

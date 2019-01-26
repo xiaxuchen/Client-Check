@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/vac_audit_background"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    >
+
+    <ImageView
+        android:id="@+id/iv_audit_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/vac_circle_background"
+        android:src="@mipmap/vac_audit_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_auditer_hint"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_auditer_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="审批人:"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_audit_icon"
+        app:layout_constraintTop_toTopOf="@+id/iv_audit_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_audit_icon"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintRight_toLeftOf="@+id/tv_auditer"
+        />
+
+    <TextView
+        android:id="@+id/tv_auditer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="夏旭晨"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_audit_icon"
+        app:layout_constraintLeft_toRightOf="@+id/tv_auditer_hint"
+        app:layout_constraintTop_toTopOf="@+id/iv_audit_icon" />
+
+    <TextView
+        android:id="@+id/tv_audit_state_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="审批结果:"
+        android:textColor="#8a8a8a"
+        android:textColorHighlight="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_audit_icon"
+        app:layout_constraintTop_toBottomOf="@+id/iv_audit_icon" />
+
+    <TextView
+        android:id="@+id/tv_audit_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="拒绝"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_audit_state_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_audit_state_hint" />
+
+    <TextView
+        android:id="@+id/tv_audit_time_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:text="审批时间:"
+        android:textColor="@color/gray"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_audit_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_audit_state_hint" />
+
+    <TextView
+        android:id="@+id/tv_audit_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018-12-30 01:00"
+        app:layout_constraintStart_toEndOf="@+id/tv_audit_time_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_audit_time_hint" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/tv_audit_des_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="审批意见{vac_down}"
+        android:textColor="@color/gray"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_audit_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_audit_time_hint" />
+
+    <TextView
+        android:id="@+id/tv_audit_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_reason_hint"
+        app:layout_constraintTop_toBottomOf="@+id/tv_audit_des_hint"
+        android:visibility="gone"
+        />
+
+</android.support.constraint.ConstraintLayout>

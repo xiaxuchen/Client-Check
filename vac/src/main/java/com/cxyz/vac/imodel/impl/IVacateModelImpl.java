@@ -2,6 +2,7 @@ package com.cxyz.vac.imodel.impl;
 
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.logiccommons.domain.CheckResult;
+import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.vac.constant.RequestCenter;
 import com.cxyz.vac.imodel.IVacateModel;
@@ -12,8 +13,10 @@ import com.cxyz.vac.imodel.IVacateModel;
 
 public class IVacateModelImpl extends IVacateModel{
     @Override
-    public void vacate(String start, String end, String des, ModelListener<String, String> listener) {
-        addCall(RequestCenter.vacate(start, end, des, UserManager.getInstance().getUser().getId(), new DisposeDataListener() {
+    public void vacate(String start, String end,Integer len,String des,Integer type, ModelListener<String, String> listener) {
+        User user = UserManager.getInstance().getUser();
+
+        addCall(RequestCenter.vacate(start, end,len, user.getType(),type,user.getId(),des, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 CheckResult<String> checkResult = (CheckResult<String>) responseObj;
@@ -32,4 +35,5 @@ public class IVacateModelImpl extends IVacateModel{
             }
         }));
     }
+
 }

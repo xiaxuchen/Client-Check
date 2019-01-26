@@ -9,7 +9,7 @@ import android.view.Window;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.IView.IBaseView;
 import com.cxyz.commons.IView.IDefaultView;
-import com.cxyz.commons.application.BaseApplication;
+import com.cxyz.commons.context.ContextManager;
 import com.cxyz.commons.manager.ActivityStackManager;
 import com.cxyz.commons.manager.ScreenManager;
 import com.cxyz.commons.utils.LogUtil;
@@ -117,7 +117,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         if(!isShowTitle()){
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
-        screenManager.setStatusBar(isStateBar(), this,statusColor());
+        //screenManager.setStatusBar(isStateBar(), this,statusColor());
         screenManager.setScreenRotate(isScreenRotate(), this);
         screenManager.setFullScreen(isFullScreen(), this);
     }
@@ -164,14 +164,6 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         return SpUtil.getInstance();
     }
 
-    /**
-     * 获取MyApp对象
-     * @return MyApp对象
-     */
-    protected BaseApplication getMyApp()
-    {
-        return (BaseApplication)getApplication();
-    }
 
     /**
      * 是否设置标题栏
@@ -307,7 +299,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
     @Override
     protected void onDestroy() {
         //注册LeakCanary
-        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+        RefWatcher refWatcher = ContextManager.getRefWatcher();
         //注销EventBus
         refWatcher.watch(this);
         if(eventBusEnable())

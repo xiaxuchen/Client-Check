@@ -42,7 +42,7 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="0.5dp"
         android:background="@color/material_grey_300"></View>
     <LinearLayout
         android:id="@+id/ll_expand"
@@ -62,7 +62,7 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="0.5dp"
         android:background="@color/material_grey_300"></View>
     <LinearLayout
         android:id="@+id/ll_exit"
@@ -81,10 +81,10 @@
 
     </LinearLayout>
 
-   <View
-android:layout_width="match_parent"
-android:layout_height="2dp"
-android:background="@color/material_grey_300"></View>
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/material_grey_300"></View>
 
 
 </LinearLayout>

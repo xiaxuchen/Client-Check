@@ -4,9 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -15,13 +13,16 @@ import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.DateUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.homepage.R;
+import com.cxyz.homepage.acitivity.CheckRedordActivity;
 import com.cxyz.homepage.acitivity.ClazzActivity;
-import com.cxyz.homepage.acitivity.PieChartActivity;
+import com.cxyz.homepage.acitivity.ExportActivity;
 import com.cxyz.homepage.adapter.FunctionAdapter;
 import com.cxyz.homepage.dto.CheckTaskDto;
 import com.cxyz.homepage.ipresenter.IHomePresenter;
 import com.cxyz.homepage.ipresenter.impl.IHomePresenterImpl;
 import com.cxyz.homepage.iview.IHomeView;
+import com.cxyz.logiccommons.manager.UserManager;
+import com.cxyz.logiccommons.typevalue.PowerType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,31 +37,11 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
 
     //Adapter需要的数据
     ArrayList<Map<String,Object>> data;
-    //用于显示第几周
-    private TextView tv_week;
-    //用于显示日期
-    private TextView tv_date;
-    //用于显示准确位置
-    private TextView tv_location;
-    //签到
-    private LinearLayout ll_check;
-    //考勤图表
-    private LinearLayout ll_checkpic;
-    //月历课次
-    private LinearLayout ll_month_lessons;
-    //请假申请
-    private LinearLayout ll_vacation;
-    //班级课表
-    private LinearLayout ll_grade_lessons;
-    //成绩情况
-    private LinearLayout ll_score;
-    //统计报告
-    private LinearLayout ll_statistic;
-    //其他信息
-    private LinearLayout ll_otherinfo;
 
     //功能
     private GridView gv_function;
+
+    private int indexs[];
 
     @Override
     protected int getLayoutId() {
@@ -74,19 +55,46 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
 
     @Override
     protected void initData(Bundle bundle) {
-        String texts[] = new String[]{"考勤","考勤图表","月历课次","请假申请",
-                "班级课表","成绩情况","统计报告","其他信息"};
-        int imgs[] = new int[]{R.mipmap.checkin,R.mipmap.checkcharts,R.mipmap.monthclass,
-                R.mipmap.appointapply,R.mipmap.classlists,R.mipmap.gradescase,R.mipmap.statistics,
+        String texts[] = new String[]{"考勤","考勤统计","班级课表","请假申请","上传假条","请假审核","数据导出","导入数据"};
+        int imgs[] = new int[]{R.mipmap.checkin, R.mipmap.checkcharts, R.mipmap.monthclass,
+                R.mipmap.appointapply, R.mipmap.classlists, R.mipmap.gradescase, R.mipmap.statistics,
                 R.mipmap.othercondition};
         data = new ArrayList<>();
-        Map<String,Object> map = null;
-        for(int i = 0;i<imgs.length;i++)
+        Map<String, Object> map = null;
+        switch (UserManager.getInstance().getUser().getPower())
         {
-            map = new HashMap<>();
-            map.put("text",texts[i]);
-            map.put("img",imgs[i]);
-            data.add(map);
+            case PowerType.STU_NORMAL:
+                {
+                    indexs= new int[]{2, 3, 4};
+                    for (int index:indexs) {
+                        map = new HashMap<>();
+                        map.put("text", texts[index]);
+                        map.put("img", imgs[index]);
+                        data.add(map);
+                    }
+                }break;
+            case PowerType.STU_CHECKER:
+                {
+                    indexs = new int[]{0, 2, 3, 4, 7};
+                    for (int index:indexs) {
+                        map = new HashMap<>();
+                        map.put("text", texts[index]);
+                        map.put("img", imgs[index]);
+                        data.add(map);
+                    }
+                }break;
+
+            default:
+            {
+                indexs = new int[]{0, 1, 5, 6};
+                for (int index:indexs) {
+                    map = new HashMap<>();
+                    map.put("text", texts[index]);
+                    map.put("img", imgs[index]);
+                    data.add(map);
+                }
+            }break;
+
         }
     }
     /**
@@ -96,9 +104,6 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
      */
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        tv_week = findViewById(R.id.tv_week);
-        tv_date = findViewById(R.id.tv_date);
-        tv_location = findViewById(R.id.tv_location);
         gv_function = findViewById(R.id.gv_function);
         gv_function.setAdapter(new FunctionAdapter(getActivity(),data,R.layout.item_function_layout));
     }
@@ -113,24 +118,42 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
      */
     @Override
     protected void setListener() {
-        gv_function.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gv_function.setOnItemClickListener((adapterView, view, i, l) -> {
 
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i)
-                {
-                    case 0:
+            switch (indexs[i])
+            {
+                case 0:
                     {
-                        if(com.cxyz.logiccommons.manager.UserManager.getInstance().getUser().getPower() == 5)
-                            ARouter.getInstance().build("/check/CheckActivity").navigation();//跳转至考勤页面
-                        else
-                            ToastUtil.showShort("您当前暂无此权限");
-                            break;
+                        ARouter.getInstance().build("/check/CheckActivity").navigation();break;//跳转至考勤页面
                     }
-                    case 2:getHoldingActivity().startActivity(ClazzActivity.class);break;//跳转至日历课次;
-                    case 6:getHoldingActivity().startActivity(PieChartActivity.class);break;//跳转到统计界面
-                    default:ToastUtil.showShort("此功能正在扩充");
-                }
+                case 1:
+                    {
+                        getHoldingActivity().startActivity(CheckRedordActivity.class);break;//跳转至考勤图表;
+                    }
+                case 2:
+                    {
+                        getHoldingActivity().startActivity(ClazzActivity.class);break;//跳转至日历课次;
+                    }
+                case 3:
+                    {
+                        ARouter.getInstance().build("/vac/VacateActivity").navigation();break;
+                    }
+                case 4:
+                    {
+                        ToastUtil.showShort("此功能正在开发中...");break;
+                    }
+                case 5:
+                    {
+                        ARouter.getInstance().build("/vac/AuditActivity").navigation();break;
+                    }
+                case 6:
+                    {
+                        getHoldingActivity().startActivity(ExportActivity.class);break;
+                    }
+                case 7:
+                    {
+                        ARouter.getInstance().build("/info/UploadActivity").navigation();break;
+                    }
             }
         });
     }

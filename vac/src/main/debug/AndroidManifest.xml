@@ -12,7 +12,7 @@
         tools:replace="android:label,android:icon"
         android:name="com.cxyz.logiccommons.application.MyApp">
 
-        <activity android:name=".activity.VacateActivity">
+        <activity android:name=".activity.MineVacateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER"/>

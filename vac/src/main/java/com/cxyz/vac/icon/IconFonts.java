@@ -1,5 +1,6 @@
 package com.cxyz.vac.icon;
 
+import com.cxyz.commons.utils.LogUtil;
 import com.joanzapata.iconify.Icon;
 
 /**
@@ -10,7 +11,11 @@ public enum IconFonts implements Icon {
 
 
     next('\ue61e'),
-    clear('\ue664');
+    clear('\ue664'),
+    time('\ue73c'),
+    down('\ue607'),
+    up('\ue665');
+
 
     private char character;
 
@@ -20,7 +25,8 @@ public enum IconFonts implements Icon {
 
     @Override
     public String key() {
-        return name().replace('_', '-');
+        LogUtil.e("vac_".concat(name().replace('_', '-')));
+        return "vac_".concat(name().replace('_', '-'));
     }
 
     @Override

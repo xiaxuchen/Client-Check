@@ -1,6 +1,7 @@
 package com.cxyz.commons.IModel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import okhttp3.Call;
@@ -38,11 +39,12 @@ public abstract class IBaseModel {
      */
     public void ClearCalls()
     {
-        for(Call call:calls)
-        {
+        Iterator<Call> iterator = calls.iterator();
+        while(iterator.hasNext())synchronized (calls){
+            Call call = iterator.next();
             if (!call.isCanceled())
                 call.cancel();
-            calls.remove(call);
+            iterator.remove();   //注意这个地方
         }
     }
 

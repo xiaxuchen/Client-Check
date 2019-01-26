@@ -77,6 +77,12 @@ public class MyHistoryActivity extends BaseActivity<IMyHistoryPresenter> impleme
     @Override
     public void setEvent() {
         refresh.setOnRefreshListener(refreshLayout -> {
+            if(result == null)
+            {
+                iPresenter.getHistory(null);
+                return;
+            }
+
             if(result != -100)
                 iPresenter.getHistory(result);
             else

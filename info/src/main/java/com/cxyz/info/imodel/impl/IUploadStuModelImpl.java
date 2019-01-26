@@ -1,5 +1,6 @@
 package com.cxyz.info.imodel.impl;
 
+import com.cxyz.commons.context.ContextManager;
 import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDownLoadListener;
@@ -7,7 +8,6 @@ import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.info.constant.NetWorkConstant;
 import com.cxyz.info.constant.RequestCenter;
 import com.cxyz.info.imodel.IUploadStuModel;
-import com.cxyz.logiccommons.application.MyApp;
 import com.cxyz.logiccommons.domain.CheckResult;
 import com.cxyz.logiccommons.typevalue.UserType;
 import com.google.gson.reflect.TypeToken;
@@ -39,8 +39,8 @@ public class IUploadStuModelImpl extends IUploadStuModel {
                         LogUtil.e(ids);
                         for (String id : ids)
                         {
-                            JPushInterface.setAlias(MyApp.getApplication(),Integer.parseInt(id),id);
-                            JPushInterface.deleteAlias(MyApp.getApplication(),Integer.parseInt(id));
+                            JPushInterface.setAlias(ContextManager.getContext(),Integer.parseInt(id),id);
+                            JPushInterface.deleteAlias(ContextManager.getContext(),Integer.parseInt(id));
                         }
                         listener.onSuccess("导入成功");
                     }

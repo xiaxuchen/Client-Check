@@ -14,6 +14,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <com.cxyz.commons.widget.TitleView
+            android:id="@+id/tv_title"
+            android:background="@drawable/common_title_shadow_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="请假"
@@ -146,11 +148,12 @@
             android:background="@color/common_line"/>
 
         <RelativeLayout
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:background="@color/app_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            >
 
             <TextView
                 android:layout_marginLeft="10dp"
@@ -159,28 +162,24 @@
                 android:layout_height="wrap_content"
                 android:text="时长"
                 android:textColor="@drawable/vac_item_background"
-                android:textSize="18sp"
-                />
-
-            <TextView
-                android:id="@+id/tv_time_len"
-                android:layout_marginRight="10dp"
-                android:layout_toLeftOf="@+id/tv_time_len_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="请选择"
-                android:textColor="@drawable/vac_item_background"
-                android:textSize="18sp"/>
-
-            <com.joanzapata.iconify.widget.IconTextView
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:id="@+id/tv_time_len_icon"
-                android:layout_alignParentRight="true"
+                android:textSize="18sp"
+                android:id="@+id/textView" />
+
+            <EditText
+                android:id="@+id/et_time_len"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@drawable/vac_item_background"
-                android:text="{next}"/>
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@color/app_white"
+                android:layout_marginRight="10dp"
+                android:hint="请假天数"
+                android:inputType="number"
+                android:textColorHint="@drawable/vac_item_background"
+                android:textSize="16sp" />
+
         </RelativeLayout>
 
         <View

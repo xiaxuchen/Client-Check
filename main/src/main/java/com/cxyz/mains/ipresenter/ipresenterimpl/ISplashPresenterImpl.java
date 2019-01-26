@@ -1,10 +1,10 @@
 package com.cxyz.mains.ipresenter.ipresenterimpl;
 
 import com.cxyz.commons.autoupdate.UpdateEntity;
+import com.cxyz.commons.context.ContextManager;
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.SpUtil;
-import com.cxyz.logiccommons.application.MyApp;
 import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.mains.constant.NetWorkConstant;
@@ -30,7 +30,7 @@ public class ISplashPresenterImpl extends ISplashPresenter {
                         return;
                     }
                     //从json中获取版本信息，如果与当前版本相同则跳转到登录界面
-                    if(AppUtil.getVersionCode(MyApp.getApplication())== info.getVersionCode())
+                    if(AppUtil.getVersionCode(ContextManager.getContext())== info.getVersionCode())
                     {
                         mIView.noUpdate();
                         return;

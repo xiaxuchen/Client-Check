@@ -11,9 +11,9 @@ import com.cxyz.vac.ipresenter.IVacatePresenter;
 
 public class IVacatePresenterImpl extends IVacatePresenter {
     @Override
-    public void vacate(String start, String end, String des) {
+    public void vacate(String start, String end,Integer len,Integer type, String des) {
         mIView.showLoadingView();
-        mIModle.vacate(start, end, des, new IBaseModel.ModelListener<String, String>() {
+        mIModle.vacate(start, end, len,des,type,new IBaseModel.ModelListener<String, String>() {
             @Override
             public void onSuccess(String data) {
                 mIView.showSuccess(data);

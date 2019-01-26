@@ -3,13 +3,9 @@
     package="com.cxyz.vac">
 
     <application>
-        <activity android:name=".activity.VacateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.VacateActivity" />
+        <activity android:name=".activity.MineVacateActivity" />
+        <activity android:name=".activity.AuditActivity" />
     </application>
 
 </manifest>

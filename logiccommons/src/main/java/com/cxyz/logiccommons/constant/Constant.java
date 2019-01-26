@@ -6,6 +6,6 @@ package com.cxyz.logiccommons.constant;
 
 public class Constant {
 
-    public static String ROOT_URL = "http://192.168.155.2:8080";
+    public static String ROOT_URL = "http://47.105.61.4:8080/Server_Check";
 
 }

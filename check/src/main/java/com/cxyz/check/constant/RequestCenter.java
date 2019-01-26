@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Call;
+
 /**
  * Created by 夏旭晨 on 2018/10/18.
  */
@@ -23,17 +25,18 @@ import java.util.Map;
 public class RequestCenter {
 
 
-    public static void getStus(int grade, DisposeDataListener listener)
+    public static Call getStus(int grade, DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap();
         map.put("grade",grade+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.get(NetWorkConstant.GET_STUS,params,new DisposeDataHandler(listener));
+            return CommonOkHttpClient.get(NetWorkConstant.GET_STUS,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
 
     /**
@@ -43,7 +46,7 @@ public class RequestCenter {
      * @param grade 班级id
      * @param listener 回调
      */
-    public static void getGradeCheck(String id, Integer type,int grade, DisposeDataListener listener)
+    public static Call getGradeCheck(String id, Integer type,int grade, DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
         map.put("id",id);
@@ -51,11 +54,12 @@ public class RequestCenter {
         map.put("grade",grade+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.get(NetWorkConstant.GRADE_CHECK_URL,params,new DisposeDataHandler(listener));
+            return CommonOkHttpClient.get(NetWorkConstant.GRADE_CHECK_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
 
     /**
@@ -63,19 +67,20 @@ public class RequestCenter {
      * @param commitCheck
      * @param listener
      */
-    public static void commitCheck(String commitCheck,DisposeDataListener listener)
+    public static Call commitCheck(String commitCheck,DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
         map.put("commitCheck",commitCheck);
         RequestParams params = new RequestParams(map);
         //发送请求
         try {
-            CommonOkHttpClient.post(NetWorkConstant.COMMIT_URL,params,new DisposeDataHandler(listener));
+            return CommonOkHttpClient.post(NetWorkConstant.COMMIT_URL,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             if(listener!=null)
                 listener.onFailure("网络状态异常");
         }
+        return null;
     }
 
     /**
@@ -86,7 +91,7 @@ public class RequestCenter {
      * @param listener 接受到服务器响应后的回调
      * @throws NetworkErrorException
      */
-    public static void checkComp(String checkerId, int checkerType,int type,DisposeDataListener listener) throws NetworkErrorException {
+    public static Call checkComp(String checkerId, int checkerType,int type,DisposeDataListener listener) {
         LogUtil.e(checkerId);
         LogUtil.e(checkerType+"");
         LogUtil.e(type+"");
@@ -97,7 +102,12 @@ public class RequestCenter {
         RequestParams params = new RequestParams(map);
         LogUtil.e(NetWorkConstant.CHECKCOMP_URL);
         LogUtil.e(map.toString());
-        CommonOkHttpClient.get(NetWorkConstant.CHECKCOMP_URL,params,new DisposeDataHandler(listener));
+        try {
+            return CommonOkHttpClient.get(NetWorkConstant.CHECKCOMP_URL,params,new DisposeDataHandler(listener));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -106,18 +116,19 @@ public class RequestCenter {
      * @param type 考勤人类型
      * @param listener 回调
      */
-    public static void getHistory(String id,int type,DisposeDataListener listener)
+    public static Call getHistory(String id,int type,DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap();
         map.put("id",id);
         map.put("type",type+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.get(NetWorkConstant.HISTORY,params,new DisposeDataHandler(listener));
+            return CommonOkHttpClient.get(NetWorkConstant.HISTORY,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
 
     /**
@@ -127,7 +138,7 @@ public class RequestCenter {
      * @param start 开始条目
      * @param listener 回调
      */
-    public static void loadMore(String id,int type,int start,DisposeDataListener listener)
+    public static Call loadMore(String id,int type,int start,DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap();
         map.put("id",id);
@@ -135,28 +146,30 @@ public class RequestCenter {
         map.put("start",start+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.get(NetWorkConstant.LOAD_MORE,params,new DisposeDataHandler(listener));
+            return CommonOkHttpClient.get(NetWorkConstant.LOAD_MORE,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
 
-    public static void getAlterRecords(Integer compId,Integer gradeId,DisposeDataListener listener)
+    public static Call getAlterRecords(Integer compId,Integer gradeId,DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
         map.put("compId",compId+"");
         map.put("gradeId",gradeId+"");
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.get(NetWorkConstant.ALTER_RECORDS,params, new DisposeDataHandler(listener));
+            return CommonOkHttpClient.get(NetWorkConstant.ALTER_RECORDS,params, new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
 
-    public static void updateAlteds(Integer compId, List<AlterRecordDto> dtos,String updaterId,int updaterType,DisposeDataListener listener){
+    public static Call updateAlteds(Integer compId, List<AlterRecordDto> dtos,String updaterId,int updaterType,DisposeDataListener listener){
         Map<String,String> map = new HashMap<>();
         map.put("compId",compId+"");
         map.put("updaterId",updaterId);
@@ -166,15 +179,16 @@ public class RequestCenter {
         } catch (JSONException e) {
             e.printStackTrace();
             listener.onFailure("数据异常");
-            return;
+            return null;
         }
         RequestParams params = new RequestParams(map);
         try {
-            CommonOkHttpClient.post(NetWorkConstant.UPDATE_RECORDS,params,new DisposeDataHandler(listener));
+            return CommonOkHttpClient.post(NetWorkConstant.UPDATE_RECORDS,params,new DisposeDataHandler(listener));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
         }
+        return null;
     }
 
     /**
@@ -202,4 +216,5 @@ public class RequestCenter {
         }
         return null;
     }
+
 }

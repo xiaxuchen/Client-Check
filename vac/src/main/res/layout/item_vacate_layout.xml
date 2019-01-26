@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/vac_audit_background"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp">
+
+
+    <TextView
+        android:id="@+id/tv_audit_state_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:text="请假类型:"
+        android:textColor="#8a8a8a"
+        android:textColorHighlight="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_audit_icon" />
+
+    <TextView
+        android:id="@+id/tv_vac_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="事假"
+        app:layout_constraintLeft_toRightOf="@+id/tv_audit_state_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_audit_state_hint"
+        />
+
+    <TextView
+        android:id="@+id/tv_audit_time_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始时间:"
+        android:textColor="@color/gray"
+        app:layout_constraintLeft_toLeftOf="@id/tv_audit_state_hint"
+        app:layout_constraintTop_toBottomOf="@+id/tv_audit_state_hint" />
+
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018-12-30 01:00"
+        app:layout_constraintStart_toEndOf="@+id/tv_audit_time_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_audit_time_hint" />
+
+    <TextView
+        android:id="@+id/tv_end_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="结束时间:"
+        android:textColor="@color/gray"
+        app:layout_constraintLeft_toLeftOf="@id/tv_audit_state_hint"
+        app:layout_constraintTop_toBottomOf="@+id/tv_audit_time_hint" />
+
+    <TextView
+        android:id="@+id/tv_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018-12-31 10:00"
+        app:layout_constraintStart_toEndOf="@+id/tv_end_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_end_hint" />
+
+    <TextView
+        android:id="@+id/tv_len_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请假时长:"
+        android:textColor="@color/gray"
+        app:layout_constraintLeft_toLeftOf="@id/tv_audit_state_hint"
+        app:layout_constraintTop_toBottomOf="@+id/tv_end" />
+
+    <TextView
+        android:id="@+id/tv_len"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10天"
+        app:layout_constraintStart_toEndOf="@+id/tv_len_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_len_hint" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/tv_reason_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请假事由 {vac_down}"
+        android:textColor="@color/gray"
+        app:layout_constraintTop_toBottomOf="@+id/tv_len_hint"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_audit_state_hint" />
+
+    <TextView
+        android:id="@+id/tv_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_reason_hint"
+        app:layout_constraintLeft_toLeftOf="@id/tv_reason_hint"
+        android:visibility="gone"
+        />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/tv_audits_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="审核情况 {vac_down}"
+        android:textColor="@color/gray"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reason"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_audit_state_hint" />
+
+    <ListView
+        android:id="@+id/lv_audits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_audits_hint"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/btn_audited"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:textColor="@color/gray"
+        android:enabled="false"
+        android:text="已审核"
+        android:textSize="14sp"
+        android:background="@drawable/vac_btn_audited_selector"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_sponsor_time"
+        app:layout_constraintTop_toBottomOf="@+id/lv_audits"
+        />
+
+    <TextView
+        android:id="@+id/tv_sponsor_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:text="2018-12-12 10:10"
+        android:textColor="@color/gray"
+        app:layout_constraintTop_toBottomOf="@+id/lv_audits"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_len_hint"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

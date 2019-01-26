@@ -19,7 +19,7 @@
         <activity android:name=".acitivity.MessageActivity">
 
         </activity>
-        <activity android:name=".acitivity.ClazzActivity">
+        <activity android:name=".acitivity.ExportActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -10,10 +10,12 @@ import android.widget.Toast;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.date.Date;
 import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.commons.widget.TitleView;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.feature_z_domain.MySubject;
 import com.cxyz.homepage.ipresenter.impl.MySubjectsPresenterImpl;
 import com.cxyz.homepage.iview.SubjectsView;
+import com.cxyz.logiccommons.manager.UserManager;
 import com.zhuangfei.timetable.TimetableView;
 import com.zhuangfei.timetable.listener.ISchedule;
 import com.zhuangfei.timetable.listener.OnItemBuildAdapter;
@@ -34,6 +36,8 @@ public class ClazzActivity extends BaseActivity<MySubjectsPresenterImpl> impleme
     TimetableView mTimetableView;
     //控件
     WeekView mWeekView;
+
+    private TitleView tv_title;
 
     LinearLayout layout;
     TextView titleTextView;
@@ -58,17 +62,19 @@ public class ClazzActivity extends BaseActivity<MySubjectsPresenterImpl> impleme
      //   this.mySubjects = mySubjects1;
      //   this.mySubjects.addAll(SubjectRepertory.loadDefaultSubjects());
 
+        tv_title = findViewById(R.id.tv_title);
         titleTextView = findViewById(R.id.id_title);
         layout = findViewById(R.id.id_layout);
         Date date = new Date();
         initTimetableView();
-        iPresenter.setMySubjects("17478090",date);//这个也是要改的
+        iPresenter.setMySubjects(UserManager.getInstance().getUser().getId(),date);
     }
 
 
     @Override
     public void setEvent() {
         layout.setOnClickListener(this);
+        tv_title.setBackClickListener(v -> onBackPressed());
     }
     @Override
     public void setSubjects(List<MySubject> subjects) {//这个是回调的方法也是要改的

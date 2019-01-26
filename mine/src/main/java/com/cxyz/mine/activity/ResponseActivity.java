@@ -8,7 +8,7 @@ import android.widget.ProgressBar;
 
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.widget.TitleView;
-import com.cxyz.mine.IPresenter.presenter.IResponsePresenter;
+import com.cxyz.mine.IPresenter.IResponsePresenter;
 import com.cxyz.mine.R;
 
 /**

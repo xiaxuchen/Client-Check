@@ -16,7 +16,7 @@ buildscript {
 
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'//greenDao支持
 
-        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.9.1')//tinker
+        classpath "com.tinkerpatch.sdk:tinkerpatch-gradle-plugin:1.1.8"//tinker
 
     }
 }
@@ -45,7 +45,21 @@ ext{
     targetSdkVersion = 26
     versionCode = 1
     versionName = "1.0"
+    versionInfo = "第一个版本"
     //router
     routerVersion = "1.4.0"
     annotationProcessor = "1.2.1"
+}
+
+// 保证dex_files文件中指定的文件都加载到Main Dex中
+afterEvaluate {
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += '--multi-dex'
+        dx.additionalParameters += "--main-dex-list=$projectDir/dex_files".toString()
+    }
 }

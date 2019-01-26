@@ -11,7 +11,7 @@ import com.cxyz.logiccommons.domain.College;
 import com.cxyz.logiccommons.domain.Grade;
 import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.manager.UserManager;
-import com.cxyz.mine.IPresenter.presenter.IMyinfoPresenter;
+import com.cxyz.mine.IPresenter.IMyinfoPresenter;
 import com.cxyz.mine.R;
 import com.cxyz.mine.iview.IMyinfoView;
 

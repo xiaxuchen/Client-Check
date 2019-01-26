@@ -120,7 +120,7 @@ public class JPushReceiver extends BroadcastReceiver
         String title;
         String content;
         String ticker;
-        String path = null;
+        String path;
         Bundle bundle = new Bundle();
         switch (type)
         {
@@ -146,11 +146,13 @@ public class JPushReceiver extends BroadcastReceiver
                 title = "请假信息新动态";
                 content = "您的请假有新进展了";
                 ticker = "最新请假信息";
+                path = "/vac/MineVacateActivity";
             }break;
             case NotifyType.VACATION_AUDIT:{
                 title = "请假待审核";
                 content = "您有新的请假待审核";
                 ticker = "最新请假信息";
+                path = "/vac/AuditActivity";
             }break;
             default:return NotifyType.ERROR;
         }
