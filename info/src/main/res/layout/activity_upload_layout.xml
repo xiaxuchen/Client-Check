@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/common_title_shadow_style"
+        app:title="信息导入"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_stu_import"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="学生信息导入"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/stu_line"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/common_line"
+        app:layout_constraintTop_toBottomOf="@+id/tv_stu_import"
+
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_lesson_import"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="课程信息导入"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/stu_line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/lesson_line"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/common_line"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lesson_import"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="暂无导入任务"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+
+</android.support.constraint.ConstraintLayout>
