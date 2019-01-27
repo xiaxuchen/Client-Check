@@ -30,7 +30,7 @@ import java.io.File;
  * Created by Administrator on 2018/9/25.
  */
 @Route(path = "/mine/MineFragment")
-public class MineFragment extends BaseFragment<IMineFragmentPresenter> implements View.OnClickListener ,IMineFragementView{
+public class MineFragment extends BaseFragment<IMineFragmentPresenter> implements View.OnClickListener ,IMineFragementView {
     private Dialog dialog;
     private ProgressBar pb_pro;
     private TextView tv_mine_myinfo;
@@ -84,7 +84,7 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
     public void tv_mine_setting() {
         Intent intent = new Intent(getActivity().getApplicationContext(), MoreSettingActivity.class);
         startActivity(intent);
-        mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
+        mActivity.overridePendingTransition(R.anim.enter_next, R.anim.enter_exit);
 
     }
 
@@ -92,19 +92,19 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
     public void tv_mine_myinfo() {
         Intent intent = new Intent(getActivity().getApplicationContext(), MyinfoActivity.class);
         startActivity(intent);
-        mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
+        mActivity.overridePendingTransition(R.anim.enter_next, R.anim.enter_exit);
     }
     //从我的界面跳转到修改密码界面
     public void tv_mine_alterpwd() {
         Intent intent = new Intent(getActivity().getApplicationContext(), ChangePwdACtivity.class);
         startActivity(intent);
-        mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
+        mActivity.overridePendingTransition(R.anim.enter_next, R.anim.enter_exit);
     }
     //从我的界面跳转到用户反馈界面
     public void tv_mine_useradvice() {
         Intent intent = new Intent(getActivity().getApplicationContext(), UserResponse.class);
         startActivity(intent);
-        mActivity.overridePendingTransition(R.anim.enter_next,R.anim.enter_exit);
+        mActivity.overridePendingTransition(R.anim.enter_next, R.anim.enter_exit);
     }
 
 
