@@ -10,20 +10,20 @@
         tools:replace="android:icon,android:label,android:theme"
         android:label="@string/common_app_name">
 
-        <!--<activity android:name="com.cxyz.mains.activity.SplashActivity"-->
-            <!--android:theme="@style/SplashTheme">-->
-            <!--<intent-filter>-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-
-        <activity android:name=".tinker.applicationlike.MainActivity">
+        <activity android:name="com.cxyz.mains.activity.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
+        <!--<activity android:name=".tinker.applicationlike.MainActivity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
 
     </application>
 
